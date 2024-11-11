@@ -1,0 +1,48 @@
+<div class="product-admin">  
+    <table class="product-table">
+      <thead>
+        <tr>
+          <th>Product Name</th>
+          <th>Category</th>
+          <th>Price</th>
+          <th>Availability</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of products">
+          <td>{{ product.name }}</td>
+          <td>
+            <mat-form-field appearance="fill" class="dropdown">
+              <mat-select [(value)]="product.category">
+                <mat-option *ngFor="let category of categories" [value]="category">{{ category }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </td>
+          <td>Rs. {{ product.price }}</td>
+          <td>
+            <mat-form-field appearance="fill" class="dropdown">
+              <mat-select [(value)]="product.availability">
+                <mat-option value="Available">Available</mat-option>
+                <mat-option value="Out Of Stock">Out Of Stock</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </td>
+          <td>
+            <button mat-icon-button color="warn" (click)="deleteProduct(product)">
+              <mat-icon>delete</mat-icon>
+            </button>
+            <button mat-icon-button color="primary" (click)="editProduct(product)">
+              <mat-icon>settings</mat-icon>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <button mat-fab style="background-color: #FB800D; color: white;" class="add-button" (click)="addProduct()">
+        <mat-icon>add</mat-icon>
+      </button>
+      
+  </div>
+  
