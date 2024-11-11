@@ -1,0 +1,63 @@
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 40px;
+    background-color: #ffffff;
+  }
+  
+  .logo {
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo img {
+    height: 80px;
+    width: auto;
+    margin-right: 20px;
+  }
+  
+  .right-section {
+    display: flex;
+    align-items: center;
+  }
+  
+  .nav {
+    display: flex;
+    gap: 15px;
+    margin-left: 820px; 
+  }
+  
+  .nav a {
+    text-decoration: none;
+    color: #000000;
+    font-weight: 500;
+    font-size: 20px;
+  }
+  
+  .cart a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    background-color: #f3f3f3;
+    padding: 8px 12px;
+    border-radius: 20px;
+    color: #007bff;
+  }
+  
+  .cart i {
+    font-size: 28px;
+    margin-right: 5px;
+  }
+  
+  .tagline {
+    text-align: center;
+    padding: 20px;
+    background: linear-gradient(to bottom, #ffffff 0%, #a4e6fa 62%); 
+  }
+  
+  .tagline h2 {
+    margin: 0;
+    color: #000000;
+    font-size: 28px;
+  }
