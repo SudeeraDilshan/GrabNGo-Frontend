@@ -1,11 +1,17 @@
+body, html {
+  height: 100%;
+  margin: 0;
+}
+
 .footer {
-  position: absolute; /* Position the footer at the bottom */
-  bottom: 0;  /* Align it to the bottom of the page */
-  left: 0; /* Ensure it's aligned to the left edge */
-  width: 100%; /* Make it span the full width */
+  position: fixed;  
+  bottom: 0;        
+  left: 0;          
+  width: 100%;      
   background: linear-gradient(to top, #ffffff, #cfefff);
   padding: 20px;
   text-align: center;
+  box-sizing: border-box; 
 }
 
 .footer-content h2 {
