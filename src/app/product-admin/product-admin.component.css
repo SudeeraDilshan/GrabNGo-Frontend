@@ -2,6 +2,10 @@
   margin: 30px;
 }
 
+.product-admin {
+  position: relative;
+}
+
 .admin-table {
   width: 100%;
   border-collapse: collapse;
