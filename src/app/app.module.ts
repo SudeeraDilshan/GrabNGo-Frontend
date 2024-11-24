@@ -6,8 +6,10 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { LoginComponent } from './components/login/login.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms'; // <-- Import ReactiveFormsModule
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EmailVerificationComponent } from './email-verification/email-verification.component';
+import { ProfileComponent } from './profile/profile.component';
+
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { EmailVerificationComponent } from './email-verification/email-verificat
     FooterComponent,
     LoginComponent,
     ResetPasswordComponent,
-    EmailVerificationComponent
+    EmailVerificationComponent,
+    ProfileComponent,
+ 
   ],
   imports: [
     BrowserModule,

@@ -12,6 +12,8 @@ body, html {
   padding: 20px;
   text-align: center;
   box-sizing: border-box; 
+  position: relative; /* Ensure it flows with the content */
+  margin-top: 20px; 
 }
 
 .footer-content h2 {
