@@ -10,6 +10,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EmailVerificationComponent } from './email-verification/email-verification.component';
 import { ProfileComponent } from './profile/profile.component';
 import { OrderHistoryComponent } from './order-history/order-history.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
+import { RegistrationComponent } from './registration/registration.component';
 
 
 @NgModule({
@@ -22,6 +24,8 @@ import { OrderHistoryComponent } from './order-history/order-history.component';
     EmailVerificationComponent,
     ProfileComponent,
     OrderHistoryComponent,
+    ChangePasswordComponent,
+    RegistrationComponent,
  
   ],
   imports: [

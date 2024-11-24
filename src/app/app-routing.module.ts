@@ -5,6 +5,8 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { EmailVerificationComponent } from './email-verification/email-verification.component';
 import { ProfileComponent } from './profile/profile.component';
 import { OrderHistoryComponent } from './order-history/order-history.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
+import { RegistrationComponent } from './registration/registration.component';
 
 const routes: Routes = [
   {
@@ -25,6 +27,12 @@ const routes: Routes = [
   },
   { path: 'order-history', 
     component: OrderHistoryComponent 
+  },
+  { path: 'change-password', 
+    component: ChangePasswordComponent 
+  },
+  { path: 'registration', 
+    component: RegistrationComponent 
   },
 ];
 

@@ -1,0 +1,110 @@
+/* Container Styles */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f9f9f9;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Registration Box Styles */
+  .register-box {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 50px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+  }
+  
+  .register-box h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333333;
+  }
+  
+  /* Form Group */
+  .form-group {
+    margin-bottom: 20px;
+    text-align: left;
+  }
+  
+  /* Input Styles */
+  .form-control {
+    width: 100%;
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+  
+  .form-control:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 4px rgba(0, 123, 255, 0.2);
+  }
+  
+  /* Error Messages */
+  .error-message {
+    color: #e74c3c;
+    font-size: 12px;
+    margin-top: 5px;
+  }
+  
+  /* Submit Button */
+  .submit-button {
+    width: 100%;
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .submit-button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+  }
+  
+  .submit-button:hover:not(:disabled) {
+    background-color: #0056b3;
+  }
+  
+  
+  
+  
+  /* Login Link */
+  .login-link {
+    margin: 20px 0;
+    font-size: 14px;
+  }
+  
+  .login-link a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .login-link a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Terms Section */
+  .terms {
+    font-size: 12px;
+    color: #666666;
+  }
+  
+  .terms a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .terms a:hover {
+    text-decoration: underline;
+  }
+  
