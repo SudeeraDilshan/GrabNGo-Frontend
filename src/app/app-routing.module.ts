@@ -4,6 +4,7 @@ import { LoginComponent } from './components/login/login.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { EmailVerificationComponent } from './email-verification/email-verification.component';
 import { ProfileComponent } from './profile/profile.component';
+import { OrderHistoryComponent } from './order-history/order-history.component';
 
 const routes: Routes = [
   {
@@ -21,7 +22,10 @@ const routes: Routes = [
   {
     path: 'profile', 
     component: ProfileComponent,
-  }
+  },
+  { path: 'order-history', 
+    component: OrderHistoryComponent 
+  },
 ];
 
 @NgModule({

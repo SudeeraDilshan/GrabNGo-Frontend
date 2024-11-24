@@ -9,6 +9,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EmailVerificationComponent } from './email-verification/email-verification.component';
 import { ProfileComponent } from './profile/profile.component';
+import { OrderHistoryComponent } from './order-history/order-history.component';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { ProfileComponent } from './profile/profile.component';
     ResetPasswordComponent,
     EmailVerificationComponent,
     ProfileComponent,
+    OrderHistoryComponent,
  
   ],
   imports: [
