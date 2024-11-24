@@ -7,6 +7,9 @@ import { ProfileComponent } from './profile/profile.component';
 import { OrderHistoryComponent } from './order-history/order-history.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { RegistrationComponent } from './registration/registration.component';
+import { CheckoutAddressComponent } from './checkout-address/checkout-address.component';
+
+
 
 const routes: Routes = [
   {
@@ -34,6 +37,8 @@ const routes: Routes = [
   { path: 'registration', 
     component: RegistrationComponent 
   },
+  { path: 'checkout-address', 
+    component: CheckoutAddressComponent },
 ];
 
 @NgModule({

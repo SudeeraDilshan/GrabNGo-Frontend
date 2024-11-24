@@ -1,0 +1,21 @@
+<div class="order-summary">
+    <h3>Order Summary</h3>
+    <div *ngFor="let item of items" class="order-item">
+      <img src="https://th.bing.com/th/id/R.d450924159753743f737e7ad57384d35?rik=jscV4sgmu%2f6yvw&pid=ImgRaw&r=0" alt="Product Image" class="product-image" />
+      <div>
+        <p>{{ item.name }}</p>
+        <p>Size: {{ item.size }}</p>
+        <p>Quantity: {{ item.quantity }}</p>
+        <p>${{ item.price }}</p>
+        <button class="remove-btn">Remove</button>
+      </div>
+    </div>
+   
+    <hr />
+    <div class="totals">
+      <p>Subtotal: ${{ getSubtotal() }}</p>
+      <p>Shipping: <span>Calculated at the next step</span></p>
+      <p>Total: ${{ getSubtotal() }}</p>
+    </div>
+  </div>
+  

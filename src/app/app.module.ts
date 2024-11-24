@@ -12,6 +12,9 @@ import { ProfileComponent } from './profile/profile.component';
 import { OrderHistoryComponent } from './order-history/order-history.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { RegistrationComponent } from './registration/registration.component';
+import { CheckoutAddressComponent } from './checkout-address/checkout-address.component';
+import { OrderSummaryComponent } from './checkout-address/order-summary/order-summary.component';
+import { CheckoutComponent } from './checkout-address/checkout/checkout.component';
 
 
 @NgModule({
@@ -26,6 +29,9 @@ import { RegistrationComponent } from './registration/registration.component';
     OrderHistoryComponent,
     ChangePasswordComponent,
     RegistrationComponent,
+    CheckoutAddressComponent,
+    OrderSummaryComponent,
+    CheckoutComponent,
  
   ],
   imports: [
