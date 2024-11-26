@@ -1,0 +1,74 @@
+<div class="add-category-container">
+    <h1>Add Category</h1>
+  
+    <!-- Category Image Upload -->
+    <div class="category-image">
+      <div class="image-placeholder">
+        <img
+          *ngIf="imagePreview"
+          [src]="imagePreview"
+          alt="Category Image Preview"
+          class="category-image-preview"
+        />
+        <label for="category-image" class="camera-icon">
+          <mat-icon>photo_camera</mat-icon>
+        </label>
+      </div>
+      <input
+        type="file"
+        id="category-image"
+        (change)="onImageUpload($event)"
+        class="file-input"
+      />
+    </div>
+  
+    <form [formGroup]="addCategoryForm" (ngSubmit)="onSubmit()">
+      <!-- Category Name -->
+      <div class="form-row">
+        <label for="category-name" class="form-label">Category Name</label>
+        <mat-form-field class="form-field">
+          <mat-label>Category Name</mat-label>
+          <input matInput formControlName="categoryName" />
+          <mat-error *ngIf="addCategoryForm.get('categoryName')?.hasError('required')">
+            Category Name is required.
+          </mat-error>
+        </mat-form-field>
+      </div>
+  
+      <!-- Description -->
+      <div class="form-row">
+        <label for="description" class="form-label">Description</label>
+        <mat-form-field class="form-field full-width">
+          <mat-label>Description</mat-label>
+          <textarea matInput rows="3" formControlName="description"></textarea>
+          <mat-error *ngIf="addCategoryForm.get('description')?.hasError('required')">
+            Description is required.
+          </mat-error>
+        </mat-form-field>
+      </div>
+  
+      <!-- Action Buttons -->
+      <div class="button-row">
+        <button
+          mat-button
+          type="button"
+          class="cancel-button"
+          (click)="resetForm()"
+        >
+          Cancel
+        </button>
+        <button
+          mat-raised-button
+          type="submit"
+          [disabled]="!addCategoryForm.valid"
+        >
+          Add Category
+        </button>
+      </div>
+  
+      <div *ngIf="showSuccessMessage" class="success-message">
+        Category added successfully!
+      </div>
+    </form>
+  </div>
+  

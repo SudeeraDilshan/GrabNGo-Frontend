@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms'; 
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
@@ -22,6 +23,10 @@ import { ProductCrudComponent } from './product-crud/product-crud.component';
 import { ProductAddComponent } from './product-crud/product-add/product-add.component';
 import { ProductEditComponent } from './product-crud/product-edit/product-edit.component';
 import { ProductDeleteComponent } from './product-crud/product-delete/product-delete.component';
+import { CategoryCrudComponent } from './category-crud/category-crud.component';
+import { CategoryAddComponent } from './category-crud/category-add/category-add.component';
+import { CategoryEditComponent } from './category-crud/category-edit/category-edit.component';
+import { CategoryDeleteComponent } from './category-crud/category-delete/category-delete.component';
 
 @NgModule({
   declarations: [
@@ -34,9 +39,14 @@ import { ProductDeleteComponent } from './product-crud/product-delete/product-de
     ProductAddComponent,
     ProductEditComponent,
     ProductDeleteComponent,
+    CategoryCrudComponent,
+    CategoryAddComponent,
+    CategoryEditComponent,
+    CategoryDeleteComponent,
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     FormsModule,
     AppRoutingModule,
     MatFormFieldModule,

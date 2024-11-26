@@ -30,8 +30,10 @@ export class ProductAdminComponent {
   }
 
   editProduct(product: any) {
-    // Logic to edit the product
-  }
+    console.log('Navigating to edit for product ID:', product.id);
+    this.router.navigate(['/productEdit', product.id]);
+    console.log("product iddddd: ", product.id);
+  }  
 
   deleteProduct(product: any): void {
     const dialogRef = this.dialog.open(ProductDeleteComponent);
@@ -44,6 +46,4 @@ export class ProductAdminComponent {
       }
     });
   }
-  
-  
 }
