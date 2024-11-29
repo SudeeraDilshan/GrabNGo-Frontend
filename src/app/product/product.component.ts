@@ -142,21 +142,21 @@ import { CartService } from '../cart/cart.services';
   styleUrls: ['./product.component.css']
 }) 
 export class ProductComponent implements OnInit {
-  product: Product | undefined;
-//  product: Product = {
-//     id: 1,
-//     name: 'Mock Product',
-//     description: 'This is a mock product description.',
-//     price: 1500,
-//     colors: ['#ff0000', '#00ff00', '#0000ff'],
-//     sizes: ['S', 'M', 'L'],
-//     images: [
-//       'https://via.placeholder.com/150',
-//       'https://via.placeholder.com/150',
-//       'https://via.placeholder.com/150'
-//     ],
-//     modelHeight: 180
-//   };
+ // product: Product | undefined;
+ product: Product = {
+    id: 1,
+    name: 'Mock Product',
+    description: 'This is a mock product description.',
+    price: 1500,
+    colors: ['#ff0000', '#00ff00', '#0000ff'],
+    sizes: ['S', 'M', 'L'],
+    images: [
+      'https://via.placeholder.com/150',
+      'https://via.placeholder.com/150',
+      'https://via.placeholder.com/150'
+    ],
+    modelHeight: 180
+  };
   selectedColor: string = '';
   selectedSize: string = '';
   quantity: number = 1;
@@ -196,6 +196,11 @@ export class ProductComponent implements OnInit {
 
   increaseQuantity(): void {
     this.quantity++;
+   
+  }
+
+  getTotalPrice(): number {
+    return this.product.price * this.quantity;
   }
 
   addToCart(): void {

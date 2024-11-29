@@ -149,6 +149,8 @@ justify-content: center;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   }
 } */
+
+
 .container {
   max-width: 1400px;
   margin: 0 auto;

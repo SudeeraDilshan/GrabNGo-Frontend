@@ -12,7 +12,8 @@ const routes: Routes = [
    { path: 'filter', component:FilterResultsComponent},
    { path: 'product', component:ProductComponent},
    { path: 'product/:id', component: ProductComponent },
-   {path:'shopping-cart',component:ShoppingCartComponent}
+   {path:'shopping-cart',component:ShoppingCartComponent},
+   
   ];
 
 @NgModule({
