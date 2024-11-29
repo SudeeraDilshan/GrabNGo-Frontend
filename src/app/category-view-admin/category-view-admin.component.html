@@ -18,10 +18,10 @@
         <ng-container matColumnDef="action">
             <th mat-header-cell *matHeaderCellDef> Action </th>
             <td mat-cell *matCellDef="let category">
-                <button mat-icon-button color="warn" (click)="deleteCategory(category)">
+                <button mat-icon-button color="warn" routerLink="/categoryDelete" (click)="deleteCategory(category)">
                     <mat-icon>delete</mat-icon>
                 </button>
-                <button mat-icon-button color="primary" (click)="editCategory(category)">
+                <button mat-icon-button color="primary" routerLink="/categoryEdit" (click)="editCategory(category)">
                     <mat-icon>settings</mat-icon>
                 </button>
             </td>

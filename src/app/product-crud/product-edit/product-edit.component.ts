@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../../services/product.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-edit',
@@ -16,7 +17,7 @@ export class ProductEditComponent implements OnInit{
   availabilityOptions = ['Available', 'Out of Stock'];
   productId: string = '';
 
-  constructor(private fb: FormBuilder, private productService: ProductService, private route: ActivatedRoute) {
+  constructor(private fb: FormBuilder, private productService: ProductService, private router: Router,private route: ActivatedRoute) {
     this.editProductForm = this.fb.group({
       productId: ['', ],
       productName: ['', Validators.required],
@@ -84,8 +85,7 @@ export class ProductEditComponent implements OnInit{
   }
 
   // Reset Form
-  resetForm(): void {
-    this.editProductForm.reset();
-    this.imagePreview = null;
+  cancel(){
+    this.router.navigate(['/productAdmin']);
   }
 }

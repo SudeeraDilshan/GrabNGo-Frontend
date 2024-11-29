@@ -1,28 +1,31 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CategoryService } from '../../services/category.service'; 
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-category-add',
   templateUrl: './category-add.component.html',
-  styleUrls: ['./category-add.component.css']
+  styleUrls: ['./category-add.component.css'],
 })
 export class CategoryAddComponent implements OnInit {
   addCategoryForm: FormGroup;
   imagePreview: string | undefined;
   showSuccessMessage: boolean = false;
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private categoryService: CategoryService, 
+    private router: Router
+  ) {
     this.addCategoryForm = this.fb.group({
       categoryName: ['', Validators.required],
       description: ['', Validators.required],
     });
   }
 
-  ngOnInit(): void {
-    // Any initialization logic can go here
-  }
+  ngOnInit(): void {}
 
-  // Handle image upload and preview
   onImageUpload(event: Event): void {
     const file = (event.target as HTMLInputElement).files?.[0];
     if (file) {
@@ -34,30 +37,29 @@ export class CategoryAddComponent implements OnInit {
     }
   }
 
-  // Reset the form to its initial state
   resetForm(): void {
     this.addCategoryForm.reset();
     this.imagePreview = undefined;
   }
 
-  // Handle form submission
   onSubmit(): void {
     if (this.addCategoryForm.valid) {
-      // Simulate category addition logic (e.g., save to the server)
-      // You can replace this with an actual API call or service method
+      const categoryData = this.addCategoryForm.value;
 
-      console.log('Category Added:', this.addCategoryForm.value);
-
-      // Show success message
-      this.showSuccessMessage = true;
-
-      // Reset the form after submission
-      this.resetForm();
-      
-      // Hide success message after a few seconds
-      setTimeout(() => {
-        this.showSuccessMessage = false;
-      }, 3000);
+      // Use the service to send data to the backend
+      this.categoryService.addCategory(categoryData).subscribe({
+        next: (response) => {
+          console.log('Category Added Response:', response);
+          this.showSuccessMessage = true;
+          setTimeout(() => {
+            this.showSuccessMessage = false;
+            this.router.navigate(['/category']);
+          }, 3000);
+        },
+        error: (err) => {
+          console.error('Error:', err);
+        },
+      });
     }
   }
 }

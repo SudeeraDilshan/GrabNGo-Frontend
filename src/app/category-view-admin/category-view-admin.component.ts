@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { CategoryDeleteComponent } from '../category-crud/category-delete/category-delete.component';
 
 interface Category {
   id: string;
@@ -20,16 +23,28 @@ export class CategoryViewAdminComponent {
     { id: 'CG004', name: 'Accessories', description: 'Fashion items that complement clothing, including jewelry, watches, handbags, belts...' },
     { id: 'CG005', name: 'Sport and Entertainment', description: 'Devices and accessories related to mobile and telecommunications, such as smart...' },
   ];
+  constructor(private dialog: MatDialog, private router: Router) {}
 
   editCategory(category: Category) {
-    console.log('Edit Category:', category);
+    console.log('Delete Category ID:', category.id);
+    console.log('Editing Category:', category);
   }
 
-  deleteCategory(category: Category) {
-    console.log('Delete Category:', category);
+  deleteCategory(category: Category): void{
+    console.log('Delete Category ID:', category.id);
+    console.log('Deleting Category:', category);
+
+    const dialogRef = this.dialog.open(CategoryDeleteComponent);
+    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+      if (confirmed) {
+        this.categories = this.categories.filter(p => p !== category);
+        console.log('Category deleted:', category);
+        console.log('Updated category list:', this.categories);
+      }
+    });
   }
 
   addCategory() {
-    console.log('Add New Category');
+    console.log('Adding a New Category');
   }
 }

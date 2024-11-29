@@ -55,7 +55,6 @@ export class ProductAddComponent {
           console.log('Generated Product ID:', response.id);
           this.showSuccessMessage = true;
 
-          // Navigate to the Product Admin page after success
           setTimeout(() => {
             this.showSuccessMessage = false;
             this.router.navigate(['/productAdmin']);
