@@ -1,0 +1,46 @@
+.cart-page {
+    text-align: center;
+    padding: 50px 20px;
+}
+
+.cart-icon i {
+    font-size: 100px;
+    color: transparent; 
+    -webkit-text-stroke: 2px #141312;
+    margin-bottom: 20px;
+}
+
+
+.cart-page p {
+    font-size: 20px;
+    font-weight: bold;
+    color: black;
+    margin: 10px 0;
+}
+
+.cart-buttons .btn {
+    display: inline-block;
+    margin: 10px;
+    padding: 15px 40px;
+    border: none;
+    border-radius: 15px;
+    font-size: 18px;
+    cursor: pointer;
+    width: 600px; 
+    height:45px;
+    max-width: 300px;  
+    text-align: center;
+}
+
+.btn-signin {
+    background-color: #e88c30;  
+    color: white;
+    font-weight: lighter;
+    
+}
+
+.btn-explore {
+    background-color: #cd9760; 
+    color: black;
+    font-weight:lighter;
+}

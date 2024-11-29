@@ -1,0 +1,29 @@
+<!-- <header class="header">
+  <img routerLink ="img"src="assets/Logo.png" alt="Grab N Go Logo" class="logo" />
+  <nav class="nav">
+    <a routerLink="about-us">About us</a>
+    <a routerLink="categories">Categories</a>
+    <a routerLink="login">Login</a>
+    <a routerLink="cart" class="cart-link">
+      <i class="fa fa-cart-shopping"></i>
+      <span> My cart </span>
+      <span class="cart-count">({{ cartItemCount }})</span>
+    </a>
+  </nav>
+</header> -->
+<header class="header">
+  <img routerLink="img" src="assets/Logo.png" alt="Grab N Go Logo" class="logo" />
+  <nav class="nav">
+    <a routerLink="about-us">About us</a>
+    <a routerLink="categories">Categories</a>
+    <a routerLink="login">Login</a>
+    <a 
+      (click)="navigateToCart()" 
+      class="cart-link"
+    >
+      <i class="fa fa-cart-shopping"></i>
+      <span> My cart </span>
+      <span class="cart-count">({{ cartItemCount }})</span>
+    </a>
+  </nav>
+</header>

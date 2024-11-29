@@ -1,0 +1,23 @@
+<div class="shopping-cart">
+    <h2>Shopping Cart</h2>
+    <div class="cart-item" *ngFor="let product of products">
+        <input class ="checkbox"type="checkbox" [(ngModel)]="product.selected" />
+
+      <div class="product-details">
+        <img src="{{ product.image }}" alt="Product Image" />
+        <div>
+          <h3>{{ product.name }}</h3>
+          <p>Rs.{{ product.price }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="cart-actions">
+      <button  class="checkout-btn" (click)="checkout()">Checkout</button>
+      <button class ="cancel-btn" (click)="cancelAll()">Cancel all</button>
+    </div>
+
+    </div>
+  
+
+   
+  
