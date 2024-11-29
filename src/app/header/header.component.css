@@ -1,4 +1,4 @@
-.header {
+/* .header {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -60,4 +60,57 @@
     margin: 0;
     color: #000000;
     font-size: 28px;
+  } */
+
+  .product-admin {
+    padding: 20px;
   }
+  
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* border-bottom: 1px solid black; */
+    box-shadow: 0 -6px 12px rgba(1, 1, 1, 0.9); 
+    }
+  
+  .logo {
+    height: 80px;
+    width: auto;
+    margin-left: 20px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .nav a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: black;
+  }
+  
+  .nav a.active {
+    color: #00aaff;
+  }
+  
+  .product-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .product-table th,
+  .product-table td {
+    padding: 12px;
+    border: 1px solid #ddd;
+  }
+  
+  .dropdown {
+    width: 100%;
+  }
+  
+  .add-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+  }
+  
