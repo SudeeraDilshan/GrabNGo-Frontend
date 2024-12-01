@@ -15,7 +15,7 @@ export class ResetPasswordComponent {
   onSubmit() {
     console.log('Email:', this.email);
     console.log('Remember Me:', this.rememberMe);
-
+    sessionStorage.setItem("userEmail", this.email);
     this.router.navigate(['/email-verify']);
   }
 }

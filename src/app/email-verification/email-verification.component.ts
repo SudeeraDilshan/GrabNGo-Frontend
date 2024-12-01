@@ -7,38 +7,38 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./email-verification.component.css']
 })
 export class EmailVerificationComponent implements OnInit {
-  verificationForm: FormGroup;
-  resendTimer: number = 60;
-  isResendDisabled: boolean = true;
+  verificationForm!: FormGroup; // Form group for the 6-digit code
+  resendTimer: number = 30; // Countdown for resend button
+  isResendDisabled: boolean = true; // Disable resend initially
+  userEmail: string = "";
 
-  constructor(private fb: FormBuilder) {
-    // Initialize form with 6 empty controls
-    this.verificationForm = this.fb.group({
-      0: ['', [Validators.required, Validators.pattern('[0-9]')]],
-      1: ['', [Validators.required, Validators.pattern('[0-9]')]],
-      2: ['', [Validators.required, Validators.pattern('[0-9]')]],
-      3: ['', [Validators.required, Validators.pattern('[0-9]')]],
-      4: ['', [Validators.required, Validators.pattern('[0-9]')]],
-      5: ['', [Validators.required, Validators.pattern('[0-9]')]]
-    });
-  }
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
-    this.startResendTimer();
+    this.userEmail = sessionStorage.getItem("userEmail")!;
+    this.verificationForm = this.fb.group({
+      code1: ['', [Validators.required, Validators.pattern('^[0-9]{1}$')]],
+      code2: ['', [Validators.required, Validators.pattern('^[0-9]{1}$')]],
+      code3: ['', [Validators.required, Validators.pattern('^[0-9]{1}$')]],
+      code4: ['', [Validators.required, Validators.pattern('^[0-9]{1}$')]],
+      code5: ['', [Validators.required, Validators.pattern('^[0-9]{1}$')]],
+      code6: ['', [Validators.required, Validators.pattern('^[0-9]{1}$')]]
+    });
+
+    this.startResendTimer(); // Start timer on initialization
   }
 
-  // Method to get controls as an array for *ngFor
-  getControls() {
-    return Object.keys(this.verificationForm.controls);
+  getControls(): string[] {
+    return Object.keys(this.verificationForm.controls); // Return control names as an array
   }
 
   onInput(event: Event, index: number): void {
     const input = event.target as HTMLInputElement;
-    if (input.value.length === 1 && index < 5) {
-      const nextInput = document.querySelector(
-        `input[formControlName="${index + 1}"]`
-      ) as HTMLInputElement;
-      nextInput?.focus();
+    if (input.value && input.value.length === 1) {
+      const nextInput = document.querySelectorAll('input')[index + 1];
+      if (nextInput) {
+        (nextInput as HTMLInputElement).focus(); // Move to the next input field
+      }
     }
   }
 
@@ -46,24 +46,25 @@ export class EmailVerificationComponent implements OnInit {
     if (this.verificationForm.valid) {
       const code = Object.values(this.verificationForm.value).join('');
       console.log('Verification Code:', code);
-      // Send code to the server for verification
+      // Call your API or service to verify the code
     }
   }
 
-  startResendTimer(): void {
+  resendCode(): void {
+    console.log('Resend Code');
     this.isResendDisabled = true;
-    this.resendTimer = 60;
-    const interval = setInterval(() => {
-      this.resendTimer--;
-      if (this.resendTimer === 0) {
-        clearInterval(interval);
-        this.isResendDisabled = false;
-      }
-    }, 1000);
+    this.resendTimer = 30; // Reset timer
+    this.startResendTimer();
+    // Call your API or service to resend the code
   }
 
-  resendCode(): void {
-    console.log('Code resent');
-    this.startResendTimer();
+  private startResendTimer(): void {
+    const interval = setInterval(() => {
+      this.resendTimer--;
+      if (this.resendTimer <= 0) {
+        this.isResendDisabled = false;
+        clearInterval(interval);
+      }
+    }, 1000);
   }
 }

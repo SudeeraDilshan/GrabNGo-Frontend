@@ -6,6 +6,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.css']
 })
+
 export class RegistrationComponent {
   registerForm: FormGroup;
 
@@ -32,7 +33,7 @@ export class RegistrationComponent {
           [
             Validators.required,
             Validators.minLength(6),
-            Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/),
+            // Validators.pattern(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/),
           ],
         ],
         confirmPassword: [

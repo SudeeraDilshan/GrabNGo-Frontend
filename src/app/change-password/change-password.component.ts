@@ -1,3 +1,4 @@
+// change-password.component.ts
 import { Component } from '@angular/core';
 
 @Component({
@@ -10,17 +11,13 @@ export class ChangePasswordComponent {
   confirmPassword: string = '';
   passwordMismatch: boolean = false;
 
-  onSubmit() {
-    // Check if passwords match
+  onSubmit(passwordForm: any) {
     if (this.newPassword !== this.confirmPassword) {
-      this.passwordMismatch = true; // Show error
+      this.passwordMismatch = true;
     } else {
-      this.passwordMismatch = false; // Reset mismatch error
-      console.log('Password updated successfully:', this.newPassword);
-
-      // Reset fields
-      this.newPassword = '';
-      this.confirmPassword = '';
+      this.passwordMismatch = false;
+      // Handle the password update logic here
+      console.log('Password updated successfully');
     }
   }
 }
