@@ -1,0 +1,57 @@
+.order-admin {
+  margin: 30px;
+}
+
+.order-admin {
+  position: relative;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  margin-bottom: 50px;
+}
+
+.admin-table th {
+  background-color: #fb800d;
+  color: white;
+  padding: 15px;
+  text-align: center;
+}
+
+.admin-table th,
+.admin-table td {
+  padding: 20px;
+  border-bottom: 1px solid #ddd;
+  text-align: center;
+}
+
+.admin-table th.action-column,
+.admin-table td.action-column {
+  width: 150px; /* Adjust this value as needed */
+  text-align: center;
+}
+
+ul {
+  padding-left: 10px;
+  text-align: left;
+}
+
+.no-data {
+  text-align: center;
+  color: gray;
+}
+
+.dropdown {
+  width: 50%; 
+  margin: 0 auto; 
+}
+
+.add-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #fb800d;
+  color: white;
+}

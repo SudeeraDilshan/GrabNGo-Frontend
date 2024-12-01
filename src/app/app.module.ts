@@ -27,6 +27,7 @@ import { CategoryCrudComponent } from './category-crud/category-crud.component';
 import { CategoryAddComponent } from './category-crud/category-add/category-add.component';
 import { CategoryEditComponent } from './category-crud/category-edit/category-edit.component';
 import { CategoryDeleteComponent } from './category-crud/category-delete/category-delete.component';
+import { OrderViewAdminComponent } from './order-view-admin/order-view-admin.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { CategoryDeleteComponent } from './category-crud/category-delete/categor
     CategoryAddComponent,
     CategoryEditComponent,
     CategoryDeleteComponent,
+    OrderViewAdminComponent,
   ],
   imports: [
     BrowserModule,

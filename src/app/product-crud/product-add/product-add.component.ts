@@ -14,7 +14,7 @@ export class ProductAddComponent {
   showSuccessMessage = false;
   productId: string | null = null;
 
-  categories = ['Category 01', 'Category 02', 'Category 03', 'Category 04', 'Category 05', 'Category 06', ];
+  categories = ['Beauty and Health', 'Home and Garden', 'Phone and Telecommunication', 'Accessories	', 'Sports', 'Entertainment'];
   availabilityOptions = ['Out Of Stock', 'Available'];
 
   constructor(
@@ -77,6 +77,7 @@ export class ProductAddComponent {
 
   resetForm() {
     this.addProductForm.reset();
+    this.router.navigate(['/productAdmin']);
     this.imagePreview = null;
     const fileInput = document.getElementById(
       'product-image'

@@ -38,6 +38,7 @@ export class CategoryAddComponent implements OnInit {
   }
 
   resetForm(): void {
+    this.router.navigate(['/category']);
     this.addCategoryForm.reset();
     this.imagePreview = undefined;
   }
