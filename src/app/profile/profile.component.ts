@@ -39,28 +39,39 @@ export class ProfileComponent {
   saveProfile() {
     this.profileService.updateProfile(this.profile).subscribe(
       (response) => {
+        console.log('Profile updated successfully');
         this.backupProfile = { ...this.profile }; // Save changes
         this.isEditing = false;
+        alert('Profile updated successfully!');
       },
       (error) => {
         console.error('Error saving profile', error);
+        alert('Failed to update profile. Please try again.');
       }
     );
   }
+  
 
   // Cancel Edits
   cancelEdit() {
     this.profile = { ...this.backupProfile }; // Revert to backup
     this.isEditing = false;
   }
-
-  // Handle Profile Picture Upload
   onProfilePicUpload(event: any) {
     const file = event.target.files[0];
     if (file) {
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.profilePictureUrl = e.target.result; // Update preview with the selected image
+      };
+      reader.readAsDataURL(file);
+  
+      // Upload to server
       this.profileService.uploadProfilePicture(file).subscribe(
         (response) => {
-          this.profilePictureUrl = response.profilePictureUrl; // Update with the new image URL from the server
+          console.log('Profile picture uploaded successfully');
+          // Update with the new image URL from the server
+          this.profilePictureUrl = response.profilePictureUrl;
         },
         (error) => {
           console.error('Error uploading profile picture', error);
@@ -68,6 +79,7 @@ export class ProfileComponent {
       );
     }
   }
+  
 
   // Delete Account
   deleteAccount() {

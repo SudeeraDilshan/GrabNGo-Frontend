@@ -15,11 +15,12 @@ export class ProfileService {
   // Upload profile picture to the server
   uploadProfilePicture(file: File): Observable<any> {
     const formData = new FormData();
-    formData.append('file', file, file.name);
+    formData.append('file', file, file.name);  // Append the file to FormData
 
     const headers = new HttpHeaders().set('Content-Type', 'multipart/form-data');
     return this.http.post<any>(`${this.apiUrl}/upload-profile-picture`, formData, { headers });
-  }
+}
+
 
   // Update profile information
   updateProfile(profileData: any): Observable<any> {
