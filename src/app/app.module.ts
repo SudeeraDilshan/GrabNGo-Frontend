@@ -11,7 +11,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -27,6 +27,7 @@ import { CategoryCrudComponent } from './category-crud/category-crud.component';
 import { CategoryAddComponent } from './category-crud/category-add/category-add.component';
 import { CategoryEditComponent } from './category-crud/category-edit/category-edit.component';
 import { CategoryDeleteComponent } from './category-crud/category-delete/category-delete.component';
+import { OrderViewAdminComponent } from './order-view-admin/order-view-admin.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { CategoryDeleteComponent } from './category-crud/category-delete/categor
     CategoryAddComponent,
     CategoryEditComponent,
     CategoryDeleteComponent,
+    OrderViewAdminComponent,
   ],
   imports: [
     BrowserModule,
@@ -59,7 +61,9 @@ import { CategoryDeleteComponent } from './category-crud/category-delete/categor
     MatInputModule,
     MatDialogModule,
   ],
-  providers: [],
+  providers: [
+    { provide: MAT_DIALOG_DATA, useValue: {} },
+  ],  
   bootstrap: [AppComponent]
 })
 export class AppModule { }

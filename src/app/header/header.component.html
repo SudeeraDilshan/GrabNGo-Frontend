@@ -1,9 +1,24 @@
 <header class="header">
   <img src="assets/Logo.png" alt="Grab N Go Logo" class="logo" />
   <nav class="nav">
-    <a routerLink="orders">Orders</a>
-    <a routerLink="productAdmin" >Product</a>
-    <a routerLink="category">Category</a>
-    <a routerLink="logout">Logout</a>
+    <a 
+      routerLink="/orderAdmin" 
+      routerLinkActive="active-link" 
+      [routerLinkActiveOptions]="{ exact: true }">
+      Orders
+    </a>
+    <a 
+      routerLink="/productAdmin" 
+      routerLinkActive="active-link" 
+      [routerLinkActiveOptions]="{ exact: true }">
+      Product
+    </a>
+    <a 
+      routerLink="/category" 
+      routerLinkActive="active-link" 
+      [routerLinkActiveOptions]="{ exact: true }">
+      Category
+    </a>
+    <a (click)="logOut()">Logout</a>
   </nav>
 </header>

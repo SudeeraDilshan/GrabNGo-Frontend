@@ -1,17 +1,6 @@
 <div class="edit-product-container">
     <h1>Edit Product Details</h1>
   
-    <!-- Product Image Upload -->
-    <div class="product-image">
-      <div class="image-placeholder">
-        <img *ngIf="imagePreview" [src]="imagePreview" alt="Product Image Preview" class="product-image-preview" />
-        <label for="product-image" class="camera-icon">
-          <mat-icon>photo_camera</mat-icon>
-        </label>
-      </div>
-      <input type="file" id="product-image" (change)="onImageUpload($event)" class="file-input" />
-    </div>
-  
     <form [formGroup]="editProductForm" (ngSubmit)="onSubmit()">
       <!-- Product Name and Price -->
       <div class="form-row">
