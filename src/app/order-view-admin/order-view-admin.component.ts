@@ -51,12 +51,9 @@ export class OrderViewAdminComponent {
 
   updateOrderStatus(order: any) {
     console.log('Updated status for order:', order);
-    // Implement your logic to update order status here
   }
 
   addOrder() {
     console.log('Add new order clicked');
-    // Logic to add a new order
   }
-
 }

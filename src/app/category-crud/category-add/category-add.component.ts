@@ -10,44 +10,26 @@ import { Router } from '@angular/router';
 })
 export class CategoryAddComponent implements OnInit {
   addCategoryForm: FormGroup;
-  imagePreview: string | undefined;
   showSuccessMessage: boolean = false;
 
-  constructor(
-    private fb: FormBuilder,
-    private categoryService: CategoryService, 
-    private router: Router
-  ) {
+  constructor( private fb: FormBuilder, private categoryService: CategoryService, private router: Router ) {
     this.addCategoryForm = this.fb.group({
       categoryName: ['', Validators.required],
       description: ['', Validators.required],
+      isActive: [true],
     });
   }
 
   ngOnInit(): void {}
 
-  onImageUpload(event: Event): void {
-    const file = (event.target as HTMLInputElement).files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        this.imagePreview = reader.result as string;
-      };
-      reader.readAsDataURL(file);
-    }
-  }
-
   resetForm(): void {
     this.router.navigate(['/category']);
     this.addCategoryForm.reset();
-    this.imagePreview = undefined;
   }
 
   onSubmit(): void {
     if (this.addCategoryForm.valid) {
       const categoryData = this.addCategoryForm.value;
-
-      // Use the service to send data to the backend
       this.categoryService.addCategory(categoryData).subscribe({
         next: (response) => {
           console.log('Category Added Response:', response);
@@ -60,7 +42,7 @@ export class CategoryAddComponent implements OnInit {
         error: (err) => {
           console.error('Error:', err);
         },
-      });
+      }); 
     }
   }
 }

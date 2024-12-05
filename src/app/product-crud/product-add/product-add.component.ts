@@ -11,25 +11,20 @@ import { ProductService } from '../../services/product.service';
 export class ProductAddComponent {
   addProductForm: FormGroup;
   imagePreview: string | ArrayBuffer | null = null;
-  showSuccessMessage = false;
-  productId: string | null = null;
+  showSuccessMessage: boolean = false;
 
   categories = ['Beauty and Health', 'Home and Garden', 'Phone and Telecommunication', 'Accessories	', 'Sports', 'Entertainment'];
   availabilityOptions = ['Out Of Stock', 'Available'];
 
-  constructor(
-    private fb: FormBuilder,
-    private route: ActivatedRoute,
-    private router: Router,
-    private productService: ProductService
-  ) {
-    const productId = this.route.snapshot.paramMap.get('id');
+  constructor( private fb: FormBuilder,  private route: ActivatedRoute, private router: Router, private productService: ProductService) {
     this.addProductForm = this.fb.group({
       productName: ['', Validators.required],
-      price: ['', [Validators.required, Validators.min(1)]],
-      description: [''],
-      category: ['', Validators.required],
-      availability: ['', Validators.required],
+      productPrice: ['', [Validators.required, Validators.min(1)]],
+      productDescription: ['', Validators.required],
+      imageUrl: ['', Validators.required],
+      categoryId: ['', Validators.required],
+      isAvailable: [true],
+      isActive: [true]
     });
   }
 
@@ -47,14 +42,11 @@ export class ProductAddComponent {
   onSubmit() {
     if (this.addProductForm.valid) {
       const productData = this.addProductForm.value;
-
-      // Call the ProductService to add the product
       this.productService.addProduct(productData).subscribe({
         next: (response) => {
           console.log('Product added successfully:', response);
           console.log('Generated Product ID:', response.id);
           this.showSuccessMessage = true;
-
           setTimeout(() => {
             this.showSuccessMessage = false;
             this.router.navigate(['/productAdmin']);
@@ -64,15 +56,7 @@ export class ProductAddComponent {
           console.error('Error adding product:', err);
         },
       });
-    } else {
-      console.error('Form is invalid');
     }
-  }
-
-  loadProductDetails(productId: string) {
-    // Fetch product details from backend using productId and populate the form
-    console.log(`Loading product details for ID: ${productId}`);
-    console.log('ProductId......', productId);
   }
 
   resetForm() {
