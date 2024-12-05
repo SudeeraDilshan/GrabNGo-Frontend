@@ -1,34 +1,34 @@
 <header class="header">
-    <img src="assets/Logo.png" alt="Grab N Go Logo" class="logo"/>
-    <nav class="nav">
-        <a
-                routerLink="/orderAdmin"
-                routerLinkActive="active-link"
-                [routerLinkActiveOptions]="{ exact: true }">
-            Orders
-        </a>
-        <a
-                routerLink="/productAdmin"
-                routerLinkActive="active-link"
-                [routerLinkActiveOptions]="{ exact: true }">
-            Product
-        </a>
-        <a
-                routerLink="/category"
-                routerLinkActive="active-link"
-                [routerLinkActiveOptions]="{ exact: true }">
-            Category
-        </a>
-        <a routerLink="/login">Login</a>
-        <a (click)="logOut()">Logout</a>
-        <a
-                (click)="navigateToCart()"
-                class="cart-link"
-        >
-            <i class="fa fa-cart-shopping"></i>
-            <span> My cart </span>
+  <img src="assets/Logo.png" alt="Grab N Go Logo" class="logo" />
+  <nav class="nav">
+    <a
+      routerLink="/orderAdmin"
+      routerLinkActive="active-link"
+      [routerLinkActiveOptions]="{ exact: true }">
+      Orders
+    </a>
+    <a
+      routerLink="/productAdmin"
+      routerLinkActive="active-link"
+      [routerLinkActiveOptions]="{ exact: true }">
+      Product
+    </a>
+    <a
+      routerLink="/category"
+      routerLinkActive="active-link"
+      [routerLinkActiveOptions]="{ exact: true }">
+      Category
+    </a>
+      <a routerLink="/login">Login</a>
+    <a (click)="logOut()">Logout</a>
+      <a
+              (click)="navigateToCart()"
+              class="cart-link"
+      >
+          <i class="fa fa-cart-shopping"></i>
+          <span> My cart </span>
 
-            <span class="cart-count">({{ cartItemCount }})</span>
-        </a>
-    </nav>
+          <span class="cart-count">({{ cartItemCount }})</span>
+      </a>
+  </nav>
 </header>

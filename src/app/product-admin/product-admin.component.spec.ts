@@ -1,23 +1,23 @@
-// import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-// import { ProductAdminComponent } from './product-admin.component';
+import { ProductAdminComponent } from './product-admin.component';
 
-// describe('ProductAdminComponent', () => {
-//   let component: ProductAdminComponent;
-//   let fixture: ComponentFixture<ProductAdminComponent>;
+describe('ProductAdminComponent', () => {
+  let component: ProductAdminComponent;
+  let fixture: ComponentFixture<ProductAdminComponent>;
 
-//   beforeEach(async () => {
-//     await TestBed.configureTestingModule({
-//       declarations: [ProductAdminComponent]
-//     })
-//     .compileComponents();
-    
-//     fixture = TestBed.createComponent(ProductAdminComponent);
-//     component = fixture.componentInstance;
-//     fixture.detectChanges();
-//   });
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [ProductAdminComponent]
+    })
+    .compileComponents();
 
-//   it('should create', () => {
-//     expect(component).toBeTruthy();
-//   });
-// });
+    fixture = TestBed.createComponent(ProductAdminComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

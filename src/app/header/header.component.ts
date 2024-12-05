@@ -1,13 +1,4 @@
-// import { Component } from '@angular/core';
 
-// @Component({
-//   selector: 'app-header',
-//   templateUrl: './header.component.html',
-//   styleUrl: './header.component.css'
-// })
-// export class HeaderComponent {
-
-// }  
 import { Component, OnInit } from '@angular/core';
 import { CartService } from '../cart/cart.services';
 import { Router } from '@angular/router';
@@ -37,4 +28,15 @@ export class HeaderComponent implements OnInit {
       
     });
   }
+
+    logOut(){
+        console.log('logged out');
+        this.signOut();
+    }
+
+    signOut() {
+        if (typeof localStorage !== 'undefined') {
+            localStorage.clear();
+        }
+    }
 }

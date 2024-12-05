@@ -1,5 +1,5 @@
-<!-- <div class="product-admin">  
-    <table class="product-table">
+<div class="product-admin">
+    <table class="admin-table" *ngIf="products.length > 0; else noProducts">
       <thead>
         <tr>
           <th>Product Name</th>
@@ -11,20 +11,22 @@
       </thead>
       <tbody>
         <tr *ngFor="let product of products">
-          <td>{{ product.name }}</td>
+          <td>{{ product.productName }}</td>
           <td>
             <mat-form-field appearance="fill" class="dropdown">
-              <mat-select [(value)]="product.category">
-                <mat-option *ngFor="let category of categories" [value]="category">{{ category }}</mat-option>
+              <mat-select [(value)]="product.categoryId" (selectionChange)="updateCategory(product)">
+                <mat-option *ngFor="let category of categories" [value]="category.categoryId">
+                  {{ category.categoryName }}
+                </mat-option>
               </mat-select>
             </mat-form-field>
           </td>
-          <td>Rs. {{ product.price }}</td>
+          <td>Rs. {{ product.productPrice }}</td>
           <td>
             <mat-form-field appearance="fill" class="dropdown">
-              <mat-select [(value)]="product.availability">
-                <mat-option value="Available">Available</mat-option>
-                <mat-option value="Out Of Stock">Out Of Stock</mat-option>
+              <mat-select [(value)]="product.available" (selectionChange)="updateAvailability(product)">
+                <mat-option [value]="true">Available</mat-option>
+                <mat-option [value]="false">Out Of Stock</mat-option>
               </mat-select>
             </mat-form-field>
           </td>
@@ -33,16 +35,18 @@
               <mat-icon>delete</mat-icon>
             </button>
             <button mat-icon-button color="primary" (click)="editProduct(product)">
-              <mat-icon>settings</mat-icon>
+              <mat-icon>edit</mat-icon>
             </button>
           </td>
         </tr>
       </tbody>
     </table>
   
-    <button mat-fab style="background-color: #FB800D; color: white;" class="add-button" (click)="addProduct()">
-        <mat-icon>add</mat-icon>
-      </button>
-      
+    <ng-template #noProducts>
+      <p class="no-data">No products available.</p>
+    </ng-template>
+
+    <button mat-fab class="add-button" (click)="addProduct()">
+      <mat-icon>add</mat-icon>
+    </button>
   </div>
-   -->

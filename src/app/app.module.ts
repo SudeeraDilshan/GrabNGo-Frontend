@@ -1,21 +1,50 @@
-import { importProvidersFrom, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
+import { MatTableModule } from '@angular/material/table';
+import { MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
-import { AppRoutingModule } from './app-routing.module'; 
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { ProductAdminComponent } from './product-admin/product-admin.component';
+import { CategoryViewAdminComponent } from './category-view-admin/category-view-admin.component';
+import { ProductCrudComponent } from './product-crud/product-crud.component';
+import { ProductAddComponent } from './product-crud/product-add/product-add.component';
+import { ProductEditComponent } from './product-crud/product-edit/product-edit.component';
+import { ProductDeleteComponent } from './product-crud/product-delete/product-delete.component';
+import { CategoryCrudComponent } from './category-crud/category-crud.component';
+import { CategoryAddComponent } from './category-crud/category-add/category-add.component';
+import { CategoryEditComponent } from './category-crud/category-edit/category-edit.component';
+import { CategoryDeleteComponent } from './category-crud/category-delete/category-delete.component';
+import { OrderViewAdminComponent } from './order-view-admin/order-view-admin.component';
+import { LoginComponent } from './components/login/login.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 
 import { CartComponent } from './cart/cart.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { EmailVerificationComponent } from './email-verification/email-verification.component';
+import { ProfileComponent } from './profile/profile.component';
+import { OrderHistoryComponent } from './order-history/order-history.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
+import { RegistrationComponent } from './registration/registration.component';
+import { CheckoutAddressComponent } from './checkout-address/checkout-address.component';
+import { OrderSummaryComponent } from './checkout-address/order-summary/order-summary.component';
+import { CheckoutComponent } from './checkout-address/checkout/checkout.component';
+import { CheckoutPaymentComponent } from './checkout-payment/checkout-payment.component';
+import { PaymentPortalComponent } from './checkout-payment/payment-portal/payment-portal.component';
 import { HttpClientModule } from '@angular/common/http';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatListModule } from '@angular/material/list';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
 import { FilterResultsComponent } from './filter-results/filter-results.component';
 import { ProductComponent } from './product/product.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
@@ -26,6 +55,31 @@ import { ProductOverviewComponent } from './product-overview/product-overview.co
     AppComponent,
     HeaderComponent,
     FooterComponent,
+    ProductAdminComponent,
+    CategoryViewAdminComponent,
+    ProductCrudComponent,
+    ProductAddComponent,
+    ProductEditComponent,
+    ProductDeleteComponent,
+    CategoryCrudComponent,
+    CategoryAddComponent,
+    CategoryEditComponent,
+    CategoryDeleteComponent,
+    OrderViewAdminComponent,
+    FooterComponent,
+    LoginComponent,
+    ResetPasswordComponent,
+    EmailVerificationComponent,
+    ProfileComponent,
+    OrderHistoryComponent,
+    ChangePasswordComponent,
+    RegistrationComponent,
+    CheckoutAddressComponent,
+    OrderSummaryComponent,
+    CheckoutComponent,
+    CheckoutPaymentComponent,
+    PaymentPortalComponent,
+
     CartComponent,
     ProductListComponent,
     FilterResultsComponent,
@@ -36,16 +90,34 @@ import { ProductOverviewComponent } from './product-overview/product-overview.co
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
+    FormsModule,
     AppRoutingModule,
     MatFormFieldModule,
+    BrowserAnimationsModule,
     MatSelectModule,
+    MatTableModule,
     MatIconModule,
     MatButtonModule,
     ReactiveFormsModule,
+    MatInputModule,
+    MatDialogModule,
+    AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    MatCardModule,
+    MatButtonModule,
+    MatListModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule,
+
   ],
-  providers: [],
+  providers: [
+    { provide: MAT_DIALOG_DATA, useValue: {} },
+  ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

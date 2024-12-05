@@ -1,54 +1,40 @@
-/* .product-admin {
-    padding: 20px;
-  }
-  
-  .header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  
-  .logo {
-    height: 80px;
-    width: auto;
-  }
-  
-  .nav a {
-    margin: 0 10px;
-    text-decoration: none;
-    color: black;
-  }
-  
-  .nav a.active {
-    color: #00aaff;
-  }
-  
-  .product-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    margin-bottom: 50px;
-  }
-  
-  .product-table th{
-    background-color: #FB800D;
-    color:white;
-  }
+.product-admin{
+  margin: 30px;
+}
 
-  .product-table th,
-  .product-table td {
-    padding: 20px;
-    border-bottom: 1px solid #ddd;
-    text-align: center;
-  }
-  
-  .dropdown {
-    width: 100%;
-  }
-  
-  .add-button {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-  }
-   */
+.product-admin {
+  position: relative;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  margin-bottom: 50px;
+}
+
+.admin-table th {
+  background-color: #FB800D;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+.admin-table th,
+.admin-table td {
+  padding: 20px;
+  border-bottom: 1px solid #ddd;
+  text-align: center;
+}
+
+.dropdown {
+  width: 100%;
+}
+
+.add-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #FB800D;
+  color: white;
+}

@@ -1,0 +1,32 @@
+<div class="category-view">
+    <table mat-table [dataSource]="categories" class="admin-table mat-elevation-z8">
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Category Name </th>
+            <td mat-cell *matCellDef="let category"> {{ category.categoryName }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef> Description </th>
+            <td mat-cell *matCellDef="let category"> {{ category.description }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef> Action </th>
+            <td mat-cell *matCellDef="let category">
+                <button mat-icon-button color="warn" (click)="deleteCategory(category)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+                <button mat-icon-button color="primary" [routerLink]="['/categoryEdit', category.categoryId]" (click)="editCategory(category)">
+                    <mat-icon>settings</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <button mat-fab class="add-button" routerLink="/categoryAdd" (click)="addCategory()">
+        <mat-icon>add</mat-icon>
+    </button>
+</div>

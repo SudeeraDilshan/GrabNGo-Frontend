@@ -1,0 +1,68 @@
+<div class="profile-container">
+    <!-- Profile Card on the Left -->
+    <div class="profile-card">
+        <div class="profile-picture-container">
+            <!-- Profile Picture (Initially shown, can be replaced) -->
+            <img [src]="profilePictureUrl" alt="Default Profile" class="profile-picture" id="profile-pic-preview">
+            
+            <!-- Hidden File Input for Image Upload -->
+            <input
+            type="file"
+            id="profile-pic-upload"
+            class="profile-pic-upload"
+            accept="image/*"
+            (change)="onProfilePicUpload($event)"
+          />
+          <label for="profile-pic-upload" class="camera-icon">
+            <i class="fas fa-camera"></i>
+          </label>
+          
+        </div>
+
+        <h4 class="profile-name">{{ profile.firstName }} {{ profile.lastName }}</h4>
+        <p class="profile-email">{{ profile.email }}</p>
+        <p class="profile-location">{{ profile.address }}</p>
+        <p class="profile-phone">{{ profile.mobile }}</p>
+    </div>
+
+    <!-- Profile Details and Security Section on the Right -->
+    <div class="profile-layout">
+        <!-- Profile Details -->
+        <div class="profile-details">
+            <h3>Personal Information</h3>
+            <div *ngIf="!isEditing">
+                <p>First Name: {{ profile.firstName }}</p>
+                <p>Last Name: {{ profile.lastName }}</p>
+                <p>Address: {{ profile.address }}</p>
+                <h3>Contact Information</h3>
+                <p>Mobile Number: {{ profile.mobile }}</p>
+                <p>Email: {{ profile.email }}</p>
+                <button (click)="toggleEdit()">Edit</button>
+            </div>
+            <div *ngIf="isEditing">
+                <label>First Name:</label>
+                <input [(ngModel)]="profile.firstName" placeholder="First Name" />
+                <label>Last Name:</label>
+                <input [(ngModel)]="profile.lastName" placeholder="Last Name" />
+                <label>Address:</label>
+                <input [(ngModel)]="profile.address" placeholder="Address" />
+                <label>Mobile Number:</label>
+                <input [(ngModel)]="profile.mobile" placeholder="Mobile Number" />
+                <label>Email:</label>
+                <input [(ngModel)]="profile.email" placeholder="Email" />
+                <button (click)="saveProfile()">Save</button>
+                <button (click)="cancelEdit()">Cancel</button>
+            </div>
+        </div>
+
+        <!-- Security Section -->
+        <div class="security">
+            <h3>Security</h3>
+            <div class="security-links">
+                <a href="#" id="change-password-link">Change Password</a>
+                <a href="#" id="delete-account-link" class="delete">Delete Account</a>
+                <a href="#" id="logout-link">Log Out</a>
+            </div>
+        </div>
+    </div>
+</div>
