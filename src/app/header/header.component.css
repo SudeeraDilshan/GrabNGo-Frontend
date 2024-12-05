@@ -1,63 +1,69 @@
-.header {
+
+  .nav a {
+    text-decoration: none;
+    padding: 10px 15px;
+    color: black;
+    font-weight: normal;
+    transition: color 0.3s ease, font-weight 0.3s ease;
+  }
+  
+  .nav a:hover {
+    color: gray;
+  }
+  
+  .active-link {
+    color: #00aaff !important;
+    font-weight: bold;
+  }  
+
+  .product-admin {
+    padding: 20px;
+  }
+  
+  .header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px 40px;
-    background-color: #ffffff;
-  }
+    box-shadow: 0 -6px 12px rgba(1, 1, 1, 0.9); 
+    }
   
   .logo {
-    display: flex;
-    align-items: center;
-  }
-  
-  .logo img {
     height: 80px;
     width: auto;
-    margin-right: 20px;
-  }
-  
-  .right-section {
-    display: flex;
-    align-items: center;
-  }
-  
-  .nav {
-    display: flex;
-    gap: 15px;
-    margin-left: 820px; 
+    margin-left: 20px;
+    margin-top: 20px;
+    margin-bottom: 10px;
   }
   
   .nav a {
+    margin: 0 10px;
     text-decoration: none;
-    color: #000000;
-    font-weight: 500;
-    font-size: 20px;
+    color: black;
   }
   
-  .cart a {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    background-color: #f3f3f3;
-    padding: 8px 12px;
-    border-radius: 20px;
-    color: #007bff;
+  .nav a.active {
+    color: #00aaff;
   }
   
-  .cart i {
-    font-size: 28px;
-    margin-right: 5px;
+  .product-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
   }
   
-  .tagline {
-    text-align: center;
-    padding: 20px;
-    background: linear-gradient(to bottom, #ffffff 0%, #a4e6fa 62%); 
+  .product-table th,
+  .product-table td {
+    padding: 12px;
+    border: 1px solid #ddd;
   }
   
-  .tagline h2 {
-    margin: 0;
-    color: #000000;
-    font-size: 28px;
+  .dropdown {
+    width: 100%;
   }
+  
+  .add-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+  }
+  

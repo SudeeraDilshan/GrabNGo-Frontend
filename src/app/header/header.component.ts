@@ -6,5 +6,14 @@ import { Component } from '@angular/core';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
+  logOut(){
+    console.log('logged out');
+    this.signOut();
+  }
 
+  signOut() {
+    if (typeof localStorage !== 'undefined') {
+      localStorage.clear();
+    }
+  }
 }
