@@ -1,18 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ReactiveFormsModule } from '@angular/forms'; 
-import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
-import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -28,6 +19,26 @@ import { CategoryAddComponent } from './category-crud/category-add/category-add.
 import { CategoryEditComponent } from './category-crud/category-edit/category-edit.component';
 import { CategoryDeleteComponent } from './category-crud/category-delete/category-delete.component';
 import { OrderViewAdminComponent } from './order-view-admin/order-view-admin.component';
+import { LoginComponent } from './components/login/login.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { EmailVerificationComponent } from './email-verification/email-verification.component';
+import { ProfileComponent } from './profile/profile.component';
+import { OrderHistoryComponent } from './order-history/order-history.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
+import { RegistrationComponent } from './registration/registration.component';
+import { CheckoutAddressComponent } from './checkout-address/checkout-address.component';
+import { OrderSummaryComponent } from './checkout-address/order-summary/order-summary.component';
+import { CheckoutComponent } from './checkout-address/checkout/checkout.component';
+import { CheckoutPaymentComponent } from './checkout-payment/checkout-payment.component';
+import { PaymentPortalComponent } from './checkout-payment/payment-portal/payment-portal.component';
+import { HttpClientModule } from '@angular/common/http';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatListModule } from '@angular/material/list';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -45,6 +56,21 @@ import { OrderViewAdminComponent } from './order-view-admin/order-view-admin.com
     CategoryEditComponent,
     CategoryDeleteComponent,
     OrderViewAdminComponent,
+    FooterComponent,
+    LoginComponent,
+    ResetPasswordComponent,
+    EmailVerificationComponent,
+    ProfileComponent,
+    OrderHistoryComponent,
+    ChangePasswordComponent,
+    RegistrationComponent,
+    CheckoutAddressComponent,
+    OrderSummaryComponent,
+    CheckoutComponent,
+    CheckoutPaymentComponent,
+    PaymentPortalComponent,
+
+
   ],
   imports: [
     BrowserModule,
@@ -57,13 +83,24 @@ import { OrderViewAdminComponent } from './order-view-admin/order-view-admin.com
     MatTableModule,
     MatIconModule,
     MatButtonModule,
-    ReactiveFormsModule, 
+    ReactiveFormsModule,
     MatInputModule,
     MatDialogModule,
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    MatCardModule,
+    MatButtonModule,
+    MatListModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule,
+
   ],
   providers: [
     { provide: MAT_DIALOG_DATA, useValue: {} },
-  ],  
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
