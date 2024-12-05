@@ -4,8 +4,21 @@
     <p>Login with email</p>
 
     <form (ngSubmit)="onLogin()">
-      <input type="email" placeholder="Email" [(ngModel)]="email" name="email" required />
-      <input type="password" placeholder="Password" [(ngModel)]="password" name="password" required />
+      <div class="input-group">
+        <input type="email" placeholder="Email" [(ngModel)]="email" name="email" required />
+      </div>
+      <div class="input-group">
+        <input
+          [type]="showPassword ? 'text' : 'password'"
+          placeholder="Password"
+          [(ngModel)]="password"
+          name="password"
+          required
+        />
+        <span class="eye-icon" (click)="togglePasswordVisibility()">
+          <i [class]="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+        </span>
+      </div>
 
       <div class="options">
         <a href="#">Don't have an account? <span routerLink="/registration">Signup</span></a>

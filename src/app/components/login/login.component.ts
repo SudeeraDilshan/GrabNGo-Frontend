@@ -9,11 +9,14 @@ import { AuthService } from '../../services/auth.service';
 export class LoginComponent {
   email: string = '';
   password: string = '';
+  showPassword: boolean = false;
 
   constructor(private authservice: AuthService)  {
 
   }
-
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
+  }
   onLogin() {
     if (this.email && this.password) {
       // console.log('Login successful:', this.email);
