@@ -1,42 +1,38 @@
-/* You can add global styles to this file, and also import other style files */
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
-.mat-dialog-container {
-    z-index: 1000; 
-  }
-
 /* Common styles for all admin tables */
+.category-view{
+    margin: 30px;
+}
+
 .admin-table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
     margin-bottom: 50px;
-}
-
-.admin-table th {
+  }
+  
+  .admin-table th {
     background-color: #FB800D;
     color: white;
     padding: 20px;
     text-align: center;
-}
-
-.admin-table th,
-.admin-table td {
+  }
+  
+  .admin-table th,
+  .admin-table td {
     padding: 20px;
     border-bottom: 1px solid #ddd;
     text-align: center;
-}
-
-.dropdown {
+  }
+  
+  .dropdown {
     width: 100%;
-}
-
-.add-button {
+  }
+  
+  .add-button {
     position: fixed;
     bottom: 20px;
     right: 20px;
     background-color: #FB800D;
     color: white;
-}
+  }
+  
