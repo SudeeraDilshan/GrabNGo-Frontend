@@ -158,7 +158,7 @@
   .add-to-cart-btn {
     width: 100%;
     padding: 1rem;
-    background-color: #ff6b00;
+    background-color:#C06308;
     color: white;
     border: none;
     cursor: pointer;
@@ -167,7 +167,7 @@
   }
   
   .add-to-cart-btn:hover {
-    background-color: #ff8533;
+    background-color: #863c0a;
   }
   
   .shipping-info {

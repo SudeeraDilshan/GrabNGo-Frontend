@@ -26,7 +26,10 @@ import { Product } from './product.model';
   providedIn: 'root'
 })
 export class ProductService {
-  private apiUrl = 'https://backend-api-url/products'; // Replace with your backend URL
+  addProductToCart(product: any) {
+    throw new Error('Method not implemented.');
+  }
+  private apiUrl = 'https://backend-api-url/products';  
 
   constructor(private http: HttpClient) {}
 

@@ -34,6 +34,7 @@ export class HeaderComponent implements OnInit {
      
     this.cartService.cartItems$.subscribe(() => {
       this.cartItemCount = this.cartService.getCartItemCount();
+      
     });
   }
 }

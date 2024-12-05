@@ -19,6 +19,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FilterResultsComponent } from './filter-results/filter-results.component';
 import { ProductComponent } from './product/product.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { ProductOverviewComponent } from './product-overview/product-overview.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,8 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
     FilterResultsComponent,
     ProductComponent,
     ShoppingCartComponent,
+    ProductOverviewComponent
+
   ],
   imports: [
     BrowserModule,

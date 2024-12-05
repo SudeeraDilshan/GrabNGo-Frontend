@@ -1,4 +1,6 @@
 export interface Product {
+  total: number;
+  quantity: number;
   id: number;
   name: string;
   description: string;
@@ -8,3 +10,5 @@ export interface Product {
   images: string[]; 
   modelHeight?: number; 
 }
+ 
+

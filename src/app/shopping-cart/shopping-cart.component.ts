@@ -92,12 +92,24 @@ export class ShoppingCartComponent implements OnInit {
 
   
   cancelAll(): void {
-    this.cartItems.forEach((item) => (item.selected = false)); // Unselect all items
-    alert('All selections have been cleared.');
+    const selectedItems = this.cartItems.filter((item) => item.selected);
+
+    if (selectedItems.length > 0) {
+      selectedItems.forEach((item) => {
+        this.cartService.removeFromCart(item.product.id, item.quantity);
+      });
+
+      this.cartItems = this.cartItems.filter((item) => !item.selected);
+
+      if (this.cartItems.length === 0) {
+        this.router.navigate(['cart']);
+      }  
+    } else {
+      alert('No items selected to remove.');
+    }
   }
 
   getTotalPrice(item: { product: Product; quantity: number }): number {
     return item.product.price * item.quantity;
   }
 }
-

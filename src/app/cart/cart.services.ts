@@ -45,6 +45,31 @@ export class CartService {
     }
   }
 
+  removeFromCart(productId: number, quantityToRemove: number = 1): void {
+    const currentCart = this.cartItemsSubject.value;
+
+    const existingItemIndex = currentCart.findIndex(
+      (item) => item.product.id === productId
+    );
+
+    if (existingItemIndex > -1) {
+      const updatedCart = [...currentCart];
+      const item = updatedCart[existingItemIndex];
+
+      if (item.quantity > quantityToRemove) {
+        updatedCart[existingItemIndex] = {
+          ...item,
+          quantity: item.quantity - quantityToRemove,
+        };
+      } else {
+        updatedCart.splice(existingItemIndex, 1);
+      }
+
+      this.cartItemsSubject.next(updatedCart);
+    }
+  }
+
+
   getCartItemCount(): number {
     return this.cartItemsSubject.value.reduce(
       (total, item) => total + item.quantity, 

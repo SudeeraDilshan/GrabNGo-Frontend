@@ -131,7 +131,8 @@
             <h3>{{ product.name }}</h3>
             <p class="description">{{ product.description }}</p>
             <p class="price">Rs. {{ product.price }}</p>
-            <button class="view-btn">View</button>
+            <button (click)="viewProductDetails(product.id)" class="view-btn">View</button>
+
           </div>
         </div>
       </div>
@@ -169,7 +170,7 @@
             <h3>{{ product.name }}</h3>
             <p class="description">{{ product.description }}</p>
             <p class="price">Rs. {{ product.price }}</p>
-            <button class="view-btn">View</button>
+            <button (click)="viewProductDetails(product.id)" class="view-btn">View</button>
           </div>
         </div>
       </div>
