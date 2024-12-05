@@ -27,7 +27,7 @@ export interface ApiResponse<T> {
   status: string;
   message: string;
   data: T
-}
+} 
 
 @Component({
   selector: 'app-product-admin',
