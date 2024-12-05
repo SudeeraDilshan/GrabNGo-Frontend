@@ -11,7 +11,7 @@ describe('ProductAdminComponent', () => {
       declarations: [ProductAdminComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(ProductAdminComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

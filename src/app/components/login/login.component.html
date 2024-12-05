@@ -1,0 +1,22 @@
+<div class="login-container">
+  <div class="login-card">
+    <h2>Welcome Back</h2>
+    <p>Login with email</p>
+
+    <form (ngSubmit)="onLogin()">
+      <input type="email" placeholder="Email" [(ngModel)]="email" name="email" required />
+      <input type="password" placeholder="Password" [(ngModel)]="password" name="password" required />
+
+      <div class="options">
+        <a href="#">Don't have an account? <span routerLink="/registration">Signup</span></a>
+        <a routerLink="/reset-password">Forgot Password?</a>
+      </div>
+
+      <button type="submit" class="login-button" [disabled]="!email || !password">Login</button>
+
+      <p class="agreement-text">
+        By continuing, you confirm that you're an adult and you've read and accepted our GrabNGo Free Membership Agreement and Privacy Policy.
+      </p>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,24 @@
+<div class="email-verification-container">
+  <h3>Email Verification Code</h3>
+  <p>Enter the 6-digit code we emailed to {{userEmail}}</p>
+  
+  <form [formGroup]="verificationForm" (ngSubmit)="onVerify()">
+    <div class="code-inputs">
+      <input *ngFor="let controlName of getControls(); let i = index"
+             type="text"
+             maxlength="1"
+             [formControlName]="controlName"
+             (input)="onInput($event, i)">
+    </div>
+    
+    <button type="button" (click)="resendCode()" [disabled]="isResendDisabled">
+      Resend in {{ resendTimer }} sec
+    </button>
+
+    <button type="submit" [disabled]="!verificationForm.valid">Verify</button>
+  </form>
+
+  <p class="disclaimer">
+    By continuing, you confirm that you’re an adult and you’ve read and accepted our GrabNGo Free Membership Agreement and Privacy Policy.
+  </p>
+</div>
