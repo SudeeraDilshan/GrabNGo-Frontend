@@ -61,6 +61,22 @@
     color: #000000;
     font-size: 28px;
   } */
+  .nav a {
+    text-decoration: none;
+    padding: 10px 15px;
+    color: black;
+    font-weight: normal;
+    transition: color 0.3s ease, font-weight 0.3s ease;
+  }
+  
+  .nav a:hover {
+    color: gray;
+  }
+  
+  .active-link {
+    color: #00aaff !important;
+    font-weight: bold;
+  }  
 
   .product-admin {
     padding: 20px;
