@@ -20,53 +20,73 @@ import { CheckoutAddressComponent } from './checkout-address/checkout-address.co
 import { CheckoutPaymentComponent } from './checkout-payment/checkout-payment.component';
 
 
-const routes: Routes = [
-  { path: '', redirectTo: '/productAdmin', pathMatch: 'full' },
-  { path: 'productAdmin', component: ProductAdminComponent},
-  { path: 'category', component: CategoryViewAdminComponent },
-  { path: 'orderAdmin', component: OrderViewAdminComponent},
-  { path: 'productAdd', component:ProductAddComponent},
-  { path: 'productEdit/:id', component: ProductEditComponent},
-  { path: 'productDelete', component:ProductDeleteComponent},
-  { path: 'categoryAdd', component: CategoryAddComponent},
-  { path: 'categoryEdit/:id', component: CategoryEditComponent},
-  { path: 'categoryDelete', component: CategoryDeleteComponent},
+import { CartComponent } from './cart/cart.component';
+import { ProductListComponent } from './product-list/product-list.component';
+import { ProductComponent } from './product/product.component';
+import { FilterResultsComponent } from './filter-results/filter-results.component';
+import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { ProductOverviewComponent } from './product-overview/product-overview.component';
 
-  {
-    path: 'login',
-    component: LoginComponent,
-  },
-  {
-    path: 'reset-password',
-    component: ResetPasswordComponent,
-  },
-  {
-    path: 'email-verify',
-    component: EmailVerificationComponent,
-  },
-  {
-    path: 'profile',
-    component: ProfileComponent,
-  },
-  { path: 'order-history',
-    component: OrderHistoryComponent
-  },
-  { path: 'change-password',
-    component: ChangePasswordComponent
-  },
-  { path: 'registration',
-    component: RegistrationComponent
-  },
-  { path: 'checkout-address',
-    component: CheckoutAddressComponent
-  },
-  { path: 'checkout-payment',
-    component: CheckoutPaymentComponent
-  },
+const routes: Routes = [
+    {path: '', redirectTo: '/products', pathMatch: 'full'},
+    {path: 'productAdmin', component: ProductAdminComponent},
+    {path: 'category', component: CategoryViewAdminComponent},
+    {path: 'orderAdmin', component: OrderViewAdminComponent},
+    {path: 'productAdd', component: ProductAddComponent},
+    {path: 'productEdit/:id', component: ProductEditComponent},
+    {path: 'productDelete', component: ProductDeleteComponent},
+    {path: 'categoryAdd', component: CategoryAddComponent},
+    {path: 'categoryEdit/:id', component: CategoryEditComponent},
+    {path: 'categoryDelete', component: CategoryDeleteComponent},
+
+    {
+        path: 'login',
+        component: LoginComponent,
+    },
+    {
+        path: 'reset-password',
+        component: ResetPasswordComponent,
+    },
+    {
+        path: 'email-verify',
+        component: EmailVerificationComponent,
+    },
+    {
+        path: 'profile',
+        component: ProfileComponent,
+    },
+    {
+        path: 'order-history',
+        component: OrderHistoryComponent
+    },
+    {
+        path: 'change-password',
+        component: ChangePasswordComponent
+    },
+    {
+        path: 'registration',
+        component: RegistrationComponent
+    },
+    {
+        path: 'checkout-address',
+        component: CheckoutAddressComponent
+    },
+    {
+        path: 'checkout-payment',
+        component: CheckoutPaymentComponent
+    },
+    {path: 'cart', component: CartComponent},
+    {path: 'products', component: ProductListComponent},
+    {path: 'product', component: ProductComponent},
+    {path: 'filter', component: FilterResultsComponent},
+    {path: 'product/:id', component: ProductComponent},
+    {path: 'shopping-cart', component: ShoppingCartComponent},
+    {path: 'product-overview', component: ProductOverviewComponent},
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
+    imports: [RouterModule.forRoot(routes)],
+    exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule {
+}

@@ -1,19 +1,42 @@
-import { Component } from '@angular/core';
+
+import { Component, OnInit } from '@angular/core';
+import { CartService } from '../cart/cart.services';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrl: './header.component.css'
+  styleUrls: ['./header.component.css']  
 })
-export class HeaderComponent {
-  logOut(){
-    console.log('logged out');
-    this.signOut();
-  }
+export class HeaderComponent implements OnInit {
+  cartItemCount: number = 0;
 
-  signOut() {
-    if (typeof localStorage !== 'undefined') {
-      localStorage.clear();
+  constructor(private cartService: CartService, private router: Router) {}
+
+  navigateToCart() {
+    if (this.cartItemCount > 0) {
+      this.router.navigate(['/shopping-cart']);
+    } else {
+      this.router.navigate(['/cart']);
     }
   }
+
+  ngOnInit() {
+     
+    this.cartService.cartItems$.subscribe(() => {
+      this.cartItemCount = this.cartService.getCartItemCount();
+      
+    });
+  }
+
+    logOut(){
+        console.log('logged out');
+        this.signOut();
+    }
+
+    signOut() {
+        if (typeof localStorage !== 'undefined') {
+            localStorage.clear();
+        }
+    }
 }

@@ -1,0 +1,178 @@
+<!-- <div class="container">
+    <h1 class="main-title">Convenience in Every Click</h1>
+  
+    <div class="search-sort-container">
+      <div class="search-box">
+        <input
+          [formControl]="searchControl"
+          type="text"
+          placeholder="Joggers"
+          class="search-input"
+        >
+        <span class="search-icon">🔍</span>
+      </div>
+  
+      <div class="sort-box">
+        <span>Sort by:</span>
+        <select [formControl]="sortControl" class="sort-select">
+          <option>Best Match</option>
+          <option>Price: Low to High</option>
+          <option>Price: High to Low</option>
+        </select>
+      </div>
+    </div>
+  
+    <div class="products-header">
+      <h2>Joggers</h2>
+      <p>{{products.length}} items found for "Joggers"</p>
+    </div>
+  
+    <div class="products-grid">
+      <div *ngFor="let product of products" class="product-card">
+        <img [src]="product.imageUrl" [alt]="product.name" class="product-image">
+        
+        <div class="product-info">
+          <h3>{{product.name}}</h3>
+          <p class="description">{{product.description}}</p>
+          <p class="price">Rs.{{product.price}}</p>
+          
+          <div class="product-actions">
+            <button class="view-btn">View</button>
+            <button class="save-btn" (click)="saveForLater(product)">
+              Save for later
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+<!--   
+  <div class="container">
+    <h1 class="main-title">Convenience in Every Click</h1> 
+  
+    <div class="search-sort-container">
+      <div class="search-box">
+        <input
+          [formControl]="searchControl"
+          type="text"
+          placeholder="Search"
+          class="search-input"
+        >
+        <span class="search-icon">
+          <i class="fas fa-search"></i>
+        </span>
+      </div>
+      
+  
+      <div class="sort-box">
+        <span>Sort by:</span>
+        <select [formControl]="sortControl" class="sort-select">
+          <option>Best Match</option>
+          <option>Price: Low to High</option>
+          <option>Price: High to Low</option>
+        </select>
+      </div>
+    </div>
+  
+    <div class="products-header">
+      <h2>Joggers</h2>
+      <p>{{products.length}} items found for "Joggers"</p>
+    </div>
+  
+    <div class="products-grid">
+      <div *ngFor="let product of products" class="product-card">
+        <img [src]="product.imageUrl" [alt]="product.name" class="product-image">
+        
+        <div class="product-info">
+          <h3>{{product.name}}</h3>
+          <p class="description">{{product.description}}</p>
+          <p class="price">Rs.{{product.price}}</p>
+          
+          <div class="product-actions">
+            <button routerLink ="product"class="view-btn">View</button>
+            <button class="save-btn" (click)="saveForLater(product)">
+              Save for later
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+  <!-- exsist -->
+  <div class="container">
+
+    <div class="search-sort-container">
+      <div class="search-box">
+        <input [formControl]="searchControl" type="text" placeholder="Search for products" class="search-input">
+        <span class="search-icon">
+          <i class="fas fa-search"></i>
+        </span>
+      </div>
+      <button class="filter-btn" (click)="onFilterClick()">
+        <i class="fas fa-filter"></i> <span class="filter-text">Filter</span>
+    </button>
+    
+    </div>
+
+    <section>
+      <div class="products-header">
+        <h2>New Arrivals</h2>
+        <a href="#" class="view-all-btn">
+          View all <span class="arrow-icon">→</span>
+        </a>
+      </div>
+      <p>Check out the latest products</p>
+      <div class="products-grid">
+        <div *ngFor="let product of newArrivals" class="product-card">
+          <img [src]="product.imageUrl" [alt]="product.name" class="product-image">
+          <div class="product-info">
+            <h3>{{ product.name }}</h3>
+            <p class="description">{{ product.description }}</p>
+            <p class="price">Rs. {{ product.price }}</p>
+            <button (click)="viewProductDetails(product.id)" class="view-btn">View</button>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <section>
+      <div class="products-header">
+        <h2>Shop by Categories</h2>
+        <a href="#" class="view-all-btn">
+          View all <span class="arrow-icon">→</span>
+        </a>
+      </div>
+      <div class="categories-grid">
+        <div *ngFor="let category of categories" class="category-card">
+          <img [src]="category.imageUrl" [alt]="category.name" class="category-image">
+          <h3>{{ category.name }}</h3>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="products-header">
+        <h2>Featured Products</h2>
+         
+        <a href="#" class="view-all-btn">
+          View all <span class="arrow-icon">→</span>
+        </a>
+      </div>
+      <p>Check out the latest products</p>
+      <div class="products-grid">
+        <div *ngFor="let product of featuredProducts" class="product-card">
+          <img [src]="product.imageUrl" [alt]="product.name" class="product-image">
+          <div class="product-info">
+            <h3>{{ product.name }}</h3>
+            <p class="description">{{ product.description }}</p>
+            <p class="price">Rs. {{ product.price }}</p>
+            <button (click)="viewProductDetails(product.id)" class="view-btn">View</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
