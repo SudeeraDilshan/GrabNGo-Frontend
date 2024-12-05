@@ -27,7 +27,7 @@ export interface ApiResponse<T> {
   status: string;
   message: string;
   data: T
-} 
+}
 
 @Component({
   selector: 'app-product-admin',
@@ -78,11 +78,11 @@ export class ProductAdminComponent {
   editProduct(product: any) {product
     this.router.navigate(['/productEdit', product.id]);
     console.log("product iddddd: ", product.id);
-  }  
+  }
 
   deleteProduct(product: Product): void {
     const dialogRef = this.dialog.open(ProductDeleteComponent);
-  
+
     dialogRef.afterClosed().subscribe((confirmed: boolean) => {
       if (confirmed) {
         product.active = false;
@@ -105,12 +105,12 @@ export class ProductAdminComponent {
       error: (err) => console.error('Error updating category:', err),
     });
   }
-  
+
   updateAvailability(product: Product): void {
     this.productService.updateProduct(product.productId, { available: product.available }).subscribe({
       next: () => console.log('Availability updated:', product),
       error: (err) => console.error('Error updating availability:', err),
     });
   }
-  
+
 }

@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -21,6 +23,10 @@ import { CategoryDeleteComponent } from './category-crud/category-delete/categor
 import { OrderViewAdminComponent } from './order-view-admin/order-view-admin.component';
 import { LoginComponent } from './components/login/login.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+
+
+import { CartComponent } from './cart/cart.component';
+import { ProductListComponent } from './product-list/product-list.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EmailVerificationComponent } from './email-verification/email-verification.component';
 import { ProfileComponent } from './profile/profile.component';
@@ -39,6 +45,10 @@ import { MatListModule } from '@angular/material/list';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
+import { FilterResultsComponent } from './filter-results/filter-results.component';
+import { ProductComponent } from './product/product.component';
+import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { ProductOverviewComponent } from './product-overview/product-overview.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +80,12 @@ import { MatIconModule } from '@angular/material/icon';
     CheckoutPaymentComponent,
     PaymentPortalComponent,
 
+    CartComponent,
+    ProductListComponent,
+    FilterResultsComponent,
+    ProductComponent,
+    ShoppingCartComponent,
+    ProductOverviewComponent
 
   ],
   imports: [
@@ -87,6 +103,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatInputModule,
     MatDialogModule,
     AppRoutingModule,
+    HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
@@ -101,6 +118,6 @@ import { MatIconModule } from '@angular/material/icon';
   providers: [
     { provide: MAT_DIALOG_DATA, useValue: {} },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

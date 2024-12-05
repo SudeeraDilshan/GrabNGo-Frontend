@@ -1,5 +1,5 @@
 <header class="header">
-  <img src="assets/Logo.png" alt="Grab N Go Logo" class="logo" />
+  <img routerLink="products" src="assets/Logo.png" alt="Grab N Go Logo" class="logo" />
   <nav class="nav">
     <a
       routerLink="/orderAdmin"
@@ -19,29 +19,16 @@
       [routerLinkActiveOptions]="{ exact: true }">
       Category
     </a>
+      <a routerLink="/login">Login</a>
     <a (click)="logOut()">Logout</a>
+      <a
+              (click)="navigateToCart()"
+              class="cart-link"
+      >
+          <i class="fa fa-cart-shopping"></i>
+          <span> My cart </span>
+
+          <span class="cart-count">({{ cartItemCount }})</span>
+      </a>
   </nav>
 </header>
-
-<!--<header class="header">-->
-<!--    <div class="logo">-->
-<!--        <img src="assets/Logo.png" alt="GrabNGo Logo" />-->
-<!--    </div>-->
-
-<!--    <nav class="nav">-->
-<!--        <a routerLink="/about">About Us</a>-->
-<!--        <a routerLink="/categories">Categories</a>-->
-<!--        <a routerLink="/login" >Login</a>-->
-<!--    </nav>-->
-
-<!--    <div class="cart">-->
-<!--        <a routerLink="/cart">-->
-<!--            <i class="material-icons">shopping_cart</i>-->
-<!--            <span>My Cart</span>-->
-<!--        </a>-->
-<!--    </div>-->
-
-<!--</header>-->
-<!--<div class="tagline">-->
-<!--    <h2>Convenience in Every Click</h2>-->
-<!--</div>-->
