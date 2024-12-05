@@ -182,7 +182,7 @@ justify-content: center;
 
 .search-icon {
   position: absolute;
-  right: 585px;
+  right: 575px;
   top: 50%;
   transform: translateY(-50%);
   color: #fff;
@@ -252,9 +252,7 @@ p {
   color:black;
   margin-top: 5px; 
   text-transform: capitalize; 
-   
-  
-}
+  }
  
 .product-card, .category-card {
   border: 1px solid #ccc;
