@@ -15,9 +15,9 @@ export class HeaderComponent implements OnInit {
 
   navigateToCart() {
     if (this.cartItemCount > 0) {
-      this.router.navigate(['shopping-cart']); 
+      this.router.navigate(['/shopping-cart']);
     } else {
-      this.router.navigate(['cart']); 
+      this.router.navigate(['/cart']);
     }
   }
 
