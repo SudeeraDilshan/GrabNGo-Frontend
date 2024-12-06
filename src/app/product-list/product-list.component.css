@@ -244,7 +244,7 @@ p {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 20px;
-  grid-auto-rows: 200px; /* Sets the height of each grid row */
+  grid-auto-rows: 200px;  
 }
 .category-card h3 {
   font-size: 18px;
@@ -308,6 +308,7 @@ p {
   border-radius: 9999px;
   font-size: 14px;
   transition: all 0.3s ease;
+  margin-top: 50px;
 }
 
 .view-all-btn:hover {
@@ -322,4 +323,54 @@ p {
 
 .view-all-btn:hover .arrow-icon {
   transform: translateX(4px);
+}
+
+.filter-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.filter-modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 300px;
+}
+
+.filter-options {
+  margin-bottom: 20px;
+}
+
+.filter-options label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.filter-options select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.apply-filter-btn {
+  background-color: #f97316;
+  color: white;
+  border: none;
+  padding: 10px;
+  width: 100%;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.apply-filter-btn:hover {
+  background-color: #C06308;
 }

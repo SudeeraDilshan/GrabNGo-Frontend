@@ -16,15 +16,10 @@ export class ProductComponent implements OnInit {
       name: 'Men\'s Casual T-Shirt',
       description: 'Comfortable cotton t-shirt, perfect for everyday wear',
       price: 999,
-      colors: ['#ff0000', '#00ff00', '#0000ff'],
-      sizes: ['S', 'M', 'L'],
+      category: 'Clothing',
       images: [
         'https://via.placeholder.com/150',
-        'https://via.placeholder.com/150',
-        'https://via.placeholder.com/150',
-        'https://via.placeholder.com/150'
       ],
-      modelHeight: 180,
       quantity: 0,
       total: 0
     },
@@ -33,15 +28,10 @@ export class ProductComponent implements OnInit {
       name: 'Women\'s Summer Dress',
       description: 'Light and breezy dress, ideal for sunny days',
       price: 1299,
-      colors: ['#ffff00', '#ff00ff', '#00ffff'],
-      sizes: ['M', 'L'],
+      category: 'Clothing',
       images: [
-        'https://via.placeholder.com/150',
-        'https://via.placeholder.com/150',
-        'https://via.placeholder.com/150',
-        'https://via.placeholder.com/150'
+        'https://via.placeholder.com/150' 
       ],
-      modelHeight: 175,
       quantity: 0,
       total: 0
     },
@@ -50,15 +40,10 @@ export class ProductComponent implements OnInit {
       name: 'Men\'s Slim Fit Jeans',
       description: 'Stylish slim-fit jeans with a modern cut',
       price: 1799,
-      colors: ['#000000', '#ffffff', '#808080'],
-      sizes: ['S', 'L'],
+      category: 'Clothing',
       images: [
-        'https://via.placeholder.com/150',
-        'https://via.placeholder.com/150',
-        'https://via.placeholder.com/150',
-        'https://via.placeholder.com/150'
+        'https://via.placeholder.com/150' 
       ],
-      modelHeight: 185,
       quantity: 0,
       total: 0
     },
@@ -67,29 +52,16 @@ export class ProductComponent implements OnInit {
       name: 'Women\'s Floral Blouse',
       description: 'Elegant floral blouse for casual or semi-formal occasions',
       price: 1599,
-      colors: ['#ff5733', '#33c1ff', '#c1ff33'],
-      sizes: ['M', 'L'],
+      category: 'Clothing',
       images: [
         'https://via.placeholder.com/150',
-        'https://via.placeholder.com/150',
-        'https://via.placeholder.com/150'
-        
       ],
-      modelHeight: 170,
       quantity: 0,
       total: 0
     },
   ];
-  
-
-
-
-
-  
 
   product: Product | null = null; // Set to null initially to handle product not found
-  selectedColor: string = '';
-  selectedSize: string = '';
   quantity: number = 1;
 
   constructor(
@@ -108,18 +80,9 @@ export class ProductComponent implements OnInit {
     const foundProduct = this.products.find(product => product.id === id);
     if (foundProduct) {
       this.product = foundProduct;
-      this.selectedColor = foundProduct.colors[0]; // Set the default color
     } else {
       console.error('Product not found');
     }
-  }
-
-  selectColor(color: string): void {
-    this.selectedColor = color;
-  }
-
-  selectSize(size: string): void {
-    this.selectedSize = size;
   }
 
   decreaseQuantity(): void {

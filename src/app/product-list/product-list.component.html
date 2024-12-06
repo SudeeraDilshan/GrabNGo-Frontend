@@ -102,7 +102,7 @@
 
   <!-- exsist -->
   <div class="container">
-
+    <!-- Search and Filter Section -->
     <div class="search-sort-container">
       <div class="search-box">
         <input [formControl]="searchControl" type="text" placeholder="Search for products" class="search-input">
@@ -112,10 +112,10 @@
       </div>
       <button class="filter-btn" (click)="onFilterClick()">
         <i class="fas fa-filter"></i> <span class="filter-text">Filter</span>
-    </button>
-    
+      </button>
     </div>
-
+  
+    <!-- New Arrivals Section -->
     <section>
       <div class="products-header">
         <h2>New Arrivals</h2>
@@ -131,14 +131,13 @@
             <h3>{{ product.name }}</h3>
             <p class="description">{{ product.description }}</p>
             <p class="price">Rs. {{ product.price }}</p>
-            <button (click)="viewProductDetails(product.id)" class="view-btn">View</button>
-
+            <button (click)="viewProductDetails(product)" class="view-btn">View</button>
           </div>
         </div>
       </div>
     </section>
-
-
+  
+    <!-- Categories Section -->
     <section>
       <div class="products-header">
         <h2>Shop by Categories</h2>
@@ -153,11 +152,11 @@
         </div>
       </div>
     </section>
-
+  
+    <!-- Featured Products Section -->
     <section>
       <div class="products-header">
         <h2>Featured Products</h2>
-         
         <a href="#" class="view-all-btn">
           View all <span class="arrow-icon">→</span>
         </a>
@@ -170,9 +169,32 @@
             <h3>{{ product.name }}</h3>
             <p class="description">{{ product.description }}</p>
             <p class="price">Rs. {{ product.price }}</p>
-            <button (click)="viewProductDetails(product.id)" class="view-btn">View</button>
+            <button (click)="viewProductDetails(product)" class="view-btn">View</button>
           </div>
         </div>
       </div>
     </section>
+  
+    <!-- Filter Popup Modal -->
+    <div *ngIf="isFilterOpen" class="filter-modal" (click)="closeFilter()">
+      <div class="filter-modal-content" (click)="$event.stopPropagation()">
+        <h2>Filter Products</h2>
+        <div class="filter-options">
+          <label for="category">Select Category</label>
+          <select id="category" [(ngModel)]="selectedCategory">
+            <option value="">All Categories</option>
+            <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
+          </select>
+        </div>
+        <div class="filter-options">
+          <label for="sortPrice">Sort by Price</label>
+          <select id="sortPrice" [(ngModel)]="sortByPrice">
+            <option value="asc">Price: Low to High</option>
+            <option value="desc">Price: High to Low</option>
+          </select>
+        </div>
+        <button class="apply-filter-btn" (click)="applyFilter()">Apply Filter</button>
+      </div>
+    </div>
   </div>
+  

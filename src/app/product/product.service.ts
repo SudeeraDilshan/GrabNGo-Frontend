@@ -26,6 +26,12 @@ import { Product } from './product.model';
   providedIn: 'root'
 })
 export class ProductService {
+  fetchProductDetails(productId: number) {
+    throw new Error('Method not implemented.');
+  }
+  getProducts() {
+    throw new Error('Method not implemented.');
+  }
   addProductToCart(product: any) {
     throw new Error('Method not implemented.');
   }
@@ -37,3 +43,5 @@ export class ProductService {
     return this.http.get<Product>(`${this.apiUrl}/${id}`);
   }
 }
+export { Product };
+
