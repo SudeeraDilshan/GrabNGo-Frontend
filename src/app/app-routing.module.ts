@@ -40,15 +40,15 @@ const routes: Routes = [
     {path: 'categoryDelete', component: CategoryDeleteComponent},
 
     {
-        path: 'login',
+        path: 'auth/login',
         component: LoginComponent,
     },
     {
-        path: 'reset-password',
+        path: 'auth/reset-password',
         component: ResetPasswordComponent,
     },
     {
-        path: 'email-verify',
+        path: 'auth/email-verify',
         component: EmailVerificationComponent,
     },
     {
@@ -64,7 +64,7 @@ const routes: Routes = [
         component: ChangePasswordComponent
     },
     {
-        path: 'registration',
+        path: 'auth/registration',
         component: RegistrationComponent
     },
     {
