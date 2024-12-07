@@ -10,35 +10,26 @@ import { AuthService } from '../services/auth.service';
 })
 export class HeaderComponent implements OnInit {
   cartItemCount: number = 0;
+    isLoggedIn: boolean = false;
 
-  constructor(private cartService: CartService, private router: Router) {}
-
-  isLoggedIn(): boolean {
-    return !!localStorage.getItem('role');
+  constructor(private cartService: CartService, private router: Router, private authService: AuthService) {
+    this.isLoggedIn = this.authService.isLoggedIn();
   }
 
   isAdmin(): boolean {
-    return localStorage.getItem('role') === 'Admin';
-  }
-
-  isUser(): boolean {
-    return localStorage.getItem('role') === 'User';
+    return sessionStorage.getItem('ROLE') === 'ADMINISTRATOR';
   }
 
   logOut(): void {
     console.log('Logged out');
-    this.clearLocalStorage();
-    this.router.navigate(['/login']); 
-  }
-
-  clearLocalStorage(): void {
-    if (typeof localStorage !== 'undefined') {
-      localStorage.clear();
-    }
+    sessionStorage.clear();
+    localStorage.clear();
+    this.router.navigate(['/']);
+    window.location.reload();
   }
 
   navigateToCart(): void {
-    if (this.isLoggedIn()) {
+    if (this.isLoggedIn) {
       this.router.navigate(['/shopping-cart']);
     } else {
       this.router.navigate(['/login']);

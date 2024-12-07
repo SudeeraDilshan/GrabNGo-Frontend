@@ -24,7 +24,7 @@ export class AuthService {
       .pipe(
         map(user => {
           sessionStorage.setItem('ACCESS_TOKEN', user.data.accessToken);
-          sessionStorage.setItem("ROLE", user.data.role);
+          sessionStorage.setItem("ROLE", user.data.userRole);
           localStorage.setItem('REFRESH_TOKEN', user.data.refreshToken);
           this.currentUserSubject.next(user);
           return user;

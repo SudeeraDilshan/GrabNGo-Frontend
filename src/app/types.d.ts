@@ -8,5 +8,5 @@ export interface ApiResponse<T> {
 export interface LoginResponse {
     accessToken: string;
     refreshToken: string;
-    role: "ADMINISTRATOR" | "STANDARD_USER"
+    userRole: "ADMINISTRATOR" | "STANDARD_USER"
 }
