@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class ProfileService {
-  private apiUrl = 'https://your-api-url.com'; // Replace with your backend API URL
+  private apiUrl = 'http://172.104.165.74:8086/api/v1/user'; 
 
   constructor(private http: HttpClient) {}
 

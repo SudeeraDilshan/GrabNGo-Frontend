@@ -7,10 +7,11 @@ import { Product } from '../product/product.model';
   providedIn: 'root',
 })
 export class CartService {
+  private cartApiUrl = 'http://172.104.165.74:8085/api/v1/cart';
+
   addToCart(product: Product, quantity: number) {
     throw new Error('Method not implemented.');
   }
-  private cartApiUrl = 'https://example.com/api/cart'; // Replace with your actual API endpoint
 
   constructor(private http: HttpClient) {}
 

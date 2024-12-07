@@ -53,7 +53,7 @@ export class ProductAdminComponent {
         console.log('Products loaded:', this.products);
       },
       error: (err) => {
-        console.error('Error loading categories:', err);
+        console.error('Error loading products:', err);
       },
     });
   }
@@ -75,9 +75,9 @@ export class ProductAdminComponent {
     this.router.navigate(['/productAdd']);
   }
 
-  editProduct(product: any) {product
-    this.router.navigate(['/productEdit', product.id]);
-    console.log("product iddddd: ", product.id);
+  editProduct(product: any) {
+    this.router.navigate(['/productEdit', product.productId]);
+    console.log("product iddddd: ", product.productId);
   }
 
   deleteProduct(product: Product): void {
