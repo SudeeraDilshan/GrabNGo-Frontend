@@ -5,45 +5,43 @@
 
     <form (ngSubmit)="onLogin()">
       <!-- Email Input -->
-      <input
-        type="email"
-        placeholder="Email"
-        [(ngModel)]="email"
-        name="email"
-        [ngClass]="{ 'input-error': !email && errorMessage }"
-        required
-      />
+        <div class="input-group">
+            <input
+                    type="email"
+                    placeholder="Email"
+                    [(ngModel)]="email"
+                    name="email"
+                    [ngClass]="{ 'input-error': !email && errorMessage }"
+                    required
+            />
+        </div>
 
       <!-- Password Input -->
-      <input
-        type="password"
-        placeholder="Password"
-        [(ngModel)]="password"
-        name="password"
-        [ngClass]="{ 'input-error': !password && errorMessage }"
-        required
-      />
+        <div class="input-group">
+            <input
+                    [type]="showPassword ? 'text' : 'password'"
+                    placeholder="Password"
+                    [(ngModel)]="password"
+                    [ngClass]="{ 'input-error': !password && errorMessage }"
+                    name="password"
+                    required
+            />
+            <span class="eye-icon" (click)="togglePasswordVisibility()">
+          <i [class]="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+        </span>
+        </div>
       <!-- Error Message Display -->
       <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
 
       <div class="options">
-        <a href="#">
-          Don't have an account? <span routerLink="/registration">Signup</span>
-        </a>
-        <a routerLink="/reset-password">Forgot Password?</a>
+        <a routerLink="/auth/registration">Don't have an account? Signup</a>
+        <a routerLink="/auth/reset-password">Forgot Password?</a>
       </div>
 
-      <button
-        type="submit"
-        class="login-button"
-        [disabled]="!email || !password"
-      >
-        Login
-      </button>
+      <button type="submit" class="login-button" [disabled]="!email || !password">Login</button>
 
       <p class="agreement-text">
-        By continuing, you confirm that you're an adult and you've read and
-        accepted our GrabNGo Free Membership Agreement and Privacy Policy.
+        By continuing, you confirm that you're an adult and you've read and accepted our GrabNGo Free Membership Agreement and Privacy Policy.
       </p>
     </form>
   </div>

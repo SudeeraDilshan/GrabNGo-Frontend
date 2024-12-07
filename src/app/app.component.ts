@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Location } from '@angular/common';
+
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,15 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'GrabNgo';
+  isAuthLayout = false;
+
+  constructor(private location: Location) {
+    
+  }
+
+  ngOnInit(): void {
+    this.isAuthLayout = this.location.path().includes("auth");
+    
+  }
+
 }
