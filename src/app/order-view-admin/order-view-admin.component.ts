@@ -1,59 +1,51 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { OrderService } from '../services/order.service';
+import { Order } from '../models/order-model';
 
 @Component({
   selector: 'app-order-view-admin',
   templateUrl: './order-view-admin.component.html',
-  styleUrl: './order-view-admin.component.css'
+  styleUrls: ['./order-view-admin.component.css'],
 })
-export class OrderViewAdminComponent {
-  orders = [
-    {
-      id: '001',
-      userName: 'Jane',
-      price: 5000,
-      items: ['Item1', 'Item2', 'Item3'],
-      quantity: 5,
-      status: 'Confirm',
-    },
-    {
-      id: '002',
-      userName: 'Ann',
-      price: 5000,
-      items: ['Item1'],
-      quantity: 2,
-      status: 'Packing',
-    },
-    {
-      id: '003',
-      userName: 'Pitar',
-      price: 5000,
-      items: ['Item1'],
-      quantity: 2,
-      status: 'Dispatch',
-    },
-    {
-      id: '004',
-      userName: 'William',
-      price: 5000,
-      items: ['Item1'],
-      quantity: 2,
-      status: 'Delivered',
-    },
-    {
-      id: '005',
-      userName: 'John',
-      price: 5000,
-      items: ['Item1'],
-      quantity: 2,
-      status: 'Confirm',
-    },
-  ];
+export class OrderViewAdminComponent implements OnInit {
+  orders: Order[] = [];
+  isLoading: boolean = false;
+  hasError: boolean = false;
 
-  updateOrderStatus(order: any) {
-    console.log('Updated status for order:', order);
+  constructor(private orderService: OrderService) {}
+
+  ngOnInit(): void {
+    this.fetchOrders();
   }
 
-  addOrder() {
-    console.log('Add new order clicked');
+  fetchOrders(): void {
+    this.isLoading = true;
+    this.hasError = false;
+
+    this.orderService.getOrders().subscribe({
+      next: (data) => {
+        this.orders = data;
+        this.isLoading = false;
+      },
+      error: () => {
+        this.hasError = true;
+        this.isLoading = false;
+      },
+    });
+  }
+
+  updateOrderStatus(order: Order): void {
+    this.orderService.updateOrder(order.orderId.toString(), order.status).subscribe({
+      next: (updatedOrder) => {
+        const index = this.orders.findIndex((o) => o.orderId === updatedOrder.orderId);
+        if (index !== -1) {
+          this.orders[index] = updatedOrder;
+        }
+        alert('Order status updated successfully!');
+      },
+      error: () => {
+        alert('Failed to update order status.');
+      },
+    });
   }
 }
