@@ -20,30 +20,30 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Product } from './product.model'; 
+import { Product } from './product.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
-  fetchProductDetails(productId: number) {
+  getCategories() {
     throw new Error('Method not implemented.');
   }
-  getProducts() {
+  getProduct(id: number) {
     throw new Error('Method not implemented.');
   }
-  addProductToCart(product: any) {
-    throw new Error('Method not implemented.');
-  }
-  private apiUrl = 'https://backend-api-url/products';  
+  private apiUrl = 'http://172.104.165.74:8084/product';  // Replace with your backend API URL
 
   constructor(private http: HttpClient) {}
 
-  getProduct(id: number): Observable<Product> {
+  getProducts(): Observable<Product[]> {
+    return this.http.get<Product[]>(this.apiUrl);
+  }
+
+  getProductById(id: number): Observable<Product> {
     return this.http.get<Product>(`${this.apiUrl}/${id}`);
   }
 }
- export { Product };
 
 // import { Injectable } from '@angular/core';
 // import { HttpClient } from '@angular/common/http';

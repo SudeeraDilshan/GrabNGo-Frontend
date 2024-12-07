@@ -1,7 +1,8 @@
- 
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ProductService } from '../product/product.service';
+ 
 
 interface Product {
   categoryId: number;
@@ -11,8 +12,8 @@ interface Product {
   productPrice: number;
   productQuantity:number;
   imageUrl: string;
-  available: true;
-  active: true;
+  available: boolean;
+  active: boolean;
 }
 
 interface Category {
@@ -20,127 +21,51 @@ interface Category {
   name: string;
   imageUrl: string;
 }
-
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit {
-  originalNewArrivals: Product[] =  [
-    {
-      productId: 1,
-      categoryId: 1,
-      productName: 'Men\'s Casual T-Shirt',
-      productDescription: 'Comfortable cotton t-shirt, perfect for everyday wear',
-      productPrice: 999,
-      imageUrl: 'https://via.placeholder.com/150',
-      productQuantity: 10,
-      available: true,
-      active: true
-    },
-    {
-      productId: 2,
-      categoryId: 2,
-      productName: 'Women\'s Summer Dress',
-      productDescription: 'Light and breezy dress, ideal for sunny days',
-      productPrice: 1299,
-      imageUrl: 'https://via.placeholder.com/150',
-      productQuantity: 8,
-      available: true,
-      active: true
-    },
-    {
-      productId: 3,
-      categoryId: 1,
-      productName: 'Men\'s Slim Fit Jeans',
-      productDescription: 'Stylish slim-fit jeans with a modern cut',
-      productPrice: 1799,
-      imageUrl: 'https://via.placeholder.com/150',
-      productQuantity: 5,
-      available: true,
-      active: true
-    },
-    {
-      productId: 4,
-      categoryId: 2,
-      productName: 'Women\'s Floral Blouse',
-      productDescription: 'Elegant floral blouse for casual or semi-formal occasions',
-      productPrice: 1599,
-      imageUrl: 'https://via.placeholder.com/150',
-      productQuantity: 12,
-      available: true,
-      active: true
-    }
-  ];
-
-  featuredProducts: Product[] = [
-    {
-      productId: 5,
-      categoryId: 1,
-      productName: 'Men\'s Sports Jacket',
-      productDescription: 'Breathable sports jacket, perfect for workouts and casual wear',
-      productPrice: 2499,
-      imageUrl: 'https://via.placeholder.com/150',
-      productQuantity: 7,
-      available: true,
-      active: true
-    },
-    {
-      productId: 6,
-      categoryId: 2,
-      productName: 'Women\'s High-Waisted Skirt',
-      productDescription: 'Chic and stylish high-waisted skirt for all occasions',
-      productPrice: 1999,
-      imageUrl: 'https://via.placeholder.com/150',
-      productQuantity: 9,
-      available: true,
-      active: true
-    },
-    {
-      productId: 7,
-      categoryId: 1,
-      productName: 'Men\'s Denim Jacket',
-      productDescription: 'Classic denim jacket, a wardrobe essential for every man',
-      productPrice: 2999,
-      imageUrl: 'https://via.placeholder.com/150',
-      productQuantity: 4,
-      available: true,
-      active: true
-    },
-    {
-      productId: 8,
-      categoryId: 2,
-      productName: 'Women\'s Knit Sweater',
-      productDescription: 'Cozy and soft knit sweater, perfect for chilly weather',
-      productPrice: 2199,
-      imageUrl: 'https://via.placeholder.com/150',
-      productQuantity: 6,
-      available: true,
-      active: true
-    }
-  ];
-
-
-  categories: Category[] = [
-    { id: 1, name: 'Men', imageUrl: 'https://via.placeholder.com/100' },
-    { id: 2, name: 'Women', imageUrl: 'https://via.placeholder.com/100' },
-  ];
-
+  originalNewArrivals: Product[] = [];
+  featuredProducts: Product[] = [];
+  categories: Category[] = [];
   newArrivals: Product[] = [];
   searchControl = new FormControl('');
   cartCount = 0;
-
   selectedCategory: number = 0;
   sortByPrice: string = 'asc';
   isFilterOpen: boolean = false;
- 
 
-  constructor(private router: Router) {}
+  constructor(private productService: ProductService, private router: Router) {}
 
   ngOnInit(): void {
     this.resetFilters();
-    
+    this.fetchProducts();  
+    this.fetchCategories();
+  }
+
+  fetchProducts(): void {
+    this.productService.getProducts().subscribe(
+      (products: Product[]) => {
+        this.originalNewArrivals = products;
+        this.resetFilters();  // Apply filters after loading the products
+      },
+      (error) => {
+        console.error('Error fetching products:', error);
+      }
+    );
+  }
+
+  fetchCategories(): void {
+    this.productService.getCategories().subscribe(
+      (categories: Category[]) => {
+        this.categories = categories;
+      },
+      (error: any) => {
+        console.error('Error fetching categories:', error);
+      }
+    );
   }
 
   resetFilters(): void {
@@ -162,13 +87,11 @@ export class ProductListComponent implements OnInit {
 
   filterProducts(): void {
     let filteredProducts = [...this.originalNewArrivals];
-
-     
+    
     if (this.selectedCategory) {
       filteredProducts = filteredProducts.filter(product => product.categoryId === this.selectedCategory);
     }
 
-   
     if (this.sortByPrice === 'asc') {
       filteredProducts.sort((a, b) => a.productPrice - b.productPrice);
     } else {
@@ -182,6 +105,7 @@ export class ProductListComponent implements OnInit {
     this.router.navigate([`/product/${product.productId}`]);
   }
 }
+
 
 // import { Component, OnInit } from '@angular/core';
 // import { FormControl } from '@angular/forms';
