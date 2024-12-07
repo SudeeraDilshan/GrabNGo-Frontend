@@ -14,15 +14,13 @@
   <!-- Order List -->
   <div *ngIf="!isLoading && !hasError">
     <div class="order-card" *ngFor="let order of orders">
-      <img [src]="order.imageUrl" alt="Product Image" />
       <div class="order-details">
-        <p class="product-name">{{ order.productName }}</p>
-        <p>Size: {{ order.size }}</p>
-        <p>Quantity: {{ order.quantity }}</p>
-        <p class="price">${{ order.price }}</p>
-      </div>
-      <div class="order-date">
-        <p>{{ order.date }}</p>
+        <p><strong>Order ID:</strong> {{ order.orderId }}</p>
+        <p><strong>User ID:</strong> {{ order.userId }}</p>
+        <p><strong>Total Price:</strong> ${{ order.totalPrice }}</p>
+        <p><strong>Status:</strong> {{ order.status }}</p>
+        <p><strong>Discount:</strong> ${{ order.discount }}</p>
+        <p><strong>Order Date:</strong> {{ order.createdDateTime | date:'medium' }}</p>
       </div>
     </div>
   </div>
