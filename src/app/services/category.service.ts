@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ApiResponse, Category } from '../category-view-admin/category-view-admin.component';
+import { Category } from '../category-view-admin/category-view-admin.component';
+import { ApiResponse } from "../types";
 
 @Injectable({
   providedIn: 'root',

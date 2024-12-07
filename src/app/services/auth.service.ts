@@ -3,12 +3,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { catchError, map } from 'rxjs/operators';
+import { ApiResponse, LoginResponse } from "../types";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://172.104.165.74:8086/api/v1/auth';
+  private apiUrl = 'http://172.104.165.74:8082/api/v1/auth';
   private currentUserSubject: BehaviorSubject<any>;
   public currentUser: Observable<any>;
 
@@ -17,14 +18,14 @@ export class AuthService {
     this.currentUser = this.currentUserSubject.asObservable();
   }
 
-  // Login User
   login(email: string, password: string): Observable<any> {
-    const loginPayload = { email, password };
-    return this.http.post<any>(`${this.apiUrl}/auth/login`, loginPayload)
+    const loginPayload = { emailAddress: email, password: password };
+    return this.http.post<ApiResponse<LoginResponse>>(`${this.apiUrl}/login`, loginPayload)
       .pipe(
         map(user => {
-          // Store user details in localStorage to keep the user logged in between page refreshes
-          localStorage.setItem('currentUser', JSON.stringify(user));
+          sessionStorage.setItem('ACCESS_TOKEN', user.data.accessToken);
+          sessionStorage.setItem("ROLE", user.data.userRole);
+          localStorage.setItem('REFRESH_TOKEN', user.data.refreshToken);
           this.currentUserSubject.next(user);
           return user;
         }),
@@ -35,7 +36,10 @@ export class AuthService {
       );
   }
 
-  // Register User
+  isLoggedIn(): boolean {
+      return !!sessionStorage.getItem('ACCESS_TOKEN');
+  }
+
   register(userData: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/auth/register`, userData)
       .pipe(
@@ -49,7 +53,6 @@ export class AuthService {
       );
   }
 
-  // Logout User
   logout(): void {
     // Remove user from localStorage and reset current user observable
     localStorage.removeItem('currentUser');
@@ -57,7 +60,6 @@ export class AuthService {
     this.router.navigate(['/login']);
   }
 
-  // Password Reset Request
   requestPasswordReset(email: string): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/auth/reset-password`, { email })
       .pipe(
@@ -71,7 +73,6 @@ export class AuthService {
       );
   }
 
-  // Change Password
   changePassword(newPassword: string, confirmPassword: string): Observable<any> {
     const passwordData = { newPassword, confirmPassword };
     return this.http.post<any>(`${this.apiUrl}/auth/change-password`, passwordData)
@@ -119,8 +120,4 @@ export class AuthService {
     return this.currentUser;
   }
 
-  // Check if the user is logged in
-  isLoggedIn(): boolean {
-    return this.currentUserSubject.value !== null;
-  }
 }

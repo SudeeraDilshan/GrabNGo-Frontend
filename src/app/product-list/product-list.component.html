@@ -23,7 +23,7 @@
       <p>Check out the latest products</p>
       <div class="products-grid">
         <div *ngFor="let product of newArrivals" class="product-card">
-          <img [src]="product.imageUrl" [alt]="product.productName" class="product-image">
+          <img [src]="productBackendUrlBase + product.imageUrl" [alt]="product.productName" class="product-image">
           <div class="product-info">
             <h3>{{ product.productName}}</h3>
             <p class="description">{{ product. productDescription }}</p>
@@ -43,8 +43,8 @@
       </div>
       <div class="categories-grid">
         <div *ngFor="let category of categories" class="category-card">
-          <img [src]="category.imageUrl" [alt]="category.name" class="category-image">
-          <h3>{{ category.name }}</h3>
+          
+          <h3>{{ category.categoryName }}</h3>
         </div>
       </div>
     </section>
@@ -60,7 +60,7 @@
       <p>Check out the latest products</p>
       <div class="products-grid">
         <div *ngFor="let product of featuredProducts" class="product-card">
-          <img [src]="product.imageUrl" [alt]="product.productName" class="product-image">
+          <img [src]="productBackendUrlBase + product.imageUrl" [alt]="product.productName" class="product-image">
           <div class="product-info">
             <h3>{{ product.productName }}</h3>
             <p class="description">{{ product.productDescription }}</p>
@@ -79,7 +79,7 @@
           <label for="category">Select Category</label>
           <select id="category" [(ngModel)]="selectedCategory">
             <option value="">All Categories</option>
-            <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
+            <option *ngFor="let category of categories" [value]="category.categoryId">{{ category.categoryName }}</option>
           </select>
         </div>
         <div class="filter-options">
