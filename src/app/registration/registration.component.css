@@ -64,7 +64,7 @@ html, body {
 .submit-button {
   width: 100%; /* Match input field width */
   padding: 10px 15px;
-  background-color: #007bff;
+  background-color: #FB800D;
   color: #ffffff;
   border: none;
   border-radius: 5px;
@@ -80,7 +80,7 @@ html, body {
 }
 
 .submit-button:hover:not(:disabled) {
-  background-color: #0056b3;
+  background-color: #c06713;
 }
 
 /* Login Link */
