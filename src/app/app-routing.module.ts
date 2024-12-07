@@ -141,7 +141,7 @@ const routes: Routes = [
         component: FilterResultsComponent
     },
     {
-        path: 'product/:id',
+        path: 'product/:productId',
         component: ProductComponent
     },
     {

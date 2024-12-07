@@ -122,6 +122,7 @@ export class ProductListComponent implements OnInit {
   }
 
   viewProductDetails(product: Product): void {
-    this.router.navigate([`/product/${product. productId}`]);
+    this.router.navigate([`/product/${product.productId}`]);
+    
   }
 }
