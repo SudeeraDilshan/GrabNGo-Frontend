@@ -41,7 +41,7 @@ export class AuthService {
   }
 
   register(userData: any): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/auth/register`, userData)
+    return this.http.post<any>(`${this.apiUrl}/register`, userData)
       .pipe(
         map(response => {
           return response;
@@ -61,7 +61,7 @@ export class AuthService {
   }
 
   requestPasswordReset(email: string): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/auth/reset-password`, { email })
+    return this.http.post<any>(`${this.apiUrl}/reset-password`, { email })
       .pipe(
         map(response => {
           return response;
@@ -75,7 +75,7 @@ export class AuthService {
 
   changePassword(newPassword: string, confirmPassword: string): Observable<any> {
     const passwordData = { newPassword, confirmPassword };
-    return this.http.post<any>(`${this.apiUrl}/auth/change-password`, passwordData)
+    return this.http.post<any>(`${this.apiUrl}/change-password`, passwordData)
       .pipe(
         map(response => {
           return response;
@@ -89,7 +89,7 @@ export class AuthService {
 
   // Verify Email
   verifyEmail(code: string): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/auth/verify-email`, { code })
+    return this.http.post<any>(`${this.apiUrl}/verify-email`, { code })
       .pipe(
         map(response => {
           return response;
