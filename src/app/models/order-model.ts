@@ -1,17 +1,25 @@
-// export interface Order {
-//     productName: string;
-//     size: string;
-//     quantity: number;
-//     price: number;
-//     imageUrl: string;
-//     date: string; 
-//   }
+export interface Order {
+  orderId: number;
+  userId: number;
+  totalPrice: number;
+  status: string;
+  createdDateTime: string; // or Date if you prefer
+  discount: number;
+  firstName: string;
+  lastName: string;
+  address: string;
+  apartment: string;
+  city: string;
+  country: string;
+  zipCode: string;
+  orderItems: OrderItem[]; // Include orderItems
+}
 
-  export interface Order{
-    orderId: number;
-    userId: number;
-    totalPrice: number;
-    status: string;
-    createdDateTime: Date;
-    discount: number;
-  }
+export interface OrderItem {
+  orderItemId: number;
+  orderId: number;
+  productId: number;
+  quantity: number;
+  discount: number;
+  sellPrice: number;
+}

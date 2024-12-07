@@ -7,11 +7,11 @@ import { Order } from '../models/order-model';
   providedIn: 'root',
 })
 export class OrderService {
-  private apiUrl = 'http://172.104.165.74:8083/api/v1/order'; 
+  private apiUrl = 'http://172.104.165.74:8083/api/v1/order';
 
   constructor(private http: HttpClient) {}
 
-  // Fetch orders using the predefined API URL
+  // Fetch order history from the API
   getOrders(): Observable<Order[]> {
     return this.http.get<Order[]>(this.apiUrl);
   }

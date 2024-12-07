@@ -78,6 +78,7 @@ import { ProductOverviewComponent } from './product-overview/product-overview.co
     CheckoutComponent,
     CheckoutPaymentComponent,
     PaymentPortalComponent,
+    
 
     CartComponent,
     ProductListComponent,
