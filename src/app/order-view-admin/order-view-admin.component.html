@@ -1,42 +1,41 @@
 <div class="order-admin">
-    <table class="admin-table" *ngIf="orders.length > 0; else noOrders">
-      <thead>
-        <tr>
-          <th>Order ID</th>
-          <th>User Name</th>
-          <th>Price</th>
-          <th>Items</th>
-          <th>Quantity</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let order of orders">
-          <td>{{ order.id }}</td>
-          <td>{{ order.userName }}</td>
-          <td>Rs. {{ order.price }}</td>
-          <td>
-            <ul>
-              <li *ngFor="let item of order.items">{{ item }}</li>
-            </ul>
-          </td>
-          <td>{{ order.quantity }}</td>
-          <td>
-            <mat-form-field appearance="fill" class="dropdown">
-              <mat-select [(value)]="order.status" (selectionChange)="updateOrderStatus(order)">
-                <mat-option value="Confirm">Confirm</mat-option>
-                <mat-option value="Packing">Packing</mat-option>
-                <mat-option value="Dispatch">Dispatch</mat-option>
-                <mat-option value="Delivered">Delivered</mat-option>
-              </mat-select>
-            </mat-form-field>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  
-    <ng-template #noOrders>
-      <p class="no-data">No orders available.</p>
-    </ng-template>
+  <div *ngIf="isLoading" class="loading">
+    <p>Loading orders...</p>
   </div>
-  
+
+  <table class="admin-table" *ngIf="orders.length > 0 && !isLoading && !hasError; else noOrders">
+    <thead>
+      <tr>
+        <th>User ID</th>
+        <th>Price</th>
+        <th>Status</th>
+        <th>Created Date</th>
+        <th>Discount</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let order of orders">
+        <td>{{ order.userId }}</td>
+        <td>Rs. {{ order.totalPrice }}</td>
+        <td>{{ order.status }}</td>
+        <td>{{ order.createdDateTime | date: 'short' }}</td>
+        <td>{{ order.discount }}</td>
+        <td>
+          <mat-form-field appearance="fill" class="dropdown">
+            <mat-select [(value)]="order.status" (selectionChange)="updateOrderStatus(order)">
+              <mat-option value="Confirm">Confirm</mat-option>
+              <mat-option value="Packing">Packing</mat-option>
+              <mat-option value="Dispatch">Dispatch</mat-option>
+              <mat-option value="Delivered">Delivered</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <ng-template #noOrders>
+    <p class="no-data">No orders available.</p>
+  </ng-template>
+</div>

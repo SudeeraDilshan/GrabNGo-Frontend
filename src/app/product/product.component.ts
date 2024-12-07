@@ -80,12 +80,6 @@ export class ProductComponent implements OnInit {
       total: 0
     },
   ];
-  
-
-
-
-
-  
 
   product: Product | null = null; // Set to null initially to handle product not found
   selectedColor: string = '';

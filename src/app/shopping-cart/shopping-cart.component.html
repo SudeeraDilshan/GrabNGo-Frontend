@@ -1,30 +1,21 @@
- 
-
-   <div class="shopping-cart" *ngIf="cartItems.length > 0">
-    <h2>Shopping Cart</h2>
-  
-    <div class="cart-item" *ngFor="let item of cartItems">
-      <input
-        class="checkbox"
-        type="checkbox"
-        [(ngModel)]="item.selected"
-        aria-label="Select item"
-      />
-  
-      <div class="product-details"  (click)="navigateToProductDetails(item.product.id)">
-        <img [src]="item.product.images[0]" alt="{{ item.product.name }}" />
-        <div>
-          <h3>{{ item.product.name }}</h3>
-          <p>Price: Rs. {{ item.product.price * item.quantity| number: '1.2-2' }}</p>
-          <p>Quantity: {{ item.quantity }}</p>
-        </div>
+<div class="shopping-cart" *ngIf="cartItems.length > 0">
+  <h2>Shopping Cart</h2>
+  <div class="cart-item" *ngFor="let item of cartItems">
+    <input class="checkbox" type="checkbox" [(ngModel)]="item.selected" aria-label="Select item"/>
+    <div class="product-details" (click)="navigateToProductDetails(item.product.id)">
+      <img [src]="item.product.images[0]" alt="{{ item.product.name }}" />
+      <div>
+        <h3>{{ item.product.name }}</h3>
+        <p>
+          Price: Rs. {{ item.product.price * item.quantity | number : "1.2-2" }}
+        </p>
+        <p>Quantity: {{ item.quantity }}</p>
       </div>
     </div>
-  
-    <div class="cart-actions">
-      <button class="checkout-btn" (click)="checkout()">Checkout</button>
-      <button class="cancel-btn" (click)="cancelAll()">Cancel All</button>
-    </div>
   </div>
-  
-  
+
+  <div class="cart-actions">
+    <button class="checkout-btn" (click)="checkout()">Checkout</button>
+    <button class="cancel-btn" (click)="cancelAll()">Cancel All</button>
+  </div>
+</div>
