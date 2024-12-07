@@ -8,6 +8,9 @@ import { ApiResponse, Product } from '../product-admin/product-admin.component';
 })
 
 export class ProductService {
+  getCategories() {
+    throw new Error('Method not implemented.');
+  }
   private apiUrl = 'http://localhost:8085/api/v1/product';
 
   constructor(private http: HttpClient) {}
@@ -32,3 +35,5 @@ export class ProductService {
     return this.http.put<any>(`${this.apiUrl}/${productId}`, product);
   }
 }
+
+export { Product };

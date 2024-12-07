@@ -12,56 +12,61 @@ import { ActivatedRoute } from '@angular/router';
 export class ProductComponent implements OnInit {
   products: Product[] = [
     {
-      id: 1,
-      name: 'Men\'s Casual T-Shirt',
-      description: 'Comfortable cotton t-shirt, perfect for everyday wear',
-      price: 999,
+      productId: 1,
+      productName: 'Men\'s Casual T-Shirt',
+      productDescription: 'Comfortable cotton t-shirt, perfect for everyday wear',
+      productPrice: 999,
       category: 'Clothing',
-      images: [
-        'https://via.placeholder.com/150',
-      ],
-      quantity: 0,
-      total: 0
+      CategoryId: 101,
+      imageUrl: ['https://via.placeholder.com/150'],
+      productQuantity: 0,
+      total: 0,
+      available: true,
+      active: true
+      
     },
     {
-      id: 2,
-      name: 'Women\'s Summer Dress',
-      description: 'Light and breezy dress, ideal for sunny days',
-      price: 1299,
+      productId: 2,
+      productName: 'Women\'s Summer Dress',
+      productDescription: 'Light and breezy dress, ideal for sunny days',
+      productPrice: 1299,
       category: 'Clothing',
-      images: [
-        'https://via.placeholder.com/150' 
-      ],
-      quantity: 0,
-      total: 0
+      CategoryId: 102, 
+      imageUrl: ['https://via.placeholder.com/150'],
+      productQuantity: 0,
+      total: 0,
+      available:true,
+      active:true
     },
     {
-      id: 3,
-      name: 'Men\'s Slim Fit Jeans',
-      description: 'Stylish slim-fit jeans with a modern cut',
-      price: 1799,
+      productId: 3,
+      productName: 'Men\'s Slim Fit Jeans',
+      productDescription: 'Stylish slim-fit jeans with a modern cut',
+      productPrice: 1799,
       category: 'Clothing',
-      images: [
-        'https://via.placeholder.com/150' 
-      ],
-      quantity: 0,
-      total: 0
+      CategoryId: 101,  
+      imageUrl: ['https://via.placeholder.com/150'],
+      productQuantity: 0,
+      total: 0,
+      available:true,
+      active:true
     },
     {
-      id: 4,
-      name: 'Women\'s Floral Blouse',
-      description: 'Elegant floral blouse for casual or semi-formal occasions',
-      price: 1599,
+      productId: 4,
+      productName: 'Women\'s Floral Blouse',
+      productDescription: 'Elegant floral blouse for casual or semi-formal occasions',
+      productPrice: 1599,
       category: 'Clothing',
-      images: [
-        'https://via.placeholder.com/150',
-      ],
-      quantity: 0,
-      total: 0
+      CategoryId: 102,  
+      imageUrl: ['https://via.placeholder.com/150'],
+      productQuantity: 0,
+      total: 0,
+      available:true,
+      active:true
     },
   ];
 
-  product: Product | null = null; // Set to null initially to handle product not found
+  product: Product | null = null;  
   quantity: number = 1;
 
   constructor(
@@ -71,13 +76,12 @@ export class ProductComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const productId = +this.route.snapshot.params['id']; // Get product ID from the URL
+    const productId = +this.route.snapshot.params['id'];  
     this.loadProduct(productId);
   }
 
   loadProduct(id: number): void {
-    // Search for the product in the products array
-    const foundProduct = this.products.find(product => product.id === id);
+    const foundProduct = this.products.find(product => product.productId === id);
     if (foundProduct) {
       this.product = foundProduct;
     } else {
@@ -98,7 +102,7 @@ export class ProductComponent implements OnInit {
   addToCart(): void {
     if (this.product) {
       this.cartService.addToCart(this.product, this.quantity);
-      console.log(`Added to cart: Rs.${(this.product.price * this.quantity).toFixed(2)}`);
+      console.log(`Added to cart: Rs.${(this.product.productPrice * this.quantity).toFixed(2)}`);
     }
   }
 }

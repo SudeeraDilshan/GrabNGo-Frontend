@@ -1,108 +1,5 @@
-<!-- <div class="container">
-    <h1 class="main-title">Convenience in Every Click</h1>
-  
-    <div class="search-sort-container">
-      <div class="search-box">
-        <input
-          [formControl]="searchControl"
-          type="text"
-          placeholder="Joggers"
-          class="search-input"
-        >
-        <span class="search-icon">🔍</span>
-      </div>
-  
-      <div class="sort-box">
-        <span>Sort by:</span>
-        <select [formControl]="sortControl" class="sort-select">
-          <option>Best Match</option>
-          <option>Price: Low to High</option>
-          <option>Price: High to Low</option>
-        </select>
-      </div>
-    </div>
-  
-    <div class="products-header">
-      <h2>Joggers</h2>
-      <p>{{products.length}} items found for "Joggers"</p>
-    </div>
-  
-    <div class="products-grid">
-      <div *ngFor="let product of products" class="product-card">
-        <img [src]="product.imageUrl" [alt]="product.name" class="product-image">
-        
-        <div class="product-info">
-          <h3>{{product.name}}</h3>
-          <p class="description">{{product.description}}</p>
-          <p class="price">Rs.{{product.price}}</p>
-          
-          <div class="product-actions">
-            <button class="view-btn">View</button>
-            <button class="save-btn" (click)="saveForLater(product)">
-              Save for later
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div> -->
-
-<!--   
   <div class="container">
-    <h1 class="main-title">Convenience in Every Click</h1> 
-  
-    <div class="search-sort-container">
-      <div class="search-box">
-        <input
-          [formControl]="searchControl"
-          type="text"
-          placeholder="Search"
-          class="search-input"
-        >
-        <span class="search-icon">
-          <i class="fas fa-search"></i>
-        </span>
-      </div>
-      
-  
-      <div class="sort-box">
-        <span>Sort by:</span>
-        <select [formControl]="sortControl" class="sort-select">
-          <option>Best Match</option>
-          <option>Price: Low to High</option>
-          <option>Price: High to Low</option>
-        </select>
-      </div>
-    </div>
-  
-    <div class="products-header">
-      <h2>Joggers</h2>
-      <p>{{products.length}} items found for "Joggers"</p>
-    </div>
-  
-    <div class="products-grid">
-      <div *ngFor="let product of products" class="product-card">
-        <img [src]="product.imageUrl" [alt]="product.name" class="product-image">
-        
-        <div class="product-info">
-          <h3>{{product.name}}</h3>
-          <p class="description">{{product.description}}</p>
-          <p class="price">Rs.{{product.price}}</p>
-          
-          <div class="product-actions">
-            <button routerLink ="product"class="view-btn">View</button>
-            <button class="save-btn" (click)="saveForLater(product)">
-              Save for later
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div> -->
-
-  <!-- exsist -->
-  <div class="container">
-    <!-- Search and Filter Section -->
+    
     <div class="search-sort-container">
       <div class="search-box">
         <input [formControl]="searchControl" type="text" placeholder="Search for products" class="search-input">
@@ -115,7 +12,7 @@
       </button>
     </div>
   
-    <!-- New Arrivals Section -->
+   
     <section>
       <div class="products-header">
         <h2>New Arrivals</h2>
@@ -126,18 +23,17 @@
       <p>Check out the latest products</p>
       <div class="products-grid">
         <div *ngFor="let product of newArrivals" class="product-card">
-          <img [src]="product.imageUrl" [alt]="product.name" class="product-image">
+          <img [src]="product.imageUrl" [alt]="product.productName" class="product-image">
           <div class="product-info">
-            <h3>{{ product.name }}</h3>
-            <p class="description">{{ product.description }}</p>
-            <p class="price">Rs. {{ product.price }}</p>
+            <h3>{{ product.productName}}</h3>
+            <p class="description">{{ product. productDescription }}</p>
+            <p class="price">Rs. {{ product.productPrice }}</p>
             <button (click)="viewProductDetails(product)" class="view-btn">View</button>
           </div>
         </div>
       </div>
     </section>
-  
-    <!-- Categories Section -->
+ 
     <section>
       <div class="products-header">
         <h2>Shop by Categories</h2>
@@ -153,7 +49,7 @@
       </div>
     </section>
   
-    <!-- Featured Products Section -->
+    
     <section>
       <div class="products-header">
         <h2>Featured Products</h2>
@@ -164,18 +60,18 @@
       <p>Check out the latest products</p>
       <div class="products-grid">
         <div *ngFor="let product of featuredProducts" class="product-card">
-          <img [src]="product.imageUrl" [alt]="product.name" class="product-image">
+          <img [src]="product.imageUrl" [alt]="product.productName" class="product-image">
           <div class="product-info">
-            <h3>{{ product.name }}</h3>
-            <p class="description">{{ product.description }}</p>
-            <p class="price">Rs. {{ product.price }}</p>
+            <h3>{{ product.productName }}</h3>
+            <p class="description">{{ product.productDescription }}</p>
+            <p class="price">Rs. {{ product.productPrice }}</p>
             <button (click)="viewProductDetails(product)" class="view-btn">View</button>
           </div>
         </div>
       </div>
     </section>
   
-    <!-- Filter Popup Modal -->
+     
     <div *ngIf="isFilterOpen" class="filter-modal" (click)="closeFilter()">
       <div class="filter-modal-content" (click)="$event.stopPropagation()">
         <h2>Filter Products</h2>

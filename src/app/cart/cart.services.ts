@@ -3,14 +3,23 @@ import { BehaviorSubject } from 'rxjs';
 import { Product } from '../product/product.model';
 
 interface CartItem {
-  product: Product;
+  cartItemId:number;
+  productId:number;
+  product:Product;
   quantity: number;
+  price:number;
+  cartId:number;
+
+  
 }
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
+  sendCartToBackend(selectedItems: { product: Product; quantity: number; }[]) {
+    throw new Error('Method not implemented.');
+  }
   getCartItems() {
     throw new Error('Method not implemented.');
   }
@@ -25,7 +34,7 @@ export class CartService {
     
      
     const existingItemIndex = currentCart.findIndex(
-      item => item.product.id === product.id
+      item => item.productId === product.productId
     );
 
     if (existingItemIndex > -1) {
@@ -40,7 +49,12 @@ export class CartService {
        
       this.cartItemsSubject.next([
         ...currentCart, 
-        { product, quantity }
+        { cartItemId: Date.now(),  
+          productId: product.productId, 
+          product,   
+          quantity, 
+          price: product.productPrice, 
+          cartId: 1 }
       ]);
     }
   }
@@ -49,7 +63,7 @@ export class CartService {
     const currentCart = this.cartItemsSubject.value;
 
     const existingItemIndex = currentCart.findIndex(
-      (item) => item.product.id === productId
+      (item) => item.productId === productId
     );
 
     if (existingItemIndex > -1) {

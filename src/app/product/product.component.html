@@ -1,7 +1,7 @@
 <div class="product-container">
   <div class="product-images">
     <div class="image-grid">
-      <div *ngFor="let image of product?.images" class="image-item">
+      <div *ngFor="let image of product?.imageUrl" class="image-item">
         <img
           [src]="image"
           [routerLink]="['/product-overview']"
@@ -15,23 +15,16 @@
 
   <div class="product-details">
     <div class="product-header">
-      <h1 class="product-title">{{ product?.name }}</h1>
-      <div class="product-actions">
-        <!-- <button class="icon-button">
-          <i class="far fa-heart"></i>
-        </button>
-        <button class="icon-button">
-          <i class="fas fa-share-alt"></i>
-        </button> -->
-      </div>
+      <h1 class="product-title">{{ product?.productName }}</h1>
+      <div class="product-actions"></div>
     </div>
 
     <div class="product-price">
-      Rs. {{ product?.price?.toFixed(2) }}
+      Rs. {{ product?.productPrice?.toFixed(2) }}
     </div>
 
     <p class="product-description">
-      {{ product?.description }}
+      {{ product?.productDescription }}
     </p>
 
     <div class="category-section">
@@ -51,7 +44,7 @@
     </div>
 
     <button (click)="addToCart()" class="add-to-cart-btn">
-      Add to Cart · Rs. {{ ( (product?.price ?? 0) * (quantity || 1) ).toFixed(2) }}
+      Add to Cart · Rs. {{ ((product?.productPrice ?? 0) * (quantity || 1)).toFixed(2) }}
     </button>
 
     <div class="shipping-info">
