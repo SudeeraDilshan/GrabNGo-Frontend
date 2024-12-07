@@ -1,8 +1,25 @@
 export interface Order {
-    productName: string;
-    size: string;
-    quantity: number;
-    price: number;
-    imageUrl: string;
-    date: string; // You can use `Date` type if you prefer to work with Date objects
-  }
+  orderId: number;
+  userId: number;
+  totalPrice: number;
+  status: string;
+  createdDateTime: string; // or Date if you prefer
+  discount: number;
+  firstName: string;
+  lastName: string;
+  address: string;
+  apartment: string;
+  city: string;
+  country: string;
+  zipCode: string;
+  orderItems: OrderItem[]; // Include orderItems
+}
+
+export interface OrderItem {
+  orderItemId: number;
+  orderId: number;
+  productId: number;
+  quantity: number;
+  discount: number;
+  sellPrice: number;
+}

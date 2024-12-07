@@ -8,7 +8,7 @@ import { catchError, map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'https://your-api-url.com'; // Your API base URL
+  private apiUrl = 'http://172.104.165.74:8082'; // Your API base URL
   private currentUserSubject: BehaviorSubject<any>;
   public currentUser: Observable<any>;
 
