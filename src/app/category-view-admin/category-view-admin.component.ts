@@ -2,19 +2,14 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { CategoryDeleteComponent } from '../category-crud/category-delete/category-delete.component';
-import { CategoryService } from '../services/category.service'; 
+import { CategoryService } from '../services/category.service';
+import { ApiResponse } from "../types";
 
 export interface Category {
   categoryId: string;
   categoryName: string;
   description: string;
   isActive: boolean;
-}
-
-export interface ApiResponse<T> {
-  status: string;
-  message: string;
-  data: T
 }
 
 @Component({
