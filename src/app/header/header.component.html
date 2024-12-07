@@ -1,7 +1,6 @@
 <header class="header">
   <img routerLink="products" src="assets/Logo.png" alt="Grab N Go Logo" class="logo" />
   <nav class="nav">
-    <!-- Admin-specific links -->
     <ng-container *ngIf="isAdmin()">
       <a
         routerLink="/orderAdmin"
@@ -23,9 +22,7 @@
       </a>
     </ng-container>
 
-    <!-- User-specific links -->
-    <ng-container *ngIf="isUser()">
-      <a routerLink="/about">About Us</a>
+    <ng-container>
       <a (click)="navigateToCart()" class="cart-link">
         <i class="fa fa-cart-shopping"></i>
         <span> My cart </span>
@@ -33,9 +30,7 @@
       </a>
     </ng-container>
 
-    <!-- Common links -->
-    
-    <a *ngIf="!isLoggedIn()" routerLink="/login">Login</a>
-    <a *ngIf="isLoggedIn()" (click)="logOut()" routerLink="/products">Logout</a>
+    <a *ngIf="!isLoggedIn" routerLink="auth/login">Login</a>
+    <a *ngIf="isLoggedIn" (click)="logOut()" routerLink="/products">Logout</a>
   </nav>
 </header>

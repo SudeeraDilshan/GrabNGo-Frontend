@@ -1,48 +1,73 @@
 <div class="login-container">
-  <div class="login-card">
-    <h2>Welcome Back</h2>
-    <p>Login with email</p>
+    <div class="login-card">
+        <h2>Welcome Back</h2>
+        <p>Login with email</p>
 
-    <form (ngSubmit)="onLogin()">
-      <!-- Email Input -->
-        <div class="input-group">
-            <input
-                    type="email"
-                    placeholder="Email"
-                    [(ngModel)]="email"
-                    name="email"
-                    [ngClass]="{ 'input-error': !email && errorMessage }"
-                    required
-            />
-        </div>
+        <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+            <div class="input-group">
+                <input
+                        type="email"
+                        placeholder="Email"
+                        formControlName="email"
+                        [ngClass]="{
+            'input-error':
+              (email?.invalid && (email?.dirty || email?.touched)) ||
+              (isSubmitted && email?.invalid)
+          }"
+                />
 
-      <!-- Password Input -->
-        <div class="input-group">
-            <input
-                    [type]="showPassword ? 'text' : 'password'"
-                    placeholder="Password"
-                    [(ngModel)]="password"
-                    [ngClass]="{ 'input-error': !password && errorMessage }"
-                    name="password"
-                    required
-            />
-            <span class="eye-icon" (click)="togglePasswordVisibility()">
+                <!-- Email Error Messages -->
+                <ng-container *ngIf="email?.invalid && (email?.dirty || email?.touched || isSubmitted)">
+                    <small *ngIf="email?.errors?.['required']" class="error-text">
+                        Email is required.
+                    </small>
+                    <small *ngIf="email?.errors?.['email']" class="error-text">
+                        Please enter a valid email address.
+                    </small>
+                </ng-container>
+            </div>
+
+            <div class="input-group">
+                <input
+                        [type]="showPassword ? 'text' : 'password'"
+                        placeholder="Password"
+                        formControlName="password"
+                        [ngClass]="{
+            'input-error':
+              (password?.invalid && (password?.dirty || password?.touched)) ||
+              (isSubmitted && password?.invalid)
+          }"
+                />
+                <span class="eye-icon" (click)="togglePasswordVisibility()">
           <i [class]="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
         </span>
-        </div>
-      <!-- Error Message Display -->
-      <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
 
-      <div class="options">
-        <a routerLink="/auth/registration">Don't have an account? Signup</a>
-        <a routerLink="/auth/reset-password">Forgot Password?</a>
-      </div>
+                <!-- Password Error Messages -->
+                <ng-container *ngIf="password?.invalid && (password?.dirty || password?.touched || isSubmitted)">
+                    <small *ngIf="password?.errors?.['required']" class="error-text">
+                        Password is required.
+                    </small>
+                    <small *ngIf="password?.errors?.['minlength']" class="error-text">
+                        Password must be at least 8 characters long.
+                    </small>
+                </ng-container>
+            </div>
 
-      <button type="submit" class="login-button" [disabled]="!email || !password">Login</button>
+            <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
 
-      <p class="agreement-text">
-        By continuing, you confirm that you're an adult and you've read and accepted our GrabNGo Free Membership Agreement and Privacy Policy.
-      </p>
-    </form>
-  </div>
+            <div class="options">
+                <a routerLink="/auth/registration">Don't have an account? Signup</a>
+                <a routerLink="/auth/reset-password">Forgot Password?</a>
+            </div>
+
+            <button type="submit" class="login-button">
+                Login
+            </button>
+
+            <p class="agreement-text">
+                By continuing, you confirm that you're an adult and you've read and accepted our GrabNGo Free Membership
+                Agreement and Privacy Policy.
+            </p>
+        </form>
+    </div>
 </div>

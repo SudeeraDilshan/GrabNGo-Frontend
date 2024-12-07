@@ -25,6 +25,7 @@ import { ProductComponent } from './product/product.component';
 import { FilterResultsComponent } from './filter-results/filter-results.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { ProductOverviewComponent } from './product-overview/product-overview.component';
+import { loginRequiredGuard } from "./guards/login-required.guard";
 
 const routes: Routes = [
     {
@@ -34,59 +35,70 @@ const routes: Routes = [
     },
     {
         path: 'productAdmin',
-        component: ProductAdminComponent
+        component: ProductAdminComponent,
+        canActivate: [loginRequiredGuard]
     },
     {
         path: 'category',
-        component: CategoryViewAdminComponent
+        component: CategoryViewAdminComponent,
+        canActivate: [loginRequiredGuard]
     },
     {
         path: 'orderAdmin',
-        component: OrderViewAdminComponent
+        component: OrderViewAdminComponent,
+        canActivate: [loginRequiredGuard]
     },
     {
         path: 'productAdd',
-        component: ProductAddComponent
+        component: ProductAddComponent,
+        canActivate: [loginRequiredGuard]
     },
     {
         path: 'productEdit/:id',
-        component: ProductEditComponent
+        component: ProductEditComponent,
+        canActivate: [loginRequiredGuard]
     },
     {
         path: 'productDelete',
-        component: ProductDeleteComponent
+        component: ProductDeleteComponent,
+        canActivate: [loginRequiredGuard]
     },
     {
         path: 'categoryAdd',
-        component: CategoryAddComponent
+        component: CategoryAddComponent,
+        canActivate: [loginRequiredGuard]
     },
     {
         path: 'categoryEdit/:id',
-        component: CategoryEditComponent
+        component: CategoryEditComponent,
+        canActivate: [loginRequiredGuard]
     },
     {
         path: 'categoryDelete',
-        component: CategoryDeleteComponent
+        component: CategoryDeleteComponent,
+        canActivate: [loginRequiredGuard]
     },
     {
-        path: 'login',
+        path: 'auth/login',
         component: LoginComponent,
     },
     {
-        path: 'reset-password',
+        path: 'auth/reset-password',
         component: ResetPasswordComponent,
     },
     {
-        path: 'email-verify',
+        path: 'auth/email-verify',
         component: EmailVerificationComponent,
     },
     {
         path: 'profile',
         component: ProfileComponent,
+        canActivate: [loginRequiredGuard]
     },
     {
         path: 'order-history',
-        component: OrderHistoryComponent
+        component: OrderHistoryComponent,
+        canActivate: [loginRequiredGuard]
     },
     {
         path: 'auth/change-password',
@@ -94,27 +106,31 @@ const routes: Routes = [
     },
     {
         path: 'change-password',
-        component: ChangePasswordComponent
+        component: ChangePasswordComponent,
+        canActivate: [loginRequiredGuard]
     },
     {
-        path: 'registration',
+        path: 'auth/registration',
         component: RegistrationComponent
     },
     {
         path: 'checkout-address',
-        component: CheckoutAddressComponent
+        component: CheckoutAddressComponent,
+        canActivate: [loginRequiredGuard]
     },
     {
         path: 'checkout-payment',
-        component: CheckoutPaymentComponent
+        component: CheckoutPaymentComponent,
+        canActivate: [loginRequiredGuard]
     },
     {
         path: 'cart',
-        component: CartComponent
+        component: CartComponent,
+        canActivate: [loginRequiredGuard]
     },
     {
         path: 'products',
-        component: ProductListComponent
+        component: ProductListComponent,
     },
     {
         path: 'product',
@@ -130,7 +146,8 @@ const routes: Routes = [
     },
     {
         path: 'shopping-cart',
-        component: ShoppingCartComponent
+        component: ShoppingCartComponent,
+        canActivate: [loginRequiredGuard]
     },
     {
         path: 'product-overview',
