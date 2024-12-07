@@ -106,3 +106,7 @@ button[type="submit"]:hover {
   margin-top: 20px;
   text-align: center;
 }
+
+button:disabled {
+  cursor: not-allowed;
+}

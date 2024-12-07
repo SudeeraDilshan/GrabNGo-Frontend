@@ -26,22 +26,22 @@ import { Product } from './product.model';
   providedIn: 'root'
 })
 export class ProductService {
-  getCategories() {
-    throw new Error('Method not implemented.');
-  }
-  getProduct(id: number) {
-    throw new Error('Method not implemented.');
-  }
+  
   private apiUrl = 'http://172.104.165.74:8084/api/v1/product';   
+  router: any;
 
   constructor(private http: HttpClient) {}
 
   getProducts(): Observable<Product[]> {
     return this.http.get<Product[]>(this.apiUrl);
-  }
+  } 
 
   getProductById(id: number): Observable<Product> {
     return this.http.get<Product>(`${this.apiUrl}/${id}`);
+  }
+
+  viewProductDetails(product: Product): void {
+    this.router.navigate([`/product/${product.productId}`]);
   }
 }
 
