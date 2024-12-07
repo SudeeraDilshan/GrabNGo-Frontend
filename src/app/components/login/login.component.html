@@ -4,18 +4,46 @@
     <p>Login with email</p>
 
     <form (ngSubmit)="onLogin()">
-      <input type="email" placeholder="Email" [(ngModel)]="email" name="email" required />
-      <input type="password" placeholder="Password" [(ngModel)]="password" name="password" required />
+      <!-- Email Input -->
+      <input
+        type="email"
+        placeholder="Email"
+        [(ngModel)]="email"
+        name="email"
+        [ngClass]="{ 'input-error': !email && errorMessage }"
+        required
+      />
+
+      <!-- Password Input -->
+      <input
+        type="password"
+        placeholder="Password"
+        [(ngModel)]="password"
+        name="password"
+        [ngClass]="{ 'input-error': !password && errorMessage }"
+        required
+      />
+      <!-- Error Message Display -->
+      <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
 
       <div class="options">
-        <a href="#">Don't have an account? <span routerLink="/registration">Signup</span></a>
+        <a href="#">
+          Don't have an account? <span routerLink="/registration">Signup</span>
+        </a>
         <a routerLink="/reset-password">Forgot Password?</a>
       </div>
 
-      <button type="submit" class="login-button" [disabled]="!email || !password">Login</button>
+      <button
+        type="submit"
+        class="login-button"
+        [disabled]="!email || !password"
+      >
+        Login
+      </button>
 
       <p class="agreement-text">
-        By continuing, you confirm that you're an adult and you've read and accepted our GrabNGo Free Membership Agreement and Privacy Policy.
+        By continuing, you confirm that you're an adult and you've read and
+        accepted our GrabNGo Free Membership Agreement and Privacy Policy.
       </p>
     </form>
   </div>

@@ -8,7 +8,7 @@ import { ApiResponse, Category } from '../category-view-admin/category-view-admi
 })
 
 export class CategoryService {
-  private apiUrl = 'http://172.104.165.74:8086'; 
+  private apiUrl = 'http://172.104.165.74:8086/api/v1/categories'; 
 
   constructor(private http: HttpClient) {}
 

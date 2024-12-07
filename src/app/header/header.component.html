@@ -36,6 +36,6 @@
     <!-- Common links -->
     
     <a *ngIf="!isLoggedIn()" routerLink="/login">Login</a>
-    <a *ngIf="isLoggedIn()" (click)="logOut()">Logout</a>
+    <a *ngIf="isLoggedIn()" (click)="logOut()" routerLink="/products">Logout</a>
   </nav>
 </header>

@@ -8,7 +8,7 @@ import { ApiResponse, Product } from '../product-admin/product-admin.component';
 })
 
 export class ProductService {
-  private apiUrl = 'http://172.104.165.74:8084';
+  private apiUrl = 'http://172.104.165.74:8084/api/v1/product';
 
   constructor(private http: HttpClient) {}
 
