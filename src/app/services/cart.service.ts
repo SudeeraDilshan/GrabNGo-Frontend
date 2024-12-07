@@ -1,17 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Product } from '../product/product.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
-  private cartApiUrl = 'http://172.104.165.74:8085/api/v1/cart';
-
-  addToCart(product: Product, quantity: number) {
-    throw new Error('Method not implemented.');
-  }
+  private cartApiUrl = 'http://172.104.165.74:8085'; // Replace with your actual API endpoint
 
   constructor(private http: HttpClient) {}
 
