@@ -2,6 +2,20 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ProductService } from '../../services/product.service';
+import { CategoryService } from '../../services/category.service';
+
+export interface Category {
+  categoryId: string;
+  categoryName: string;
+  description: string;
+  isActive: boolean;
+}
+
+export interface ApiResponse<T> {
+  status: string;
+  message: string;
+  data: T
+}
 
 @Component({
   selector: 'app-product-add',
@@ -14,19 +28,37 @@ export class ProductAddComponent {
   imagePreview: string | ArrayBuffer | null = null;
   showSuccessMessage = false;
   submitted: boolean = false;
+  categories: Category[] = [];
 
-  categories = ['Beauty and Health', 'Home and Garden', 'Phone and Telecommunication', 'Accessories	', 'Sports', 'Entertainment'];
-  availabilityOptions = ['Out Of Stock', 'Available'];
-
-  constructor( private fb: FormBuilder,  private route: ActivatedRoute, private router: Router, private productService: ProductService) {
+  availabilityOptions = [
+    { label: 'Out Of Stock', value: false },
+    { label: 'Available', value: true }
+  ];
+  constructor( private fb: FormBuilder,  private route: ActivatedRoute, private router: Router, private productService: ProductService, private categoryService: CategoryService) {
     this.addProductForm = this.fb.group({
       productName: ['', Validators.required],
-      productPrice: ['', [Validators.required, Validators.min(1)]],
       productDescription: ['', Validators.required],
+      productPrice: ['', [Validators.required, Validators.min(1)]],
+      productQuantity: ['', Validators.required],
       imageUrl: ['', Validators.required],
       categoryId: ['', Validators.required],
-      available: [true],
+      available: [true, Validators.required],
       active: [true]
+    });
+  }
+
+  ngOnInit(): void {
+    this.loadCategories();
+  }
+
+  loadCategories(): void {
+    this.categoryService.getCategories().subscribe({
+      next: (categories) => {
+        this.categories = (categories as unknown as ApiResponse<Category[]>).data;
+      },
+      error: (err) => {
+        console.error('Error loading categories:', err);
+      },
     });
   }
 
@@ -44,12 +76,15 @@ export class ProductAddComponent {
 
   onSubmit() {
     this.submitted = true;
+    console.log('Form submitted:', this.addProductForm.value);
+    console.log('Form validity:', this.addProductForm.valid);
     if (this.addProductForm.valid) {
       const productData = this.addProductForm.value;
       this.productService.addProduct(productData).subscribe({
         next: (response) => {
           console.log('Form submitted:', this.addProductForm.value);
           console.log('Product added successfully:', response);
+          console.log('Product Data:', productData);
           this.showSuccessMessage = true;
           setTimeout(() => {
             this.showSuccessMessage = false;

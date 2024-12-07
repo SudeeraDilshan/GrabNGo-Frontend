@@ -9,8 +9,6 @@ interface CartItem {
   quantity: number;
   price:number;
   cartId:number;
-
-  
 }
 
 @Injectable({
