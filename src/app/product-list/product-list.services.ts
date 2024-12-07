@@ -1,24 +1,22 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Product, Category } from '../product/product.model';
-
+import { Product, Category } from '../product/product.model';  
 @Injectable({
-  providedIn: 'root',
-})
-export class ProductService {
-  private productBackendUrl = 'http://172.104.165.74:8084'; // Product Backend URL
-  private categoryBackendUrl = 'http://172.104.165.74:8086'; // Category Backend URL
-
-  constructor(private http: HttpClient) {}
-
-  // Method to fetch products
-  getProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(`${this.productBackendUrl}/products`);
+    providedIn: 'root',
+  })
+  export class ProductService {
+    private productBackendUrl = 'http://172.104.165.74:8084';  
+    private categoryBackendUrl = 'http://172.104.165.74:8086';  
+  
+    constructor(private http: HttpClient) {}
+  
+    getProducts(): Observable<Product[]> {
+      return this.http.get<Product[]>(`${this.productBackendUrl}/products`);
+    }
+  
+    getCategories(): Observable<Category[]> {
+      return this.http.get<Category[]>(`${this.categoryBackendUrl}/categories`);
+    }
   }
-
-  // Method to fetch categories
-  getCategories(): Observable<Category[]> {
-    return this.http.get<Category[]>(`${this.categoryBackendUrl}/categories`);
-  }
-}
+  
