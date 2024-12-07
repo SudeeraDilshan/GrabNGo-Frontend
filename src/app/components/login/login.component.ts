@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -9,18 +10,30 @@ import { AuthService } from '../../services/auth.service';
 export class LoginComponent {
   email: string = '';
   password: string = '';
+  errorMessage: string = ''; // To store error messages
+  showPassword: boolean = false;
 
-  constructor(private authservice: AuthService)  {
+  constructor(private authService: AuthService, private router: Router) {}
 
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
   }
 
   onLogin() {
     if (this.email && this.password) {
-      // console.log('Login successful:', this.email);
-      // Implement actual login logic here, e.g., HTTP requests to authenticate user
-      this.authservice.login(this.email, this.password)
+        this.authService.login(this.email, this.password).subscribe({
+            next: user => {
+                console.log('Login successful:', user);
+                this.router.navigate(['/']); // Navigate to home or another page
+            },
+            error: err => {
+                console.error('Login failed:', err);
+                this.errorMessage = 'Invalid email or password. Please try again.'; // Show login error
+            },
+        });
     } else {
-      console.error('Please fill in all fields.');
+        this.errorMessage = 'Please fill in both email and password.';
+        return;
     }
   }
 }

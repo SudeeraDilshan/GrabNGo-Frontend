@@ -8,7 +8,7 @@ import { catchError, map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'https://your-api-url.com'; // Your API base URL
+  private apiUrl = 'http://172.104.165.74:8086/api/v1/auth';
   private currentUserSubject: BehaviorSubject<any>;
   public currentUser: Observable<any>;
 
@@ -99,6 +99,20 @@ export class AuthService {
         })
       );
   }
+
+  getRole(): string | null {
+    const currentUser = this.currentUserSubject.value;
+    return currentUser ? currentUser.role : null;
+  }
+
+  isAdmin(): boolean {
+    return this.getRole() === 'Admin';
+  }
+
+  isUser(): boolean {
+    return this.getRole() === 'User';
+  }
+
 
   // Get current logged-in user
   getCurrentUser(): Observable<any> {

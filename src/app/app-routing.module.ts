@@ -19,7 +19,6 @@ import { RegistrationComponent } from './registration/registration.component';
 import { CheckoutAddressComponent } from './checkout-address/checkout-address.component';
 import { CheckoutPaymentComponent } from './checkout-payment/checkout-payment.component';
 
-
 import { CartComponent } from './cart/cart.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { ProductComponent } from './product/product.component';
@@ -28,17 +27,47 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { ProductOverviewComponent } from './product-overview/product-overview.component';
 
 const routes: Routes = [
-    {path: '', redirectTo: '/products', pathMatch: 'full'},
-    {path: 'productAdmin', component: ProductAdminComponent},
-    {path: 'category', component: CategoryViewAdminComponent},
-    {path: 'orderAdmin', component: OrderViewAdminComponent},
-    {path: 'productAdd', component: ProductAddComponent},
-    {path: 'productEdit/:id', component: ProductEditComponent},
-    {path: 'productDelete', component: ProductDeleteComponent},
-    {path: 'categoryAdd', component: CategoryAddComponent},
-    {path: 'categoryEdit/:id', component: CategoryEditComponent},
-    {path: 'categoryDelete', component: CategoryDeleteComponent},
-
+    {
+        path: '',
+        redirectTo: '/products',
+        pathMatch: 'full'
+    },
+    {
+        path: 'productAdmin',
+        component: ProductAdminComponent
+    },
+    {
+        path: 'category',
+        component: CategoryViewAdminComponent
+    },
+    {
+        path: 'orderAdmin',
+        component: OrderViewAdminComponent
+    },
+    {
+        path: 'productAdd',
+        component: ProductAddComponent
+    },
+    {
+        path: 'productEdit/:id',
+        component: ProductEditComponent
+    },
+    {
+        path: 'productDelete',
+        component: ProductDeleteComponent
+    },
+    {
+        path: 'categoryAdd',
+        component: CategoryAddComponent
+    },
+    {
+        path: 'categoryEdit/:id',
+        component: CategoryEditComponent
+    },
+    {
+        path: 'categoryDelete',
+        component: CategoryDeleteComponent
+    },
     {
         path: 'login',
         component: LoginComponent,
@@ -60,6 +89,10 @@ const routes: Routes = [
         component: OrderHistoryComponent
     },
     {
+        path: 'auth/change-password',
+        component: ChangePasswordComponent
+    },
+    {
         path: 'change-password',
         component: ChangePasswordComponent
     },
@@ -75,13 +108,34 @@ const routes: Routes = [
         path: 'checkout-payment',
         component: CheckoutPaymentComponent
     },
-    {path: 'cart', component: CartComponent},
-    {path: 'products', component: ProductListComponent},
-    {path: 'product', component: ProductComponent},
-    {path: 'filter', component: FilterResultsComponent},
-    {path: 'product/:id', component: ProductComponent},
-    {path: 'shopping-cart', component: ShoppingCartComponent},
-    {path: 'product-overview', component: ProductOverviewComponent},
+    {
+        path: 'cart',
+        component: CartComponent
+    },
+    {
+        path: 'products',
+        component: ProductListComponent
+    },
+    {
+        path: 'product',
+        component: ProductComponent
+    },
+    {
+        path: 'filter',
+        component: FilterResultsComponent
+    },
+    {
+        path: 'product/:id',
+        component: ProductComponent
+    },
+    {
+        path: 'shopping-cart',
+        component: ShoppingCartComponent
+    },
+    {
+        path: 'product-overview',
+        component: ProductOverviewComponent
+    },
 ];
 
 @NgModule({
