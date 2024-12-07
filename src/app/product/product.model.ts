@@ -10,10 +10,11 @@ export interface Product {
   productQuantity: number;
   total: number;
   available:boolean;
-active:boolean
+  active:boolean
 }
 export interface Category {
   id: number;
   name: string;
+  imageUrl: string;
    
 }

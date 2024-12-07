@@ -42,6 +42,10 @@
   box-sizing: border-box; /* Consistent width calculation */
 }
 
+.input-group {
+  text-align: left;
+}
+
 .eye-icon {
   position: absolute;
   top: 50%;
@@ -99,4 +103,17 @@
 .login-container .login-card .login-button:disabled {
   background-color: #ccc;
   cursor: not-allowed;
+}
+
+.input-error {
+  border-color: red;
+}
+
+.error-text {
+  color: red;
+  margin-top: 5px;
+}
+
+.error-messages {
+  margin-top: 5px;
 }
