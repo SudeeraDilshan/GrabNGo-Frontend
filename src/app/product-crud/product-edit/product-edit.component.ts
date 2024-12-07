@@ -20,10 +20,13 @@ export class ProductEditComponent implements OnInit{
     this.editProductForm = this.fb.group({
       productId: ['', ],
       productName: ['', Validators.required],
-      productPrice: [null, [Validators.required, Validators.min(0)]],
       productDescription: ['', Validators.required],
+      productPrice: [null, [Validators.required, Validators.min(0)]],
+      productQuantity: ['', Validators.required],
+      imageUrl: ['', Validators.required],
       categoryId: ['', Validators.required],
       available: [false], 
+      active: [true]
     });
   }
 
@@ -46,8 +49,8 @@ export class ProductEditComponent implements OnInit{
         if (product) {
           this.editProductForm.patchValue({
             productName: product.data.productName,
-            productPrice: product.data.productPrice,
             productDescription: product.data.productDescription,
+            productPrice: product.data.productPrice,
             categoryId: product.data.categoryId,
             // availability: product.availability,
           });
@@ -69,13 +72,13 @@ export class ProductEditComponent implements OnInit{
       const updatedProduct = {
         productId: this.productId,
         productName: productData.productName,
-        productPrice: productData.productPrice,
         productDescription: productData.productDescription,
+        productPrice: productData.productPrice,
         productQuantity: productData.productQuantity,
         imageUrl: productData.imageUrl,
         categoryId: productData.categoryId,
+        available: productData.available,
         active: productData.active,
-        available: productData.available
       }
       this.productService.updateProduct(this.productId, updatedProduct).subscribe({
         next: (response) => {
