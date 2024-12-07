@@ -21,38 +21,36 @@ export class ProductComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const productId = +this.route.snapshot.params['id'];  // Get product ID from route parameters
-    this.loadProduct(productId);  // Load the product details from the backend
+    const productId = +this.route.snapshot.params['id'];  
+    this.loadProduct(productId);  
   }
 
-  // Load the product by ID
+ 
   loadProduct(id: number): void {
     this.productService.getProductById(id).subscribe(
       (product) => {
-        this.product = product;  // Assign the fetched product to the component
+        this.product = product;   
       },
       (error) => {
         console.error('Error fetching product:', error);
       }
     );
   }
-
-  // Decrease the quantity in the cart
+ 
   decreaseQuantity(): void {
     if (this.quantity > 1) {
       this.quantity--;
     }
   }
 
-  // Increase the quantity in the cart
+   
   increaseQuantity(): void {
     this.quantity++;
   }
-
-  // Add the product to the cart
+ 
   addToCart(): void {
     if (this.product) {
-      this.cartService.addToCart(this.product, this.quantity);  // Add product to cart service
+      this.cartService.addToCart(this.product, this.quantity);   
       console.log(`Added to cart: Rs.${(this.product.productPrice * this.quantity).toFixed(2)}`);
     }
   }

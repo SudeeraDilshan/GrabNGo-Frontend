@@ -32,7 +32,7 @@ export class ProductService {
   getProduct(id: number) {
     throw new Error('Method not implemented.');
   }
-  private apiUrl = 'http://172.104.165.74:8084/product';  // Replace with your backend API URL
+  private apiUrl = 'http://172.104.165.74:8084/api/v1/product';   
 
   constructor(private http: HttpClient) {}
 
