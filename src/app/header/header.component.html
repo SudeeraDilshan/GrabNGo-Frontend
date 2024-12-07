@@ -1,34 +1,41 @@
 <header class="header">
   <img routerLink="products" src="assets/Logo.png" alt="Grab N Go Logo" class="logo" />
   <nav class="nav">
-    <a
-      routerLink="/orderAdmin"
-      routerLinkActive="active-link"
-      [routerLinkActiveOptions]="{ exact: true }">
-      Orders
-    </a>
-    <a
-      routerLink="/productAdmin"
-      routerLinkActive="active-link"
-      [routerLinkActiveOptions]="{ exact: true }">
-      Product
-    </a>
-    <a
-      routerLink="/category"
-      routerLinkActive="active-link"
-      [routerLinkActiveOptions]="{ exact: true }">
-      Category
-    </a>
-      <a routerLink="/login">Login</a>
-    <a (click)="logOut()">Logout</a>
+    <!-- Admin-specific links -->
+    <ng-container *ngIf="isAdmin()">
       <a
-              (click)="navigateToCart()"
-              class="cart-link"
-      >
-          <i class="fa fa-cart-shopping"></i>
-          <span> My cart </span>
-
-          <span class="cart-count">({{ cartItemCount }})</span>
+        routerLink="/orderAdmin"
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: true }">
+        Orders
       </a>
+      <a
+        routerLink="/productAdmin"
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: true }">
+        Product
+      </a>
+      <a
+        routerLink="/category"
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: true }">
+        Category
+      </a>
+    </ng-container>
+
+    <!-- User-specific links -->
+    <ng-container *ngIf="isUser()">
+      <a routerLink="/about">About Us</a>
+      <a (click)="navigateToCart()" class="cart-link">
+        <i class="fa fa-cart-shopping"></i>
+        <span> My cart </span>
+        <span class="cart-count" *ngIf="cartItemCount > 0">({{ cartItemCount }})</span>
+      </a>
+    </ng-container>
+
+    <!-- Common links -->
+    
+    <a *ngIf="!isLoggedIn()" routerLink="/login">Login</a>
+    <a *ngIf="isLoggedIn()" (click)="logOut()" routerLink="/products">Logout</a>
   </nav>
 </header>

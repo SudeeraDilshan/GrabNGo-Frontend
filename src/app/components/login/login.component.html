@@ -4,21 +4,34 @@
     <p>Login with email</p>
 
     <form (ngSubmit)="onLogin()">
-      <div class="input-group">
-        <input type="email" placeholder="Email" [(ngModel)]="email" name="email" required />
-      </div>
-      <div class="input-group">
-        <input
-          [type]="showPassword ? 'text' : 'password'"
-          placeholder="Password"
-          [(ngModel)]="password"
-          name="password"
-          required
-        />
-        <span class="eye-icon" (click)="togglePasswordVisibility()">
+      <!-- Email Input -->
+        <div class="input-group">
+            <input
+                    type="email"
+                    placeholder="Email"
+                    [(ngModel)]="email"
+                    name="email"
+                    [ngClass]="{ 'input-error': !email && errorMessage }"
+                    required
+            />
+        </div>
+
+      <!-- Password Input -->
+        <div class="input-group">
+            <input
+                    [type]="showPassword ? 'text' : 'password'"
+                    placeholder="Password"
+                    [(ngModel)]="password"
+                    [ngClass]="{ 'input-error': !password && errorMessage }"
+                    name="password"
+                    required
+            />
+            <span class="eye-icon" (click)="togglePasswordVisibility()">
           <i [class]="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
         </span>
-      </div>
+        </div>
+      <!-- Error Message Display -->
+      <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
 
       <div class="options">
         <a routerLink="/auth/registration">Don't have an account? Signup</a>

@@ -20,10 +20,10 @@ export class ProductEditComponent implements OnInit{
     this.editProductForm = this.fb.group({
       productId: ['', ],
       productName: ['', Validators.required],
-      price: [null, [Validators.required, Validators.min(0)]],
-      description: ['', Validators.required],
-      category: ['', Validators.required],
-      availability: ['', Validators.required],
+      productPrice: [null, [Validators.required, Validators.min(0)]],
+      productDescription: ['', Validators.required],
+      categoryId: ['', Validators.required],
+      available: [false], 
     });
   }
 
@@ -45,11 +45,11 @@ export class ProductEditComponent implements OnInit{
       (product) => {
         if (product) {
           this.editProductForm.patchValue({
-            productName: product.name,
-            price: product.price,
-            description: product.description,
-            category: product.category,
-            availability: product.availability,
+            productName: product.data.productName,
+            productPrice: product.data.productPrice,
+            productDescription: product.data.productDescription,
+            categoryId: product.data.categoryId,
+            // availability: product.availability,
           });
         } else {
           console.error('Product data is null or undefined!');
@@ -66,9 +66,8 @@ export class ProductEditComponent implements OnInit{
   onSubmit(): void {
     if (this.editProductForm.valid) {
       const productData = this.editProductForm.value;
-
       const updatedProduct = {
-        id: this.productId,
+        productId: this.productId,
         productName: productData.productName,
         productPrice: productData.productPrice,
         productDescription: productData.productDescription,
@@ -78,7 +77,6 @@ export class ProductEditComponent implements OnInit{
         active: productData.active,
         available: productData.available
       }
-
       this.productService.updateProduct(this.productId, updatedProduct).subscribe({
         next: (response) => {
           console.log('Category Added Response:', response);

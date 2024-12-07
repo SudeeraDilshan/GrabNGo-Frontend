@@ -18,15 +18,14 @@ export class CategoryEditComponent {
       categoryName: ['', Validators.required],
       description: ['', Validators.required],
     });
-  }
+  } 
 
   ngOnInit(): void {
     this.categoryId = this.activatedRoute.snapshot.paramMap.get('id')!
     this.categoryService.getCategoryById(this.categoryId).subscribe(data => {
       console.log(data.data);
       this.editCategoryForm.controls["categoryName"].setValue(data.data.categoryName);
-      this.editCategoryForm.controls["description"].setValue(data.data.description);
-      
+      this.editCategoryForm.controls["description"].setValue(data.data.description);     
     })
   }
 
@@ -37,14 +36,12 @@ export class CategoryEditComponent {
   onSubmit(): void {
     if (this.editCategoryForm.valid) {
       const categoryData = this.editCategoryForm.value;
-
       const updateCategory = {
         id: this.categoryId,
         categoryName: categoryData.categoryName,
         description: categoryData.description,
         isActive: true
       }
-
       // Use the service to send data to the backend
       this.categoryService.updateCategory(this.categoryId, updateCategory).subscribe({
         next: (response) => {
