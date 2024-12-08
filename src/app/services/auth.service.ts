@@ -10,6 +10,7 @@ import { ApiResponse, LoginResponse } from "../types";
 })
 export class AuthService {
   private apiUrl = 'http://172.104.165.74:8082/api/v1/auth';
+  private userUrl='http://172.104.165.74:8082/api/v1/user';
   private currentUserSubject: BehaviorSubject<any>;
   public currentUser: Observable<any>;
 
@@ -18,16 +19,22 @@ export class AuthService {
     this.currentUser = this.currentUserSubject.asObservable();
   }
 
-  login(email: string, password: string): Observable<any> {
+  login(email: string, password: string): Observable<LoginResponse> {
     const loginPayload = { emailAddress: email, password: password };
     return this.http.post<ApiResponse<LoginResponse>>(`${this.apiUrl}/login`, loginPayload)
       .pipe(
-        map(user => {
-          sessionStorage.setItem('ACCESS_TOKEN', user.data.accessToken);
-          sessionStorage.setItem("ROLE", user.data.userRole);
-          localStorage.setItem('REFRESH_TOKEN', user.data.refreshToken);
-          this.currentUserSubject.next(user);
-          return user;
+        map(response => {
+          // Store access and refresh tokens in session and local storage
+          sessionStorage.setItem('ACCESS_TOKEN', response.data.accessToken);
+          localStorage.setItem('REFRESH_TOKEN', response.data.refreshToken);
+
+          // Store user data in local storage
+          this.storeUserInLocalStorage(response.data);
+
+          // Update the current user subject
+          this.currentUserSubject.next(response.data);
+
+          return response.data;
         }),
         catchError(error => {
           console.error('Login error:', error);
@@ -36,9 +43,19 @@ export class AuthService {
       );
   }
 
-  isLoggedIn(): boolean {
-      return !!sessionStorage.getItem('ACCESS_TOKEN');
+  private storeUserInLocalStorage(userData: LoginResponse): void {
+    localStorage.setItem('userData', JSON.stringify(userData));
   }
+
+  private getUserFromLocalStorage(): LoginResponse | null {
+    const userDataString = localStorage.getItem('userData');
+    return userDataString ? JSON.parse(userDataString) : null;
+  }
+
+  isLoggedIn(): boolean {
+    return !!sessionStorage.getItem('ACCESS_TOKEN');
+  }
+
 
   register(userData: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/register`, userData)
@@ -87,6 +104,7 @@ export class AuthService {
       );
   }
 
+
   // Verify Email
   verifyEmail(code: string): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/verify-email`, { code })
@@ -96,6 +114,20 @@ export class AuthService {
         }),
         catchError(error => {
           console.error('Email verification error:', error);
+          throw error;
+        })
+      );
+  }
+
+  PasswordModification(oldPassword: string, newPassword: string, confirmPassword: string): Observable<any> {
+    const passwordData = { oldPassword, newPassword, confirmPassword };
+    return this.http.post<any>(`${this.userUrl}/change-password`, passwordData)
+      .pipe(
+        map(response => {
+          return response;
+        }),
+        catchError(error => {
+          console.error('Change password error:', error);
           throw error;
         })
       );

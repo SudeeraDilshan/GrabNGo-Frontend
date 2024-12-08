@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Order } from '../models/order-model';
 import { OrderService } from '../services/order.service';
 import { ProductService } from '../services/product.service';
 import { forkJoin } from 'rxjs';
@@ -10,9 +9,13 @@ import { forkJoin } from 'rxjs';
   styleUrls: ['./order-history.component.css'],
 })
 export class OrderHistoryComponent implements OnInit {
-  isLoading: boolean = true; // Loading state
-  hasError: boolean = false; // Error state
-  orders: any[] = []; // Array to store transformed order history
+  isLoading: boolean = true;
+  hasError: boolean = false;
+  orders: any[] = [];
+
+  // Add input parameters for userId and status
+  userId: string = '8'; // Default user ID
+  status: string = 'Accepted'; // Default status
 
   constructor(
     private orderService: OrderService,
@@ -26,15 +29,16 @@ export class OrderHistoryComponent implements OnInit {
   fetchOrderHistory(): void {
     this.isLoading = true;
     this.hasError = false;
-  
-    this.orderService.getOrders().subscribe({
+
+    // Use the new method with userId and status
+    this.orderService.getOrdersByUserAndStatus(this.userId, this.status).subscribe({
       next: (orders) => {
         const productRequests = orders.flatMap((order) =>
           order.orderItems.map((item) =>
-            this.productService.getProductById(String(item.productId)) // Convert productId to string
+            this.productService.getProductById(String(item.productId))
           )
         );
-  
+
         forkJoin(productRequests).subscribe({
           next: (products) => {
             this.orders = orders.map((order) => {
@@ -51,13 +55,13 @@ export class OrderHistoryComponent implements OnInit {
                   date: new Date(order.createdDateTime).toLocaleDateString(),
                 };
               });
-  
+
               return {
                 ...order,
                 orderItems: enrichedOrderItems,
               };
             });
-  
+
             this.isLoading = false;
           },
           error: () => {
@@ -72,4 +76,11 @@ export class OrderHistoryComponent implements OnInit {
       },
     });
   }
-}  
+
+  // Optional: Method to allow dynamic filtering
+  filterOrders(userId: string, status: string): void {
+    this.userId = userId;
+    this.status = status;
+    this.fetchOrderHistory();
+  }
+}

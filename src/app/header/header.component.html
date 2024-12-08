@@ -31,6 +31,13 @@
     </ng-container>
 
     <a *ngIf="!isLoggedIn" routerLink="auth/login">Login</a>
-    <a *ngIf="isLoggedIn" (click)="logOut()" routerLink="/products">Logout</a>
+    <a *ngIf="isLoggedIn" (click)="toggleProfileDropdown()" class="profile-link">
+      Profile
+      <div class="dropdown-menu" *ngIf="showProfileDropdown">
+        <a routerLink="order-history">Order History</a>
+        <a routerLink="profile">Profile Edit</a>
+        <a (click)="logOut()" routerLink="/products">Logout</a>
+      </div>
+    </a>
   </nav>
 </header>
