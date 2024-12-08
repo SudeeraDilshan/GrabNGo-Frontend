@@ -1,6 +1,5 @@
 <div class="add-product-container">
   <h1>Add Product</h1>
-
   <!-- Product Image Upload -->
   <div class="product-image">
     <div class="image-placeholder">
@@ -62,28 +61,28 @@
         </mat-error>
       </mat-form-field>
     </div>
-
+    
     <!-- Category and Availability -->
     <div class="form-row align-labels">
       <label for="category" class="form-label">Category</label>
       <mat-form-field class="form-field">
         <mat-label>Category</mat-label>
         <mat-select id="category" formControlName="categoryId">
-          <mat-option *ngFor="let category of categories" [value]="category">
-            {{ category }}
+          <mat-option *ngFor="let category of categories" [value]="category.categoryId">
+            {{ category.categoryName }}
           </mat-option>
         </mat-select>
         <mat-error *ngIf="submitted && addProductForm.get('categoryId')?.hasError('required')">
           Category is required.
         </mat-error>
       </mat-form-field>
-
+      
       <label for="availability" class="form-label">Availability</label>
       <mat-form-field class="form-field">
         <mat-label>Availability</mat-label>
         <mat-select id="availability" formControlName="available">
-          <mat-option *ngFor="let status of availabilityOptions" [value]="status">
-            {{ status }}
+          <mat-option *ngFor="let status of availabilityOptions" [value]="status.value">
+            {{ status.label }}
           </mat-option>
         </mat-select>
         <mat-error *ngIf="submitted && addProductForm.get('available')?.hasError('required')">

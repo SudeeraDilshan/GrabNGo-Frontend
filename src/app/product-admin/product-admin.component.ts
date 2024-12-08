@@ -62,7 +62,6 @@ export class ProductAdminComponent {
     this.categoryService.getCategories().subscribe({
       next: (categories) => {
         this.categories = (categories as unknown as ApiResponse<Category[]>).data;
-        console.log('Categories loaded:', this.categories);
       },
       error: (err) => {
         console.error('Error loading categories:', err);

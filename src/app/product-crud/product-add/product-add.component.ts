@@ -11,6 +11,12 @@ export interface Category {
   isActive: boolean;
 }
 
+export interface ApiResponse<T> {
+  status: string;
+  message: string;
+  data: T
+}
+
 @Component({
   selector: 'app-product-add',
   templateUrl: './product-add.component.html',
@@ -24,9 +30,10 @@ export class ProductAddComponent {
   submitted: boolean = false;
   categories: Category[] = [];
 
-  // categories = ['Beauty and Health', 'Home and Garden', 'Phone and Telecommunication', 'Accessories	', 'Sports', 'Entertainment'];
-  availabilityOptions = ['Out Of Stock', 'Available'];
-
+  availabilityOptions = [
+    { label: 'Out Of Stock', value: false },
+    { label: 'Available', value: true }
+  ];
   constructor( private fb: FormBuilder,  private route: ActivatedRoute, private router: Router, private productService: ProductService, private categoryService: CategoryService) {
     this.addProductForm = this.fb.group({
       productName: ['', Validators.required],
@@ -35,8 +42,23 @@ export class ProductAddComponent {
       productQuantity: ['', Validators.required],
       imageUrl: ['', Validators.required],
       categoryId: ['', Validators.required],
-      available: [true],
+      available: [true, Validators.required],
       active: [true]
+    });
+  }
+
+  ngOnInit(): void {
+    this.loadCategories();
+  }
+
+  loadCategories(): void {
+    this.categoryService.getCategories().subscribe({
+      next: (categories) => {
+        this.categories = (categories as unknown as ApiResponse<Category[]>).data;
+      },
+      error: (err) => {
+        console.error('Error loading categories:', err);
+      },
     });
   }
 
