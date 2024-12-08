@@ -21,7 +21,7 @@ import { CategoryAddComponent } from './category-crud/category-add/category-add.
 import { CategoryEditComponent } from './category-crud/category-edit/category-edit.component';
 import { CategoryDeleteComponent } from './category-crud/category-delete/category-delete.component';
 import { OrderViewAdminComponent } from './order-view-admin/order-view-admin.component';
-import { LoginComponent } from './components/login/login.component';
+import { LoginComponent } from './login/login.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 import { CartComponent } from './cart/cart.component';
@@ -48,6 +48,7 @@ import { FilterResultsComponent } from './filter-results/filter-results.componen
 import { ProductComponent } from './product/product.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { ProductOverviewComponent } from './product-overview/product-overview.component';
+import { PasswordModificationComponent } from './password-modification/password-modification.component';
 
 @NgModule({
   declarations: [
@@ -78,14 +79,16 @@ import { ProductOverviewComponent } from './product-overview/product-overview.co
     CheckoutComponent,
     CheckoutPaymentComponent,
     PaymentPortalComponent,
-    
+
 
     CartComponent,
     ProductListComponent,
     FilterResultsComponent,
     ProductComponent,
     ShoppingCartComponent,
-    ProductOverviewComponent
+    ProductOverviewComponent,
+    PasswordModificationComponent
+
 
   ],
   imports: [

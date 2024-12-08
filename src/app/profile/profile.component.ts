@@ -110,6 +110,6 @@ export class ProfileComponent implements OnInit {
 
   // Change Password
   changePassword() {
-    window.location.href = '/change-password';
+    window.location.href = '/password-modification';
   }
 }
