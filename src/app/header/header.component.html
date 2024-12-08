@@ -1,9 +1,43 @@
 <header class="header">
-  <img src="assets/Logo.png" alt="Grab N Go Logo" class="logo" />
+  <img routerLink="products" src="assets/Logo.png" alt="Grab N Go Logo" class="logo" />
   <nav class="nav">
-    <a routerLink="orders">Orders</a>
-    <a routerLink="productAdmin" >Product</a>
-    <a routerLink="category">Category</a>
-    <a routerLink="logout">Logout</a>
+    <ng-container *ngIf="isAdmin()">
+      <a
+        routerLink="/orderAdmin"
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: true }">
+        Orders
+      </a>
+      <a
+        routerLink="/productAdmin"
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: true }">
+        Product
+      </a>
+      <a
+        routerLink="/category"
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: true }">
+        Category
+      </a>
+    </ng-container>
+
+    <ng-container>
+      <a (click)="navigateToCart()" class="cart-link">
+        <i class="fa fa-cart-shopping"></i>
+        <span> My cart </span>
+        <span class="cart-count" >({{ cartItemCount }})</span>
+      </a>
+    </ng-container>
+
+    <a *ngIf="!isLoggedIn" routerLink="auth/login">Login</a>
+    <a *ngIf="isLoggedIn" (click)="toggleProfileDropdown()" class="profile-link">
+      Profile
+      <div class="dropdown-menu" *ngIf="showProfileDropdown">
+        <a routerLink="order-history">Order History</a>
+        <a routerLink="profile">Profile Edit</a>
+        <a (click)="logOut()" routerLink="/products">Logout</a>
+      </div>
+    </a>
   </nav>
 </header>

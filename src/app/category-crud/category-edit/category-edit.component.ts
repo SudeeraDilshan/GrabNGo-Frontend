@@ -1,52 +1,50 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CategoryService } from '../../services/category.service'; // Import the service
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-category-edit',
   templateUrl: './category-edit.component.html',
   styleUrl: './category-edit.component.css'
 })
-export class CategoryEditComponent {
-  addCategoryForm: FormGroup;
-  imagePreview: string | undefined;
-  showSuccessMessage: boolean = false;
 
-  constructor(
-    private fb: FormBuilder,
-    private categoryService: CategoryService, 
-    private router: Router
-  ) {
-    this.addCategoryForm = this.fb.group({
+export class CategoryEditComponent {
+  editCategoryForm: FormGroup;
+  showSuccessMessage: boolean = false;
+  categoryId!: string;
+
+  constructor( private fb: FormBuilder, private categoryService: CategoryService, private router: Router, private activatedRoute: ActivatedRoute) {
+    this.editCategoryForm = this.fb.group({
       categoryName: ['', Validators.required],
       description: ['', Validators.required],
     });
-  }
+  } 
 
-  ngOnInit(): void {}
-
-  onImageUpload(event: Event): void {
-    const file = (event.target as HTMLInputElement).files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        this.imagePreview = reader.result as string;
-      };
-      reader.readAsDataURL(file);
-    }
+  ngOnInit(): void {
+    this.categoryId = this.activatedRoute.snapshot.paramMap.get('id')!
+    this.categoryService.getCategoryById(this.categoryId).subscribe(data => {
+      console.log(data.data);
+      this.editCategoryForm.controls["categoryName"].setValue(data.data.categoryName);
+      this.editCategoryForm.controls["description"].setValue(data.data.description);     
+    })
   }
 
   cancel(){
-    this.router.navigate(['/categories']);
+    this.router.navigate(['/category']);
   }
 
   onSubmit(): void {
-    if (this.addCategoryForm.valid) {
-      const categoryData = this.addCategoryForm.value;
-
+    if (this.editCategoryForm.valid) {
+      const categoryData = this.editCategoryForm.value;
+      const updateCategory = {
+        id: this.categoryId,
+        categoryName: categoryData.categoryName,
+        description: categoryData.description,
+        isActive: true
+      }
       // Use the service to send data to the backend
-      this.categoryService.addCategory(categoryData).subscribe({
+      this.categoryService.updateCategory(this.categoryId, updateCategory).subscribe({
         next: (response) => {
           console.log('Category Added Response:', response);
           this.showSuccessMessage = true;

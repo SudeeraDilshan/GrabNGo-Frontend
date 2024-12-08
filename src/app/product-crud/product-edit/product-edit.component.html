@@ -1,16 +1,16 @@
 <div class="edit-product-container">
     <h1>Edit Product Details</h1>
-  
+    
     <!-- Product Image Upload -->
-    <div class="product-image">
-      <div class="image-placeholder">
-        <img *ngIf="imagePreview" [src]="imagePreview" alt="Product Image Preview" class="product-image-preview" />
-        <label for="product-image" class="camera-icon">
-          <mat-icon>photo_camera</mat-icon>
-        </label>
-      </div>
-      <input type="file" id="product-image" (change)="onImageUpload($event)" class="file-input" />
+  <div class="product-image">
+    <div class="image-placeholder">
+      <img *ngIf="imagePreview" [src]="imagePreview" alt="Product Image Preview" class="product-image-preview" />
+      <label for="product-image" class="camera-icon">
+        <mat-icon>photo_camera</mat-icon>
+      </label>
     </div>
+    <input type="file" id="product-image" (change)="onImageUpload($event)" class="file-input" />
+  </div>
   
     <form [formGroup]="editProductForm" (ngSubmit)="onSubmit()">
       <!-- Product Name and Price -->
@@ -28,7 +28,7 @@
         <label for="price" class="form-label">Price</label>
         <mat-form-field class="form-field">
           <mat-label>Price</mat-label>
-          <input matInput type="number" formControlName="price" />
+          <input matInput type="number" formControlName="productPrice" />
           <mat-icon class="edit-icon">edit</mat-icon>
           <mat-error *ngIf="editProductForm.get('price')?.hasError('required')">
             Price is required.
@@ -38,28 +38,42 @@
           </mat-error>
         </mat-form-field>
       </div>
+
+      <div class="form-row">
+        <label for="Quantity" class="form-label">Quantity</label>
+        <mat-form-field class="form-field">
+          <mat-label>Quantity</mat-label>
+          <input matInput type="number" formControlName="productQuantity" />
+          <mat-error *ngIf="submitted && editProductForm.get('productQuantity')?.hasError('required')">
+            Quantity is required.
+          </mat-error>
+          <mat-error *ngIf="submitted && editProductForm.get('productQuantity')?.hasError('min')">
+            Quantity must be a positive number.
+          </mat-error>
+        </mat-form-field>
+      </div>
   
       <!-- Description -->
       <label for="description" class="form-label">Description</label>
       <div class="form-row">
         <mat-form-field class="form-field full-width">
           <mat-label>Description</mat-label>
-          <textarea matInput rows="3" formControlName="description"></textarea>
+          <textarea matInput rows="3" formControlName="productDescription"></textarea>
           <mat-icon class="edit-icon" >edit</mat-icon>
           <mat-error *ngIf="editProductForm.get('description')?.hasError('required')">
             Description is required.
           </mat-error>
         </mat-form-field>
       </div>
-  
+
       <!-- Category and Availability -->
       <div class="form-row align-labels">
         <label for="category" class="form-label">Category</label>
         <mat-form-field class="form-field">
           <mat-label>Category</mat-label>
-          <mat-select id="category" formControlName="category">
-            <mat-option *ngFor="let category of categories" [value]="category">
-              {{ category }}
+          <mat-select id="category" formControlName="categoryId">
+            <mat-option *ngFor="let category of categories" [value]="category.categoryId">
+              {{ category.categoryName }}
             </mat-option>
           </mat-select>
           <mat-icon class="edit-icon">edit</mat-icon>
@@ -71,7 +85,7 @@
         <label for="availability" class="form-label">Availability</label>
         <mat-form-field class="form-field">
           <mat-label>Availability</mat-label>
-          <mat-select id="availability" formControlName="availability">
+          <mat-select id="availability" formControlName="available">
             <mat-option *ngFor="let status of availabilityOptions" [value]="status">
               {{ status }}
             </mat-option>
@@ -86,7 +100,8 @@
       <!-- Action Buttons -->
       <div class="button-row">
         <button mat-button type="button" class="cancel-button" (click)="cancel()">Cancel</button>
-        <button mat-raised-button type="submit" routerLink="/productAdmin" [disabled]="!editProductForm.valid">Edit Product</button>
+        <button mat-raised-button type="submit" [disabled]="!editProductForm.valid">Edit Product</button>
+
       </div>
   
       <div *ngIf="showSuccessMessage" class="success-message">
