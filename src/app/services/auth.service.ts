@@ -198,4 +198,15 @@ export class AuthService {
     return sessionStorage.getItem('resetPasswordEmail') || '';
   }
 
+
+  // In AuthService
+  getUserEmail(): string | null {
+    const userData = localStorage.getItem('userData');
+    if (userData) {
+      const parsedData = JSON.parse(userData);
+      return parsedData.emailAddress || null;
+    }
+    return null;
+  }
+
 }

@@ -155,3 +155,18 @@
 .security-links .delete {
     color: red; /* Delete account link in red */
 }
+
+.profile-picture-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.profile-avatar {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ddd;
+}
