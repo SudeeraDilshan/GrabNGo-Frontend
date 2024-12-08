@@ -11,7 +11,6 @@ export class OrderService {
 
   constructor(private http: HttpClient) {}
 
-  // Fetch order history from the API
   getOrders(): Observable<Order[]> {
     return this.http.get<Order[]>(this.apiUrl);
   }
