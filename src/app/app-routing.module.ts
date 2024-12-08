@@ -26,6 +26,7 @@ import { FilterResultsComponent } from './filter-results/filter-results.componen
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { ProductOverviewComponent } from './product-overview/product-overview.component';
 import { loginRequiredGuard } from "./guards/login-required.guard";
+import { FilterCategoryComponent } from './filter-category/filter-category.component';
 
 const routes: Routes = [
     {
@@ -153,6 +154,14 @@ const routes: Routes = [
         path: 'product-overview',
         component: ProductOverviewComponent
     },
+  
+     
+        { path: 'category/:categoryId', component: FilterCategoryComponent },
+   
+      
+         
+      
+      
 ];
 
 @NgModule({

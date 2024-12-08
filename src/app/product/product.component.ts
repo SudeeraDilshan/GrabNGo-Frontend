@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from './product.model';
 import { ProductService } from './product.service';
-import { CartService } from '../cart/cart.services';
+
 import { ActivatedRoute, Router } from '@angular/router';
+import { CartService } from '../shopping-cart/shopping-cart.services';
 
 @Component({
   selector: 'app-product',
@@ -28,7 +29,14 @@ export class ProductComponent implements OnInit {
     this.fetchProductDetails(this.productId);
   }
   fetchProductDetails(productId: number) {
-    
+    this.productService.getProductById(productId).subscribe({
+      next: (product) => {
+        this.product = product;
+      },
+      error: (err) => {
+        console.error('Error fetching product details:', err);
+      },
+    });
   }
 
  

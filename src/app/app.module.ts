@@ -48,6 +48,7 @@ import { FilterResultsComponent } from './filter-results/filter-results.componen
 import { ProductComponent } from './product/product.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { ProductOverviewComponent } from './product-overview/product-overview.component';
+import { FilterCategoryComponent } from './filter-category/filter-category.component';
 
 @NgModule({
   declarations: [
@@ -85,7 +86,8 @@ import { ProductOverviewComponent } from './product-overview/product-overview.co
     FilterResultsComponent,
     ProductComponent,
     ShoppingCartComponent,
-    ProductOverviewComponent
+    ProductOverviewComponent,
+    FilterCategoryComponent
 
   ],
   imports: [
