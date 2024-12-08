@@ -1,4 +1,3 @@
-// change-password.component.ts
 import { Component } from '@angular/core';
 
 @Component({
@@ -11,12 +10,22 @@ export class ChangePasswordComponent {
   confirmPassword: string = '';
   passwordMismatch: boolean = false;
 
+  showNewPassword: boolean = false;
+  showConfirmPassword: boolean = false;
+
+  toggleNewPasswordVisibility() {
+    this.showNewPassword = !this.showNewPassword;
+  }
+
+  toggleConfirmPasswordVisibility() {
+    this.showConfirmPassword = !this.showConfirmPassword;
+  }
+
   onSubmit(passwordForm: any) {
     if (this.newPassword !== this.confirmPassword) {
       this.passwordMismatch = true;
     } else {
       this.passwordMismatch = false;
-      // Handle the password update logic here
       console.log('Password updated successfully');
     }
   }

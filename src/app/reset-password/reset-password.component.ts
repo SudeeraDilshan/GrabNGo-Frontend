@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router'; // Import the Router
+import { Router } from '@angular/router'; 
 
 @Component({
   selector: 'app-reset-password',
@@ -14,7 +14,6 @@ export class ResetPasswordComponent {
 
   onSubmit() {
     console.log('Email:', this.email);
-    console.log('Remember Me:', this.rememberMe);
     sessionStorage.setItem("userEmail", this.email);
     this.router.navigate(['/email-verify']);
   }

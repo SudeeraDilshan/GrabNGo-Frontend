@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { CartService } from '../cart/cart.services';
+
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { CartService } from '../shopping-cart/shopping-cart.services';
 
 @Component({
   selector: 'app-header',
@@ -38,7 +39,15 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.cartService.cartItems$.subscribe(() => {
-      this.cartItemCount = this.cartService.getCartItemCount();
+     // this.cartItemCount = this.cartService.getCartItemCount();
     });
   }
+
+  showProfileDropdown: boolean = false;
+
+toggleProfileDropdown() {
+  this.showProfileDropdown = !this.showProfileDropdown;
+}
+
+ 
 }

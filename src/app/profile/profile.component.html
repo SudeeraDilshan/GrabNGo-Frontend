@@ -7,16 +7,15 @@
             
             <!-- Hidden File Input for Image Upload -->
             <input
-            type="file"
-            id="profile-pic-upload"
-            class="profile-pic-upload"
-            accept="image/*"
-            (change)="onProfilePicUpload($event)"
-          />
-          <label for="profile-pic-upload" class="camera-icon">
-            <i class="fas fa-camera"></i>
-          </label>
-          
+                type="file"
+                id="profile-pic-upload"
+                class="profile-pic-upload"
+                accept="image/*"
+                (change)="onProfilePicUpload($event)"
+            />
+            <label for="profile-pic-upload" class="camera-icon">
+                <i class="fas fa-camera"></i>
+            </label>
         </div>
 
         <h4 class="profile-name">{{ profile.firstName }} {{ profile.lastName }}</h4>
@@ -50,8 +49,12 @@
                 <input [(ngModel)]="profile.mobile" placeholder="Mobile Number" />
                 <label>Email:</label>
                 <input [(ngModel)]="profile.email" placeholder="Email" />
-                <button (click)="saveProfile()">Save</button>
-                <button (click)="cancelEdit()">Cancel</button>
+
+                <!-- Buttons aligned to the right -->
+                <div class="buttons-container">
+                    <button (click)="saveProfile()">Save</button>
+                    <button (click)="cancelEdit()">Cancel</button>
+                </div>
             </div>
         </div>
 
