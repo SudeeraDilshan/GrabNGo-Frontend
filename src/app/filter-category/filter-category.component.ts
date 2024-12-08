@@ -17,6 +17,7 @@ interface Category {
   categoryId: number;
   categoryName: string;
   description: string;
+  isActive: boolean;
 }
 
 @Component({
@@ -32,25 +33,29 @@ export class FilterCategoryComponent implements OnInit {
   categoryBackendUrl = 'http://172.104.165.74:8086/api/v1';
 
   constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient) {}
+
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.categoryId = +params['categoryId'];
-  
-      // Safely retrieve the category name from the route state
+
+      // Retrieve category name from route state or fallback to fetching details
       const state = this.router.getCurrentNavigation()?.extras.state as { categoryName?: string };
-      this.categoryName = state?.categoryName ||'Category Products' ; 
-  
+      if (state?.categoryName) {
+        this.categoryName = state.categoryName;
+      } else {
+        this.fetchCategoryDetails(this.categoryId);
+      }
+
       this.fetchCategoryProducts(this.categoryId);
     });
   }
-  
-  
+
   fetchCategoryDetails(categoryId: number): void {
     this.http.get<{ msg: string; data: Category }>(`${this.categoryBackendUrl}/categories/${categoryId}`)
       .subscribe({
         next: (response) => {
           if (response && response.data) {
-            this.categoryName = response.data.categoryName;  
+            this.categoryName = response.data.categoryName; // Update category name dynamically
           } else {
             console.error('Unexpected response format:', response);
           }
@@ -62,21 +67,29 @@ export class FilterCategoryComponent implements OnInit {
   }
 
   fetchCategoryProducts(categoryId: number): void {
-    this.http.get<{ msg: string; data: Product[]; status: string }>(`${this.productBackendUrl}/products/category/${categoryId}`)
-      .subscribe({
-        next: (response) => {
-          if (response && Array.isArray(response.data)) {
-            this.categoryProducts = response.data;
-          } else {
-            console.error(`Unexpected response format for category ID ${categoryId}:`, response);
-            this.categoryProducts = [];
-          }
-        },
-        error: (err) => {
-          console.error('Error fetching products from backend:', err);
+    this.http.get<{ msg: string; data: Product[]; status: string }>(
+      `${this.productBackendUrl}/product?categoryId=${categoryId}`
+      
+    )
+    .subscribe({
+      next: (response) => {
+        if (response && Array.isArray(response.data)) {
+          this.categoryProducts = response.data;
+        } else {
+          console.error(`Unexpected response format for category ID ${categoryId}:`, response);
           this.categoryProducts = [];
-        },
-      });
+        }
+      },
+      error: (err) => {
+        console.error('Error fetching products from backend:', err);
+        if (err.status === 0) {
+          console.error('Network error or CORS issue. Check API accessibility.');
+        } else {
+          console.error(`Backend returned error: ${err.message}`);
+        }
+        this.categoryProducts = []; // Clear products to avoid stale data
+      },
+    });
   }
 
   viewProductDetails(product: Product): void {
