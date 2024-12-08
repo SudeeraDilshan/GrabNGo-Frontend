@@ -77,6 +77,35 @@ export class AuthService {
     this.router.navigate(['/login']);
   }
 
+  forgetPassword(email: string): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/forget-password`, email)
+      .pipe(
+        map(response => {
+          // Optionally store email in session for verification steps
+          sessionStorage.setItem('resetPasswordEmail', email);
+          return response;
+        }),
+        catchError(error => {
+          console.error('Forget password error:', error);
+          throw error;
+        })
+      );
+  }
+
+  verifyEmailAndCode(email: string, verificationCode: string): Observable<any> {
+    const body = { email, verificationCode };
+    return this.http.post<any>(`${this.apiUrl}/verify`, body)
+      .pipe(
+        map(response => {
+          return response;
+        }),
+        catchError(error => {
+          console.error('Email and code verification error:', error);
+          throw error;
+        })
+      );
+  }
+
   requestPasswordReset(email: string): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/reset-password`, { email })
       .pipe(
@@ -103,7 +132,19 @@ export class AuthService {
         })
       );
   }
-
+// In auth.service.ts
+  resetPassword(resetData: { email: string, password: string, verificationCode: string }): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/reset-password`, resetData)
+      .pipe(
+        map(response => {
+          return response;
+        }),
+        catchError(error => {
+          console.error('Reset password error:', error);
+          throw error;
+        })
+      );
+  }
 
   // Verify Email
   verifyEmail(code: string): Observable<any> {
@@ -150,6 +191,22 @@ export class AuthService {
   // Get current logged-in user
   getCurrentUser(): Observable<any> {
     return this.currentUser;
+  }
+
+
+  getResetPasswordEmail(): string {
+    return sessionStorage.getItem('resetPasswordEmail') || '';
+  }
+
+
+  // In AuthService
+  getUserEmail(): string | null {
+    const userData = localStorage.getItem('userData');
+    if (userData) {
+      const parsedData = JSON.parse(userData);
+      return parsedData.emailAddress || null;
+    }
+    return null;
   }
 
 }

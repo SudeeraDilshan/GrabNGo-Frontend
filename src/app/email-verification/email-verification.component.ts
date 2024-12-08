@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from "../services/auth.service";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-email-verification',
@@ -7,15 +9,30 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./email-verification.component.css']
 })
 export class EmailVerificationComponent implements OnInit {
-  verificationForm!: FormGroup; // Form group for the 6-digit code
-  resendTimer: number = 30; // Countdown for resend button
-  isResendDisabled: boolean = true; // Disable resend initially
+  verificationForm!: FormGroup;
+  resendTimer: number = 30;
+  isResendDisabled: boolean = true;
   userEmail: string = "";
+  newPassword: string = ""; // Add this to store the new password
+  errorMessage: string = "";
+  isLoading: boolean = false;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    this.userEmail = sessionStorage.getItem("userEmail")!;
+    // Retrieve email from session storage
+    this.userEmail = this.authService.getResetPasswordEmail();
+
+    if (!this.userEmail) {
+      // If no email is found, redirect to forget password page
+      this.router.navigate(['/auth/change-password']);
+      return;
+    }
+
     this.verificationForm = this.fb.group({
       code1: ['', [Validators.required, Validators.pattern('^[0-9]{1}$')]],
       code2: ['', [Validators.required, Validators.pattern('^[0-9]{1}$')]],
@@ -25,11 +42,11 @@ export class EmailVerificationComponent implements OnInit {
       code6: ['', [Validators.required, Validators.pattern('^[0-9]{1}$')]]
     });
 
-    this.startResendTimer(); // Start timer on initialization
+    this.startResendTimer();
   }
 
   getControls(): string[] {
-    return Object.keys(this.verificationForm.controls); // Return control names as an array
+    return Object.keys(this.verificationForm.controls);
   }
 
   onInput(event: Event, index: number): void {
@@ -37,25 +54,49 @@ export class EmailVerificationComponent implements OnInit {
     if (input.value && input.value.length === 1) {
       const nextInput = document.querySelectorAll('input')[index + 1];
       if (nextInput) {
-        (nextInput as HTMLInputElement).focus(); // Move to the next input field
+        (nextInput as HTMLInputElement).focus();
       }
     }
   }
 
   onVerify(): void {
     if (this.verificationForm.valid) {
-      const code = Object.values(this.verificationForm.value).join('');
-      console.log('Verification Code:', code);
-      // Call your API or service to verify the code
+      // Combine verification code
+      const verificationCode = Object.values(this.verificationForm.value).join('');
+
+      // Set loading state
+      this.isLoading = true;
+      this.errorMessage = '';
+
+      // Navigate to change password page with necessary data
+      this.router.navigate(['/auth/change-password'], {
+        queryParams: {
+          email: this.userEmail,
+          verificationCode: verificationCode
+        }
+      });
     }
   }
 
   resendCode(): void {
-    console.log('Resend Code');
+    // Reset timer and disable resend button
     this.isResendDisabled = true;
-    this.resendTimer = 30; // Reset timer
+    this.resendTimer = 30;
     this.startResendTimer();
-    // Call your API or service to resend the code
+
+    // Call forget password API to resend verification code
+    this.authService.forgetPassword(this.userEmail)
+      .subscribe({
+        next: (response) => {
+          // Handle successful resend
+          console.log('Code resent successfully');
+        },
+        error: (error) => {
+          // Handle resend error
+          this.errorMessage = 'Failed to resend verification code';
+          console.error('Resend code error:', error);
+        }
+      });
   }
 
   private startResendTimer(): void {
