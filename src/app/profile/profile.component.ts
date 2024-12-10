@@ -1,6 +1,6 @@
-// profile.component.ts
 import { Component, OnInit } from '@angular/core';
-import { ProfileService } from '../services/profile.service';
+import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -8,108 +8,95 @@ import { ProfileService } from '../services/profile.service';
   styleUrls: ['./profile.component.css'],
 })
 export class ProfileComponent implements OnInit {
-  profile: any = {
+  profile = {
+    userId: 0,
+    emailAddress: '',
     firstName: '',
     lastName: '',
+    contactNumber: '',
+    nic: '',
     address: '',
-    mobile: '',
-    email: '',
+    role: '',
   };
 
-  backupProfile: any = {}; // Backup for canceling edits
-  isEditing = false; // Edit Mode State
-  profilePictureUrl = 'https://www.pngarts.com/files/10/Default-Profile-Picture-Download-PNG-Image.png'; // Default Profile Picture
+  isLoading = false;
+  errorMessage: string | null = null;
+  isEditing = false;  // To toggle between view and edit modes
 
-  constructor(private profileService: ProfileService) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    this.getUserDetails();
+    this.loadUserProfile();
   }
 
-  // Fetch user details from API
-  getUserDetails() {
-    this.profileService.getUserDetails().subscribe(
-      (data) => {
-        this.profile = {
-          firstName: data.firstName,
-          lastName: data.lastName,
-          address: data.address,
-          mobile: data.contactNumber,
-          email: data.emailAddress,
-        };
-        this.backupProfile = { ...this.profile };
-        console.log('User details fetched successfully:', data);
-      },
-      (error) => {
-        console.error('Error fetching user details:', error);
-      }
-    );
-  }
+  // Load user profile data using AuthService
+  loadUserProfile(): void {
+    this.isLoading = true;
+    this.authService.getCurrentUser().subscribe(
+      (currentUser) => {
+        if (currentUser) {
+          // Set the profile data from the currentUser object
+          this.profile.userId = currentUser.userId;
+          this.profile.emailAddress = currentUser.email;
+          this.profile.firstName = currentUser.firstName;
+          this.profile.lastName = currentUser.lastName;
+          this.profile.contactNumber = currentUser.contactNumber;
+          this.profile.nic = currentUser.nic;
+          this.profile.address = currentUser.address;
+          this.profile.role = currentUser.role;
+          console.log('profile firstname: ', this.profile.firstName);
+          console.log('profile lastname: ', this.profile.lastName);
+          console.log('profile userId: ', this.profile.userId);
+          console.log('profile contactNumber: ', this.profile.contactNumber);
+          console.log('profile nic: ', this.profile.nic);
+          console.log('profile address: ', this.profile.address);
+          console.log('profile role: ', this.profile.role);
 
-  // Toggle Edit Mode
-  toggleEdit() {
-    this.isEditing = true;
-  }
-
-  // Save Edited Profile
-  saveProfile() {
-    this.profileService.updateProfile(this.profile).subscribe(
-      () => {
-        console.log('Profile updated successfully');
-        this.backupProfile = { ...this.profile };
-        this.isEditing = false;
-        alert('Profile updated successfully!');
-      },
-      (error) => {
-        console.error('Error saving profile:', error);
-        alert('Failed to update profile. Please try again.');
-      }
-    );
-  }
-
-  // Cancel Edits
-  cancelEdit() {
-    this.profile = { ...this.backupProfile };
-    this.isEditing = false;
-  }
-
-  // Upload Profile Picture
-  onProfilePicUpload(event: any) {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e: any) => {
-        this.profilePictureUrl = e.target.result;
-      };
-      reader.readAsDataURL(file);
-
-      this.profileService.uploadProfilePicture(file).subscribe(
-        (response) => {
-          console.log('Profile picture uploaded successfully');
-          this.profilePictureUrl = response.profilePictureUrl;
-        },
-        (error) => {
-          console.error('Error uploading profile picture:', error);
+        } else {
+          this.errorMessage = 'User not logged in. Please log in again.';
         }
-      );
-    }
-  }
-
-  // Delete Account
-  deleteAccount() {
-    this.profileService.deleteAccount().subscribe(
-      () => {
-        console.log('Account deleted successfully');
-        window.location.href = '/login';
+        this.isLoading = false;
       },
       (error) => {
-        console.error('Error deleting account:', error);
+        this.isLoading = false;
+        this.errorMessage = 'Failed to load profile data. Please try again.';
+      }
+    );
+  }
+   
+  // Toggle between edit and view modes
+  toggleEditMode(): void {
+    this.isEditing = !this.isEditing;
+  }
+
+  // Save the profile changes
+  saveProfile(): void {
+    this.isLoading = true;
+    // Call AuthService to update the profile, you can call a backend API here
+    this.authService.updateProfile(this.profile).subscribe(
+      (response) => {
+        this.isLoading = false;
+        this.isEditing = false;
+        // Optionally, display a success message
+      },
+      (error) => {
+        this.isLoading = false;
+        this.errorMessage = 'Failed to save profile. Please try again.';
       }
     );
   }
 
-  // Change Password
-  changePassword() {
-    window.location.href = '/change-password';
+  // Logout the user
+  logout(): void {
+    this.authService.logout();
+    this.router.navigate(['/login']);
+  }
+
+  // Navigate to change password page
+  changePassword(): void {
+    this.router.navigate(['/password-modification']);
   }
 }

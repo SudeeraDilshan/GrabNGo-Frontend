@@ -5,7 +5,7 @@
 .active-link {
   color: #00aaff !important;
   font-weight: bold;
-}  
+}
 
 .product-admin {
   padding: 20px;
@@ -16,11 +16,11 @@
   align-items: center;
   justify-content: space-between;
   box-shadow: 0 -6px 12px rgba(1, 1, 1, 0.9);
-    padding: 1px 1px;
-    background-color: white;
-    position: sticky;
-    top: 0;
-    z-index: 10;
+  padding: 1px 1px;
+  background-color: white;
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
 .logo {
@@ -29,11 +29,11 @@
   margin-left: 20px;
   margin-top: 20px;
   margin-bottom: 10px;
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .nav a:hover {
-    color: #00aaff;
+  color: #00aaff;
 }
 
 .nav a {
@@ -73,30 +73,30 @@
 }
 
 .cart-link {
-    background-color: #f5f5f5;
-    padding: 8px 15px;
-    border-radius: 20px;
-    display: inline-flex;
-    align-items: center;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s;
-    cursor: pointer;
+  background-color: #f5f5f5;
+  padding: 8px 15px;
+  border-radius: 20px;
+  display: inline-flex;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s;
+  cursor: pointer;
 }
 
 .cart-link:hover {
-    background-color: #e6f7ff;
+  background-color: #e6f7ff;
 }
 
 .fa-cart-shopping {
-    font-size: 20px;
-    margin-right: 5px;
-    color: #00aaff;
+  font-size: 20px;
+  margin-right: 5px;
+  color: #00aaff;
 }
 
 .cart-count {
-    font-size: 16px;
-    color: orange;
-    margin-left: 5px;
+  font-size: 16px;
+  color: orange;
+  margin-left: 5px;
 }
 
 .profile-link {
@@ -112,7 +112,7 @@
   z-index: 1;
   min-width: 150px;
   top: 100%;
-  left: -70px;   
+  left: -70px;
 }
 
 .dropdown-menu a {
