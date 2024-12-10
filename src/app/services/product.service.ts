@@ -26,11 +26,10 @@ export class ProductService {
             'enctype': 'multipart/form-data',
         },
     });
-}
+  }
 
-  
   updateProduct(productId: string, updatedProduct: any): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/${productId}`, updatedProduct);
+    return this.http.patch<any>(`${this.apiUrl}/${productId}`, updatedProduct);
   }
 
   deleteProduct(productId: string, product:any): Observable<any> {
