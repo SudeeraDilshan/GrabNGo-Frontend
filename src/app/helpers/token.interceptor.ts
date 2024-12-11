@@ -1,56 +1,62 @@
-import { HttpInterceptorFn } from '@angular/common/http';
-import { inject } from '@angular/core';
-import { catchError, switchMap, throwError } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpClient } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError, switchMap } from 'rxjs/operators';
 import { ApiResponse } from "../types";
 
-export const tokenInterceptor: HttpInterceptorFn = (req, next) => {
-  const httpClient = inject(HttpClient);
-  const accessToken = localStorage.getItem('ACCESS_TOKEN');
-  const refreshTokenEndpointUrl = "172.207.18.25:8082/api/v1/auth/refresh"
+@Injectable({
+    providedIn: 'root'
+})
+export class TokenInterceptor implements HttpInterceptor {
+    private refreshTokenEndpointUrl = "172.207.18.25:8082/api/v1/auth/refresh";
 
-  if (accessToken) {
-    const authenticatedReq = req.clone({
-      setHeaders: {
-        Authorization: `Bearer ${accessToken}`
-      }
-    });
-    const refreshToken = localStorage.getItem('REFRESH_TOKEN');
+    constructor(private httpClient: HttpClient) {}
 
-    return next(authenticatedReq).pipe(
-        catchError((error) => {
+    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+        console.log('Token interceptor');
+        const accessToken = localStorage.getItem('ACCESS_TOKEN');
 
-          if (error.status === 401 && refreshToken) {
+        if (accessToken) {
+            const authenticatedReq = req.clone({
+                setHeaders: {
+                    Authorization: `Bearer ${accessToken}`
+                }
+            });
+            const refreshToken = localStorage.getItem('REFRESH_TOKEN');
 
-            return httpClient.post<ApiResponse<string>>(refreshTokenEndpointUrl, {
-              refreshToken, accessToken
-            }).pipe(
-                switchMap((newTokenResponse) => {
+            return next.handle(authenticatedReq).pipe(
+                catchError((error) => {
+                    if (error.status === 401 && refreshToken) {
+                        return this.httpClient.post<ApiResponse<string>>(this.refreshTokenEndpointUrl, {
+                            refreshToken,
+                            accessToken
+                        }).pipe(
+                            switchMap((newTokenResponse) => {
+                                localStorage.setItem('ACCESS_TOKEN', newTokenResponse.data);
 
-                  localStorage.setItem('ACCESS_TOKEN', newTokenResponse.data);
+                                const newAuthenticatedReq = req.clone({
+                                    setHeaders: {
+                                        Authorization: `Bearer ${newTokenResponse.data}`
+                                    }
+                                });
 
-                  const newAuthenticatedReq = req.clone({
-                    setHeaders: {
-                      Authorization: `Bearer ${newTokenResponse.data}`
+                                return next.handle(newAuthenticatedReq);
+                            }),
+                            catchError((refreshError) => {
+                                localStorage.removeItem('ACCESS_TOKEN');
+                                localStorage.removeItem('REFRESH_TOKEN');
+                                window.location.href = '/login';
+
+                                return throwError(() => refreshError);
+                            })
+                        );
                     }
-                  });
 
-                  return next(newAuthenticatedReq);
-                }),
-                catchError((refreshError) => {
-                  localStorage.removeItem('ACCESS_TOKEN');
-                  localStorage.removeItem('REFRESH_TOKEN');
-                  window.location.href = '/login';
-
-                  return throwError(() => refreshError);
+                    return throwError(() => error);
                 })
             );
-          }
+        }
 
-          return throwError(() => error);
-        })
-    );
-  }
-
-  return next(req);
-};
+        return next.handle(req);
+    }
+}

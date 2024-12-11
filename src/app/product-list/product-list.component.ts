@@ -39,9 +39,9 @@ export class ProductListComponent implements OnInit {
   sortByPrice: string = 'asc';
   isFilterOpen: boolean = false;
 
-   productBackendUrl = 'http://172.104.165.74:8084/api/v1'; 
-   productBackendUrlBase = 'http://172.104.165.74:8084'; 
-  private categoryBackendUrl = 'http://172.104.165.74:8086/api/v1'; 
+   productBackendUrl = 'http://172.207.18.25:8084/api/v1';
+   productBackendUrlBase = 'http://172.207.18.25:8084';
+  private categoryBackendUrl = 'http://172.207.18.25:8086/api/v1';
 
   constructor(private router: Router, private http: HttpClient) {}
 
