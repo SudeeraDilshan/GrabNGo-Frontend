@@ -11,7 +11,7 @@ import { CartService } from '../shopping-cart/shopping-cart.services';
 })
 export class HeaderComponent implements OnInit {
   cartItemCount: number = 0;
-    isLoggedIn: boolean = false;
+  isLoggedIn: boolean = false;
 
   constructor(private cartService: CartService, private router: Router, private authService: AuthService) {
     this.isLoggedIn = this.authService.isLoggedIn();
@@ -39,7 +39,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.cartService.cartItems$.subscribe(() => {
-      this.cartItemCount = this.cartService.getCartItemCount();
+      // this.cartItemCount = this.cartService.getCartItem();
     });
   }
 
@@ -49,5 +49,5 @@ toggleProfileDropdown() {
   this.showProfileDropdown = !this.showProfileDropdown;
 }
 
- 
+
 }
