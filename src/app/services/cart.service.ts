@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class CartService {
-  private cartApiUrl = 'http://172.104.165.74:8085'; // Replace with your actual API endpoint
+  private cartApiUrl = 'http://172.207.18.25:8085'; // Replace with your actual API endpoint
 
   constructor(private http: HttpClient) {}
 

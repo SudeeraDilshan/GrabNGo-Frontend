@@ -37,7 +37,7 @@ import { OrderSummaryComponent } from './checkout-address/order-summary/order-su
 import { CheckoutComponent } from './checkout-address/checkout/checkout.component';
 import { CheckoutPaymentComponent } from './checkout-payment/checkout-payment.component';
 import { PaymentPortalComponent } from './checkout-payment/payment-portal/payment-portal.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, provideHttpClient, withInterceptors } from '@angular/common/http';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
@@ -49,6 +49,7 @@ import { ProductComponent } from './product/product.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { ProductOverviewComponent } from './product-overview/product-overview.component';
 import { PasswordModificationComponent } from './password-modification/password-modification.component';
+import { tokenInterceptor } from "./helpers/token.interceptor";
 
 @NgModule({
   declarations: [
@@ -79,8 +80,6 @@ import { PasswordModificationComponent } from './password-modification/password-
     CheckoutComponent,
     CheckoutPaymentComponent,
     PaymentPortalComponent,
-
-
     CartComponent,
     ProductListComponent,
     FilterResultsComponent,
@@ -88,8 +87,6 @@ import { PasswordModificationComponent } from './password-modification/password-
     ShoppingCartComponent,
     ProductOverviewComponent,
     PasswordModificationComponent
-
-
   ],
   imports: [
     BrowserModule,
@@ -120,6 +117,7 @@ import { PasswordModificationComponent } from './password-modification/password-
   ],
   providers: [
     { provide: MAT_DIALOG_DATA, useValue: {} },
+    provideHttpClient(withInterceptors([tokenInterceptor]))
   ],
   bootstrap: [AppComponent],
 })
