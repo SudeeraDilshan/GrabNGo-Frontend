@@ -22,76 +22,31 @@ export class OrderViewAdminComponent implements OnInit {
     this.isLoading = true;
     this.hasError = false;
     this.orderService.getOrders().subscribe({
-      next: (data) => {
-        console.log('Fetched orders:', data);
-        // Normalize the status field
-        this.orders = data.map(order => ({
-          ...order,
-          status: JSON.parse(order.status)?.status || order.status
-        }));
+      next: (data: Order[]) => { // Explicitly type the parameter
+        this.orders = data;
         this.isLoading = false;
       },
-      error: () => {
+      error: (error: any) => {
+        console.error('Error fetching orders:', error);
         this.hasError = true;
         this.isLoading = false;
       },
     });
   }
-  
-  
 
-  // fetchOrders(): void {
-  //   this.isLoading = true;
-  //   this.hasError = false;
-  //   this.orderService.getOrders().subscribe({
-  //     next: (data) => {
-  //       console.log('Fetched orders:', data);
-  //       this.orders = data;
-  //       this.isLoading = false;
-  //     },
-  //     error: () => {
-  //       this.hasError = true;
-  //       this.isLoading = false;
-  //     },
-  //   });
-  // }
-
-  //   updateOrderStatus(order: any): void {
-  //     console.log('Updating order:', order);
-  //     console.log('Payload being sent:', { orderId: order.orderId, status: order.status });
-  //     this.orderService.updateOrder(order.orderId, order.status).subscribe({
-  //       next: (updatedOrder) => {
-  //         console.log('Order updated successfully:', updatedOrder);
-  //         const index = this.orders.findIndex((o) => o.orderId === updatedOrder.orderId);
-  //         if (index !== -1) {
-  //           this.orders[index] = updatedOrder;
-  //         }
-  //         alert('Order status updated successfully!');
-  //       },
-  //       error: (err) => {
-  //         console.error('Failed to update order status:', err);
-  //         alert('Failed to update order status.');
-  //       },
-  //     });
-  //   }
-  // }
-
-  // updateOrderStatus(order: Order): void {
-  //   this.orderService.updateOrder(order.orderId, order.status).subscribe({
-  //     next: (updatedOrder) => {
-  //       this.showSuccessMessage = true;
-  //       console.log('Order updated successfully:', updatedOrder);
-  //       setTimeout(() => {
-  //         this.showSuccessMessage = false;
-  //       }, 3000);
-  //     },
-  //     error: (err) => {
-  //       console.error('Error updating order:', err);
-  //     },
-  //   });
-  // }
-  
   updateOrderStatus(order: Order): void {
+    this.orderService.updateOrder(order.orderId.toString(), order.status).subscribe({
+      next: (updatedOrder: Order) => {
+        const index = this.orders.findIndex((o) => o.orderId === updatedOrder.orderId);
+        if (index !== -1) {
+          this.orders[index] = updatedOrder;
+        }
+        alert('Order status updated successfully!');
+
+          this.showSuccessMessage = true;
+          setTimeout(() => {
+              this.showSuccessMessage = false;
+          }, 3000);
     this.orderService.updateOrder(order.orderId, order.status).subscribe({
       next: (updatedOrder) => {
         const normalizedOrder = {
@@ -106,10 +61,10 @@ export class OrderViewAdminComponent implements OnInit {
           this.showSuccessMessage = false;
         }, 3000);
       },
-      error: (err) => {
-        console.error('Error updating order:', err);
+      error: (error: any) => {
+        console.error('Error updating order status:', error);
+        alert('Failed to update order status.');
       },
     });
   }
-  
 }
