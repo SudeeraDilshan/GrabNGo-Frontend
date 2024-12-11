@@ -45,9 +45,9 @@ export class HeaderComponent implements OnInit {
 
   showProfileDropdown: boolean = false;
 
-  toggleProfileDropdown() {
-    this.showProfileDropdown = !this.showProfileDropdown;
-  }
+toggleProfileDropdown() {
+  this.showProfileDropdown = !this.showProfileDropdown;
+}
 
 
 }

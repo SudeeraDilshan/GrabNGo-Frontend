@@ -122,7 +122,21 @@ export class ProductListComponent implements OnInit {
   }
 
   viewProductDetails(product: Product): void {
-    this.router.navigate([`/product/${product.productId}`]);
-    
+    if (product && product.productId) {
+      console.log(`Navigating to product details page for productId: ${product.productId}`);
+      this.router.navigate([`/product/${product.productId}`]);
+    } else {
+      console.error('Product ID is missing. Cannot navigate to the product details page.');
+    }
   }
+  goToCategory(categoryId: number, categoryName: string): void {
+    if (categoryId && categoryName) {
+      this.router.navigate(['/category', categoryId], { state: { categoryName } });
+    } else {
+      console.error('Category ID or name is missing. Cannot navigate to the category page.');
+    }
+  }
+  
+  
 }
+  
