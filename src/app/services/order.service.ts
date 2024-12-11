@@ -3,6 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 import { Order } from '../models/order-model';
 import {catchError} from "rxjs/operators";
+import { HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +13,6 @@ export class OrderService {
 
   constructor(private http: HttpClient) {}
 
-  // Get all orders (admin view)
   getOrders(): Observable<Order[]> {
     return this.http.get<Order[]>(this.apiUrl);
   }
