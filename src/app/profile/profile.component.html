@@ -1,19 +1,15 @@
 <div class="profile-container">
-  <!-- Loading Indicator -->
   <div *ngIf="isLoading" class="loading-spinner">
     Loading...
   </div>
 
-  <!-- Error Message -->
   <div *ngIf="errorMessage" class="error-message">
     {{ errorMessage }}
   </div>
 
-  <!-- Profile Content -->
   <div class="profile-content" *ngIf="!isLoading">
     <div class="profile-header">
       <div class="profile-picture-container">
-        <!-- Static Avatar Image -->
         <img
           src="../../assets/Profile-image.png"
           alt="Avatar"
