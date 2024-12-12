@@ -3,21 +3,21 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { PaymentPortalComponent } from './payment-portal.component';
 
 describe('PaymentPortalComponent', () => {
-  let component: PaymentPortalComponent;
-  let fixture: ComponentFixture<PaymentPortalComponent>;
+    let component: PaymentPortalComponent;
+    let fixture: ComponentFixture<PaymentPortalComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [PaymentPortalComponent]
-    })
-    .compileComponents();
-    
-    fixture = TestBed.createComponent(PaymentPortalComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
+            declarations: [PaymentPortalComponent]
+        })
+            .compileComponents();
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+        fixture = TestBed.createComponent(PaymentPortalComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
+
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 });

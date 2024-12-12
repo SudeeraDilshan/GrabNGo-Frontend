@@ -1,43 +1,43 @@
 <header class="header">
-  <img routerLink="products" src="assets/Logo.png" alt="Grab N Go Logo" class="logo" />
-  <nav class="nav">
-    <ng-container *ngIf="isAdmin()">
-      <a
-        routerLink="/orderAdmin"
-        routerLinkActive="active-link"
-        [routerLinkActiveOptions]="{ exact: true }">
-        Orders
-      </a>
-      <a
-        routerLink="/productAdmin"
-        routerLinkActive="active-link"
-        [routerLinkActiveOptions]="{ exact: true }">
-        Product
-      </a>
-      <a
-        routerLink="/category"
-        routerLinkActive="active-link"
-        [routerLinkActiveOptions]="{ exact: true }">
-        Category
-      </a>
-    </ng-container>
+    <img alt="Grab N Go Logo" class="logo" routerLink="products" src="assets/Logo.png"/>
+    <nav class="nav">
+        <ng-container *ngIf="isAdmin()">
+            <a
+                    [routerLinkActiveOptions]="{ exact: true }"
+                    routerLink="/orderAdmin"
+                    routerLinkActive="active-link">
+                Orders
+            </a>
+            <a
+                    [routerLinkActiveOptions]="{ exact: true }"
+                    routerLink="/productAdmin"
+                    routerLinkActive="active-link">
+                Product
+            </a>
+            <a
+                    [routerLinkActiveOptions]="{ exact: true }"
+                    routerLink="/category"
+                    routerLinkActive="active-link">
+                Category
+            </a>
+        </ng-container>
 
-    <ng-container>
-      <a (click)="navigateToCart()" class="cart-link">
-        <i class="fa fa-cart-shopping"></i>
-        <span> My cart </span>
-        <span class="cart-count" >({{ cartItemCount }})</span>
-      </a>
-    </ng-container>
+        <ng-container>
+            <a (click)="navigateToCart()" class="cart-link">
+                <i class="fa fa-cart-shopping"></i>
+                <span> My cart </span>
+                <span class="cart-count">({{ cartItemCount }})</span>
+            </a>
+        </ng-container>
 
-    <a *ngIf="!isLoggedIn" routerLink="auth/login">Login</a>
-    <a *ngIf="isLoggedIn" (click)="toggleProfileDropdown()" class="profile-link">
-      Profile
-      <div class="dropdown-menu" *ngIf="showProfileDropdown">
-        <a routerLink="order-history">Order History</a>
-        <a routerLink="profile">Profile Edit</a>
-        <a (click)="logOut()" routerLink="/products">Logout</a>
-      </div>
-    </a>
-  </nav>
+        <a *ngIf="!isLoggedIn" routerLink="auth/login">Login</a>
+        <a (click)="toggleProfileDropdown()" *ngIf="isLoggedIn" class="profile-link">
+            Profile
+            <div *ngIf="showProfileDropdown" class="dropdown-menu">
+                <a routerLink="order-history">Order History</a>
+                <a routerLink="profile">Profile Edit</a>
+                <a (click)="logOut()" routerLink="/products">Logout</a>
+            </div>
+        </a>
+    </nav>
 </header>
