@@ -29,6 +29,7 @@
             <p class="description">{{ product. productDescription }}</p>
             <p class="price">Rs. {{ product.productPrice }}</p>
             <button (click)="viewProductDetails(product)" class="view-btn">View</button>
+
           </div>
         </div>
       </div>
@@ -43,9 +44,12 @@
       </div>
       <div class="categories-grid">
         <div *ngFor="let category of categories" class="category-card">
+          <h3 (click)="goToCategory(category.categoryId, category.categoryName)">
+            {{ category.categoryName }}
+          </h3>
           
-          <h3>{{ category.categoryName }}</h3>
         </div>
+        
       </div>
     </section>
   

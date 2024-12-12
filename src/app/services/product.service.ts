@@ -20,12 +20,16 @@ export class ProductService {
     return this.http.get<Product[]>(`${this.apiUrl}`);
   }
 
-  addProduct(newProduct: any): Observable<any> {
-    return this.http.post<any>(this.apiUrl, newProduct);
+  addProduct(newProduct: FormData): Observable<any> {
+    return this.http.post<any>(this.apiUrl, newProduct, {
+        headers: {
+            'enctype': 'multipart/form-data',
+        },
+    });
   }
 
   updateProduct(productId: string, updatedProduct: any): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/${productId}`, updatedProduct);
+    return this.http.patch<any>(`${this.apiUrl}/${productId}`, updatedProduct);
   }
 
   deleteProduct(productId: string, product:any): Observable<any> {

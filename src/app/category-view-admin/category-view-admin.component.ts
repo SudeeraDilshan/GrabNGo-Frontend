@@ -25,6 +25,10 @@ export class CategoryViewAdminComponent {
   ngOnInit(): void {
     this.loadCategories();
   }
+  
+  addCategory() {
+    console.log('Adding a New Category');
+  }
 
   editCategory(category: Category) {
     console.log('Editing Category:', category);
@@ -60,7 +64,4 @@ export class CategoryViewAdminComponent {
     });
   }
 
-  addCategory() {
-    console.log('Adding a New Category');
-  }
 }

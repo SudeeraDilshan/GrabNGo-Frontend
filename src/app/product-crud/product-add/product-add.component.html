@@ -1,6 +1,9 @@
 <div class="add-product-container">
   <h1>Add Product</h1>
-  <!-- Product Image Upload -->
+  
+
+  <form [formGroup]="addProductForm" (ngSubmit)="onSubmit()">
+    <!-- Product Image Upload -->
   <div class="product-image">
     <div class="image-placeholder">
       <img *ngIf="imagePreview" [src]="imagePreview" alt="Product Image Preview" class="product-image-preview" />
@@ -10,8 +13,7 @@
     </div>
     <input type="file" id="product-image" (change)="onImageUpload($event)" class="file-input" />
   </div>
-
-  <form [formGroup]="addProductForm" (ngSubmit)="onSubmit()">
+  
     <!-- Product Name and Price -->
     <div class="form-row">
       <label for="product-name" class="form-label">Product Name</label>

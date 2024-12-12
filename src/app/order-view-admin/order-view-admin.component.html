@@ -2,39 +2,38 @@
   <div *ngIf="isLoading" class="loading">
     <p>Loading orders...</p>
   </div>
-
   <table class="admin-table" *ngIf="orders.length > 0 && !isLoading && !hasError; else noOrders">
     <thead>
       <tr>
+        <th>Order ID</th>
         <th>User ID</th>
         <th>Price</th>
-        <th>Status</th>
         <th>Created Date</th>
-        <th>Discount</th>
-        <th>Action</th>
+        <th>Status</th>
+        <!-- <th>Discount</th> -->
+        <!-- <th>Action</th> -->
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let order of orders">
+        <td>{{ order.orderId }}</td>
         <td>{{ order.userId }}</td>
         <td>Rs. {{ order.totalPrice }}</td>
-        <td>{{ order.status }}</td>
         <td>{{ order.createdDateTime | date: 'short' }}</td>
-        <td>{{ order.discount }}</td>
         <td>
           <mat-form-field appearance="fill" class="dropdown">
             <mat-select [(value)]="order.status" (selectionChange)="updateOrderStatus(order)">
-              <mat-option value="Confirm">Confirm</mat-option>
+              <mat-option value="Canceled">Canceled</mat-option>
               <mat-option value="Packing">Packing</mat-option>
               <mat-option value="Dispatch">Dispatch</mat-option>
               <mat-option value="Delivered">Delivered</mat-option>
             </mat-select>
           </mat-form-field>
         </td>
+        <!-- <td>{{ order.discount }}</td> -->
       </tr>
     </tbody>
   </table>
-
   <ng-template #noOrders>
     <p class="no-data">No orders available.</p>
   </ng-template>

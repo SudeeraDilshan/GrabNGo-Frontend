@@ -3,7 +3,7 @@ export interface Order {
   userId: number;
   totalPrice: number;
   status: string;
-  createdDateTime: string; // or Date if you prefer
+  createdDateTime: string; 
   discount: number;
   firstName: string;
   lastName: string;
@@ -12,7 +12,7 @@ export interface Order {
   city: string;
   country: string;
   zipCode: string;
-  orderItems: OrderItem[]; // Include orderItems
+  orderItems: OrderItem[];
 }
 
 export interface OrderItem {
@@ -23,3 +23,4 @@ export interface OrderItem {
   discount: number;
   sellPrice: number;
 }
+
