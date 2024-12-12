@@ -1,76 +1,76 @@
 <div class="container">
- 
-    <h1  [routerLink]="['/product']"class="page-title">Convenience in Every Click</h1>
-  
-    
+
+    <h1 [routerLink]="['/product']" class="page-title">Convenience in Every Click</h1>
+
+
     <div class="search-section">
-    
-      <div class="search-box">
-        <input 
-          type="text" 
-          [formControl]="searchControl"
-          class="search-input" 
-          placeholder="Search products..."
-          (keyup)="onSearch()">
-        <button class="search-button" (click)="onSearch()">
-          <i class="fas fa-search"></i>
-        </button>
-      </div>
-  
-      
-      <div class="sort-box">
-        <span class="sort-label">Sort by : </span>
-        <select 
-          [(ngModel)]="selectedSort" 
-          (change)="onSortChange()"
-          class="sort-select">
-          <option *ngFor="let option of sortOptions">{{ option }}</option>
-        </select>
-      </div>
-    </div>
-  
-    
-    <div class="results-header">
-      <h2>{{ searchQuery }}</h2>
-      <p>{{ totalItems }} items found for "{{ searchQuery }}"</p>
-    </div>
-  
-    
-    <div class="products-grid">
-      <div *ngFor="let product of products" class="product-card">
-        <div class="product-image-container">
-          <img [src]="product.imageUrl" [alt]="product.name" class="product-image">
-        </div>
-        <div class="product-content">
-          <h3 class="product-name">{{ product.name }}</h3>
-          <p class="product-description">{{ product.description }}</p>
-          <p class="product-price">Rs.{{ product.price }}</p>
-          <div class="button-group">
-            <button [routerLink]="['/product']"class="view-button">View</button>
-            <button class="save-later-button" (click)="saveForLater(product)">
-              Save for later
+
+        <div class="search-box">
+            <input
+                    (keyup)="onSearch()"
+                    [formControl]="searchControl"
+                    class="search-input"
+                    placeholder="Search products..."
+                    type="text">
+            <button (click)="onSearch()" class="search-button">
+                <i class="fas fa-search"></i>
             </button>
-          </div>
         </div>
-      </div>
+
+
+        <div class="sort-box">
+            <span class="sort-label">Sort by : </span>
+            <select
+                    (change)="onSortChange()"
+                    [(ngModel)]="selectedSort"
+                    class="sort-select">
+                <option *ngFor="let option of sortOptions">{{ option }}</option>
+            </select>
+        </div>
     </div>
-  </div>
-  
-  
-  <div class="results-header">
+
+
+    <div class="results-header">
+        <h2>{{ searchQuery }}</h2>
+        <p>{{ totalItems }} items found for "{{ searchQuery }}"</p>
+    </div>
+
+
+    <div class="products-grid">
+        <div *ngFor="let product of products" class="product-card">
+            <div class="product-image-container">
+                <img [alt]="product.name" [src]="product.imageUrl" class="product-image">
+            </div>
+            <div class="product-content">
+                <h3 class="product-name">{{ product.name }}</h3>
+                <p class="product-description">{{ product.description }}</p>
+                <p class="product-price">Rs.{{ product.price }}</p>
+                <div class="button-group">
+                    <button [routerLink]="['/product']" class="view-button">View</button>
+                    <button (click)="saveForLater(product)" class="save-later-button">
+                        Save for later
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="results-header">
     <p>{{ totalItems }} items found</p>
-  </div>
-  
-  
-  <div class="product-list">
+</div>
+
+
+<div class="product-list">
     <div *ngFor="let product of products" class="product-card">
-      <img [src]="product.imageUrl" alt="{{ product.name }}" />
-      <div class="product-info">
-        <h3>{{ product.name }}</h3>
-        <p>{{ product.description }}</p>
-        <p><strong>Price:</strong> Rs.{{ product.price }}</p>
-        <button (click)="saveForLater(product)">Save for later</button>
-      </div>
+        <img [src]="product.imageUrl" alt="{{ product.name }}"/>
+        <div class="product-info">
+            <h3>{{ product.name }}</h3>
+            <p>{{ product.description }}</p>
+            <p><strong>Price:</strong> Rs.{{ product.price }}</p>
+            <button (click)="saveForLater(product)">Save for later</button>
+        </div>
     </div>
-  </div>
+</div>
   
