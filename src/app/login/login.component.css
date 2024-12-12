@@ -1,119 +1,119 @@
 .login-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: #f5f5f5;
-  overflow: hidden; /* Prevent scrolling */
-  margin: 0; /* Ensure no extra scroll margins */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f5f5f5;
+    overflow: hidden; /* Prevent scrolling */
+    margin: 0; /* Ensure no extra scroll margins */
 }
 
 .login-card {
-  width: 100%;
-  max-width: 450px; /* Increased max width */
-  padding: 30px; /* Increased padding */
-  border-radius: 10px;
-  background-color: white;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  box-sizing: border-box; /* Ensures padding is accounted for */
+    width: 100%;
+    max-width: 450px; /* Increased max width */
+    padding: 30px; /* Increased padding */
+    border-radius: 10px;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    box-sizing: border-box; /* Ensures padding is accounted for */
 }
 
 .login-card h2 {
-  margin-bottom: 15px; /* Adjusted spacing */
-  font-size: 24px;
+    margin-bottom: 15px; /* Adjusted spacing */
+    font-size: 24px;
 }
 
 .login-card p {
-  margin-bottom: 25px; /* Adjusted spacing */
-  color: #666;
+    margin-bottom: 25px; /* Adjusted spacing */
+    color: #666;
 }
 
 .input-group {
-  position: relative;
-  margin: 10px 0; /* Adjusted margin for spacing */
+    position: relative;
+    margin: 10px 0; /* Adjusted margin for spacing */
 }
 
 .input-group input {
-  width: 100%; /* Ensure full width */
-  padding: 10px 40px 10px 10px; /* Space for the eye icon */
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  box-sizing: border-box; /* Consistent width calculation */
+    width: 100%; /* Ensure full width */
+    padding: 10px 40px 10px 10px; /* Space for the eye icon */
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box; /* Consistent width calculation */
 }
 
 .input-group {
-  text-align: left;
+    text-align: left;
 }
 
 .eye-icon {
-  position: absolute;
-  top: 50%;
-  right: 10px;
-  transform: translateY(-50%);
-  cursor: pointer;
-  color: #666;
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #666;
 }
 
 .login-button {
-  width: 100%; /* Match input field width */
-  padding: 10px;
-  border: none;
-  background-color: #fb800d;
-  color: white;
-  border-radius: 5px;
-  cursor: pointer;
-  margin: 10px 0; /* Match input field spacing */
-  box-sizing: border-box; /* Consistent width calculation */
+    width: 100%; /* Match input field width */
+    padding: 10px;
+    border: none;
+    background-color: #fb800d;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px 0; /* Match input field spacing */
+    box-sizing: border-box; /* Consistent width calculation */
 }
 
 .login-button:disabled {
-  background-color: #ddd;
-  cursor: not-allowed;
+    background-color: #ddd;
+    cursor: not-allowed;
 }
 
 .options {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
 }
 
 .options a {
-  color: #c06713;
-  text-decoration: none;
+    color: #c06713;
+    text-decoration: none;
 }
 
 .agreement-text {
-  margin-top: 20px;
-  font-size: 12px;
-  color: #666;
+    margin-top: 20px;
+    font-size: 12px;
+    color: #666;
 }
 
 .error-message {
-  color: red !important;
-  font-size: 14px;
-  margin-bottom: 10px;
+    color: red !important;
+    font-size: 14px;
+    margin-bottom: 10px;
 }
 
 .input-error {
-  border: 1px solid red;
-  background-color: #ffe6e6;
+    border: 1px solid red;
+    background-color: #ffe6e6;
 }
 
 .login-container .login-card .login-button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
+    background-color: #ccc;
+    cursor: not-allowed;
 }
 
 .input-error {
-  border-color: red;
+    border-color: red;
 }
 
 .error-text {
-  color: red;
-  margin-top: 5px;
+    color: red;
+    margin-top: 5px;
 }
 
 .error-messages {
-  margin-top: 5px;
+    margin-top: 5px;
 }

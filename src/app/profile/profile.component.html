@@ -1,109 +1,109 @@
 <div class="profile-container">
-  <div *ngIf="isLoading" class="loading-spinner">
-    Loading...
-  </div>
-
-  <div *ngIf="errorMessage" class="error-message">
-    {{ errorMessage }}
-  </div>
-
-  <div class="profile-content" *ngIf="!isLoading">
-    <div class="profile-header">
-      <div class="profile-picture-container">
-        <img
-          src="../../assets/Profile-image.png"
-          alt="Avatar"
-          class="profile-avatar"
-        />
-      </div>
+    <div *ngIf="isLoading" class="loading-spinner">
+        Loading...
     </div>
 
-    <div class="profile-details">
-      <!-- View Mode -->
-      <ng-container *ngIf="!isEditing">
-        <div class="profile-info">
-          <h2>Profile Details</h2>
-            <p><strong>First Name:</strong> {{ profile.firstName }}</p>
-            <p><strong>Last Name:</strong> {{ profile.lastName }}</p>
-            <p><strong>Email:</strong> {{ profile.emailAddress }}</p>
-            <p><strong>Contact Number:</strong> {{ profile.contactNumber }}</p>
-            <p><strong>NIC:</strong> {{ profile.nic }}</p>
-            <p><strong>Address:</strong> {{ profile.address }}</p>
-            <p><strong>Role:</strong> {{ profile.role }}</p>
-          <div class="action-buttons">
-            <button (click)="toggleEditMode()">Edit Profile</button>
-          </div>
+    <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+    </div>
+
+    <div *ngIf="!isLoading" class="profile-content">
+        <div class="profile-header">
+            <div class="profile-picture-container">
+                <img
+                        alt="Avatar"
+                        class="profile-avatar"
+                        src="../../assets/Profile-image.png"
+                />
+            </div>
         </div>
-      </ng-container>
 
-      <!-- Edit Mode -->
-      <ng-container *ngIf="isEditing">
-        <form (ngSubmit)="saveProfile()" class="edit-profile-form">
-          <h2>Edit Profile</h2>
+        <div class="profile-details">
+            <!-- View Mode -->
+            <ng-container *ngIf="!isEditing">
+                <div class="profile-info">
+                    <h2>Profile Details</h2>
+                    <p><strong>First Name:</strong> {{ profile.firstName }}</p>
+                    <p><strong>Last Name:</strong> {{ profile.lastName }}</p>
+                    <p><strong>Email:</strong> {{ profile.emailAddress }}</p>
+                    <p><strong>Contact Number:</strong> {{ profile.contactNumber }}</p>
+                    <p><strong>NIC:</strong> {{ profile.nic }}</p>
+                    <p><strong>Address:</strong> {{ profile.address }}</p>
+                    <p><strong>Role:</strong> {{ profile.role }}</p>
+                    <div class="action-buttons">
+                        <button (click)="toggleEditMode()">Edit Profile</button>
+                    </div>
+                </div>
+            </ng-container>
 
-          <div class="form-group">
-            <label for="firstName">First Name</label>
-            <input
-              type="text"
-              id="firstName"
-              [(ngModel)]="profile.firstName"
-              name="firstName"
-              required
-            />
-          </div>
+            <!-- Edit Mode -->
+            <ng-container *ngIf="isEditing">
+                <form (ngSubmit)="saveProfile()" class="edit-profile-form">
+                    <h2>Edit Profile</h2>
 
-          <div class="form-group">
-            <label for="lastName">Last Name</label>
-            <input
-              type="text"
-              id="lastName"
-              [(ngModel)]="profile.lastName"
-              name="lastName"
-              required
-            />
-          </div>
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <input
+                                [(ngModel)]="profile.firstName"
+                                id="firstName"
+                                name="firstName"
+                                required
+                                type="text"
+                        />
+                    </div>
 
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input
-              type="email"
-              id="email"
-              [(ngModel)]="profile.emailAddress"
-              name="email"
-              required
-            />
-          </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+                        <input
+                                [(ngModel)]="profile.lastName"
+                                id="lastName"
+                                name="lastName"
+                                required
+                                type="text"
+                        />
+                    </div>
 
-          <div class="form-group">
-            <label for="contactNumber">Contact Number</label>
-            <input
-              type="tel"
-              id="contactNumber"
-              [(ngModel)]="profile.contactNumber"
-              name="contactNumber"
-            />
-          </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input
+                                [(ngModel)]="profile.emailAddress"
+                                id="email"
+                                name="email"
+                                required
+                                type="email"
+                        />
+                    </div>
 
-          <div class="form-group">
-            <label for="address">Address</label>
-            <textarea
-              id="address"
-              [(ngModel)]="profile.address"
-              name="address"
-            ></textarea>
-          </div>
+                    <div class="form-group">
+                        <label for="contactNumber">Contact Number</label>
+                        <input
+                                [(ngModel)]="profile.contactNumber"
+                                id="contactNumber"
+                                name="contactNumber"
+                                type="tel"
+                        />
+                    </div>
 
-          <div class="action-buttons">
-            <button type="submit">Save Changes</button>
-            <button type="button" (click)="toggleEditMode()">Cancel</button>
-          </div>
-        </form>
-      </ng-container>
+                    <div class="form-group">
+                        <label for="address">Address</label>
+                        <textarea
+                                [(ngModel)]="profile.address"
+                                id="address"
+                                name="address"
+                        ></textarea>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button type="submit">Save Changes</button>
+                        <button (click)="toggleEditMode()" type="button">Cancel</button>
+                    </div>
+                </form>
+            </ng-container>
+        </div>
+
+        <div class="profile-actions">
+            <button (click)="changePassword()">Change Password</button>
+            <button (click)="logout()">Logout</button>
+        </div>
     </div>
-
-    <div class="profile-actions">
-      <button (click)="changePassword()">Change Password</button>
-      <button (click)="logout()">Logout</button>
-    </div>
-  </div>
 </div>
