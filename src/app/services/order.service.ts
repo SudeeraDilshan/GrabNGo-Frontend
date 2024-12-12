@@ -9,7 +9,7 @@ import { HttpHeaders } from '@angular/common/http';
   providedIn: 'root',
 })
 export class OrderService {
-  private apiUrl = 'http://172.104.165.74:8083/api/v1/order';
+  private apiUrl = 'http://172.207.18.25:8083/api/v1/order';
 
   constructor(private http: HttpClient) {}
 

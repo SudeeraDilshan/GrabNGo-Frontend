@@ -6,8 +6,8 @@ import { Product, Category } from '../product/product.model';
     providedIn: 'root',
   })
   export class ProductService {
-    private productBackendUrl = 'http://172.104.165.74:8084';  
-    private categoryBackendUrl = 'http://172.104.165.74:8086';  
+    private productBackendUrl = 'http://172.207.18.25:8084';
+    private categoryBackendUrl = 'http://172.207.18.25:8086';
   
     constructor(private http: HttpClient) {}
   

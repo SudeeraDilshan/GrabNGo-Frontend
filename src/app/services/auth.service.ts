@@ -9,8 +9,8 @@ import { ApiResponse, LoginResponse } from "../types";
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://172.104.165.74:8082/api/v1/auth';
-  private userUrl='http://172.104.165.74:8082/api/v1/user';
+  private apiUrl = 'http://172.207.18.25:8082/api/v1/auth';
+  private userUrl='http://172.207.18.25:8082/api/v1/user';
   private currentUserSubject: BehaviorSubject<any>;
   public currentUser: Observable<any>;
 

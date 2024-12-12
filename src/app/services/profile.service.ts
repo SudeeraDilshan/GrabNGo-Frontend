@@ -25,7 +25,7 @@ export interface ApiResponse<T> {
   providedIn: 'root'
 })
 export class ProfileService {
-  private baseUrl = 'http://172.104.165.74:8082/api/v1';
+  private baseUrl = 'http://172.207.18.25:8082/api/v1';
 
   constructor(private http: HttpClient) {}
 

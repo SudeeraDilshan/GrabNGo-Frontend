@@ -9,7 +9,7 @@ import { ApiResponse } from "../types";
 })
 
 export class CategoryService {
-  private apiUrl = 'http://172.104.165.74:8086/api/v1/categories';
+  private apiUrl = 'http://172.207.18.25:8086/api/v1/categories';
 
   constructor(private http: HttpClient) {}
 
