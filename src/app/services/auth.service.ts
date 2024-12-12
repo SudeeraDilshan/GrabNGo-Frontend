@@ -52,6 +52,11 @@ export class AuthService {
     return userDataString ? JSON.parse(userDataString) : null;
   }
 
+  updateProfile(profile: any): Observable<any> {
+    const userId = profile.userId;
+    return this.http.put<any>(`${this.apiUrl}/user/${userId}`, profile);
+  }
+
   isLoggedIn(): boolean {
     return !!sessionStorage.getItem('ACCESS_TOKEN');
   }
@@ -190,14 +195,25 @@ export class AuthService {
 
   // Get current logged-in user
   getCurrentUser(): Observable<any> {
-    return this.currentUser;
+    const userData = localStorage.getItem('userData');
+    if (userData) {
+      const parsedData = JSON.parse(userData);
+      console.log('pasrsedDataaaa: ',parsedData);
+      return new BehaviorSubject(parsedData).asObservable();
+    } else {
+      return new BehaviorSubject(null).asObservable();
+    }
+  }
+
+  getUserDetails(email: string): Observable<any> {
+    const url = `${this.userUrl}/${encodeURIComponent(email)}`;
+    return this.http.get(url); // Returns the observable
   }
 
 
   getResetPasswordEmail(): string {
     return sessionStorage.getItem('resetPasswordEmail') || '';
   }
-
 
   // In AuthService
   getUserEmail(): string | null {
@@ -208,5 +224,36 @@ export class AuthService {
     }
     return null;
   }
+
+  getAccessToken(): string | null {
+    const userData = localStorage.getItem('userData');
+    console.log("userdata is hereeee: ", userData);
+    if (userData) {
+      const parsedData = JSON.parse(userData);
+      console.log('this is accesstokwn: ', parsedData.accessToken)
+      return parsedData.accessToken;
+    }
+    return null;
+  }
+
+  refreshToken(): Observable<string> {
+    const refreshToken = this.getRefreshToken();
+    return this.http.post<{ accessToken: string }>(`${this.apiUrl}/refresh`, { refreshToken }).pipe(
+      map((response) => {
+        localStorage.setItem('userData', JSON.stringify(response));
+        return response.accessToken;
+      })
+    );
+  }
+
+  getRefreshToken(): string {
+    const userData = localStorage.getItem('userData');
+    if (userData) {
+      const parsedData = JSON.parse(userData);
+      return parsedData.refreshToken;
+    }
+    return '';
+  }
+
 
 }

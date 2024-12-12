@@ -80,8 +80,6 @@ import { PasswordModificationComponent } from './password-modification/password-
     CheckoutComponent,
     CheckoutPaymentComponent,
     PaymentPortalComponent,
-
-
     CartComponent,
     ProductListComponent,
     FilterResultsComponent,
@@ -90,8 +88,6 @@ import { PasswordModificationComponent } from './password-modification/password-
     FilterCategoryComponent,
     ProductOverviewComponent,
     PasswordModificationComponent
-
-
   ],
   imports: [
     BrowserModule,
