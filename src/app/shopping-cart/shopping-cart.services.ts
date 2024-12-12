@@ -9,7 +9,7 @@
 // export class CartService {
 //   private cartItemsSubject = new BehaviorSubject<{ product: Product; quantity: number }[]>([]);
 //   cartItems$ = this.cartItemsSubject.asObservable();
-//   private baseUrl = 'http://172.104.165.74:8085/api/v1/cart';
+//   private baseUrl = 'http://172.207.18.25:8085/api/v1/cart';
 
 //   constructor(private http: HttpClient) {}
 
@@ -65,7 +65,7 @@ interface CartItem {
 export class CartService {
   private cartItemsSubject = new BehaviorSubject<CartItem[]>([]);
   cartItems$ = this.cartItemsSubject.asObservable();
-  private baseUrl = 'http://172.104.165.74:8085/api/v1/cart';
+  private baseUrl = 'http://172.207.18.25:8085/api/v1/cart';
 
   constructor(private http: HttpClient) {}
 
