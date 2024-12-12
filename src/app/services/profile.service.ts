@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
-import { HttpHeaders } from '@angular/common/http';
-import { AuthService } from '../services/auth.service';
+import { Observable } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 
 export interface UserProfile {
   userId: number;
@@ -21,47 +19,47 @@ export interface ApiResponse<T> {
   message: string;
   data: T;
   errors: any;
-  
 }
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class ProfileService {
   private baseUrl = 'http://172.104.165.74:8082/api/v1';
 
-  constructor(private http: HttpClient, private authService: AuthService) { }
+  constructor(private http: HttpClient) {}
 
   getUserProfileByEmail(email: string): Observable<UserProfile> {
-    const token = this.authService.getAccessToken(); // Get the access token from the auth service
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`,
-    });
-  
-    const url = `${this.baseUrl}/user/${encodeURIComponent(email)}`;
-  
-    return this.http.get<UserProfile>(url, { headers }).pipe(
-      catchError((error) => {
-        console.error('Error fetching user profile:', error);
-        return throwError(error);
-      })
-    );
+    return this.http
+      .get<ApiResponse<UserProfile>>(`${this.baseUrl}/user/${encodeURIComponent(email)}`)
+      .pipe(
+        map((response) => {
+          if (!response.status) {
+            throw new Error(response.message || 'Failed to fetch user profile');
+          }
+          return response.data; // Extract the 'data' field.
+
+        }),
+        catchError((error) => {
+          console.error('Error fetching user profile:', error);
+          throw error;
+        })
+      );
   }
 
-  // Update user profile
   updateUserProfile(profile: UserProfile): Observable<UserProfile> {
-    const url = `${this.baseUrl}/user/profile`;
-    return this.http.put<ApiResponse<UserProfile>>(url, profile).pipe(
-      map((response) => {
-        if (!response.status) {
-          throw new Error(response.message || 'Failed to update user profile');
-        }
-        return response.data;
-      }),
-      catchError((error) => {
-        console.error('Error updating user profile:', error);
-        return throwError(error);
-      })
-    );
+    return this.http.put<ApiResponse<UserProfile>>(`${this.baseUrl}/user/profile`, profile)
+      .pipe(
+        map(response => {
+          if (!response.status) {
+            throw new Error(response.message || 'Failed to update user profile');
+          }
+          return response.data;
+        }),
+        catchError(error => {
+          console.error('Error updating user profile:', error);
+          throw error;
+        })
+      );
   }
 }

@@ -48,6 +48,7 @@ import { FilterResultsComponent } from './filter-results/filter-results.componen
 import { ProductComponent } from './product/product.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { ProductOverviewComponent } from './product-overview/product-overview.component';
+import { FilterCategoryComponent } from './filter-category/filter-category.component';
 import { PasswordModificationComponent } from './password-modification/password-modification.component';
 
 @NgModule({
@@ -79,16 +80,14 @@ import { PasswordModificationComponent } from './password-modification/password-
     CheckoutComponent,
     CheckoutPaymentComponent,
     PaymentPortalComponent,
-    
-
     CartComponent,
     ProductListComponent,
     FilterResultsComponent,
     ProductComponent,
     ShoppingCartComponent,
+    FilterCategoryComponent,
     ProductOverviewComponent,
     PasswordModificationComponent
-
   ],
   imports: [
     BrowserModule,

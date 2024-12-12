@@ -1,41 +1,35 @@
 <div class="profile-container">
-  <!-- Loading Indicator -->
   <div *ngIf="isLoading" class="loading-spinner">
     Loading...
   </div>
 
-  <!-- Error Message -->
   <div *ngIf="errorMessage" class="error-message">
     {{ errorMessage }}
   </div>
 
-  <!-- Profile Content -->
-  <div class="profile-content" *ngIf="!isLoading && !errorMessage">
-    <!-- Profile Header -->
+  <div class="profile-content" *ngIf="!isLoading">
     <div class="profile-header">
       <div class="profile-picture-container">
-        <!-- Static Avatar Image -->
         <img
-          src="../assets/Profile-image.png"
+          src="../../assets/Profile-image.png"
           alt="Avatar"
           class="profile-avatar"
         />
       </div>
     </div>
 
-    <!-- Profile Details -->
     <div class="profile-details">
       <!-- View Mode -->
       <ng-container *ngIf="!isEditing">
         <div class="profile-info">
           <h2>Profile Details</h2>
-          <p><strong>First Name:</strong> {{ profile.firstName }}</p>
-          <p><strong>Last Name:</strong> {{ profile.lastName }}</p>
-          <p><strong>Email:</strong> {{ profile.emailAddress }}</p>
-          <p><strong>Contact Number:</strong> {{ profile.contactNumber }}</p>
-          <p><strong>NIC:</strong> {{ profile.nic }}</p>
-          <p><strong>Address:</strong> {{ profile.address }}</p>
-          <p><strong>Role:</strong> {{ profile.role }}</p>
+            <p><strong>First Name:</strong> {{ profile.firstName }}</p>
+            <p><strong>Last Name:</strong> {{ profile.lastName }}</p>
+            <p><strong>Email:</strong> {{ profile.emailAddress }}</p>
+            <p><strong>Contact Number:</strong> {{ profile.contactNumber }}</p>
+            <p><strong>NIC:</strong> {{ profile.nic }}</p>
+            <p><strong>Address:</strong> {{ profile.address }}</p>
+            <p><strong>Role:</strong> {{ profile.role }}</p>
           <div class="action-buttons">
             <button (click)="toggleEditMode()">Edit Profile</button>
           </div>
@@ -107,9 +101,8 @@
       </ng-container>
     </div>
 
-    <!-- Profile Actions -->
     <div class="profile-actions">
-      <button routerLink="/password-modification" (click)="changePassword()">Change Password</button>
+      <button (click)="changePassword()">Change Password</button>
       <button (click)="logout()">Logout</button>
     </div>
   </div>

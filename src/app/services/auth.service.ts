@@ -53,7 +53,7 @@ export class AuthService {
   }
 
   updateProfile(profile: any): Observable<any> {
-    const userId = profile.userId; 
+    const userId = profile.userId;
     return this.http.put<any>(`${this.apiUrl}/user/${userId}`, profile);
   }
 
@@ -203,29 +203,27 @@ export class AuthService {
     } else {
       return new BehaviorSubject(null).asObservable();
     }
-  }  
+  }
 
   getUserDetails(email: string): Observable<any> {
-    const url = `${this.userUrl}/${encodeURIComponent(email)}`; 
+    const url = `${this.userUrl}/${encodeURIComponent(email)}`;
     return this.http.get(url); // Returns the observable
-  } 
+  }
 
 
   getResetPasswordEmail(): string {
     return sessionStorage.getItem('resetPasswordEmail') || '';
   }
 
-
   // In AuthService
   getUserEmail(): string | null {
     const userData = localStorage.getItem('userData');
     if (userData) {
       const parsedData = JSON.parse(userData);
-      return parsedData.email || null;
+      return parsedData.emailAddress || null;
     }
     return null;
   }
-  
 
   getAccessToken(): string | null {
     const userData = localStorage.getItem('userData');
@@ -247,7 +245,7 @@ export class AuthService {
       })
     );
   }
-  
+
   getRefreshToken(): string {
     const userData = localStorage.getItem('userData');
     if (userData) {
@@ -255,7 +253,7 @@ export class AuthService {
       return parsedData.refreshToken;
     }
     return '';
-  }  
-  
+  }
+
 
 }
