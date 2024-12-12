@@ -2,37 +2,22 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-
-export interface UserProfile {
-    userId: number;
-    emailAddress: string;
-    firstName: string;
-    lastName: string;
-    contactNumber: string;
-    nic: string;
-    address: string;
-    role: string;
-}
-
-export interface ApiResponse<T> {
-    status: boolean;
-    message: string;
-    data: T;
-    errors: any;
-}
+import { ApiResponse, Env, UserProfile } from "../types";
+import { environment } from "../../environments/environment";
 
 @Injectable({
     providedIn: 'root'
 })
 export class ProfileService {
-    private baseUrl = 'http://172.207.18.25:8082/api/v1';
+    private env = environment as Env;
+    private apiUrl = this.env.userApi;
 
     constructor(private http: HttpClient) {
     }
 
     getUserProfileByEmail(email: string): Observable<UserProfile> {
         return this.http
-            .get<ApiResponse<UserProfile>>(`${this.baseUrl}/user/${encodeURIComponent(email)}`)
+            .get<ApiResponse<UserProfile>>(`${this.apiUrl}/${encodeURIComponent(email)}`)
             .pipe(
                 map((response) => {
                     if (!response.status) {
@@ -49,7 +34,7 @@ export class ProfileService {
     }
 
     updateUserProfile(profile: UserProfile): Observable<UserProfile> {
-        return this.http.put<ApiResponse<UserProfile>>(`${this.baseUrl}/user/profile`, profile)
+        return this.http.put<ApiResponse<UserProfile>>(`${this.apiUrl}/profile`, profile)
             .pipe(
                 map(response => {
                     if (!response.status) {

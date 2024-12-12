@@ -2,13 +2,15 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, switchMap } from 'rxjs/operators';
-import { ApiResponse } from "../types";
+import { ApiResponse, Env } from "../types";
+import { environment } from "../../environments/environment";
 
 @Injectable({
     providedIn: 'root'
 })
 export class TokenInterceptor implements HttpInterceptor {
-    private refreshTokenEndpointUrl = "172.207.18.25:8082/api/v1/auth/refresh";
+    private env = environment as Env;
+    private refreshTokenEndpointUrl = `${this.env.userApi}/refresh`;
 
     constructor(private httpClient: HttpClient) {
     }

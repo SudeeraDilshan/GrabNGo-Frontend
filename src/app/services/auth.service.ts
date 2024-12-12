@@ -3,15 +3,17 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { catchError, map } from 'rxjs/operators';
-import { ApiResponse, LoginResponse } from "../types";
+import { ApiResponse, Env, LoginResponse } from "../types";
+import { environment } from "../../environments/environment";
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthService {
     public currentUser: Observable<any>;
-    private apiUrl = 'http://172.207.18.25:8082/api/v1/auth';
-    private userUrl = 'http://172.207.18.25:8082/api/v1/user';
+    private env = environment as Env;
+    private apiUrl = this.env.authApi
+    private userUrl = this.env.userApi;
     private currentUserSubject: BehaviorSubject<any>;
 
     constructor(private http: HttpClient, private router: Router) {
