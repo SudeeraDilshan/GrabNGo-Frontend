@@ -26,7 +26,8 @@ import { FilterResultsComponent } from './filter-results/filter-results.componen
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { ProductOverviewComponent } from './product-overview/product-overview.component';
 import { loginRequiredGuard } from "./guards/login-required.guard";
-import {PasswordModificationComponent} from "./password-modification/password-modification.component";
+import { PasswordModificationComponent } from "./password-modification/password-modification.component";
+import { FilterCategoryComponent } from './filter-category/filter-category.component';
 
 const routes: Routes = [
     {
@@ -110,10 +111,10 @@ const routes: Routes = [
         component: ChangePasswordComponent,
         canActivate: [loginRequiredGuard]
     },
-  {
-    path: 'password-modification',
-    component: PasswordModificationComponent,
-  },
+    {
+        path: 'password-modification',
+        component: PasswordModificationComponent,
+    },
     {
         path: 'auth/registration',
         component: RegistrationComponent
@@ -157,6 +158,10 @@ const routes: Routes = [
     {
         path: 'product-overview',
         component: ProductOverviewComponent
+    },
+    {
+        path: 'category/:categoryId',
+        component: FilterCategoryComponent
     },
 ];
 

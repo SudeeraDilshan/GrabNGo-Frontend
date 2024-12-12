@@ -1,0 +1,19 @@
+<div class="products-header">
+    <h2>{{ categoryName }}</h2>
+    <a class="view-all-btn" href="#">
+        View all <span class="arrow-icon">→</span>
+    </a>
+</div>
+<p>Explore products under this category</p>
+<div class="products-grid">
+    <div *ngFor="let product of categoryProducts" class="product-card">
+        <img [alt]="product.productName" [src]="productBackendUrl + product.imageUrl" class="product-image"/>
+        <div class="product-info">
+            <h3>{{ product.productName }}</h3>
+            <p class="description">{{ product.productDescription }}</p>
+            <p class="price">Rs. {{ product.productPrice }}</p>
+            <button (click)="viewProductDetails(product)" class="view-btn">View</button>
+        </div>
+    </div>
+</div>
+  

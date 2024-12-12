@@ -3,17 +3,17 @@
         <h2>Welcome Back</h2>
         <p>Login with email</p>
 
-        <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+        <form (ngSubmit)="onLogin()" [formGroup]="loginForm">
             <div class="input-group">
                 <input
-                        type="email"
-                        placeholder="Email"
-                        formControlName="email"
                         [ngClass]="{
             'input-error':
               (email?.invalid && (email?.dirty || email?.touched)) ||
               (isSubmitted && email?.invalid)
           }"
+                        formControlName="email"
+                        placeholder="Email"
+                        type="email"
                 />
 
                 <!-- Email Error Messages -->
@@ -29,16 +29,16 @@
 
             <div class="input-group">
                 <input
-                        [type]="showPassword ? 'text' : 'password'"
-                        placeholder="Password"
-                        formControlName="password"
                         [ngClass]="{
             'input-error':
               (password?.invalid && (password?.dirty || password?.touched)) ||
               (isSubmitted && password?.invalid)
           }"
+                        [type]="showPassword ? 'text' : 'password'"
+                        formControlName="password"
+                        placeholder="Password"
                 />
-                <span class="eye-icon" (click)="togglePasswordVisibility()">
+                <span (click)="togglePasswordVisibility()" class="eye-icon">
           <i [class]="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
         </span>
 
@@ -60,7 +60,7 @@
                 <a routerLink="/auth/reset-password">Forgot Password?</a>
             </div>
 
-            <button type="submit" class="login-button">
+            <button class="login-button" type="submit">
                 Login
             </button>
 
