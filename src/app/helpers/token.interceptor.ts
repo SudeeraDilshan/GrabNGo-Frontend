@@ -2,22 +2,22 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, switchMap } from 'rxjs/operators';
-import { ApiResponse, Env } from "../types";
-import { environment } from "../../environments/environment";
+import { ApiResponse } from "../types";
+import { AuthService } from "../services/auth.service";
 
 @Injectable({
     providedIn: 'root'
 })
 export class TokenInterceptor implements HttpInterceptor {
-    private env = environment as Env;
-    private refreshTokenEndpointUrl = `${this.env.userApi}/refresh`;
+    private refreshTokenEndpointUrl = `http://localhost:8080/api/v1/auth/refresh`;
 
-    constructor(private httpClient: HttpClient) {
+    constructor(private httpClient: HttpClient, private authService: AuthService) {
     }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         console.log('Token interceptor');
-        const accessToken = localStorage.getItem('ACCESS_TOKEN');
+        const accessToken = this.authService.getAccessToken();
+        console.log(accessToken)
 
         if (accessToken) {
             const authenticatedReq = req.clone({

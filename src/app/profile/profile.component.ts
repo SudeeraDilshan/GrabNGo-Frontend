@@ -37,14 +37,15 @@ export class ProfileComponent implements OnInit {
     }
 
     fetchUserProfile(): void {
-        const userEmail = this.authService.getUserEmail();
+        const userEmail = this.authService.getCurrentUserEmail();
+        console.log(userEmail)
         if (userEmail) {
             this.isLoading = true;
-            this.profileService.getUserProfileByEmail(userEmail).subscribe({
-                next: (profile) => {
-                    this.profile = profile; // Update profile with backend data.
+            this.profileService.getCurrentUserDetails().subscribe({
+                next: (response) => {
+                    this.profile = response.data; // Update profile with backend data.
                     this.isLoading = false;
-                    console.log('Fetched profile:', profile);
+                    console.log('Fetched profile:', response.data);
 
                 },
                 error: (error) => {

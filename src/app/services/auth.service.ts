@@ -3,17 +3,15 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { catchError, map } from 'rxjs/operators';
-import { ApiResponse, Env, LoginResponse } from "../types";
-import { environment } from "../../environments/environment";
+import { ApiResponse, LoginResponse } from "../types";
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthService {
     public currentUser: Observable<any>;
-    private env = environment as Env;
-    private apiUrl = this.env.authApi
-    private userUrl = this.env.userApi;
+    private apiUrl = "http://localhost:8080/api/v1/auth"
+    private userUrl = "http://localhost:8080/api/v1/user";
     private currentUserSubject: BehaviorSubject<any>;
 
     constructor(private http: HttpClient, private router: Router) {
@@ -26,16 +24,8 @@ export class AuthService {
         return this.http.post<ApiResponse<LoginResponse>>(`${this.apiUrl}/login`, loginPayload)
             .pipe(
                 map(response => {
-                    // Store access and refresh tokens in session and local storage
-                    sessionStorage.setItem('ACCESS_TOKEN', response.data.accessToken);
-                    localStorage.setItem('REFRESH_TOKEN', response.data.refreshToken);
-
-                    // Store user data in local storage
                     this.storeUserInLocalStorage(response.data);
-
-                    // Update the current user subject
                     this.currentUserSubject.next(response.data);
-
                     return response.data;
                 }),
                 catchError(error => {
@@ -54,6 +44,26 @@ export class AuthService {
         return !!sessionStorage.getItem('ACCESS_TOKEN');
     }
 
+    getAccessToken(): string | null {
+        return sessionStorage.getItem('ACCESS_TOKEN');
+    }
+
+    getCurrentUserRole(): string | null {
+        return sessionStorage.getItem('ROLE');
+    }
+
+    getCurrentUserEmail(): string | null {
+        return sessionStorage.getItem('EMAIL');
+    }
+
+    getCurrentUserId(): string | null {
+        return sessionStorage.getItem('USER_ID');
+    }
+
+    getRefreshToken(): string | null {
+        return localStorage.getItem('REFRESH_TOKEN');
+    }
+
     register(userData: any): Observable<any> {
         return this.http.post<any>(`${this.apiUrl}/register`, userData)
             .pipe(
@@ -68,10 +78,10 @@ export class AuthService {
     }
 
     logout(): void {
-        // Remove user from localStorage and reset current user observable
-        localStorage.removeItem('currentUser');
+        localStorage.clear();
+        sessionStorage.clear()
         this.currentUserSubject.next(null);
-        this.router.navigate(['/login']);
+        this.router.navigate(['/']);
     }
 
     forgetPassword(email: string): Observable<any> {
@@ -181,9 +191,6 @@ export class AuthService {
         return this.getRole() === 'Admin';
     }
 
-    isUser(): boolean {
-        return this.getRole() === 'User';
-    }
 
     // Get current logged-in user
     getCurrentUser(): Observable<any> {
@@ -206,27 +213,6 @@ export class AuthService {
         return sessionStorage.getItem('resetPasswordEmail') || '';
     }
 
-    // In AuthService
-    getUserEmail(): string | null {
-        const userData = localStorage.getItem('userData');
-        if (userData) {
-            const parsedData = JSON.parse(userData);
-            return parsedData.emailAddress || null;
-        }
-        return null;
-    }
-
-    getAccessToken(): string | null {
-        const userData = localStorage.getItem('userData');
-        console.log("userdata is hereeee: ", userData);
-        if (userData) {
-            const parsedData = JSON.parse(userData);
-            console.log('this is accesstokwn: ', parsedData.accessToken)
-            return parsedData.accessToken;
-        }
-        return null;
-    }
-
     refreshToken(): Observable<string> {
         const refreshToken = this.getRefreshToken();
         return this.http.post<{ accessToken: string }>(`${this.apiUrl}/refresh`, {refreshToken}).pipe(
@@ -237,17 +223,12 @@ export class AuthService {
         );
     }
 
-    getRefreshToken(): string {
-        const userData = localStorage.getItem('userData');
-        if (userData) {
-            const parsedData = JSON.parse(userData);
-            return parsedData.refreshToken;
-        }
-        return '';
-    }
-
     private storeUserInLocalStorage(userData: LoginResponse): void {
-        localStorage.setItem('userData', JSON.stringify(userData));
+        localStorage.setItem('REFRESH_TOKEN', userData.refreshToken);
+        sessionStorage.setItem('ACCESS_TOKEN', userData.accessToken);
+        sessionStorage.setItem('ROLE', userData.userRole);
+        sessionStorage.setItem('USER_ID', userData.userId);
+        sessionStorage.setItem('EMAIL', userData.email);
     }
 
     private getUserFromLocalStorage(): LoginResponse | null {

@@ -8,7 +8,9 @@ export interface ApiResponse<T> {
 export interface LoginResponse {
     accessToken: string;
     refreshToken: string;
-    userRole: "ADMINISTRATOR" | "STANDARD_USER"
+    userRole: "ADMINISTRATOR" | "STANDARD_USER";
+    userId: string;
+    email: string;
 }
 
 export interface UserProfile {
@@ -40,14 +42,4 @@ export interface Category {
     id: number;
     name: string;
     imageUrl: string;
-}
-
-export interface Env {
-    production: boolean;
-    userApi: string;
-    productApi: string;
-    categoryApi: string;
-    cartApi: string;
-    orderApi: string;
-    authApi: string;
 }

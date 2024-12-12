@@ -53,7 +53,7 @@ export class PasswordModificationComponent {
         };
 
         // Send change password request
-        this.http.post('http://172.104.165.74:8082/api/v1/user/change-password', payload)
+        this.http.post('http://172.104.165.74:8080/api/v1/user/change-password', payload)
             .subscribe({
                 next: (response) => {
                     this.successMessage = 'Password changed successfully!';

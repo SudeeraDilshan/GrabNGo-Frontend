@@ -1,36 +1,29 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { ApiResponse, Env, UserProfile } from "../types";
-import { environment } from "../../environments/environment";
+import { ApiResponse, UserProfile } from "../types";
+import { AuthService } from "./auth.service";
 
 @Injectable({
     providedIn: 'root'
 })
 export class ProfileService {
-    private env = environment as Env;
-    private apiUrl = this.env.userApi;
+    private apiUrl = "http://localhost:8080/api/v1/user";
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private authService: AuthService) {
     }
 
-    getUserProfileByEmail(email: string): Observable<UserProfile> {
-        return this.http
-            .get<ApiResponse<UserProfile>>(`${this.apiUrl}/${encodeURIComponent(email)}`)
-            .pipe(
-                map((response) => {
-                    if (!response.status) {
-                        throw new Error(response.message || 'Failed to fetch user profile');
-                    }
-                    return response.data; // Extract the 'data' field.
+    getCurrentUserDetails(): Observable<ApiResponse<UserProfile>> {
+        let email = this.authService.getCurrentUserEmail()!;
+        const token = this.authService.getAccessToken();
+        const headers = new HttpHeaders({
 
-                }),
-                catchError((error) => {
-                    console.error('Error fetching user profile:', error);
-                    throw error;
-                })
-            );
+            'Accept': '*/*',
+            "Authorization": `Bearer ${token}`,
+
+        });
+        return this.http.get<ApiResponse<UserProfile>>(`${this.apiUrl}/${encodeURIComponent(email)}`, { headers: headers });
     }
 
     updateUserProfile(profile: UserProfile): Observable<UserProfile> {
