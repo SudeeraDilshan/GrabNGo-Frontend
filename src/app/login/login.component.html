@@ -1,0 +1,73 @@
+<div class="login-container">
+    <div class="login-card">
+        <h2>Welcome Back</h2>
+        <p>Login with email</p>
+
+        <form (ngSubmit)="onLogin()" [formGroup]="loginForm">
+            <div class="input-group">
+                <input
+                        [ngClass]="{
+            'input-error':
+              (email?.invalid && (email?.dirty || email?.touched)) ||
+              (isSubmitted && email?.invalid)
+          }"
+                        formControlName="email"
+                        placeholder="Email"
+                        type="email"
+                />
+
+                <!-- Email Error Messages -->
+                <ng-container *ngIf="email?.invalid && (email?.dirty || email?.touched || isSubmitted)">
+                    <small *ngIf="email?.errors?.['required']" class="error-text">
+                        Email is required.
+                    </small>
+                    <small *ngIf="email?.errors?.['email']" class="error-text">
+                        Please enter a valid email address.
+                    </small>
+                </ng-container>
+            </div>
+
+            <div class="input-group">
+                <input
+                        [ngClass]="{
+            'input-error':
+              (password?.invalid && (password?.dirty || password?.touched)) ||
+              (isSubmitted && password?.invalid)
+          }"
+                        [type]="showPassword ? 'text' : 'password'"
+                        formControlName="password"
+                        placeholder="Password"
+                />
+                <span (click)="togglePasswordVisibility()" class="eye-icon">
+          <i [class]="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+        </span>
+
+                <!-- Password Error Messages -->
+                <ng-container *ngIf="password?.invalid && (password?.dirty || password?.touched || isSubmitted)">
+                    <small *ngIf="password?.errors?.['required']" class="error-text">
+                        Password is required.
+                    </small>
+                    <small *ngIf="password?.errors?.['minlength']" class="error-text">
+                        Password must be at least 8 characters long.
+                    </small>
+                </ng-container>
+            </div>
+
+            <p *ngIf="errorMessage" class="error-message">{{ errorMessage }}</p>
+
+            <div class="options">
+                <a routerLink="/auth/registration">Don't have an account? Signup</a>
+                <a routerLink="/auth/reset-password">Forgot Password?</a>
+            </div>
+
+            <button class="login-button" type="submit">
+                Login
+            </button>
+
+            <p class="agreement-text">
+                By continuing, you confirm that you're an adult and you've read and accepted our GrabNGo Free Membership
+                Agreement and Privacy Policy.
+            </p>
+        </form>
+    </div>
+</div>

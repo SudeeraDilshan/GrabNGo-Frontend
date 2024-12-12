@@ -1,0 +1,101 @@
+<div class="checkout">
+    <h3>Checkout</h3>
+    <form #checkoutForm="ngForm" (ngSubmit)="onSubmit(checkoutForm)">
+        <div class="shipping-info">
+            <label>First Name</label>
+            <input
+                    #firstName="ngModel"
+                    [(ngModel)]="formData.firstName"
+                    name="firstName"
+                    placeholder="First Name"
+                    required
+                    type="text"
+            />
+            <div *ngIf="firstName.invalid && firstName.touched" class="error">
+                First Name is required
+            </div>
+
+            <label>Last Name</label>
+            <input
+                    #lastName="ngModel"
+                    [(ngModel)]="formData.lastName"
+                    name="lastName"
+                    placeholder="Last Name"
+                    required
+                    type="text"
+            />
+            <div *ngIf="lastName.invalid && lastName.touched" class="error">
+                Last Name is required
+            </div>
+
+            <label>Address</label>
+            <input
+                    #address="ngModel"
+                    [(ngModel)]="formData.address"
+                    name="address"
+                    placeholder="Address"
+                    required
+                    type="text"
+            />
+            <div *ngIf="address.invalid && address.touched" class="error">
+                Address is required
+            </div>
+
+            <label>Apartment, suite, etc (optional)</label>
+            <input
+                    [(ngModel)]="formData.apartment"
+                    name="apartment"
+                    placeholder="Apartment, suite, etc"
+                    type="text"
+            />
+
+            <label>City</label>
+            <input
+                    #city="ngModel"
+                    [(ngModel)]="formData.city"
+                    name="city"
+                    placeholder="City"
+                    required
+                    type="text"
+            />
+            <div *ngIf="city.invalid && city.touched" class="error">
+                City is required
+            </div>
+
+            <label>Country</label>
+            <select
+                    #country="ngModel"
+                    [(ngModel)]="formData.country"
+                    name="country"
+                    required
+            >
+                <option value="">Select Country</option>
+                <option *ngFor="let c of countries" [value]="c">{{ c }}</option>
+            </select>
+            <div *ngIf="country.invalid && country.touched" class="error">
+                Country is required
+            </div>
+
+            <label>Zipcode</label>
+            <input
+                    #zipcode="ngModel"
+                    [(ngModel)]="formData.zipcode"
+                    name="zipcode"
+                    pattern="^[0-9]{5}$"
+                    placeholder="Zipcode"
+                    required
+                    type="text"
+            />
+            <div *ngIf="zipcode.invalid && zipcode.touched" class="error">
+                Zipcode is required and must be 5 digits
+            </div>
+        </div>
+        <button
+                [disabled]="checkoutForm.invalid"
+                class="continue-btn"
+                type="submit"
+        >
+            Confirm order
+        </button>
+    </form>
+</div>

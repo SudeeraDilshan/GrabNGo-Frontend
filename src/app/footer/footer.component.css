@@ -1,41 +1,50 @@
+body, html {
+    height: 100%;
+    margin: 0;
+}
 
 .footer {
-    background: linear-gradient(to top, #ffffff, #cfefff); 
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(to top, #ffffff, #cfefff);
     padding: 20px;
     text-align: center;
-  }
-  
-  .footer-content h2 {
+    box-sizing: border-box;
+    position: relative; /* Ensure it flows with the content */
+    margin-top: 20px;
+}
+
+.footer-content h2 {
     font-size: 22px;
     color: #000000;
     font-weight: bold;
     margin: 10px 0;
-  }
-  
-  .social-icons {
+}
+
+.social-icons {
     margin: 15px 0;
-  }
-  
-  .social-icons a {
+}
+
+.social-icons a {
     color: #000000;
     font-size: 24px;
     margin: 0 10px;
     text-decoration: none;
-  }
-  
-  .footer-links {
+}
+
+.footer-links {
     font-size: 16px;
     color: #000000;
     margin-top: 10px;
-  }
-  
-  .footer-links a {
+}
+
+.footer-links a {
     color: #000000;
     text-decoration: none;
     margin: 0 5px;
-  }
-  
-  .footer-links a:hover {
+}
+
+.footer-links a:hover {
     text-decoration: underline;
-  }
-  
+}

@@ -1,0 +1,173 @@
+/* Profile Container */
+.profile-container {
+    font-family: Arial, sans-serif;
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between; /* Space between the left and right sections */
+    justify-content: space-between; /* Space between the left and right sections */
+    gap: 20px; /* Adds a gap between the left and right sections */
+}
+
+/* Left Section: Profile Card */
+.profile-card {
+    background-color: #fff; /* White background */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    text-align: center;
+    max-width: 300px;
+    flex: 1; /* Left section should be smaller */
+}
+
+.profile-picture-container {
+    position: relative;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center; /* Center the content */
+    align-items: center;
+}
+
+/* Camera Icon Style */
+.camera-icon {
+    position: absolute;
+    bottom: 20px; /* Adjust the bottom position closer to the profile picture */
+    right: 60px; /* Adjust the right position closer to the profile picture */
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    color: white;
+    border-radius: 50%;
+    width: 30px; /* Reduce the size of the icon */
+    height: 30px; /* Reduce the size of the icon */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 16px; /* Adjust font size */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease;
+}
+
+.camera-icon:hover {
+    background-color: rgba(0, 0, 0, 0.7); /* Darker on hover */
+}
+
+/* Hide the File Input */
+.profile-pic-upload {
+    display: none; /* This hides the file input */
+}
+
+/* Profile Picture */
+.profile-picture {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #f0f0f0;
+    margin: 0 auto;
+}
+
+/* Right Section: Profile Details and Security */
+.profile-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 30px; /* Space between profile details and security section */
+    flex: 2; /* Right side takes more space */
+    width: 100%;
+}
+
+/* Profile Details Section */
+.profile-details {
+    background-color: #fff; /* White background */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.profile-details h3 {
+    margin-bottom: 15px;
+    color: #f57c00; /* Orange header color */
+    font-size: 20px;
+}
+
+.profile-details label {
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 10px;
+    display: block;
+    color: #333;
+}
+
+.profile-details input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.profile-details button {
+    margin-top: 15px;
+    padding: 10px 15px;
+    background-color: #f57c00; /* Orange color */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+/* Add spacing between Save and Cancel buttons */
+.profile-details button + button {
+    margin-left: 10px; /* Add space between Save and Cancel buttons */
+}
+
+.profile-details button:hover {
+    background-color: #e65100; /* Darker orange on hover */
+}
+
+/* Security Section */
+.security {
+    background-color: #fff; /* White background */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.security h3 {
+    color: #f57c00; /* Orange header color */
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+.security-links a {
+    display: block;
+    margin: 5px 0;
+    color: #f57c00; /* Orange links */
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.security-links a:hover {
+    text-decoration: underline;
+}
+
+.security-links .delete {
+    color: red; /* Delete account link in red */
+}
+
+.profile-picture-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.profile-avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ddd;
+}

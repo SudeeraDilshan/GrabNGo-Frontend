@@ -1,0 +1,31 @@
+<div class="order-history">
+    <h1>Order History</h1>
+
+    <!-- Loading State -->
+    <div *ngIf="isLoading" class="loading">
+        <p>Loading...</p>
+    </div>
+
+    <!-- Error State -->
+    <div *ngIf="hasError" class="error">
+        <p>Failed to load order history. Please try again later.</p>
+    </div>
+
+    <!-- Order List -->
+    <div *ngIf="!isLoading && !hasError">
+        <div *ngFor="let order of orders" class="order-card">
+            <div *ngFor="let item of order.orderItems">
+                <img [src]="item.imageUrl" alt="Product Image"/>
+                <div class="order-details">
+                    <p class="product-name">{{ item.productName }}</p>
+                    <p>Size: {{ item.size }}</p>
+                    <p>Quantity: {{ item.quantity }}</p>
+                    <p class="price">${{ item.price }}</p>
+                </div>
+                <div class="order-date">
+                    <p>{{ item.date }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

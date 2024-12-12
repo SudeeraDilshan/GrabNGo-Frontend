@@ -2,48 +2,116 @@ import { Component } from '@angular/core';
 import { ProductDeleteComponent } from '../product-crud/product-delete/product-delete.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { ProductService } from '../services/product.service';
+import { CategoryService } from '../services/category.service';
+
+export interface Product {
+    productId: string;
+    productName: string;
+    productDescription: string;
+    productPrice: string;
+    imageUrl: string;
+    categoryId: string;
+    active: boolean;
+    available: boolean;
+}
+
+export interface Category {
+    categoryId: string;
+    categoryName: string;
+    description: string;
+    isActive: boolean;
+}
+
+export interface ApiResponse<T> {
+    status: string;
+    message: string;
+    data: T
+}
 
 @Component({
-  selector: 'app-product-admin',
-  templateUrl: './product-admin.component.html',
-  styleUrls: ['./product-admin.component.css']
+    selector: 'app-product-admin',
+    templateUrl: './product-admin.component.html',
+    styleUrls: ['./product-admin.component.css']
 })
 
 export class ProductAdminComponent {
-  products = [
-    { name: 'Product 01', category: 'Category 02', price: 1999.00, availability: 'Available' },
-    { name: 'Product 02', category: 'Category 01', price: 1999.00, availability: 'Out Of Stock' },
-    { name: 'Product 03', category: 'Category 05', price: 1999.00, availability: 'Out Of Stock' },
-    { name: 'Product 04', category: 'Category 03', price: 1999.00, availability: 'Available' },
-    { name: 'Product 05', category: 'Category 03', price: 1999.00, availability: 'Out Of Stock' },
-    { name: 'Product 06', category: 'Category 02', price: 1999.00, availability: 'Out Of Stock' },
-    { name: 'Product 07', category: 'Category 05', price: 1999.00, availability: 'Available' },
+    displayedColumns: string[] = ['Product Name', 'Category', 'Price', 'Availability', 'Action'];
+    products: Product[] = [];
+    categories: Category[] = [];
 
-  ];
+    constructor(private dialog: MatDialog, private router: Router, private productService: ProductService, private categoryService: CategoryService) {
+    }
 
-  categories = ['Category 01', 'Category 02', 'Category 03', 'Category 04', 'Category 05'];
+    ngOnInit(): void {
+        this.loadProducts();
+        this.loadCategories();
+    }
 
-  constructor(private dialog: MatDialog, private router: Router) {}
+    loadProducts(): void {
+        this.productService.getProducts().subscribe({
+            next: (products) => {
+                this.products = (products as unknown as ApiResponse<Product[]>).data;
+                console.log('Products loaded:', this.products);
+            },
+            error: (err) => {
+                console.error('Error loading products:', err);
+            },
+        });
+    }
 
-  addProduct() {
-    // Logic to add a new product
-  }
+    loadCategories(): void {
+        this.categoryService.getCategories().subscribe({
+            next: (categories) => {
+                this.categories = (categories as unknown as ApiResponse<Category[]>).data;
+            },
+            error: (err) => {
+                console.error('Error loading categories:', err);
+            },
+        });
+    }
 
-  editProduct(product: any) {
-    console.log('Navigating to edit for product ID:', product.id);
-    this.router.navigate(['/productEdit', product.id]);
-    console.log("product iddddd: ", product.id);
-  }  
+    addProduct() {
+        console.log('Navigating to add  form');
+        this.router.navigate(['/productAdd']);
+    }
 
-  deleteProduct(product: any): void {
-    const dialogRef = this.dialog.open(ProductDeleteComponent);
-  
-    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
-      if (confirmed) {
-        this.products = this.products.filter(p => p !== product);
-        console.log('Product deleted:', product);
-        console.log('Updated products list:', this.products);
-      }
-    });
-  }
+    editProduct(product: any) {
+        this.router.navigate(['/productEdit', product.productId]);
+        console.log("product iddddd: ", product.productId);
+    }
+
+    deleteProduct(product: Product): void {
+        const dialogRef = this.dialog.open(ProductDeleteComponent);
+
+        dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+            if (confirmed) {
+                product.active = false;
+                this.productService.deleteProduct(product.productId, product).subscribe({
+                    next: () => {
+                        this.products = this.products.filter(p => p.productId !== product.productId);
+                        console.log('Product deleted:', product);
+                    },
+                    error: (err) => {
+                        console.error('Error deleting product:', err);
+                    },
+                });
+            }
+        });
+    }
+
+    updateCategory(product: Product): void {
+        this.productService.updateProduct(product.productId, {categoryId: product.categoryId}).subscribe({
+            next: () => console.log('Category updated:', product),
+            error: (err) => console.error('Error updating category:', err),
+        });
+    }
+
+    updateAvailability(product: Product): void {
+        this.productService.updateProduct(product.productId, {available: product.available}).subscribe({
+            next: () => console.log('Availability updated:', product),
+            error: (err) => console.error('Error updating availability:', err),
+        });
+    }
+
 }

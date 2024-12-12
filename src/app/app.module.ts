@@ -1,17 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ReactiveFormsModule } from '@angular/forms'; 
-import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
 
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
-import { MatInputModule } from '@angular/material/input';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -27,39 +20,112 @@ import { CategoryCrudComponent } from './category-crud/category-crud.component';
 import { CategoryAddComponent } from './category-crud/category-add/category-add.component';
 import { CategoryEditComponent } from './category-crud/category-edit/category-edit.component';
 import { CategoryDeleteComponent } from './category-crud/category-delete/category-delete.component';
+import { OrderViewAdminComponent } from './order-view-admin/order-view-admin.component';
+import { LoginComponent } from './login/login.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+
+import { CartComponent } from './cart/cart.component';
+import { ProductListComponent } from './product-list/product-list.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { EmailVerificationComponent } from './email-verification/email-verification.component';
+import { ProfileComponent } from './profile/profile.component';
+import { OrderHistoryComponent } from './order-history/order-history.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
+import { RegistrationComponent } from './registration/registration.component';
+import { CheckoutAddressComponent } from './checkout-address/checkout-address.component';
+import { OrderSummaryComponent } from './checkout-address/order-summary/order-summary.component';
+import { CheckoutComponent } from './checkout-address/checkout/checkout.component';
+import { CheckoutPaymentComponent } from './checkout-payment/checkout-payment.component';
+import { PaymentPortalComponent } from './checkout-payment/payment-portal/payment-portal.component';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatListModule } from '@angular/material/list';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { FilterResultsComponent } from './filter-results/filter-results.component';
+import { ProductComponent } from './product/product.component';
+import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { ProductOverviewComponent } from './product-overview/product-overview.component';
+import { FilterCategoryComponent } from './filter-category/filter-category.component';
+import { PasswordModificationComponent } from './password-modification/password-modification.component';
+import { TokenInterceptor } from "./helpers/token.interceptor";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-    FooterComponent,
-    ProductAdminComponent,
-    CategoryViewAdminComponent,
-    ProductCrudComponent,
-    ProductAddComponent,
-    ProductEditComponent,
-    ProductDeleteComponent,
-    CategoryCrudComponent,
-    CategoryAddComponent,
-    CategoryEditComponent,
-    CategoryDeleteComponent,
-  ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    FormsModule,
-    AppRoutingModule,
-    MatFormFieldModule,
-    BrowserAnimationsModule,
-    MatSelectModule,
-    MatTableModule,
-    MatIconModule,
-    MatButtonModule,
-    ReactiveFormsModule, 
-    MatInputModule,
-    MatDialogModule,
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        HeaderComponent,
+        FooterComponent,
+        ProductAdminComponent,
+        CategoryViewAdminComponent,
+        ProductCrudComponent,
+        ProductAddComponent,
+        ProductEditComponent,
+        ProductDeleteComponent,
+        CategoryCrudComponent,
+        CategoryAddComponent,
+        CategoryEditComponent,
+        CategoryDeleteComponent,
+        OrderViewAdminComponent,
+        FooterComponent,
+        LoginComponent,
+        ResetPasswordComponent,
+        EmailVerificationComponent,
+        ProfileComponent,
+        OrderHistoryComponent,
+        ChangePasswordComponent,
+        RegistrationComponent,
+        CheckoutAddressComponent,
+        OrderSummaryComponent,
+        CheckoutComponent,
+        CheckoutPaymentComponent,
+        PaymentPortalComponent,
+        CartComponent,
+        ProductListComponent,
+        FilterResultsComponent,
+        ProductComponent,
+        ShoppingCartComponent,
+        FilterCategoryComponent,
+        ProductOverviewComponent,
+        PasswordModificationComponent
+    ],
+    imports: [
+        BrowserModule,
+        HttpClientModule,
+        FormsModule,
+        AppRoutingModule,
+        MatFormFieldModule,
+        BrowserAnimationsModule,
+        MatSelectModule,
+        MatTableModule,
+        MatIconModule,
+        MatButtonModule,
+        ReactiveFormsModule,
+        MatInputModule,
+        MatDialogModule,
+        AppRoutingModule,
+        HttpClientModule,
+        FormsModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        MatCardModule,
+        MatButtonModule,
+        MatListModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatIconModule,
+
+    ],
+    providers: [
+        {provide: MAT_DIALOG_DATA, useValue: {}},
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: TokenInterceptor,
+            multi: true
+        }
+    ],
+    bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {
+}

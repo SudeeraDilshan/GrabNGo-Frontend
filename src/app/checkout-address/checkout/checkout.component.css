@@ -1,0 +1,32 @@
+.checkout {
+    padding: 20px;
+}
+
+.shipping-info label {
+    display: block;
+    margin-top: 10px;
+}
+
+.shipping-info input,
+.shipping-info select {
+    width: 100%;
+    padding: 5px;
+    margin-top: 5px;
+}
+
+.continue-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: orange;
+    color: white;
+    border: none;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+.error {
+    color: red;
+    font-size: 0.9em;
+    margin-top: 5px;
+}
+  
