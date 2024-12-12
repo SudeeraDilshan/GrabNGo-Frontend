@@ -4,7 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
-import { MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -37,7 +37,7 @@ import { OrderSummaryComponent } from './checkout-address/order-summary/order-su
 import { CheckoutComponent } from './checkout-address/checkout/checkout.component';
 import { CheckoutPaymentComponent } from './checkout-payment/checkout-payment.component';
 import { PaymentPortalComponent } from './checkout-payment/payment-portal/payment-portal.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
@@ -50,75 +50,82 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { ProductOverviewComponent } from './product-overview/product-overview.component';
 import { FilterCategoryComponent } from './filter-category/filter-category.component';
 import { PasswordModificationComponent } from './password-modification/password-modification.component';
+import { TokenInterceptor } from "./helpers/token.interceptor";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-    FooterComponent,
-    ProductAdminComponent,
-    CategoryViewAdminComponent,
-    ProductCrudComponent,
-    ProductAddComponent,
-    ProductEditComponent,
-    ProductDeleteComponent,
-    CategoryCrudComponent,
-    CategoryAddComponent,
-    CategoryEditComponent,
-    CategoryDeleteComponent,
-    OrderViewAdminComponent,
-    FooterComponent,
-    LoginComponent,
-    ResetPasswordComponent,
-    EmailVerificationComponent,
-    ProfileComponent,
-    OrderHistoryComponent,
-    ChangePasswordComponent,
-    RegistrationComponent,
-    CheckoutAddressComponent,
-    OrderSummaryComponent,
-    CheckoutComponent,
-    CheckoutPaymentComponent,
-    PaymentPortalComponent,
-    CartComponent,
-    ProductListComponent,
-    FilterResultsComponent,
-    ProductComponent,
-    ShoppingCartComponent,
-    FilterCategoryComponent,
-    ProductOverviewComponent,
-    PasswordModificationComponent
-  ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    FormsModule,
-    AppRoutingModule,
-    MatFormFieldModule,
-    BrowserAnimationsModule,
-    MatSelectModule,
-    MatTableModule,
-    MatIconModule,
-    MatButtonModule,
-    ReactiveFormsModule,
-    MatInputModule,
-    MatDialogModule,
-    AppRoutingModule,
-    HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    MatCardModule,
-    MatButtonModule,
-    MatListModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatIconModule,
+    declarations: [
+        AppComponent,
+        HeaderComponent,
+        FooterComponent,
+        ProductAdminComponent,
+        CategoryViewAdminComponent,
+        ProductCrudComponent,
+        ProductAddComponent,
+        ProductEditComponent,
+        ProductDeleteComponent,
+        CategoryCrudComponent,
+        CategoryAddComponent,
+        CategoryEditComponent,
+        CategoryDeleteComponent,
+        OrderViewAdminComponent,
+        FooterComponent,
+        LoginComponent,
+        ResetPasswordComponent,
+        EmailVerificationComponent,
+        ProfileComponent,
+        OrderHistoryComponent,
+        ChangePasswordComponent,
+        RegistrationComponent,
+        CheckoutAddressComponent,
+        OrderSummaryComponent,
+        CheckoutComponent,
+        CheckoutPaymentComponent,
+        PaymentPortalComponent,
+        CartComponent,
+        ProductListComponent,
+        FilterResultsComponent,
+        ProductComponent,
+        ShoppingCartComponent,
+        FilterCategoryComponent,
+        ProductOverviewComponent,
+        PasswordModificationComponent
+    ],
+    imports: [
+        BrowserModule,
+        HttpClientModule,
+        FormsModule,
+        AppRoutingModule,
+        MatFormFieldModule,
+        BrowserAnimationsModule,
+        MatSelectModule,
+        MatTableModule,
+        MatIconModule,
+        MatButtonModule,
+        ReactiveFormsModule,
+        MatInputModule,
+        MatDialogModule,
+        AppRoutingModule,
+        HttpClientModule,
+        FormsModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        MatCardModule,
+        MatButtonModule,
+        MatListModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatIconModule,
 
-  ],
-  providers: [
-    { provide: MAT_DIALOG_DATA, useValue: {} },
-  ],
-  bootstrap: [AppComponent],
+    ],
+    providers: [
+        {provide: MAT_DIALOG_DATA, useValue: {}},
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: TokenInterceptor,
+            multi: true
+        }
+    ],
+    bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {
+}
