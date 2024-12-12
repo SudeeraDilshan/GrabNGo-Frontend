@@ -1,52 +1,52 @@
 <div class="product-admin">
-    <table class="admin-table" *ngIf="products.length > 0; else noProducts">
-      <thead>
+    <table *ngIf="products.length > 0; else noProducts" class="admin-table">
+        <thead>
         <tr>
-          <th>Product Name</th>
-          <th>Category</th>
-          <th>Price</th>
-          <th>Availability</th>
-          <th>Action</th>
+            <th>Product Name</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Availability</th>
+            <th>Action</th>
         </tr>
-      </thead>
-      <tbody>
+        </thead>
+        <tbody>
         <tr *ngFor="let product of products">
-          <td>{{ product.productName }}</td>
-          <td>
-            <mat-form-field appearance="fill" class="dropdown">
-              <mat-select [(value)]="product.categoryId" (selectionChange)="updateCategory(product)">
-                <mat-option *ngFor="let category of categories" [value]="category.categoryId">
-                  {{ category.categoryName }}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-          </td>
-          <td>Rs. {{ product.productPrice }}</td>
-          <td>
-            <mat-form-field appearance="fill" class="dropdown">
-              <mat-select [(value)]="product.available" (selectionChange)="updateAvailability(product)">
-                <mat-option [value]="true">Available</mat-option>
-                <mat-option [value]="false">Out Of Stock</mat-option>
-              </mat-select>
-            </mat-form-field>
-          </td>
-          <td>
-            <button mat-icon-button color="warn" (click)="deleteProduct(product)">
-              <mat-icon>delete</mat-icon>
-            </button>
-            <button mat-icon-button color="primary" (click)="editProduct(product)">
-              <mat-icon>edit</mat-icon>
-            </button>
-          </td>
+            <td>{{ product.productName }}</td>
+            <td>
+                <mat-form-field appearance="fill" class="dropdown">
+                    <mat-select (selectionChange)="updateCategory(product)" [(value)]="product.categoryId">
+                        <mat-option *ngFor="let category of categories" [value]="category.categoryId">
+                            {{ category.categoryName }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </td>
+            <td>Rs. {{ product.productPrice }}</td>
+            <td>
+                <mat-form-field appearance="fill" class="dropdown">
+                    <mat-select (selectionChange)="updateAvailability(product)" [(value)]="product.available">
+                        <mat-option [value]="true">Available</mat-option>
+                        <mat-option [value]="false">Out Of Stock</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </td>
+            <td>
+                <button (click)="deleteProduct(product)" color="warn" mat-icon-button>
+                    <mat-icon>delete</mat-icon>
+                </button>
+                <button (click)="editProduct(product)" color="primary" mat-icon-button>
+                    <mat-icon>edit</mat-icon>
+                </button>
+            </td>
         </tr>
-      </tbody>
+        </tbody>
     </table>
-  
+
     <ng-template #noProducts>
-      <p class="no-data">No products available.</p>
+        <p class="no-data">No products available.</p>
     </ng-template>
 
-    <button mat-fab class="add-button" (click)="addProduct()">
-      <mat-icon>add</mat-icon>
+    <button (click)="addProduct()" class="add-button" mat-fab>
+        <mat-icon>add</mat-icon>
     </button>
-  </div>
+</div>

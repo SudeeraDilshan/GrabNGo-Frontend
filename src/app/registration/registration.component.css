@@ -1,114 +1,114 @@
 html, body {
-  height: 100%; /* Full height of viewport */
-  margin: 0; /* Remove browser default margin */
-  padding: 0; /* Remove padding */
-  overflow: hidden; /* Disable scrolling */
+    height: 100%; /* Full height of viewport */
+    margin: 0; /* Remove browser default margin */
+    padding: 0; /* Remove padding */
+    overflow: hidden; /* Disable scrolling */
 }
 
 .container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%; /* Full height for alignment */
-  background-color: #f9f9f9;
-  font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Full height for alignment */
+    background-color: #f9f9f9;
+    font-family: Arial, sans-serif;
 }
 
 /* Registration Box Styles */
 .register-box {
-  background: #ffffff;
-  border-radius: 20px;
-  padding: 30px; /* Adjusted padding to fit within viewport */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 400px; /* Ensures box doesn't exceed viewport */
-  text-align: center;
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 30px; /* Adjusted padding to fit within viewport */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px; /* Ensures box doesn't exceed viewport */
+    text-align: center;
 }
 
 .register-box h2 {
-  font-size: 24px;
-  margin-bottom: 15px;
-  color: #333333;
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: #333333;
 }
 
 /* Form Group */
 .form-group {
-  margin-bottom: 15px;
-  text-align: left;
+    margin-bottom: 15px;
+    text-align: left;
 }
 
 /* Input Styles */
 .form-control {
-  width: 100%; /* Full width of form container */
-  padding: 10px 15px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 14px;
-  box-sizing: border-box; /* Consistent sizing */
+    width: 100%; /* Full width of form container */
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    box-sizing: border-box; /* Consistent sizing */
 }
 
 .form-control:focus {
-  outline: none;
-  border-color: #007bff;
-  box-shadow: 0 0 4px rgba(0, 123, 255, 0.2);
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 4px rgba(0, 123, 255, 0.2);
 }
 
 /* Error Messages */
 .error-message {
-  color: #e74c3c;
-  font-size: 12px;
-  margin-top: 5px;
+    color: #e74c3c;
+    font-size: 12px;
+    margin-top: 5px;
 }
 
 /* Submit Button */
 .submit-button {
-  width: 100%; /* Match input field width */
-  padding: 10px 15px;
-  background-color: #FB800D;
-  color: #ffffff;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  box-sizing: border-box; /* Consistent sizing */
+    width: 100%; /* Match input field width */
+    padding: 10px 15px;
+    background-color: #FB800D;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-sizing: border-box; /* Consistent sizing */
 }
 
 .submit-button:disabled {
-  background-color: #cccccc;
-  cursor: not-allowed;
+    background-color: #cccccc;
+    cursor: not-allowed;
 }
 
 .submit-button:hover:not(:disabled) {
-  background-color: #c06713;
+    background-color: #c06713;
 }
 
 /* Login Link */
 .login-link {
-  margin: 15px 0;
-  font-size: 14px;
+    margin: 15px 0;
+    font-size: 14px;
 }
 
 .login-link a {
-  color: #007bff;
-  text-decoration: none;
+    color: #007bff;
+    text-decoration: none;
 }
 
 .login-link a:hover {
-  text-decoration: underline;
+    text-decoration: underline;
 }
 
 /* Terms Section */
 .terms {
-  font-size: 12px;
-  color: #666666;
+    font-size: 12px;
+    color: #666666;
 }
 
 .terms a {
-  color: #007bff;
-  text-decoration: none;
+    color: #007bff;
+    text-decoration: none;
 }
 
 .terms a:hover {
-  text-decoration: underline;
+    text-decoration: underline;
 }

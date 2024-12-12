@@ -66,6 +66,7 @@
     border: 3px solid #f0f0f0;
     margin: 0 auto;
 }
+
 /* Right Section: Profile Details and Security */
 .profile-layout {
     display: flex;
@@ -157,16 +158,16 @@
 }
 
 .profile-picture-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
 }
 
 .profile-avatar {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid #ddd;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ddd;
 }
