@@ -1,85 +1,14 @@
- // import { Component, OnInit } from '@angular/core';
-// import { Product } from './product.model';
-// import { ProductService } from './product.service';
-
-// import { ActivatedRoute, Router } from '@angular/router';
-// import { CartService } from '../shopping-cart/shopping-cart.services';
-
-// @Component({
-//   selector: 'app-product',
-//   templateUrl: './product.component.html',
-//   styleUrls: ['./product.component.css']
-// })
-// export class ProductComponent implements OnInit {
-//   products: Product[] = [];
-//   product: Product | null = null;
-//   quantity: number = 1;
-//   productId!: number;
- 
-//   constructor(
-//     private route: ActivatedRoute,
-//     private productService: ProductService,
-//     private cartService: CartService,
-//     private router: Router
-//   ) {} 
-
-//   ngOnInit(): void {
-     
-//     this.productId = +this.route.snapshot.paramMap.get('productId')!;
-//     this.fetchProductDetails(this.productId);
-//   }
-//   fetchProductDetails(productId: number) {
-//     this.productService.getProductById(productId).subscribe({
-//       next: (product) => {
-//         this.product = product;
-//       },
-//       error: (err) => {
-//         console.error('Error fetching product details:', err);
-//       },
-//     });
-//   }
-
- 
-//   loadProduct(id: number): void {
-//     this.productService.getProductById(id).subscribe(
-//       (product) => {
-//         this.product = product;   
-//       },
-//       (error) => {
-//         console.error('Error fetching product:', error);
-//       }
-//     );
-//   }
- 
-//   decreaseQuantity(): void {
-//     if (this.quantity > 1) {
-//       this.quantity--;
-//     }
-//   }
-
-   
-//   increaseQuantity(): void {
-//     this.quantity++;
-//   }
- 
-//   addToCart(): void {
-//     if (this.product) {
-//       this.cartService.addToCart(this.product, this.quantity);   
-//       console.log(`Added to cart: Rs.${(this.product.productPrice * this.quantity).toFixed(2)}`);
-//     }
-//   }
-// }
-
 import { Component, OnInit } from '@angular/core';
+
 import { ActivatedRoute } from '@angular/router';
-import { ProductService } from './product.service';
 import { CartService } from '../shopping-cart/shopping-cart.services';
-import { Product } from './product.model';
+import { ProductService } from "../services/product.service";
+import { Product } from "../types";
 
 @Component({
-  selector: 'app-product',
-  templateUrl: './product.component.html',
-  styleUrls: ['./product.component.css'],
+    selector: 'app-product',
+    templateUrl: './product.component.html',
+    styleUrls: ['./product.component.css']
 })
 export class ProductComponent implements OnInit {
   product: Product | null = null;
@@ -113,14 +42,14 @@ export class ProductComponent implements OnInit {
 
   fetchProductDetails(productId: number): void {
     this.loading = true;
-    this.productService.getProductById(productId).subscribe({
+    this.productService.getProductById(productId.toString()).subscribe({
       next: (product: Product) => {
         console.log('Fetched Product Details:', product);
         this.product = product;
-        
+
         // Handle image URLs
         this.images = this.processImageUrls(product.imageUrl);
-        
+
         this.loading = false;
       },
       error: (err) => {
@@ -134,15 +63,15 @@ export class ProductComponent implements OnInit {
   // New method to process image URLs
   processImageUrls(imageUrl: string | string[]): string[] {
     const baseUrl = 'http://172.104.165.74:8084';
-    
+
     // If imageUrl is undefined or null, return empty array
     if (!imageUrl) return ['path/to/default/image.jpg'];
-    
+
     // If it's a single string, wrap it in an array
     const urls = Array.isArray(imageUrl) ? imageUrl : [imageUrl];
-    
+
     // Map URLs to include base path, handle default if no images
-    return urls.length > 0 
+    return urls.length > 0
       ? urls.map(url => `${baseUrl}${url}`)
       : ['path/to/default/image.jpg'];
   }

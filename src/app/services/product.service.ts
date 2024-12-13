@@ -8,7 +8,7 @@ import { Product } from '../product-admin/product-admin.component';
 })
 
 export class ProductService {
-    private apiUrl = 'http://172.207.18.25:8084/api/v1/product';
+    private apiUrl = "http://172.207.18.25:8080/api/v1/product";
 
     constructor(private http: HttpClient) {
     }

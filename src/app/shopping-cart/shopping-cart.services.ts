@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { Product } from '../product/product.model';
+import { Product } from "../types";
 
 interface CartItem {
   cartItemId: number;
@@ -10,29 +10,31 @@ interface CartItem {
   price: number;
   cartId: number;
   selected?: boolean;
-  
+
 }
 
 @Injectable({
     providedIn: 'root',
 })
 export class CartService {
-  getCartItemCount(): number {
-    return this.cartItemsSubject.value.reduce(
-      (total, item) => total + item.quantity,
-      0
-    );
-  }
-  private cartItemsSubject = new BehaviorSubject<CartItem[]>([]);
-  cartItems$ = this.cartItemsSubject.asObservable();
+    private cartItemsSubject = new BehaviorSubject<CartItem[]>([]);
+    cartItems$ = this.cartItemsSubject.asObservable();
+    private apiUrl = "http://172.207.18.25:8080/api/v1/cart"
 
   constructor() {
-   
+
     const storedCart = localStorage.getItem('shoppingCart');
     if (storedCart) {
       this.cartItemsSubject.next(JSON.parse(storedCart));
     }
   }
+
+    getCartItemCount(): number {
+        return this.cartItemsSubject.value.reduce(
+            (total, item) => total + item.quantity,
+            0
+        );
+    }
 
   addToCart(product: Product, quantity: number = 1): void {
     const currentCart = this.cartItemsSubject.value;

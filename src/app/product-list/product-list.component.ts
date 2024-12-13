@@ -39,10 +39,9 @@ export class ProductListComponent implements OnInit {
     sortByPrice: string = 'asc';
     isFilterOpen: boolean = false;
 
-  productBackendUrl = 'http://172.104.165.74:8084/api/v1';
-  productBackendUrlBase = 'http://172.104.165.74:8084';
-  private categoryBackendUrl = 'http://172.104.165.74:8086/api/v1';
-  productService: any;
+    productBackendUrl = 'http://172.207.18.25:8080/api/v1';
+    productBackendUrlBase = 'http://172.207.18.25:8080';
+    private categoryBackendUrl = 'http://172.207.18.25:8080/api/v1';
 
   // Declare filteredProducts here
   filteredProducts: Product[] = [];
@@ -81,7 +80,7 @@ export class ProductListComponent implements OnInit {
       },
     });
   }
-  
+
   fetchCategories(): void {
     this.http.get<{ msg: string; data: Category[]; status: string }>(`${this.categoryBackendUrl}/categories`).subscribe({
       next: (response) => {
@@ -112,7 +111,7 @@ export class ProductListComponent implements OnInit {
       this.filteredProducts = [...this.originalNewArrivals];
     }
   }
-  
+
   resetFilters(): void {
     this.newArrivals = [...this.originalNewArrivals];
   }
