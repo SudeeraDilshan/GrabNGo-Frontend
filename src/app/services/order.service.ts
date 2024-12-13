@@ -17,20 +17,16 @@ export class OrderService {
         return this.http.get<Order[]>(this.apiUrl);
     }
 
-    // In your ProductService
     getProductById(productId: string): Observable<any> {
-        // Log the full URL being called
         console.log(`Attempting to fetch product with URL: ${this.apiUrl}/${productId}`);
 
         return this.http.get<any>(`${this.apiUrl}/${productId}`).pipe(
             catchError(error => {
                 console.error('Error fetching product:', error);
-                // Log detailed error information
                 console.error('Error status:', error.status);
                 console.error('Error message:', error.message);
                 console.error('Error details:', error);
 
-                // Rethrow or handle the error as needed
                 return throwError(() => new Error('Product fetch failed'));
             })
         );

@@ -52,9 +52,9 @@ export class ProductAdminComponent {
       this.productService.getProducts().subscribe({
         next: (products) => {
           const response = products as unknown as ApiResponse<Product[]>;
-          console.log('Raw products from server:', response.data); // Debug log
+          console.log('Raw products from server:', response.data); 
           this.products = response.data.filter(product => product.available);
-          console.log('Filtered products:', this.products);
+          console.log('Filtered productsss:', this.products);
         },
         error: (err) => {
           console.error('Error loading products:', err);

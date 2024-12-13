@@ -12,7 +12,7 @@ export class LoginComponent implements OnInit {
     loginForm!: FormGroup;
     showPassword: boolean = false;
     errorMessage: string = '';
-    isSubmitted: boolean = false; // Added to track form submission
+    isSubmitted: boolean = false; 
 
     constructor(
         private fb: FormBuilder,
@@ -21,7 +21,6 @@ export class LoginComponent implements OnInit {
     ) {
     }
 
-    // Getter methods for easy access in template
     get email() {
         return this.loginForm.get('email');
     }
