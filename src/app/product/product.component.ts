@@ -16,7 +16,8 @@ export class ProductComponent implements OnInit {
   productId: number | null = null;
   loading: boolean = true;
   error: string | null = null;
-
+  images: string[] = [];
+  
   constructor(
     private route: ActivatedRoute,
     private productService: ProductService,

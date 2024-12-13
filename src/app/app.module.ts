@@ -34,7 +34,7 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
 import { RegistrationComponent } from './registration/registration.component';
 import { CheckoutAddressComponent } from './checkout-address/checkout-address.component';
 import { OrderSummaryComponent } from './checkout-address/order-summary/order-summary.component';
-import { CheckoutComponent } from './checkout-address/checkout/checkout.component';
+ 
 import { CheckoutPaymentComponent } from './checkout-payment/checkout-payment.component';
 import { PaymentPortalComponent } from './checkout-payment/payment-portal/payment-portal.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
@@ -78,7 +78,7 @@ import { TokenInterceptor } from "./helpers/token.interceptor";
         RegistrationComponent,
         CheckoutAddressComponent,
         OrderSummaryComponent,
-        CheckoutComponent,
+        CheckoutAddressComponent,
         CheckoutPaymentComponent,
         PaymentPortalComponent,
         CartComponent,
@@ -88,7 +88,9 @@ import { TokenInterceptor } from "./helpers/token.interceptor";
         ShoppingCartComponent,
         FilterCategoryComponent,
         ProductOverviewComponent,
-        PasswordModificationComponent
+        PasswordModificationComponent,
+        
+        
     ],
     imports: [
         BrowserModule,
