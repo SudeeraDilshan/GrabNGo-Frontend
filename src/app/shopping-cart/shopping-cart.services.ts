@@ -17,6 +17,12 @@ interface CartItem {
     providedIn: 'root',
 })
 export class CartService {
+    
+  clearCart(): void {
+    this.cartItems$ = this.cartItemsSubject.asObservable();
+    sessionStorage.removeItem('SELECTED_CART_ITEMS');  
+  }
+  
     private cartItemsSubject = new BehaviorSubject<CartItem[]>([]);
     cartItems$ = this.cartItemsSubject.asObservable();
     private apiUrl = "http://172.207.18.25:8080/api/v1/cart"

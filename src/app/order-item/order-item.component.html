@@ -6,7 +6,7 @@
         <h3 class="product-name">{{orderItem.productName}}</h3>
         <div class="product-info">
             <p class="product-quantity">Quantity: {{orderItem.quantity}}</p>
-            <p class="product-price">${{orderItem.quantity * orderItem.unitPrice}}</p>
+            <p class="product-price">Rs.{{orderItem.quantity * orderItem.unitPrice}}</p>
         </div>
         <div class="order-details">
             <p class="order-date">Date: {{orderItem.createdDateTime | date: 'dd-MMM-yy h:mm:ss a '}}</p>

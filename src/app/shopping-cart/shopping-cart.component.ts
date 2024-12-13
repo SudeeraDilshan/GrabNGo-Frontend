@@ -4,15 +4,14 @@ import { CartService } from './shopping-cart.services';
 import { Product } from "../types";
 
 @Component({
-    selector: 'app-shopping-cart',
-    templateUrl: './shopping-cart.component.html',
-    styleUrls: ['./shopping-cart.component.css'],
+  selector: 'app-shopping-cart',
+  templateUrl: './shopping-cart.component.html',
+  styleUrls: ['./shopping-cart.component.css'],
 })
 export class ShoppingCartComponent implements OnInit {
-    cartItems: { product: Product; quantity: number; selected: boolean }[] = [];
+  cartItems: { product: Product; quantity: number; selected: boolean }[] = [];
 
-    constructor(private cartService: CartService, private router: Router) {
-    }
+  constructor(private cartService: CartService, private router: Router) {}
 
   ngOnInit(): void {
     this.loadCartItems();
@@ -27,7 +26,6 @@ export class ShoppingCartComponent implements OnInit {
       }));
     }
 
-    // Sync with cartService
     this.cartService.cartItems$.subscribe((items) => {
       if (items.length === 0 && !storedCart) {
         this.navigateToCart();
@@ -55,13 +53,10 @@ export class ShoppingCartComponent implements OnInit {
   checkout(): void {
     const selectedItems = this.getSelectedItems();
     if (selectedItems.length > 0) {
-      alert(
-        'Proceeding to checkout with the following items:\n' +
-          selectedItems
-            .map((item) => `${item.product.productName} (x${item.quantity})`)
-            .join('\n')
+      sessionStorage.setItem(
+        'SELECTED_CART_ITEMS',
+        JSON.stringify(selectedItems)
       );
-      sessionStorage.setItem("SELECTED_CART_ITEMS", selectedItems.map(item => item.product.categoryId).join(","))
       this.router.navigate(['/checkout-address']);
     } else {
       alert('Please select at least one product to checkout.');
@@ -75,8 +70,6 @@ export class ShoppingCartComponent implements OnInit {
         this.cartService.removeFromCart(item.product.productId, item.quantity);
       });
       this.cartItems = this.cartItems.filter((item) => !item.selected);
-
-      
       localStorage.setItem('shoppingCart', JSON.stringify(this.cartItems));
 
       if (this.cartItems.length === 0) {
