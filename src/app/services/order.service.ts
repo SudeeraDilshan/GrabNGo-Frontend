@@ -1,8 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams , HttpHeaders  } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { Order } from '../models/order-model';
-import { catchError } from "rxjs/operators";
+import { catchError , map } from "rxjs/operators";
+import { ApiResponse, Order } from "../types";
+import { AuthService } from './auth.service';
+
+
+
 
 @Injectable({
     providedIn: 'root',
@@ -10,7 +14,7 @@ import { catchError } from "rxjs/operators";
 export class OrderService {
     private apiUrl = "http://172.207.18.25:8080/api/v1/order";
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient,  private authService: AuthService) {
     }
 
     getOrders(): Observable<Order[]> {
@@ -73,4 +77,21 @@ export class OrderService {
 
         return this.http.get<Order[]>(`${this.apiUrl}/paginated`, {params});
     }
+  //Get Order History
+ getOrderHistoryById(): Observable<ApiResponse<Order>> {
+    const userId = this.authService.getCurrentUserId()!; // Get the current user's ID
+    const token = this.authService.getAccessToken(); // Get the access token
+    const headers = new HttpHeaders({
+        'Accept': '*/*', // Accept all response formats
+        'Authorization': `Bearer ${token}`, // Authorization header with Bearer token
+    });
+
+    // Construct the correct API URL for fetching order history
+    return this.http.get<ApiResponse<Order>>(
+        `${this.apiUrl}/filter?userId=${encodeURIComponent(userId)}`, 
+        { headers: headers }
+    );
+}
+
+  
 }
