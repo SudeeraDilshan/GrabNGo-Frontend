@@ -32,15 +32,22 @@ export class HeaderComponent implements OnInit {
 
     navigateToCart(): void {
         if (this.isLoggedIn) {
-            this.router.navigate(['/shopping-cart']);
+            if (this.cartItemCount > 0) {
+                
+                this.router.navigate(['/shopping-cart']);
+            } else {
+             
+                this.router.navigate(['/cart']);
+            }
         } else {
-            this.router.navigate(['/login']);
+           
+            this.router.navigate(['auth/login']);
         }
     }
-
+    
     ngOnInit(): void {
         this.cartService.cartItems$.subscribe(() => {
-            // this.cartItemCount = this.cartService.getCartItem();
+             this.cartItemCount = this.cartService.getCartItemCount();
         });
     }
 
