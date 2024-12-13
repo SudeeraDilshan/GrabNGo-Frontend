@@ -1,173 +1,155 @@
-/* Profile Container */
-.profile-container {
+/* Add background gradient to the entire container */
+body {
+    background: linear-gradient(to bottom, #f6f9fc, #e9eef2);
+    margin: 0;
+    padding: 0;
     font-family: Arial, sans-serif;
-    max-width: 1200px;
-    margin: 20px auto;
-    padding: 20px;
-    display: flex;
-    justify-content: space-between; /* Space between the left and right sections */
-    justify-content: space-between; /* Space between the left and right sections */
-    gap: 20px; /* Adds a gap between the left and right sections */
-}
-
-/* Left Section: Profile Card */
-.profile-card {
-    background-color: #fff; /* White background */
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    text-align: center;
-    max-width: 300px;
-    flex: 1; /* Left section should be smaller */
-}
-
-.profile-picture-container {
-    position: relative;
-    margin-bottom: 20px;
-    display: flex;
-    justify-content: center; /* Center the content */
-    align-items: center;
-}
-
-/* Camera Icon Style */
-.camera-icon {
-    position: absolute;
-    bottom: 20px; /* Adjust the bottom position closer to the profile picture */
-    right: 60px; /* Adjust the right position closer to the profile picture */
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-    color: white;
-    border-radius: 50%;
-    width: 30px; /* Reduce the size of the icon */
-    height: 30px; /* Reduce the size of the icon */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    font-size: 16px; /* Adjust font size */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.3s ease;
-}
-
-.camera-icon:hover {
-    background-color: rgba(0, 0, 0, 0.7); /* Darker on hover */
-}
-
-/* Hide the File Input */
-.profile-pic-upload {
-    display: none; /* This hides the file input */
-}
-
-/* Profile Picture */
-.profile-picture {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 3px solid #f0f0f0;
-    margin: 0 auto;
-}
-
-/* Right Section: Profile Details and Security */
-.profile-layout {
-    display: flex;
-    flex-direction: column;
-    gap: 30px; /* Space between profile details and security section */
-    flex: 2; /* Right side takes more space */
-    width: 100%;
-}
-
-/* Profile Details Section */
-.profile-details {
-    background-color: #fff; /* White background */
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-}
-
-.profile-details h3 {
-    margin-bottom: 15px;
-    color: #f57c00; /* Orange header color */
-    font-size: 20px;
-}
-
-.profile-details label {
-    font-size: 14px;
-    font-weight: bold;
-    margin-top: 10px;
-    display: block;
     color: #333;
 }
 
-.profile-details input {
-    width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 14px;
+/* Centered container with padding */
+.profile-container {
+    max-width: 800px;
+    margin: 50px auto; /* Center in the middle with top spacing */
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    overflow: hidden;
 }
 
-.profile-details button {
-    margin-top: 15px;
-    padding: 10px 15px;
-    background-color: #f57c00; /* Orange color */
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    font-size: 14px;
-    cursor: pointer;
-}
-
-/* Add spacing between Save and Cancel buttons */
-.profile-details button + button {
-    margin-left: 10px; /* Add space between Save and Cancel buttons */
-}
-
-.profile-details button:hover {
-    background-color: #e65100; /* Darker orange on hover */
-}
-
-/* Security Section */
-.security {
-    background-color: #fff; /* White background */
+/* Add a subtle border to sections */
+.profile-content {
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    background-color: #f9f9f9;
 }
 
-.security h3 {
-    color: #f57c00; /* Orange header color */
-    font-size: 20px;
-    margin-bottom: 15px;
-}
-
-.security-links a {
-    display: block;
-    margin: 5px 0;
-    color: #f57c00; /* Orange links */
-    font-size: 14px;
-    text-decoration: none;
-}
-
-.security-links a:hover {
-    text-decoration: underline;
-}
-
-.security-links .delete {
-    color: red; /* Delete account link in red */
-}
-
-.profile-picture-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+/* Header styles */
+.profile-header {
+    text-align: center;
     margin-bottom: 20px;
 }
 
+/* Improve avatar styling */
 .profile-avatar {
     width: 150px;
     height: 150px;
     border-radius: 50%;
     object-fit: cover;
-    border: 2px solid #ddd;
+    border: 5px solid #f57c00;
+    transition: transform 0.3s ease;
+}
+
+.profile-avatar:hover {
+    transform: scale(1.1);
+}
+
+/* Add subtle spacing and typography */
+.profile-info h2 {
+    margin-bottom: 10px;
+    font-size: 24px;
+    color: #f57c00;
+    text-align: center;
+}
+
+.profile-info p {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.action-buttons button {
+    margin: 10px 5px;
+    padding: 10px 20px;
+    background-color: #f57c00;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    text-align:right; 
+}
+
+.action-buttons button:hover {
+    background-color: #e65100;
+    transform: translateY(-2px);
+}
+
+/* Link for "Change Password" */
+.change-password-link {
+    color: #f57c00;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+    transition: color 0.3s ease;
+}
+
+.change-password-link:hover {
+    color: #e65100;
+}
+
+/* Edit Form Improvements */
+.edit-profile-form {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.edit-profile-form h2 {
+    color: #f57c00;
+    margin-bottom: 20px;
+    font-size: 20px;
+    text-align: center;
+}
+
+.edit-profile-form .form-group {
+    margin-bottom: 20px;
+}
+
+.edit-profile-form input,
+.edit-profile-form textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.edit-profile-form input:focus,
+.edit-profile-form textarea:focus {
+    outline: none;
+    border-color: #f57c00;
+    box-shadow: 0 0 4px rgba(245, 124, 0, 0.5);
+}
+
+/* Button alignment */
+.edit-profile-form .action-buttons {
+    text-align: center;
+}
+
+.edit-profile-form button {
+    padding: 10px 20px;
+    margin: 0 10px;
+    background-color: #f57c00;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.edit-profile-form button:hover {
+    background-color: #e65100;
+}
+
+.action-buttons {
+    text-align: right; /* Align buttons to the right */
+    margin-top: 20px; /* Add some spacing for proper layout */
 }
