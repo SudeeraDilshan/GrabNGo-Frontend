@@ -1,71 +1,64 @@
 import { Component, OnInit } from '@angular/core';
+import { CartService } from '../../shopping-cart/shopping-cart.services';
+
+interface OrderItem {
+  id: number;
+  name: string;
+  size: string;
+  quantity: number;
+  price: number;
+  imageUrl: string;
+}
 
 @Component({
-    selector: 'app-order-summary',
-    templateUrl: './order-summary.component.html',
-    styleUrls: ['./order-summary.component.css'],
+  selector: 'app-order-summary',
+  templateUrl: './order-summary.component.html',
+  styleUrls: ['./order-summary.component.css']
 })
 export class OrderSummaryComponent implements OnInit {
-    items: any[] = []; // Array to hold cart items
-    isModalOpen = false; // To toggle modal visibility
-    selectedItem: any = null; // Item to be removed
+  items: OrderItem[] = [];
+  isModalOpen = false;
+  selectedItem: OrderItem | null = null;
+  imageUrl: string | undefined;
+  constructor(private cartService: CartService) {}
 
-    ngOnInit(): void {
-        this.loadDummyData(); // Load dummy data on initialization
-    }
+  ngOnInit(): void {
+    this.loadCartItems();
+  }
 
-    // Load dummy data
-    loadDummyData(): void {
-        this.items = [
-            {
-                id: '1',
-                name: 'Product 1',
-                size: 'M',
-                quantity: 2,
-                price: 25.5,
-                imageUrl: 'https://via.placeholder.com/50',
-            },
-            {
-                id: '2',
-                name: 'Product 2',
-                size: 'L',
-                quantity: 1,
-                price: 40.0,
-                imageUrl: 'https://via.placeholder.com/50',
-            },
-            {
-                id: '3',
-                name: 'Product 3',
-                size: 'S',
-                quantity: 3,
-                price: 15.75,
-                imageUrl: 'https://via.placeholder.com/50',
-            },
-        ];
-    }
+  loadCartItems(): void {
+    this.cartService.cartItems$.subscribe((cartItems) => {
+      this.items = cartItems.map((item) => ({
+        id: item.product.productId,
+        name: item.product.productName,
+        size: 'Default Size',
+        quantity: item.quantity,
+        price: item.product.productPrice,
+        imageUrl: item.product.imageUrl[0]
+      }));
+    });
+  }
 
-    // Open the confirmation modal
-    openConfirmationModal(item: any): void {
-        this.selectedItem = item;
-        this.isModalOpen = true;
-    }
+  openConfirmationModal(item: OrderItem): void {
+    this.selectedItem = item;
+    this.isModalOpen = true;
+  }
 
-    // Close the confirmation modal
-    closeModal(): void {
-        this.isModalOpen = false;
-        this.selectedItem = null;
-    }
+  // Close the confirmation modal
+  closeModal(): void {
+    this.isModalOpen = false;
+    this.selectedItem = null;
+  }
 
-    // Confirm deletion of the selected item
-    confirmDelete(): void {
-        if (this.selectedItem) {
-            this.items = this.items.filter((i) => i.id !== this.selectedItem.id);
-            this.closeModal();
-        }
+  confirmDelete(): void {
+    if (this.selectedItem) {
+      this.cartService.removeFromCart(this.selectedItem.id, this.selectedItem.quantity);
+      this.closeModal();
     }
+  }
 
-    // Calculate the subtotal
-    getSubtotal(): number {
-        return this.items.reduce((total, item) => total + item.price * item.quantity, 0);
-    }
+  // Calculate the subtotal
+  getSubtotal(): number {
+    return this.items.reduce((total, item) => total + item.price * item.quantity, 0);
+  }
 }

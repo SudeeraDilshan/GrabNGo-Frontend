@@ -39,58 +39,59 @@ export class FilterCategoryComponent implements OnInit {
         this.route.params.subscribe((params) => {
             this.categoryId = +params['categoryId'];
 
-            // Retrieve category name from route state or fallback to fetching details
-            const state = this.router.getCurrentNavigation()?.extras.state as { categoryName?: string };
-            if (state?.categoryName) {
-                this.categoryName = state.categoryName;
-            } else {
-                this.fetchCategoryDetails(this.categoryId);
-            }
+       
+      const state = this.router.getCurrentNavigation()?.extras.state as { categoryName?: string };
+      if (state?.categoryName) {
+        this.categoryName = state.categoryName;
+      } else {
+        this.fetchCategoryDetails(this.categoryId);
+      }
 
             this.fetchCategoryProducts(this.categoryId);
         });
     }
 
-    fetchCategoryDetails(categoryId: number): void {
-        this.http.get<{ msg: string; data: Category }>(`${this.categoryBackendUrl}/categories/${categoryId}`)
-            .subscribe({
-                next: (response) => {
-                    if (response && response.data) {
-                        this.categoryName = response.data.categoryName; // Update category name dynamically
-                    } else {
-                        console.error('Unexpected response format:', response);
-                    }
-                },
-                error: (err) => {
-                    console.error('Error fetching category details:', err);
-                },
-            });
-    }
+  fetchCategoryDetails(categoryId: number): void {
+    this.http.get<{ msg: string; data: Category }>(`${this.categoryBackendUrl}/categories/${categoryId}`)
+      .subscribe({
+        next: (response) => {
+          if (response && response.data) {
+            this.categoryName = response.data.categoryName;  
+          } else {
+            console.error('Unexpected response format:', response);
+          }
+        },
+        error: (err) => {
+          console.error('Error fetching category details:', err);
+        },
+      });
+  }
 
-    fetchCategoryProducts(categoryId: number): void {
-        this.http.get<{ msg: string; data: Product[]; status: string }>(
-            `${this.productBackendUrl}/product?categoryId=${categoryId}`
-        )
-            .subscribe({
-                next: (response) => {
-                    if (response && Array.isArray(response.data)) {
-                        this.categoryProducts = response.data;
-                    } else {
-                        console.error(`Unexpected response format for category ID ${categoryId}:`, response);
-                        this.categoryProducts = [];
-                    }
-                },
-                error: (err) => {
-                    console.error('Error fetching products from backend:', err);
-                    if (err.status === 0) {
-                        console.error('Network error or CORS issue. Check API accessibility.');
-                    } else {
-                        console.error(`Backend returned error: ${err.message}`);
-                    }
-                    this.categoryProducts = []; // Clear products to avoid stale data
-                },
-            });
-    }
+  fetchCategoryProducts(categoryId: number): void {
+    this.http.get<{ msg: string; data: Product[]; status: string }>(
+      `${this.productBackendUrl}/product?categoryId=${categoryId}`
+      
+    )
+    .subscribe({
+      next: (response) => {
+        if (response && Array.isArray(response.data)) {
+          this.categoryProducts = response.data;
+        } else {
+          console.error(`Unexpected response format for category ID ${categoryId}:`, response);
+          this.categoryProducts = [];
+        }
+      },
+      error: (err) => {
+        console.error('Error fetching products from backend:', err);
+        if (err.status === 0) {
+          console.error('Network error or CORS issue. Check API accessibility.');
+        } else {
+          console.error(`Backend returned error: ${err.message}`);
+        }
+        this.categoryProducts = []; 
+      },
+    });
+  }
 
     viewProductDetails(product: Product): void {
         if (product && product.productId) {
