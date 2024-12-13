@@ -9,7 +9,6 @@ import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
 import { ProductAdminComponent } from './product-admin/product-admin.component';
 import { CategoryViewAdminComponent } from './category-view-admin/category-view-admin.component';
 import { ProductCrudComponent } from './product-crud/product-crud.component';
@@ -53,7 +52,6 @@ import { OrderItemComponent } from './order-item/order-item.component';
     declarations: [
         AppComponent,
         HeaderComponent,
-        FooterComponent,
         ProductAdminComponent,
         CategoryViewAdminComponent,
         ProductCrudComponent,
@@ -65,7 +63,6 @@ import { OrderItemComponent } from './order-item/order-item.component';
         CategoryEditComponent,
         CategoryDeleteComponent,
         OrderViewAdminComponent,
-        FooterComponent,
         LoginComponent,
         ResetPasswordComponent,
         EmailVerificationComponent,
