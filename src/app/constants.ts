@@ -1,3 +1,3 @@
-export const ACCEPTED = 'ACCEPTED';
-export const CANCELLED = 'CANCELLED';
-export const DELIVERED = 'DELIVERED';
+export const ACCEPTED = 'Accepted';
+export const CANCELLED = 'Cancelled';
+export const DELIVERED = 'Delivered';
