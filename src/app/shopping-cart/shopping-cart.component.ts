@@ -61,6 +61,7 @@ export class ShoppingCartComponent implements OnInit {
             .map((item) => `${item.product.productName} (x${item.quantity})`)
             .join('\n')
       );
+      sessionStorage.setItem("SELECTED_CART_ITEMS", selectedItems.map(item => item.product.categoryId).join(","))
       this.router.navigate(['/checkout-address']);
     } else {
       alert('Please select at least one product to checkout.');
@@ -75,7 +76,7 @@ export class ShoppingCartComponent implements OnInit {
       });
       this.cartItems = this.cartItems.filter((item) => !item.selected);
 
-      // Update localStorage
+      
       localStorage.setItem('shoppingCart', JSON.stringify(this.cartItems));
 
       if (this.cartItems.length === 0) {

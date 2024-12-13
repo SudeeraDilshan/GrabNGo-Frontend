@@ -12,8 +12,11 @@ export class CheckoutService {
 
   constructor(private http: HttpClient) {}
 
-  // Send form data to backend
-  submitCheckout(formData: FormData): Observable<any> {
-    return this.http.post(this.apiUrl, formData);
+   
+  submitCheckout(payload: any): Observable<any> {
+    const headers = { 'Content-Type': 'application/json' };  
+    return this.http.post(this.apiUrl, payload, { headers });
+    
   }
+  
 }

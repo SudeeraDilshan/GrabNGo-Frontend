@@ -64,7 +64,7 @@ export class CartService {
       ]);
     }
 
-    // Update localStorage
+   
     localStorage.setItem('shoppingCart', JSON.stringify(this.cartItemsSubject.value));
   }
 
@@ -88,7 +88,7 @@ export class CartService {
       }
 
       this.cartItemsSubject.next(updatedCart);
-      // Update localStorage
+      
       localStorage.setItem('shoppingCart', JSON.stringify(updatedCart));
     }
   }
