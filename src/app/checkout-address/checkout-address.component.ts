@@ -80,12 +80,6 @@ export class CheckoutAddressComponent implements OnInit {
     this.selectedItem = null;
   }
 
-  confirmDelete(): void {
-    if (this.selectedItem) {
-      this.cartService.removeFromCart(String(this.selectedItem.id), this.selectedItem.quantity); // Convert id to string
-      this.closeModal();
-    }
-  }
   onSubmit(form: any): void {
     if (form.valid) {
       const userId = this.getUserIdFromLocalStorage();
