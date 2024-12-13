@@ -71,11 +71,11 @@
             <label class="form-label" for="category">Category</label>
             <mat-form-field class="form-field">
                 <mat-label>Category</mat-label>
-                <mat-select formControlName="categoryId" id="category">
+                <mat-select id="category" formControlName="categoryId">
                     <mat-option *ngFor="let category of categories" [value]="category.categoryId">
-                        {{ category.categoryName }}
+                      {{ category.categoryName }}
                     </mat-option>
-                </mat-select>
+                  </mat-select>
                 <mat-icon class="edit-icon">edit</mat-icon>
                 <mat-error *ngIf="editProductForm.get('category')?.hasError('required')">
                     Category is required.
@@ -85,11 +85,10 @@
             <label class="form-label" for="availability">Availability</label>
             <mat-form-field class="form-field">
                 <mat-label>Availability</mat-label>
-                <mat-select formControlName="available" id="availability">
-                    <mat-option *ngFor="let status of availabilityOptions" [value]="status">
-                        {{ status }}
-                    </mat-option>
-                </mat-select>
+                <mat-select id="availability" formControlName="available">
+                    <mat-option [value]="true">Available</mat-option>
+                    <mat-option [value]="false">Out of Stock</mat-option>
+                  </mat-select>
                 <mat-icon class="edit-icon">edit</mat-icon>
                 <mat-error *ngIf="editProductForm.get('availability')?.hasError('required')">
                     Availability is required.

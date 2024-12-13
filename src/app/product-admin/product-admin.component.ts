@@ -49,16 +49,20 @@ export class ProductAdminComponent {
     }
 
     loadProducts(): void {
-        this.productService.getProducts().subscribe({
-            next: (products) => {
-                this.products = (products as unknown as ApiResponse<Product[]>).data;
-                console.log('Products loaded:', this.products);
-            },
-            error: (err) => {
-                console.error('Error loading products:', err);
-            },
-        });
+      this.productService.getProducts().subscribe({
+        next: (products) => {
+          const response = products as unknown as ApiResponse<Product[]>;
+          console.log('Raw products from server:', response.data); // Debug log
+          this.products = response.data.filter(product => product.available);
+          console.log('Filtered products:', this.products);
+        },
+        error: (err) => {
+          console.error('Error loading products:', err);
+        },
+      });
     }
+    
+    
 
     loadCategories(): void {
         this.categoryService.getCategories().subscribe({
@@ -82,23 +86,23 @@ export class ProductAdminComponent {
     }
 
     deleteProduct(product: Product): void {
-        const dialogRef = this.dialog.open(ProductDeleteComponent);
-
-        dialogRef.afterClosed().subscribe((confirmed: boolean) => {
-            if (confirmed) {
-                product.active = false;
-                this.productService.deleteProduct(product.productId, product).subscribe({
-                    next: () => {
-                        this.products = this.products.filter(p => p.productId !== product.productId);
-                        console.log('Product deleted:', product);
-                    },
-                    error: (err) => {
-                        console.error('Error deleting product:', err);
-                    },
-                });
-            }
-        });
-    }
+      const dialogRef = this.dialog.open(ProductDeleteComponent);
+      dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+        if (confirmed) {
+          this.productService.deleteProduct(product.productId, product).subscribe({
+            next: () => {
+              this.loadProducts(); // Reload from the server
+              console.log('Product deleted:', product);
+            },
+            error: (err) => {
+              console.error('Error deleting product:', err);
+            },
+          });
+        }
+      });
+    }    
+    
+    
 
     updateCategory(product: Product): void {
         this.productService.updateProduct(product.productId, {categoryId: product.categoryId}).subscribe({

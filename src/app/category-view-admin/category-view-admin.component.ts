@@ -37,7 +37,6 @@ export class CategoryViewAdminComponent {
     }
 
     loadCategories(): void {
-        // Fetch categories from backend
         this.categoryService.getCategories().subscribe({
             next: (categories) => {
                 this.categories = (categories as unknown as ApiResponse<Category[]>).data;
