@@ -1,16 +1,17 @@
 <div class="container">
     <div class="register-box">
         <h2>Register to GrabNGo</h2>
-        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <form (ngSubmit)="onSubmit()" [formGroup]="registerForm">
             <!-- Email Address -->
             <div class="form-group">
                 <input
-                        type="email"
+                        class="form-control"
                         formControlName="emailAddress"
                         placeholder="Email Address"
-                        class="form-control"
+                        type="email"
                 />
-                <div *ngIf="registerForm.get('emailAddress')?.invalid && registerForm.get('emailAddress')?.touched" class="error-message">
+                <div *ngIf="registerForm.get('emailAddress')?.invalid && registerForm.get('emailAddress')?.touched"
+                     class="error-message">
                     <small *ngIf="registerForm.get('emailAddress')?.errors?.['required']">
                         Email is required.
                     </small>
@@ -23,12 +24,13 @@
             <!-- First Name -->
             <div class="form-group">
                 <input
-                        type="text"
+                        class="form-control"
                         formControlName="firstName"
                         placeholder="First Name"
-                        class="form-control"
+                        type="text"
                 />
-                <div *ngIf="registerForm.get('firstName')?.invalid && registerForm.get('firstName')?.touched" class="error-message">
+                <div *ngIf="registerForm.get('firstName')?.invalid && registerForm.get('firstName')?.touched"
+                     class="error-message">
                     <small *ngIf="registerForm.get('firstName')?.errors?.['required']">
                         First name is required.
                     </small>
@@ -44,12 +46,13 @@
             <!-- Last Name -->
             <div class="form-group">
                 <input
-                        type="text"
+                        class="form-control"
                         formControlName="lastName"
                         placeholder="Last Name"
-                        class="form-control"
+                        type="text"
                 />
-                <div *ngIf="registerForm.get('lastName')?.invalid && registerForm.get('lastName')?.touched" class="error-message">
+                <div *ngIf="registerForm.get('lastName')?.invalid && registerForm.get('lastName')?.touched"
+                     class="error-message">
                     <small *ngIf="registerForm.get('lastName')?.errors?.['required']">
                         Last name is required.
                     </small>
@@ -65,12 +68,13 @@
             <!-- Password -->
             <div class="form-group">
                 <input
-                        type="password"
+                        class="form-control"
                         formControlName="password"
                         placeholder="Password"
-                        class="form-control"
+                        type="password"
                 />
-                <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched" class="error-message">
+                <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched"
+                     class="error-message">
                     <small *ngIf="registerForm.get('password')?.errors?.['required']">
                         Password is required.
                     </small>
@@ -86,17 +90,19 @@
             <!-- Confirm Password -->
             <div class="form-group">
                 <input
-                        type="password"
+                        class="form-control"
                         formControlName="confirmPassword"
                         placeholder="Confirm Password"
-                        class="form-control"
+                        type="password"
                 />
-                <div *ngIf="registerForm.get('confirmPassword')?.invalid && registerForm.get('confirmPassword')?.touched" class="error-message">
+                <div *ngIf="registerForm.get('confirmPassword')?.invalid && registerForm.get('confirmPassword')?.touched"
+                     class="error-message">
                     <small *ngIf="registerForm.get('confirmPassword')?.errors?.['required']">
                         Confirming your password is required.
                     </small>
                 </div>
-                <div *ngIf="registerForm.errors?.['mismatch'] && registerForm.get('confirmPassword')?.touched" class="error-message">
+                <div *ngIf="registerForm.errors?.['mismatch'] && registerForm.get('confirmPassword')?.touched"
+                     class="error-message">
                     <small>Passwords do not match.</small>
                 </div>
             </div>
@@ -104,12 +110,13 @@
             <!-- Contact Number -->
             <div class="form-group">
                 <input
-                        type="tel"
+                        class="form-control"
                         formControlName="contactNumber"
                         placeholder="Contact Number"
-                        class="form-control"
+                        type="tel"
                 />
-                <div *ngIf="registerForm.get('contactNumber')?.invalid && registerForm.get('contactNumber')?.touched" class="error-message">
+                <div *ngIf="registerForm.get('contactNumber')?.invalid && registerForm.get('contactNumber')?.touched"
+                     class="error-message">
                     <small *ngIf="registerForm.get('contactNumber')?.errors?.['required']">
                         Contact number is required.
                     </small>
@@ -122,11 +129,12 @@
             <!-- Address -->
             <div class="form-group">
         <textarea
+                class="form-control"
                 formControlName="address"
                 placeholder="Address"
-                class="form-control"
         ></textarea>
-                <div *ngIf="registerForm.get('address')?.invalid && registerForm.get('address')?.touched" class="error-message">
+                <div *ngIf="registerForm.get('address')?.invalid && registerForm.get('address')?.touched"
+                     class="error-message">
                     <small *ngIf="registerForm.get('address')?.errors?.['required']">
                         Address is required.
                     </small>
@@ -142,10 +150,10 @@
             <!-- NIC -->
             <div class="form-group">
                 <input
-                        type="text"
+                        class="form-control"
                         formControlName="nic"
                         placeholder="NIC Number"
-                        class="form-control"
+                        type="text"
                 />
                 <div *ngIf="registerForm.get('nic')?.invalid && registerForm.get('nic')?.touched" class="error-message">
                     <small *ngIf="registerForm.get('nic')?.errors?.['required']">
@@ -157,7 +165,7 @@
                 </div>
             </div>
 
-            <button type="submit" [disabled]="registerForm.invalid" class="submit-button">Sign Up</button>
+            <button [disabled]="registerForm.invalid" class="submit-button" type="submit">Sign Up</button>
         </form>
 
         <p class="login-link">

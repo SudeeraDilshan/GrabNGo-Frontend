@@ -14,7 +14,7 @@ interface CartItem {
 }
 
 @Injectable({
-  providedIn: 'root',
+    providedIn: 'root',
 })
 export class CartService {
   getCartItemCount(): number {
@@ -72,9 +72,9 @@ export class CartService {
       (item) => item.productId === productId
     );
 
-    if (existingItemIndex > -1) {
-      const updatedCart = [...currentCart];
-      const item = updatedCart[existingItemIndex];
+        if (existingItemIndex > -1) {
+            const updatedCart = [...currentCart];
+            const item = updatedCart[existingItemIndex];
 
       if (item.quantity > quantityToRemove) {
         updatedCart[existingItemIndex] = {

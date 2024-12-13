@@ -44,6 +44,7 @@ export class OrderSummaryComponent implements OnInit {
     this.isModalOpen = true;
   }
 
+  // Close the confirmation modal
   closeModal(): void {
     this.isModalOpen = false;
     this.selectedItem = null;
@@ -56,6 +57,7 @@ export class OrderSummaryComponent implements OnInit {
     }
   }
 
+  // Calculate the subtotal
   getSubtotal(): number {
     return this.items.reduce((total, item) => total + item.price * item.quantity, 0);
   }

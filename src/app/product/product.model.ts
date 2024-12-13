@@ -14,6 +14,7 @@ export interface Product {
   available:true;
   active:true
 }
+
 export interface Category {
   categoryName: string;
   categoryId: number;

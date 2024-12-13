@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
+    selector: 'app-login',
+    templateUrl: './login.component.html',
+    styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
     loginForm!: FormGroup;
@@ -18,7 +18,17 @@ export class LoginComponent implements OnInit {
         private fb: FormBuilder,
         private authService: AuthService,
         private router: Router
-    ) {}
+    ) {
+    }
+
+    // Getter methods for easy access in template
+    get email() {
+        return this.loginForm.get('email');
+    }
+
+    get password() {
+        return this.loginForm.get('password');
+    }
 
     ngOnInit() {
         this.loginForm = this.fb.group({
@@ -45,7 +55,7 @@ export class LoginComponent implements OnInit {
 
         // Check if the form is valid before submitting
         if (this.loginForm.valid) {
-            const { email, password } = this.loginForm.value;
+            const {email, password} = this.loginForm.value;
 
             this.authService.login(email, password).subscribe({
                 next: user => {
@@ -58,14 +68,5 @@ export class LoginComponent implements OnInit {
                 },
             });
         }
-    }
-
-    // Getter methods for easy access in template
-    get email() {
-        return this.loginForm.get('email');
-    }
-
-    get password() {
-        return this.loginForm.get('password');
     }
 }

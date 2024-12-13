@@ -24,6 +24,7 @@
     <p>Total: <span>Rs. {{ getSubtotal() | number: '1.2-2' }}</span></p>
   </div>
 
+  <!-- Confirmation Modal -->
   <div *ngIf="isModalOpen" class="modal-overlay">
     <div class="modal-content">
       <h4>Confirm Deletion</h4>

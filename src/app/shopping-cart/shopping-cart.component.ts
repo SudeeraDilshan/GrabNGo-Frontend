@@ -4,14 +4,15 @@ import { Product } from '../product/product.model';
 import { CartService } from './shopping-cart.services';
 
 @Component({
-  selector: 'app-shopping-cart',
-  templateUrl: './shopping-cart.component.html',
-  styleUrls: ['./shopping-cart.component.css'],
+    selector: 'app-shopping-cart',
+    templateUrl: './shopping-cart.component.html',
+    styleUrls: ['./shopping-cart.component.css'],
 })
 export class ShoppingCartComponent implements OnInit {
-  cartItems: { product: Product; quantity: number; selected: boolean }[] = [];
+    cartItems: { product: Product; quantity: number; selected: boolean }[] = [];
 
-  constructor(private cartService: CartService, private router: Router) {}
+    constructor(private cartService: CartService, private router: Router) {
+    }
 
   ngOnInit(): void {
     this.loadCartItems();

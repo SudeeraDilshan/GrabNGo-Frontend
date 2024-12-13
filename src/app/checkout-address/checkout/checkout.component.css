@@ -1,20 +1,20 @@
 .checkout {
     padding: 20px;
-  }
-  
-  .shipping-info label {
+}
+
+.shipping-info label {
     display: block;
     margin-top: 10px;
-  }
-  
-  .shipping-info input,
-  .shipping-info select {
+}
+
+.shipping-info input,
+.shipping-info select {
     width: 100%;
     padding: 5px;
     margin-top: 5px;
-  }
-  
-  .continue-btn {
+}
+
+.continue-btn {
     width: 100%;
     padding: 10px;
     background-color:#f97316;
@@ -22,10 +22,11 @@
     border: none;
     margin-top: 20px;
     cursor: pointer;
-  }
-  .error {
+}
+
+.error {
     color: red;
     font-size: 0.9em;
     margin-top: 5px;
-  }
+}
   

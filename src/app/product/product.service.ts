@@ -15,7 +15,8 @@ interface ProductApiResponse {
 export class ProductService {
   private apiUrl = 'http://172.104.165.74:8084/api/v1/product';
 
-  constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient) {
+    }
 
   getProductById(productId: number): Observable<Product> {
     return this.http.get<ProductApiResponse>(`${this.apiUrl}/${productId}`).pipe(

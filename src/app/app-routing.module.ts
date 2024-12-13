@@ -9,7 +9,7 @@ import { CategoryAddComponent } from './category-crud/category-add/category-add.
 import { CategoryEditComponent } from './category-crud/category-edit/category-edit.component';
 import { CategoryDeleteComponent } from './category-crud/category-delete/category-delete.component';
 import { OrderViewAdminComponent } from './order-view-admin/order-view-admin.component';
-import { LoginComponent } from './components/login/login.component';
+import { LoginComponent } from './login/login.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { EmailVerificationComponent } from './email-verification/email-verification.component';
 import { ProfileComponent } from './profile/profile.component';
@@ -26,6 +26,7 @@ import { FilterResultsComponent } from './filter-results/filter-results.componen
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { ProductOverviewComponent } from './product-overview/product-overview.component';
 import { loginRequiredGuard } from "./guards/login-required.guard";
+import { PasswordModificationComponent } from "./password-modification/password-modification.component";
 import { FilterCategoryComponent } from './filter-category/filter-category.component';
 
 const routes: Routes = [
@@ -111,6 +112,10 @@ const routes: Routes = [
         canActivate: [loginRequiredGuard]
     },
     {
+        path: 'password-modification',
+        component: PasswordModificationComponent,
+    },
+    {
         path: 'auth/registration',
         component: RegistrationComponent
     },
@@ -154,14 +159,10 @@ const routes: Routes = [
         path: 'product-overview',
         component: ProductOverviewComponent
     },
-  
-     
-        { path: 'category/:categoryId', component: FilterCategoryComponent },
-   
-      
-         
-      
-      
+    {
+        path: 'category/:categoryId',
+        component: FilterCategoryComponent
+    },
 ];
 
 @NgModule({

@@ -1,75 +1,87 @@
 import { Component, OnInit } from '@angular/core';
-import { Order } from '../models/order-model';
 import { OrderService } from '../services/order.service';
 import { ProductService } from '../services/product.service';
 import { forkJoin } from 'rxjs';
 
 @Component({
-  selector: 'app-order-history',
-  templateUrl: './order-history.component.html',
-  styleUrls: ['./order-history.component.css'],
+    selector: 'app-order-history',
+    templateUrl: './order-history.component.html',
+    styleUrls: ['./order-history.component.css'],
 })
 export class OrderHistoryComponent implements OnInit {
-  isLoading: boolean = true; // Loading state
-  hasError: boolean = false; // Error state
-  orders: any[] = []; // Array to store transformed order history
+    isLoading: boolean = true;
+    hasError: boolean = false;
+    orders: any[] = [];
 
-  constructor(
-    private orderService: OrderService,
-    private productService: ProductService
-  ) {}
+    // Add input parameters for userId and status
+    userId: string = '8'; // Default user ID
+    status: string = 'Accepted'; // Default status
 
-  ngOnInit(): void {
-    this.fetchOrderHistory();
-  }
+    constructor(
+        private orderService: OrderService,
+        private productService: ProductService
+    ) {
+    }
 
-  fetchOrderHistory(): void {
-    this.isLoading = true;
-    this.hasError = false;
-  
-    this.orderService.getOrders().subscribe({
-      next: (orders) => {
-        const productRequests = orders.flatMap((order) =>
-          order.orderItems.map((item) =>
-            this.productService.getProductById(String(item.productId)) // Convert productId to string
-          )
-        );
-  
-        forkJoin(productRequests).subscribe({
-          next: (products) => {
-            this.orders = orders.map((order) => {
-              const enrichedOrderItems = order.orderItems.map((item) => {
-                const product = products.find(
-                  (p: any) => p.data.productId === item.productId
+    ngOnInit(): void {
+        this.fetchOrderHistory();
+    }
+
+    fetchOrderHistory(): void {
+        this.isLoading = true;
+        this.hasError = false;
+
+        // Use the new method with userId and status
+        this.orderService.getOrdersByUserAndStatus(this.userId, this.status).subscribe({
+            next: (orders) => {
+                const productRequests = orders.flatMap((order) =>
+                    order.orderItems.map((item) =>
+                        this.productService.getProductById(String(item.productId))
+                    )
                 );
-                return {
-                  productName: product?.data?.productName || 'Unknown',
-                  size: 'N/A',
-                  quantity: item.quantity,
-                  price: item.sellPrice,
-                  imageUrl: product?.data?.imageUrl || '',
-                  date: new Date(order.createdDateTime).toLocaleDateString(),
-                };
-              });
-  
-              return {
-                ...order,
-                orderItems: enrichedOrderItems,
-              };
-            });
-  
-            this.isLoading = false;
-          },
-          error: () => {
-            this.isLoading = false;
-            this.hasError = true;
-          },
+
+                forkJoin(productRequests).subscribe({
+                    next: (products) => {
+                        this.orders = orders.map((order) => {
+                            const enrichedOrderItems = order.orderItems.map((item) => {
+                                const product = products.find(
+                                    (p: any) => p.data.productId === item.productId
+                                );
+                                return {
+                                    productName: product?.data?.productName || 'Unknown',
+                                    size: 'N/A',
+                                    quantity: item.quantity,
+                                    price: item.sellPrice,
+                                    imageUrl: product?.data?.imageUrl || '',
+                                    date: new Date(order.createdDateTime).toLocaleDateString(),
+                                };
+                            });
+
+                            return {
+                                ...order,
+                                orderItems: enrichedOrderItems,
+                            };
+                        });
+
+                        this.isLoading = false;
+                    },
+                    error: () => {
+                        this.isLoading = false;
+                        this.hasError = true;
+                    },
+                });
+            },
+            error: () => {
+                this.isLoading = false;
+                this.hasError = true;
+            },
         });
-      },
-      error: () => {
-        this.isLoading = false;
-        this.hasError = true;
-      },
-    });
-  }
-}  
+    }
+
+    // Optional: Method to allow dynamic filtering
+    filterOrders(userId: string, status: string): void {
+        this.userId = userId;
+        this.status = status;
+        this.fetchOrderHistory();
+    }
+}

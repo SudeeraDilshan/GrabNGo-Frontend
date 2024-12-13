@@ -29,13 +29,13 @@
 
 //   addToCart(product: Product, quantity: number = 1) {
 //     const currentCart = this.cartItemsSubject.value;
-     
+
 //     const existingItemIndex = currentCart.findIndex(
 //       item => item.productId === product.productId
 //     );
 
 //     if (existingItemIndex > -1) {
-      
+
 //       const updatedCart = [...currentCart];
 //       updatedCart[existingItemIndex] = {
 //         ...updatedCart[existingItemIndex],
@@ -43,7 +43,7 @@
 //       };
 //       this.cartItemsSubject.next(updatedCart);
 //     } else {
-       
+
 //       this.cartItemsSubject.next([
 //         ...currentCart, 
 //         { cartItemId: Date.now(),  

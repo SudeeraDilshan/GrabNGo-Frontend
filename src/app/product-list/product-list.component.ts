@@ -23,21 +23,21 @@ interface Category {
 }
 
 @Component({
-  selector: 'app-product-list',
-  templateUrl: './product-list.component.html',
-  styleUrls: ['./product-list.component.css']
+    selector: 'app-product-list',
+    templateUrl: './product-list.component.html',
+    styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit {
-  originalNewArrivals: Product[] = [];
-  newArrivals: Product[] = [];
-  featuredProducts: Product[] = [];
-  categories: Category[] = [];
-  searchControl = new FormControl('');
-  cartCount = 0;
+    originalNewArrivals: Product[] = [];
+    newArrivals: Product[] = [];
+    featuredProducts: Product[] = [];
+    categories: Category[] = [];
+    searchControl = new FormControl('');
+    cartCount = 0;
 
-  selectedCategory: number = 0;
-  sortByPrice: string = 'asc';
-  isFilterOpen: boolean = false;
+    selectedCategory: number = 0;
+    sortByPrice: string = 'asc';
+    isFilterOpen: boolean = false;
 
   productBackendUrl = 'http://172.104.165.74:8084/api/v1';
   productBackendUrlBase = 'http://172.104.165.74:8084';
@@ -117,16 +117,16 @@ export class ProductListComponent implements OnInit {
     this.newArrivals = [...this.originalNewArrivals];
   }
 
-  onFilterClick(): void {
-    this.isFilterOpen = true;
-  }
+    onFilterClick(): void {
+        this.isFilterOpen = true;
+    }
 
   closeFilter(): void {
     this.isFilterOpen = false;
   }
 
-  filterProducts(): void {
-    let filteredProducts = [...this.originalNewArrivals];
+    filterProducts(): void {
+        let filteredProducts = [...this.originalNewArrivals];
 
     if (this.selectedCategory) {
       filteredProducts = filteredProducts.filter(
@@ -140,8 +140,8 @@ export class ProductListComponent implements OnInit {
       filteredProducts.sort((a, b) => b.productPrice - a.productPrice);
     }
 
-    this.newArrivals = filteredProducts;
-  }
+        this.newArrivals = filteredProducts;
+    }
 
   viewProductDetails(product: Product): void {
     if (product && product.productId) {
