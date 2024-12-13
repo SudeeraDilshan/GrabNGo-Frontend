@@ -69,6 +69,7 @@ export interface OrderViewItem {
 }
 
 export interface Product {
+    isDeleted: any;
     productId: string;
     productName: string;
     productDescription: string;
