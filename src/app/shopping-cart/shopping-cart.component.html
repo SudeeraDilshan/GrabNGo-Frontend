@@ -1,7 +1,7 @@
 <div *ngIf="cartItems.length > 0" class="shopping-cart">
     <h2>Shopping Cart</h2>
 
-    <div *ngFor="let item of cartItems" class="cart-item">
+    <div *ngFor="let item of cartItemsToDisplay" class="cart-item">
         <input
                 [(ngModel)]="item.selected"
                 aria-label="Select item"
@@ -10,17 +10,17 @@
         />
 
         <div (click)="navigateToProductDetails(item.product.productId)" class="product-details">
-            <img [src]="item.product.imageUrl[0]" alt="{{ item.product.productName }}"/>
+            <img [src]="item.product.imageUrl" alt="{{ item.product.productName }}"/>
             <div>
                 <h3>{{ item.product.productName }}</h3>
-                <p>Price: Rs. {{ item.product.productPrice * item.quantity | number: '1.2-2' }}</p>
-                <p>Quantity: {{ item.quantity }}</p>
+                <p>Price: Rs. {{ item.product.productPrice * item.cartItem.quantity | number: '1.2-2' }}</p>
+                <p>Quantity: {{ item.cartItem.quantity }}</p>
             </div>
         </div>
     </div>
 
     <div class="cart-actions">
         <button (click)="checkout()" class="checkout-btn">Checkout</button>
-        <button (click)="cancelAll()" class="cancel-btn">Cancel All</button>
+        <button (click)="cancelAll()" class="cancel-btn">Remove</button>
     </div>
 </div>
