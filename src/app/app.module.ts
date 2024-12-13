@@ -51,6 +51,7 @@ import { ProductOverviewComponent } from './product-overview/product-overview.co
 import { FilterCategoryComponent } from './filter-category/filter-category.component';
 import { PasswordModificationComponent } from './password-modification/password-modification.component';
 import { TokenInterceptor } from "./helpers/token.interceptor";
+import { OrderItemComponent } from './order-item/order-item.component';
 
 @NgModule({
     declarations: [
@@ -88,7 +89,8 @@ import { TokenInterceptor } from "./helpers/token.interceptor";
         ShoppingCartComponent,
         FilterCategoryComponent,
         ProductOverviewComponent,
-        PasswordModificationComponent
+        PasswordModificationComponent,
+        OrderItemComponent
     ],
     imports: [
         BrowserModule,

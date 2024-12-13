@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CartService } from '../../shopping-cart/shopping-cart.services';
 
 interface OrderItem {
-  id: number;
+  id: string;
   name: string;
   size: string;
   quantity: number;
