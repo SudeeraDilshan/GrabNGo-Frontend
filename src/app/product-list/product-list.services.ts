@@ -8,6 +8,7 @@ import { Product, Category } from '../product/product.model';
   export class ProductService {
     private productBackendUrl = 'http://172.104.165.74:8084';  
     private categoryBackendUrl = 'http://172.104.165.74:8086';  
+    
   
     constructor(private http: HttpClient) {}
   
@@ -18,5 +19,6 @@ import { Product, Category } from '../product/product.model';
     getCategories(): Observable<Category[]> {
       return this.http.get<Category[]>(`${this.categoryBackendUrl}/categories`);
     }
+     
   }
   

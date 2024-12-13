@@ -1,20 +1,29 @@
 export interface Product {
   
-  CategoryId: number;
   productId: number;
   productName: string;
   productDescription: string;
   productPrice: number;
-  // category: string; 
-  imageUrl: string[];
+  
   productQuantity: number;
-  total: number;
-  available:boolean;
-  active:boolean
+  imageUrl: string[];
+  categoryId: number; 
+ //  category: string; 
+   
+  //total: number;
+  available:true;
+  active:true
 }
 export interface Category {
+  categoryName: string;
+  categoryId: number;
   id: number;
   name: string;
   imageUrl: string;
    
+}
+export interface ProductApiResponse {
+  msg: string;
+  data: Product;
+  status: string;
 }

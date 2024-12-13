@@ -38,7 +38,7 @@ export class FilterCategoryComponent implements OnInit {
     this.route.params.subscribe((params) => {
       this.categoryId = +params['categoryId'];
 
-      // Retrieve category name from route state or fallback to fetching details
+       
       const state = this.router.getCurrentNavigation()?.extras.state as { categoryName?: string };
       if (state?.categoryName) {
         this.categoryName = state.categoryName;
@@ -55,7 +55,7 @@ export class FilterCategoryComponent implements OnInit {
       .subscribe({
         next: (response) => {
           if (response && response.data) {
-            this.categoryName = response.data.categoryName; // Update category name dynamically
+            this.categoryName = response.data.categoryName;  
           } else {
             console.error('Unexpected response format:', response);
           }
@@ -87,7 +87,7 @@ export class FilterCategoryComponent implements OnInit {
         } else {
           console.error(`Backend returned error: ${err.message}`);
         }
-        this.categoryProducts = []; // Clear products to avoid stale data
+        this.categoryProducts = []; 
       },
     });
   }
