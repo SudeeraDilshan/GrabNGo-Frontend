@@ -1,3 +1,5 @@
+import { OrderItem } from "./models/order-model";
+
 export interface ApiResponse<T> {
     data: T;
     status: boolean;
@@ -24,22 +26,63 @@ export interface UserProfile {
     role: string;
 }
 
-export interface Product {
-
-    CategoryId: number;
-    productId: number;
-    productName: string;
-    productDescription: string;
-    productPrice: number;
-    imageUrl: string[];
-    productQuantity: number;
-    total: number;
-    available: boolean;
-    active: boolean
-}
-
 export interface Category {
     id: number;
     name: string;
     imageUrl: string;
+}
+
+export interface Order {
+    orderId: number;
+    userId: number;
+    totalPrice: number;
+    status: string;
+    createdDateTime: string;
+    discount: number;
+    firstName: string;
+    lastName: string;
+    address: string;
+    apartment: string;
+    city: string;
+    country: string;
+    zipCode: string;
+    orderItems: OrderItem[];
+}
+
+export interface OrderItem {
+    orderItemId: number;
+    orderId: number;
+    productId: number;
+    quantity: number;
+    discount: number;
+    sellPrice: number;
+}
+
+export interface OrderViewItem {
+    orderId: number;
+    quantity: number;
+    status: string;
+    createdDateTime: string;
+    unitPrice: number;
+    productName: string;
+    productImg: string;
+}
+
+export interface Product {
+    productId: string;
+    productName: string;
+    productDescription: string;
+    productPrice: number;
+    productQuantity: number;
+    imageUrl: string;
+    categoryId: string;
+    active: boolean;
+    available: boolean;
+}
+
+export interface Category {
+    categoryId: string;
+    categoryName: string;
+    description: string;
+    isActive: boolean;
 }

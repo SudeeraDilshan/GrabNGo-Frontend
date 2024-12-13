@@ -34,7 +34,7 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
 import { RegistrationComponent } from './registration/registration.component';
 import { CheckoutAddressComponent } from './checkout-address/checkout-address.component';
 import { OrderSummaryComponent } from './checkout-address/order-summary/order-summary.component';
- 
+
 import { CheckoutPaymentComponent } from './checkout-payment/checkout-payment.component';
 import { PaymentPortalComponent } from './checkout-payment/payment-portal/payment-portal.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
@@ -51,6 +51,7 @@ import { ProductOverviewComponent } from './product-overview/product-overview.co
 import { FilterCategoryComponent } from './filter-category/filter-category.component';
 import { PasswordModificationComponent } from './password-modification/password-modification.component';
 import { TokenInterceptor } from "./helpers/token.interceptor";
+import { OrderItemComponent } from './order-item/order-item.component';
 
 @NgModule({
     declarations: [
@@ -89,8 +90,7 @@ import { TokenInterceptor } from "./helpers/token.interceptor";
         FilterCategoryComponent,
         ProductOverviewComponent,
         PasswordModificationComponent,
-        
-        
+        OrderItemComponent
     ],
     imports: [
         BrowserModule,

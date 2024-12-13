@@ -44,7 +44,7 @@ export class ShoppingCartComponent implements OnInit {
     this.router.navigate(['cart']);
   }
 
-  navigateToProductDetails(productId: number): void {
+  navigateToProductDetails(productId: string): void {
     this.router.navigate(['product', productId]);
   }
 
