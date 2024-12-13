@@ -73,8 +73,8 @@ export class ShoppingCartComponent implements OnInit {
         this.router.navigate(['product', productId]);
     }
 
-    getSelectedItems(): CartItem[] {
-        return this.selectedItems;
+    getSelectedItems(): { product: Product, cartItem: CartItem, selected: boolean}[] {
+        return this.cartItemsToDisplay.filter((item) => item.selected);
     }
 
     checkout(): void {
