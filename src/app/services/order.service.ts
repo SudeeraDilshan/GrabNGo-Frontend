@@ -8,7 +8,7 @@ import { catchError } from "rxjs/operators";
     providedIn: 'root',
 })
 export class OrderService {
-    private apiUrl = "http://localhost:8080/api/v1/order";
+    private apiUrl = "http://172.207.18.25:8080/api/v1/order";
 
     constructor(private http: HttpClient) {
     }

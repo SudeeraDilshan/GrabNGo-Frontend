@@ -10,8 +10,8 @@ import { ApiResponse, LoginResponse } from "../types";
 })
 export class AuthService {
     public currentUser: Observable<any>;
-    private apiUrl = "http://localhost:8080/api/v1/auth"
-    private userUrl = "http://localhost:8080/api/v1/user";
+    private apiUrl = "http://172.207.18.25:8080/api/v1/auth"
+    private userUrl = "http://172.207.18.25:8080/api/v1/user";
     private currentUserSubject: BehaviorSubject<any>;
 
     constructor(private http: HttpClient, private router: Router) {

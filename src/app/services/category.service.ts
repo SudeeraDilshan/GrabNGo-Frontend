@@ -9,7 +9,7 @@ import { ApiResponse } from "../types";
 })
 
 export class CategoryService {
-    private apiUrl = "http://localhost:8080/api/v1/category";
+    private apiUrl = "http://172.207.18.25:8080/api/v1/category";
 
     constructor(private http: HttpClient) {
     }

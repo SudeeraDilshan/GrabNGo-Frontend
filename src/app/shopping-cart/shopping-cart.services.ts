@@ -18,7 +18,7 @@ interface CartItem {
 export class CartService {
     private cartItemsSubject = new BehaviorSubject<CartItem[]>([]);
     cartItems$ = this.cartItemsSubject.asObservable();
-    private apiUrl = "http://localhost:8080/api/v1/cart"
+    private apiUrl = "http://172.207.18.25:8080/api/v1/cart"
 
     constructor(private http: HttpClient) {
     }
