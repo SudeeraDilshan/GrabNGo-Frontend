@@ -66,7 +66,7 @@ export class ProductAdminComponent {
   editProduct(product: any) {
     this.router.navigate(['/productEdit', product.productId]);
   }
-
+  
   deleteProduct(product: Product): void {
     const dialogRef = this.dialog.open(ProductDeleteComponent);
     dialogRef.afterClosed().subscribe((confirmed: boolean) => {
