@@ -65,8 +65,8 @@
 }
 
 .order-summary {
-    flex: 1; /* Allow to take equal space */
-    min-width: 300px; /* Ensure responsiveness */
+    flex: 1;  
+    min-width: 300px;  
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 10px;
@@ -124,8 +124,7 @@
     color: #999;
     font-size: 1.2em;
 }
-
-/* Modal styles */
+ 
 .modal-overlay {
     position: fixed;
     top: 0;

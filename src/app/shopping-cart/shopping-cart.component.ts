@@ -5,9 +5,9 @@ import { CartItem, Product } from "../types";
 import { ProductService } from "../services/product.service";
 
 @Component({
-    selector: 'app-shopping-cart',
-    templateUrl: './shopping-cart.component.html',
-    styleUrls: ['./shopping-cart.component.css'],
+  selector: 'app-shopping-cart',
+  templateUrl: './shopping-cart.component.html',
+  styleUrls: ['./shopping-cart.component.css'],
 })
 export class ShoppingCartComponent implements OnInit {
     cartItems: CartItem[] = [];
