@@ -82,22 +82,6 @@ export class CheckoutAddressComponent implements OnInit {
     this.selectedItem = null;
   }
 
-  confirmDelete(): void {
-    if (this.selectedItem) {
-     
-      this.cartService.removeFromCart(String(this.selectedItem.id), this.selectedItem.quantity);
-  
-       
-      this.items = this.items.filter(item => item.id !== this.selectedItem!.id);  
-  
-      
-      this.closeModal();
-    } else {
-      console.error('No item selected for deletion.');
-    }
-  }
-  
-
   onSubmit(form: any): void {
     if (form.valid) {
       const userId = this.getUserIdFromLocalStorage();
@@ -135,14 +119,14 @@ export class CheckoutAddressComponent implements OnInit {
         (response) => {
           console.log('Checkout successful:', response);
           alert('Order placed successfully!');
-          
+
 
           sessionStorage.removeItem('SELECTED_CART_ITEMS');
-        
-          
+
+
           this.cartService.clearCart();
         },
-        
+
         (error) => {
           console.error('Error during checkout:', error);
           alert('There was an error submitting your order. Please try again.');
@@ -166,5 +150,5 @@ export class CheckoutAddressComponent implements OnInit {
     return userId ? parseInt(userId) : null;
   }
 
- 
+
 }
