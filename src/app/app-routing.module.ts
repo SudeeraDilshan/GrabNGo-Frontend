@@ -16,9 +16,6 @@ import { ProfileComponent } from './profile/profile.component';
 import { OrderHistoryComponent } from './order-history/order-history.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { RegistrationComponent } from './registration/registration.component';
- 
-import { CheckoutPaymentComponent } from './checkout-payment/checkout-payment.component';
-
 import { CartComponent } from './cart/cart.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { ProductComponent } from './product/product.component';
@@ -123,11 +120,6 @@ const routes: Routes = [
     {
         path: 'checkout-address',
         component: CheckoutAddressComponent,
-        canActivate: [loginRequiredGuard]
-    },
-    {
-        path: 'checkout-payment',
-        component: CheckoutPaymentComponent,
         canActivate: [loginRequiredGuard]
     },
     {

@@ -33,10 +33,6 @@ import { OrderHistoryComponent } from './order-history/order-history.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { CheckoutAddressComponent } from './checkout-address/checkout-address.component';
-import { OrderSummaryComponent } from './checkout-address/order-summary/order-summary.component';
-
-import { CheckoutPaymentComponent } from './checkout-payment/checkout-payment.component';
-import { PaymentPortalComponent } from './checkout-payment/payment-portal/payment-portal.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -78,10 +74,7 @@ import { OrderItemComponent } from './order-item/order-item.component';
         ChangePasswordComponent,
         RegistrationComponent,
         CheckoutAddressComponent,
-        OrderSummaryComponent,
         CheckoutAddressComponent,
-        CheckoutPaymentComponent,
-        PaymentPortalComponent,
         CartComponent,
         ProductListComponent,
         FilterResultsComponent,
