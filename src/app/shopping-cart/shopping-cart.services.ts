@@ -4,7 +4,7 @@ import { Product } from "../types";
 
 interface CartItem {
   cartItemId: number;
-  productId: number;
+  productId: string;
   product: Product;
   quantity: number;
   price: number;
@@ -68,7 +68,7 @@ export class CartService {
     localStorage.setItem('shoppingCart', JSON.stringify(this.cartItemsSubject.value));
   }
 
-  removeFromCart(productId: number, quantityToRemove: number = 1): void {
+  removeFromCart(productId: string, quantityToRemove: number = 1): void {
     const currentCart = this.cartItemsSubject.value;
     const existingItemIndex = currentCart.findIndex(
       (item) => item.productId === productId
