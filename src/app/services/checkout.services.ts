@@ -16,7 +16,8 @@ export class CheckoutService {
   submitCheckout(payload: any): Observable<any> {
     const headers = { 'Content-Type': 'application/json' };  
     return this.http.post(this.apiUrl, payload, { headers });
-    
+
   }
+  
   
 }

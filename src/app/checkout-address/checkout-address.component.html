@@ -118,16 +118,5 @@
         <p>Shipping: <span>Calculated at the next step</span></p>
         <p>Total: <span>Rs. {{ getSubtotal() | number: '1.2-2' }}</span></p>
       </div>
-      <!-- Confirmation Modal -->
-      <div *ngIf="isModalOpen" class="modal-overlay">
-        <div class="modal-content">
-          <h4>Confirm Deletion</h4>
-          <p>Are you sure you want to remove "{{ selectedItem?.name }}"?</p>
-          <div class="modal-actions">
-            <button (click)="confirmDelete()" class="btn-confirm">Yes</button>
-            <button (click)="closeModal()" class="btn-cancel">No</button>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
