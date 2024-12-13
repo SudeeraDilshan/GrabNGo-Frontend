@@ -1,5 +1,6 @@
 <div class="product-admin">
-    <table *ngIf="products.length > 0; else noProducts" class="admin-table">
+  <h2>Product Details</h2>
+  <table *ngIf="products.length > 0; else noProducts" class="admin-table">
         <thead>
         <tr>
             <th>Product Name</th>
@@ -21,7 +22,7 @@
                     </mat-select>
                 </mat-form-field>
             </td>
-        
+
             <td>Rs. {{ product.productPrice }}</td>
             <td>
                 <mat-form-field appearance="fill" class="dropdown">
