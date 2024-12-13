@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { Order } from '../models/order-model';
 import { catchError } from "rxjs/operators";
+import { ApiResponse, Order } from "../types";
 
 @Injectable({
     providedIn: 'root',
@@ -32,12 +32,11 @@ export class OrderService {
         );
     }
 
-    // Fetch order history by user ID and status
     getOrdersByUserAndStatus(userId: string, status: string): Observable<Order[]> {
-        const params = new HttpParams()
-            .set('userId', userId)
-            .set('status', status);
-
+        let params = new HttpParams().set('userId', userId);
+        if (status !== '') {
+            params = params.set('status', status);
+        }
         return this.http.get<Order[]>(`${this.apiUrl}/filter`, {params});
     }
 

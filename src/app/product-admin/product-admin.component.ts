@@ -4,30 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ProductService } from '../services/product.service';
 import { CategoryService } from '../services/category.service';
-
-export interface Product {
-    productId: string;
-    productName: string;
-    productDescription: string;
-    productPrice: string;
-    imageUrl: string;
-    categoryId: string;
-    active: boolean;
-    available: boolean;
-}
-
-export interface Category {
-    categoryId: string;
-    categoryName: string;
-    description: string;
-    isActive: boolean;
-}
-
-export interface ApiResponse<T> {
-    status: string;
-    message: string;
-    data: T
-}
+import { ApiResponse, Category, Product } from "../types";
 
 @Component({
     selector: 'app-product-admin',

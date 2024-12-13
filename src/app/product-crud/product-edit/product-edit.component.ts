@@ -107,7 +107,7 @@ export class ProductEditComponent implements OnInit {
                         productQuantity: product.data.productQuantity,
                         imageUrl: product.data.imageUrl,
                         categoryId: product.data.categoryId,
-                        availability: product.availability,
+                        availability: product.data.available,
                     });
                 } else {
                     console.error('Product data is null or undefined!');
