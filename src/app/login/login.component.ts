@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { CartService } from "../shopping-cart/shopping-cart.services";
 
 @Component({
     selector: 'app-login',
@@ -17,6 +18,7 @@ export class LoginComponent implements OnInit {
     constructor(
         private fb: FormBuilder,
         private authService: AuthService,
+        private cartService: CartService,
         private router: Router
     ) {
     }
@@ -53,7 +55,15 @@ export class LoginComponent implements OnInit {
             this.authService.login(email, password).subscribe({
                 next: user => {
                     console.log('Login successful:', user);
-                    this.router.navigate(['/']);
+                    this.cartService.getUserCart(user.userId).subscribe({
+                        next: cart => {
+                            this.cartService.storeCartInSessionStorage(cart);
+                            this.router.navigate(['/']);
+                        },
+                        error: err => {
+                            console.error('Error fetching user cart:', err);
+                        }
+                    });
                 },
                 error: err => {
                     console.error('Login failed:', err);
