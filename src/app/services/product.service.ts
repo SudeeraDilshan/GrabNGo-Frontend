@@ -30,8 +30,14 @@ export class ProductService {
     }
 
     updateProduct(productId: string, updatedProduct: any): Observable<any> {
-        return this.http.patch<any>(`${this.apiUrl}/${productId}`, updatedProduct);
+        console.log("Payload for update:", JSON.stringify(updatedProduct));
+        return this.http.put<any>(`${this.apiUrl}/${productId}`, updatedProduct, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
     }
+    
 
     deleteProduct(productId: string, product: any): Observable<any> {
         return this.http.put<any>(`${this.apiUrl}/${productId}`, product);

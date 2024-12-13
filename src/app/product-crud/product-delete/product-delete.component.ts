@@ -11,10 +11,13 @@ export class ProductDeleteComponent {
     }
 
     onNoClick(): void {
-        this.dialogRef.close(false);
-    }
-
-    onDelete(): void {
-        this.dialogRef.close(true);
-    }
+        console.log('Deletion canceled');
+        this.dialogRef.close(false); 
+      }
+      
+      onDelete(): void {
+        console.log('Deletion confirmed');
+        this.dialogRef.close(true); 
+      }
+      
 }
