@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from './product.model';
-import { ProductService } from './product.service';
 
 import { ActivatedRoute, Router } from '@angular/router';
 import { CartService } from '../shopping-cart/shopping-cart.services';
+import { ProductService } from "../services/product.service";
+import { Product } from "../types";
 
 @Component({
     selector: 'app-product',
@@ -31,7 +31,7 @@ export class ProductComponent implements OnInit {
     }
 
     fetchProductDetails(productId: number) {
-        this.productService.getProductById(productId).subscribe({
+        this.productService.getProductById(productId.toString()).subscribe({
             next: (product) => {
                 this.product = product;
             },
@@ -43,7 +43,7 @@ export class ProductComponent implements OnInit {
 
 
     loadProduct(id: number): void {
-        this.productService.getProductById(id).subscribe(
+        this.productService.getProductById(id.toString()).subscribe(
             (product) => {
                 this.product = product;
             },

@@ -1,28 +1,31 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from "../../environments/environment";
+import { Env } from "../types";
 
 @Injectable({
     providedIn: 'root',
 })
 export class CartService {
-    private cartApiUrl = 'http://172.207.18.25:8085'; // Replace with your actual API endpoint
+    private env = environment as Env;
+    private apiUrl = this.env.cartApi;
 
     constructor(private http: HttpClient) {
     }
 
     // Fetch all cart items
     getCartItems(): Observable<any[]> {
-        return this.http.get<any[]>(this.cartApiUrl);
+        return this.http.get<any[]>(this.apiUrl);
     }
 
     // Remove a specific item from the cart
     removeCartItem(itemId: string): Observable<any> {
-        return this.http.delete(`${this.cartApiUrl}/${itemId}`);
+        return this.http.delete(`${this.apiUrl}/${itemId}`);
     }
 
     // Add or update a cart item (if needed)
     addOrUpdateCartItem(item: any): Observable<any> {
-        return this.http.post(this.cartApiUrl, item);
+        return this.http.post(this.apiUrl, item);
     }
 }

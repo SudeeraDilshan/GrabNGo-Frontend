@@ -1,55 +1,33 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-
-export interface UserProfile {
-    userId: number;
-    emailAddress: string;
-    firstName: string;
-    lastName: string;
-    contactNumber: string;
-    nic: string;
-    address: string;
-    role: string;
-}
-
-export interface ApiResponse<T> {
-    status: boolean;
-    message: string;
-    data: T;
-    errors: any;
-}
+import { ApiResponse, UserProfile } from "../types";
+import { AuthService } from "./auth.service";
 
 @Injectable({
     providedIn: 'root'
 })
 export class ProfileService {
-    private baseUrl = 'http://172.207.18.25:8082/api/v1';
+    private apiUrl = "http://172.207.18.25:8080/api/v1/user";
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private authService: AuthService) {
     }
 
-    getUserProfileByEmail(email: string): Observable<UserProfile> {
-        return this.http
-            .get<ApiResponse<UserProfile>>(`${this.baseUrl}/user/${encodeURIComponent(email)}`)
-            .pipe(
-                map((response) => {
-                    if (!response.status) {
-                        throw new Error(response.message || 'Failed to fetch user profile');
-                    }
-                    return response.data; // Extract the 'data' field.
+    getCurrentUserDetails(): Observable<ApiResponse<UserProfile>> {
+        let email = this.authService.getCurrentUserEmail()!;
+        const token = this.authService.getAccessToken();
+        const headers = new HttpHeaders({
 
-                }),
-                catchError((error) => {
-                    console.error('Error fetching user profile:', error);
-                    throw error;
-                })
-            );
+            'Accept': '*/*',
+            "Authorization": `Bearer ${token}`,
+
+        });
+        return this.http.get<ApiResponse<UserProfile>>(`${this.apiUrl}/${encodeURIComponent(email)}`, { headers: headers });
     }
 
     updateUserProfile(profile: UserProfile): Observable<UserProfile> {
-        return this.http.put<ApiResponse<UserProfile>>(`${this.baseUrl}/user/profile`, profile)
+        return this.http.put<ApiResponse<UserProfile>>(`${this.apiUrl}/profile`, profile)
             .pipe(
                 map(response => {
                     if (!response.status) {

@@ -47,20 +47,14 @@ export class LoginComponent implements OnInit {
     }
 
     onLogin() {
-        // Set submission flag
         this.isSubmitted = true;
-
-        // Mark all fields as touched to trigger validation display
         this.loginForm.markAllAsTouched();
-
-        // Check if the form is valid before submitting
         if (this.loginForm.valid) {
             const {email, password} = this.loginForm.value;
-
             this.authService.login(email, password).subscribe({
                 next: user => {
                     console.log('Login successful:', user);
-                    this.router.navigate(['/']); // Navigate to home or another page
+                    this.router.navigate(['/']);
                 },
                 error: err => {
                     console.error('Login failed:', err);
