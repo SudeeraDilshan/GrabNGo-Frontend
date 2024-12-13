@@ -87,3 +87,19 @@ export interface Category {
     description: string;
     isActive: boolean;
 }
+
+export interface Cart {
+    cartId: number;
+    userId: number;
+    totalAmount: number;
+    totalProducts: number;
+    active: boolean;
+}
+
+export interface CartItem {
+    cartItemId:number,
+    productId:number,
+    quantity:number,
+    price:number,
+    cartId:number
+}
