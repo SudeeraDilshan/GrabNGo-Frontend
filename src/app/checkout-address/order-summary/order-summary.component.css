@@ -16,10 +16,10 @@
 }
 
 .remove-btn {
-    color: red;
-    border: none;
-    background: none;
-    cursor: pointer;
+  color:#f97316;
+  border: none;
+  background: none;
+  cursor: pointer;
 }
 
 .totals p {
@@ -56,12 +56,12 @@
 }
 
 .btn-confirm {
-    background-color: red;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 3px;
-    cursor: pointer;
+  background-color:#f97316;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 3px;
+  cursor: pointer;
 }
 
 .btn-cancel {
