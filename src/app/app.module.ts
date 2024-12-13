@@ -33,10 +33,6 @@ import { OrderHistoryComponent } from './order-history/order-history.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { CheckoutAddressComponent } from './checkout-address/checkout-address.component';
-import { OrderSummaryComponent } from './checkout-address/order-summary/order-summary.component';
-import { CheckoutComponent } from './checkout-address/checkout/checkout.component';
-import { CheckoutPaymentComponent } from './checkout-payment/checkout-payment.component';
-import { PaymentPortalComponent } from './checkout-payment/payment-portal/payment-portal.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -51,6 +47,7 @@ import { ProductOverviewComponent } from './product-overview/product-overview.co
 import { FilterCategoryComponent } from './filter-category/filter-category.component';
 import { PasswordModificationComponent } from './password-modification/password-modification.component';
 import { TokenInterceptor } from "./helpers/token.interceptor";
+import { OrderItemComponent } from './order-item/order-item.component';
 
 @NgModule({
     declarations: [
@@ -77,10 +74,7 @@ import { TokenInterceptor } from "./helpers/token.interceptor";
         ChangePasswordComponent,
         RegistrationComponent,
         CheckoutAddressComponent,
-        OrderSummaryComponent,
-        CheckoutComponent,
-        CheckoutPaymentComponent,
-        PaymentPortalComponent,
+        CheckoutAddressComponent,
         CartComponent,
         ProductListComponent,
         FilterResultsComponent,
@@ -88,7 +82,8 @@ import { TokenInterceptor } from "./helpers/token.interceptor";
         ShoppingCartComponent,
         FilterCategoryComponent,
         ProductOverviewComponent,
-        PasswordModificationComponent
+        PasswordModificationComponent,
+        OrderItemComponent
     ],
     imports: [
         BrowserModule,

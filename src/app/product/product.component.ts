@@ -16,7 +16,8 @@ export class ProductComponent implements OnInit {
   productId: number | null = null;
   loading: boolean = true;
   error: string | null = null;
-
+  images: string[] = [];
+  
   constructor(
     private route: ActivatedRoute,
     private productService: ProductService,
@@ -63,7 +64,8 @@ export class ProductComponent implements OnInit {
   }
 
   increaseQuantity(): void {
-    if (this.product && this.quantity < this.product.productQuantity) {
+    if (this.product && this.quantity < this.product.productQuantity
+    ) {
       this.quantity++;
     }
   }

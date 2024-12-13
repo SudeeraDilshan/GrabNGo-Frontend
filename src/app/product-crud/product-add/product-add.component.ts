@@ -136,7 +136,8 @@ export class ProductAddComponent {
 
             // Append the file with correct key
             formData.append('file', this.imageFile);
-
+            console.log('Image file:', this.imageFile);
+            
             this.productService.addProduct(formData).subscribe({
                 next: (response) => {
                     console.log('Product added successfully:', response);

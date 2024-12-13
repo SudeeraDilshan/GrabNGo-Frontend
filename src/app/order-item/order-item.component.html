@@ -1,0 +1,16 @@
+<div class="order-item">
+    <div class="product-image">
+        <img src="/assets/placeholder.png" alt="Product Image" class="product-img">
+    </div>
+    <div class="product-details">
+        <h3 class="product-name">{{orderItem.productName}}</h3>
+        <div class="product-info">
+            <p class="product-quantity">Quantity: {{orderItem.quantity}}</p>
+            <p class="product-price">${{orderItem.quantity * orderItem.unitPrice}}</p>
+        </div>
+        <div class="order-details">
+            <p class="order-date">Date: {{orderItem.createdDateTime | date: 'dd-MMM-yy h:mm:ss a '}}</p>
+            <p class="order-status">Status: {{orderItem.status}}</p>
+        </div>
+    </div>
+</div>

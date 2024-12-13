@@ -40,7 +40,6 @@ export class ProductListComponent implements OnInit {
     isFilterOpen: boolean = false;
 
     productBackendUrl = 'http://172.207.18.25:8080/api/v1';
-    productBackendUrlBase = 'http://172.207.18.25:8080';
     private categoryBackendUrl = 'http://172.207.18.25:8080/api/v1';
 
   // Declare filteredProducts here

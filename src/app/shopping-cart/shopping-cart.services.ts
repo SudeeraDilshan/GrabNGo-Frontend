@@ -4,7 +4,7 @@ import { Product } from "../types";
 
 interface CartItem {
   cartItemId: number;
-  productId: number;
+  productId: string;
   product: Product;
   quantity: number;
   price: number;
@@ -64,11 +64,11 @@ export class CartService {
       ]);
     }
 
-    // Update localStorage
+   
     localStorage.setItem('shoppingCart', JSON.stringify(this.cartItemsSubject.value));
   }
 
-  removeFromCart(productId: number, quantityToRemove: number = 1): void {
+  removeFromCart(productId: string, quantityToRemove: number = 1): void {
     const currentCart = this.cartItemsSubject.value;
     const existingItemIndex = currentCart.findIndex(
       (item) => item.productId === productId
@@ -88,7 +88,7 @@ export class CartService {
       }
 
       this.cartItemsSubject.next(updatedCart);
-      // Update localStorage
+      
       localStorage.setItem('shoppingCart', JSON.stringify(updatedCart));
     }
   }
