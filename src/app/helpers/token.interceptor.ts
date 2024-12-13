@@ -9,7 +9,7 @@ import { AuthService } from "../services/auth.service";
     providedIn: 'root'
 })
 export class TokenInterceptor implements HttpInterceptor {
-    private refreshTokenEndpointUrl = `http://localhost:8080/api/v1/auth/refresh`;
+    private refreshTokenEndpointUrl = `http://172.207.18.25:8080/api/v1/auth/refresh`;
 
     constructor(private httpClient: HttpClient, private authService: AuthService) {
     }

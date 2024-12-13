@@ -29,8 +29,8 @@ export class FilterCategoryComponent implements OnInit {
     categoryId: number = 0;
     categoryProducts: Product[] = [];
     categoryName: string = 'Category Products';
-    productBackendUrl = 'http://localhost:8080/api/v1';
-    categoryBackendUrl = 'http://localhost:8080/api/v1';
+    productBackendUrl = 'http://172.207.18.25:8080/api/v1';
+    categoryBackendUrl = 'http://172.207.18.25:8080/api/v1';
 
     constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient) {
     }

@@ -9,7 +9,7 @@ import { AuthService } from "./auth.service";
     providedIn: 'root'
 })
 export class ProfileService {
-    private apiUrl = "http://localhost:8080/api/v1/user";
+    private apiUrl = "http://172.207.18.25:8080/api/v1/user";
 
     constructor(private http: HttpClient, private authService: AuthService) {
     }
