@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CartService } from '../shopping-cart/shopping-cart.services';
 import { ProductService } from "../services/product.service";
-import { Product } from "../types";
+import {ApiResponse, Product} from "../types";
 
 @Component({
     selector: 'app-product',
@@ -16,7 +16,6 @@ export class ProductComponent implements OnInit {
   productId: number | null = null;
   loading: boolean = true;
   error: string | null = null;
-  images: string[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -43,12 +42,9 @@ export class ProductComponent implements OnInit {
   fetchProductDetails(productId: number): void {
     this.loading = true;
     this.productService.getProductById(productId.toString()).subscribe({
-      next: (product: Product) => {
-        console.log('Fetched Product Details:', product);
-        this.product = product;
-
-        // Handle image URLs
-        this.images = this.processImageUrls(product.imageUrl);
+      next: (response: ApiResponse<Product>) => {
+        console.log('Fetched Product Details:', response);
+        this.product = response.data;
 
         this.loading = false;
       },
@@ -58,22 +54,6 @@ export class ProductComponent implements OnInit {
         this.loading = false;
       },
     });
-  }
-
-  // New method to process image URLs
-  processImageUrls(imageUrl: string | string[]): string[] {
-    const baseUrl = 'http://172.104.165.74:8084';
-
-    // If imageUrl is undefined or null, return empty array
-    if (!imageUrl) return ['path/to/default/image.jpg'];
-
-    // If it's a single string, wrap it in an array
-    const urls = Array.isArray(imageUrl) ? imageUrl : [imageUrl];
-
-    // Map URLs to include base path, handle default if no images
-    return urls.length > 0
-      ? urls.map(url => `${baseUrl}${url}`)
-      : ['path/to/default/image.jpg'];
   }
 
   decreaseQuantity(): void {
@@ -95,8 +75,4 @@ export class ProductComponent implements OnInit {
     }
   }
 
-  // Kept for potential future use or reference
-  getProductImageUrl(): string {
-    return this.images.length > 0 ? this.images[0] : 'path/to/default/image.jpg';
-  }
 }
