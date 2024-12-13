@@ -13,9 +13,9 @@ export class OrderViewAdminComponent implements OnInit {
   isLoading: boolean = false;
   hasError: boolean = false;
   showSuccessMessage: boolean = false;
-  accepted = ACCEPTED;
-  delivered = DELIVERED;
-  cancelled = CANCELLED;
+  Accepted = ACCEPTED;
+  Delivered = DELIVERED;
+  Cancelled = CANCELLED;
 
   constructor(private orderService: OrderService) {}
 
@@ -28,7 +28,7 @@ export class OrderViewAdminComponent implements OnInit {
     this.hasError = false;
     this.orderService.getOrders().subscribe({
       next: (data: Order[]) => {
-        // Explicitly type the parameter
+        console.log('Fetched orders:', data);
         this.orders = data;
         this.isLoading = false;
       },
@@ -41,46 +41,36 @@ export class OrderViewAdminComponent implements OnInit {
   }
 
   updateOrderStatus(order: Order): void {
-    this.orderService
-      .updateOrder(order.orderId.toString(), order.status)
-      .subscribe({
-        next: (updatedOrder: Order) => {
-          const index = this.orders.findIndex(
-            (o) => o.orderId === updatedOrder.orderId
-          );
-          if (index !== -1) {
-            this.orders[index] = updatedOrder;
-          }
-          alert('Order status updated successfully!');
+    // Ensure status is a direct string
+    const statusToSend = order.status;
+    console.log(statusToSend);
 
-          this.showSuccessMessage = true;
-          setTimeout(() => {
-            this.showSuccessMessage = false;
-          }, 3000);
-          this.orderService
-            .updateOrder(order.orderId.toString(), order.status)
-            .subscribe({
-              next: (updatedOrder) => {
-                const normalizedOrder = {
-                  ...updatedOrder,
-                  status:
-                    JSON.parse(updatedOrder.status)?.status ||
-                    updatedOrder.status,
-                };
-                this.orders = this.orders.map((o) =>
-                  o.orderId === normalizedOrder.orderId ? normalizedOrder : o
-                );
-                this.showSuccessMessage = true;
-                setTimeout(() => {
-                  this.showSuccessMessage = false;
-                }, 3000);
-              },
-              error: (error: any) => {
-                console.error('Error updating order status:', error);
-                alert('Failed to update order status.');
-              },
-            });
-        },
-      });
+    this.orderService.updateOrder(order.orderId.toString(), statusToSend).subscribe({
+      next: (updatedOrder: Order) => {
+        // Normalize the status if it's a JSON-serialized string
+        try {
+          const parsedStatus = JSON.parse(updatedOrder.status);
+          updatedOrder.status = parsedStatus.status || updatedOrder.status;
+        } catch (e) {
+          console.warn('Failed to parse status, using raw value:', updatedOrder.status);
+        }
+
+        // Update the local orders list
+        const index = this.orders.findIndex((o) => o.orderId === updatedOrder.orderId);
+        if (index !== -1) {
+          this.orders[index] = updatedOrder;
+        }
+
+        console.log('Order status updated successfully!', updatedOrder);
+
+        this.showSuccessMessage = true;
+        setTimeout(() => {
+          this.showSuccessMessage = false;
+        }, 3000);
+      },
+      error: (error: any) => {
+        console.error('Error updating order status:', error);
+      },
+    });
   }
 }
