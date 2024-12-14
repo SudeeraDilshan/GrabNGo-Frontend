@@ -8,7 +8,7 @@ interface OrderItem {
   size: string;
   quantity: number;
   price: number;
-  imageUrl: string;
+  
 }
 
 interface FormData {
