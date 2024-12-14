@@ -59,6 +59,8 @@ h2 {
   display: grid;
   grid-template-columns: repeat(2, 1fr); /* Two items per row */
   gap: 20px; /* Spacing between cards */
+  margin-left: 30px;
+  margin-right: 30px;
 }
 
 .order-item {

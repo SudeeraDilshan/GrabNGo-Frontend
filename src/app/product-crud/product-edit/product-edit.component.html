@@ -12,7 +12,7 @@
         <input (change)="onImageUpload($event)" class="file-input" id="product-image" type="file"/>
     </div>
 
-    <form [formGroup]="editProductForm" (ngSubmit)="onSubmit()">
+    <form (ngSubmit)="onSubmit()" [formGroup]="editProductForm">
         <!-- Product Name and Price -->
         <div class="form-row">
             <label class="form-label" for="product-name">Product Name</label>
@@ -99,7 +99,8 @@
         <!-- Action Buttons -->
         <div class="button-row">
             <button (click)="cancel()" class="cancel-button" mat-button type="button">Cancel</button>
-            <button [disabled]="!editProductForm.valid" mat-raised-button type="submit" >Edit Product</button>
+            <button [disabled]="!editProductForm.valid" mat-raised-button type="submit">Edit Product</button>
+
         </div>
 
         <div *ngIf="showSuccessMessage" class="success-message">

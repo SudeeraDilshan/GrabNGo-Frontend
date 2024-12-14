@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from '../shopping-cart/shopping-cart.services';
 import { CheckoutService } from '../services/checkout.services';
+import { Router } from '@angular/router'; // Import Router
 
 interface OrderItem {
   id: number;
@@ -29,6 +30,7 @@ interface FormData {
 export class CheckoutAddressComponent implements OnInit {
   items: OrderItem[] = [];
   isModalOpen = false;
+  isSuccessModalOpen = false;
   selectedItem: OrderItem | null = null;
   formData: FormData = {
     firstName: '',
@@ -51,7 +53,11 @@ export class CheckoutAddressComponent implements OnInit {
     'Ukraine', 'United Arab Emirates', 'United Kingdom', 'United States', 'Uzbekistan', 'Vatican City', 'Vietnam'
   ];
 
-  constructor(private cartService: CartService, private checkoutService: CheckoutService) {}
+  constructor(
+    private cartService: CartService,
+    private checkoutService: CheckoutService,
+    private router: Router // Inject Router
+  ) {}
 
   ngOnInit(): void {
     this.loadCartItems();
@@ -68,7 +74,6 @@ export class CheckoutAddressComponent implements OnInit {
         price: item.product.productPrice,
         imageUrl: item.product.imageUrl,
       }));
-      console.log(this.items)
     }
   }
 
@@ -117,16 +122,10 @@ export class CheckoutAddressComponent implements OnInit {
 
       this.checkoutService.submitCheckout(payload).subscribe(
         (response) => {
-          console.log('Checkout successful:', response);
-          alert('Order placed successfully!');
-
-
+          this.isSuccessModalOpen = true;  // Open the success modal
           sessionStorage.removeItem('SELECTED_CART_ITEMS');
-
-
           this.cartService.clearCart();
         },
-
         (error) => {
           console.error('Error during checkout:', error);
           alert('There was an error submitting your order. Please try again.');
@@ -135,6 +134,11 @@ export class CheckoutAddressComponent implements OnInit {
     } else {
       alert('Please fill all required fields correctly.');
     }
+  }
+
+  closeSuccessModal(): void {
+    this.isSuccessModalOpen = false;  // Close the success modal
+    this.router.navigate(['/']);  // Redirect to home page (or '/product')
   }
 
   getSubtotal(): number {
@@ -149,6 +153,4 @@ export class CheckoutAddressComponent implements OnInit {
     const userId = sessionStorage.getItem('USER_ID');
     return userId ? parseInt(userId) : null;
   }
-
-
 }

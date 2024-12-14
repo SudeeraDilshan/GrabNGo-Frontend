@@ -1,6 +1,6 @@
 <div>
-<h2>Order Details</h2>
-<div class="container">
+  <h2>Order Details</h2>
+  <div class="container">
     <div class="checkout">
       <h3>Checkout</h3>
       <form #checkoutForm="ngForm" (ngSubmit)="onSubmit(checkoutForm)">
@@ -113,6 +113,16 @@
       <div class="totals">
         <p>Total: <span>Rs. {{ getSubtotal() | number: '1.2-2' }}</span></p>
       </div>
+    </div>
+  </div>
+
+
+  <!-- Success Modal -->
+  <div class="modal-overlay" *ngIf="isSuccessModalOpen">
+    <div class="modal-content">
+      <h3>Order Placed Successfully!</h3>
+      <p>Thank you for your purchase.</p>
+      <button (click)="closeSuccessModal()" class="btn-confirm">Close</button>
     </div>
   </div>
 </div>
