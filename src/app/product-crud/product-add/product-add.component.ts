@@ -66,7 +66,8 @@ export class ProductAddComponent {
     }
 
     onImageUpload(event: Event): void {
-        const file = (event.target as HTMLInputElement).files?.[0];
+        const fileInput = event.target as HTMLInputElement;
+        const file = fileInput.files?.[0];
         if (file) {
             this.imageFile = file;
             const reader = new FileReader();
@@ -74,14 +75,19 @@ export class ProductAddComponent {
                 this.imagePreview = reader.result;
             };
             reader.readAsDataURL(file);
+        } else {
+            this.imageFile = null;
+            this.imagePreview = null;
         }
     }
+    
 
     onSubmit() {
         this.submitted = true;
+    
         if (this.addProductForm.valid && this.imageFile) {
             const formData = new FormData();
-
+    
             formData.append('productName', this.addProductForm.get('productName')?.value);
             formData.append('productDescription', this.addProductForm.get('productDescription')?.value);
             formData.append('productPrice', this.addProductForm.get('productPrice')?.value);
@@ -89,19 +95,20 @@ export class ProductAddComponent {
             formData.append('categoryId', this.addProductForm.get('categoryId')?.value);
             formData.append('available', this.addProductForm.get('available')?.value.toString());
             formData.append('active', this.addProductForm.get('active')?.value.toString());
-
-            // Append the file with correct key
             formData.append('file', this.imageFile);
-            console.log('Image file:', this.imageFile);
-            
+    
             this.productService.addProduct(formData).subscribe({
                 next: (response) => {
-                    console.log('Product added successfully:', response);
-                    this.showSuccessMessage = true;
-                    setTimeout(() => {
-                        this.showSuccessMessage = false;
-                        this.router.navigate(['/productAdmin']);
-                    }, 3000);
+                    if (response.status === '100 CONTINUE') {
+                        console.log('Product added successfully:', response);
+                        this.showSuccessMessage = true;
+                        setTimeout(() => {
+                            this.showSuccessMessage = false;
+                            this.router.navigate(['/productAdmin']);
+                        }, 3000);
+                    } else {
+                        console.error('Unexpected response:', response);
+                    }
                 },
                 error: (err) => {
                     console.error('Error adding product:', err);
@@ -111,6 +118,7 @@ export class ProductAddComponent {
             console.error('Form is invalid or no image is selected.');
         }
     }
+    
 
 
     resetForm() {

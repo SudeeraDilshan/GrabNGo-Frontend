@@ -71,20 +71,19 @@ export class ProductAdminComponent {
     const dialogRef = this.dialog.open(ProductDeleteComponent);
     dialogRef.afterClosed().subscribe((confirmed: boolean) => {
       if (confirmed) {
-        this.productService
-          .deleteProduct(product.productId, product)
-          .subscribe({
-            next: () => {
-              this.loadProducts();
-              console.log('Product deleted:', product);
-            },
-            error: (err) => {
-              console.error('Error deleting product:', err);
-            },
-          });
+        this.productService.deleteProductByQuery(product.productId.toString()).subscribe({
+          next: (response) => {
+            console.log('Product deleted:', response.msg);
+            this.loadProducts(); // Reload the product list
+          },
+          error: (err) => {
+            console.error('Error deleting product:', err);
+          },
+        });
       }
     });
   }
+  
 
   updateCategory(product: Product): void {
     this.productService
