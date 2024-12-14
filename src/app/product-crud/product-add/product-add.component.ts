@@ -80,14 +80,14 @@ export class ProductAddComponent {
             this.imagePreview = null;
         }
     }
-    
+
 
     onSubmit() {
         this.submitted = true;
-    
+
         if (this.addProductForm.valid && this.imageFile) {
             const formData = new FormData();
-    
+
             formData.append('productName', this.addProductForm.get('productName')?.value);
             formData.append('productDescription', this.addProductForm.get('productDescription')?.value);
             formData.append('productPrice', this.addProductForm.get('productPrice')?.value);
@@ -96,7 +96,7 @@ export class ProductAddComponent {
             formData.append('available', this.addProductForm.get('available')?.value.toString());
             formData.append('active', this.addProductForm.get('active')?.value.toString());
             formData.append('file', this.imageFile);
-    
+
             this.productService.addProduct(formData).subscribe({
                 next: (response) => {
                     if (response.status === '100 CONTINUE') {
@@ -118,8 +118,6 @@ export class ProductAddComponent {
             console.error('Form is invalid or no image is selected.');
         }
     }
-    
-
 
     resetForm() {
         this.addProductForm.reset();

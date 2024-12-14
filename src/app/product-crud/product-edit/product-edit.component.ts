@@ -144,20 +144,24 @@ export class ProductEditComponent implements OnInit {
         productQuantity: productData.productQuantity,
         imageUrl: productData.imageUrl,
         categoryId: parseInt(productData.categoryId, 10),
-        available: productData.available === 'Available',
+        available: productData.available,
       };
+
       console.log('Payload to API:', updatedProduct);
-      this.productService
-        .updateProduct(this.productId, updatedProduct)
-        .subscribe({
-          next: (response) => {
-            console.log('Update response:', response);
-            this.showSuccessMessage = true;
-          },
-          error: (err) => {
-            console.error('Error updating product:', err);
-          },
-        });
+
+      this.productService.updateProduct(this.productId, updatedProduct).subscribe({
+        next: (response) => {
+          console.log('Update response:', response);
+          this.showSuccessMessage = true;
+
+          setTimeout(() => {
+            this.router.navigate(['/productAdmin']);
+          }, 2000);
+        },
+        error: (err) => {
+          console.error('Error updating product:', err);
+        },
+      });
     }
   }
 
