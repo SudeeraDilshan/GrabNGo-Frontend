@@ -65,18 +65,6 @@ export class ProductAddComponent {
         });
     }
 
-    // onImageUpload(event: Event): void {
-    //   const file = (event.target as HTMLInputElement).files?.[0];
-    //   if (file) {
-    //     const reader = new FileReader();
-    //     reader.onload = () => {
-    //       this.imagePreview = reader.result;
-    //       this.addProductForm.patchValue({ imageUrl: reader.result });
-    //     };
-    //     reader.readAsDataURL(file);
-    //   }
-    // }
-
     onImageUpload(event: Event): void {
         const file = (event.target as HTMLInputElement).files?.[0];
         if (file) {
@@ -88,38 +76,6 @@ export class ProductAddComponent {
             reader.readAsDataURL(file);
         }
     }
-
-    // onSubmit() {
-    //   this.submitted = true;
-    //   if (this.addProductForm.valid && this.imageFile) {
-    //     const formData = new FormData();
-    //     formData.append('productName', this.addProductForm.get('productName')?.value);
-    //     formData.append('productDescription', this.addProductForm.get('productDescription')?.value);
-    //     formData.append('productPrice', this.addProductForm.get('productPrice')?.value);
-    //     formData.append('productQuantity', this.addProductForm.get('productQuantity')?.value);
-    //     formData.append('available', this.addProductForm.get('available')?.value);
-    //     formData.append('active', this.addProductForm.get('active')?.value);
-    //     formData.append('categoryId', this.addProductForm.get('categoryId')?.value);
-    //     formData.append('file', this.imageFile);
-    //     console.log('Image file:', this.imageFile);
-
-    //     this.productService.addProduct(formData).subscribe({
-    //       next: (response) => {
-    //         console.log('Product added successfully:', response);
-    //         this.showSuccessMessage = true;
-    //         setTimeout(() => {
-    //           this.showSuccessMessage = false;
-    //           this.router.navigate(['/productAdmin']);
-    //         }, 3000);
-    //       },
-    //       error: (err) => {
-    //         console.error('Error adding product:', err);
-    //       },
-    //     });
-    //   } else {
-    //     console.error('Form is invalid or no image is selected.');
-    //   }
-    // }
 
     onSubmit() {
         this.submitted = true;
