@@ -28,7 +28,7 @@ h2 {
 .admin-table td {
     padding: 20px;
     border-bottom: 1px solid #ddd;
-    text-align: center;
+    text-align: left;
 }
 
 .dropdown {
