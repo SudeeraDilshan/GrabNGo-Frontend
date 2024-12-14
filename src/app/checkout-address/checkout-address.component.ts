@@ -65,7 +65,7 @@ export class CheckoutAddressComponent implements OnInit {
         size: 'Default Size',
         quantity: item.quantity,
         price: item.product.productPrice,
-        imageUrl: item.product.imageUrl[0],
+        imageUrl: item.product.imageUrl,
       }));
     });
   }
