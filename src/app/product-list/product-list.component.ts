@@ -100,7 +100,8 @@ export class ProductListComponent implements OnInit {
 
   onSearch(): void {
     const searchTerm = this.searchControl.value?.toLowerCase();
-    console.log("Search term:", searchTerm); // Log the search term
+    console.log('Search term:', searchTerm);
+
     if (searchTerm) {
       this.filteredProducts = this.originalNewArrivals.filter((product) =>
         product.productName.toLowerCase().includes(searchTerm) ||
@@ -109,6 +110,9 @@ export class ProductListComponent implements OnInit {
     } else {
       this.filteredProducts = [...this.originalNewArrivals];
     }
+
+    // Reapply filters after searching
+    this.filterProducts();
   }
 
   resetFilters(): void {
@@ -123,23 +127,29 @@ export class ProductListComponent implements OnInit {
     this.isFilterOpen = false;
   }
 
-    filterProducts(): void {
-        let filteredProducts = [...this.originalNewArrivals];
 
+  filterProducts(): void {
+    let filteredProducts = [...this.originalNewArrivals];
+
+    // Apply category filter if a category is selected
     if (this.selectedCategory) {
       filteredProducts = filteredProducts.filter(
         (product) => product.categoryId === this.selectedCategory
       );
     }
 
+    // Apply sorting based on the selected price order
     if (this.sortByPrice === 'asc') {
       filteredProducts.sort((a, b) => a.productPrice - b.productPrice);
     } else if (this.sortByPrice === 'desc') {
       filteredProducts.sort((a, b) => b.productPrice - a.productPrice);
     }
 
-        this.newArrivals = filteredProducts;
-    }
+    // Update the filteredProducts array
+    this.filteredProducts = filteredProducts;
+    console.log('Filtered Products:', this.filteredProducts); // Log for debugging
+  }
+
 
   viewProductDetails(product: Product): void {
     if (product && product.productId) {
@@ -161,21 +171,26 @@ export class ProductListComponent implements OnInit {
   }
 
   applyFilter(): void {
+    // Close the filter modal
     this.isFilterOpen = false;
 
+    // Parse the selected category ID
     const selectedCategoryId = Number(this.selectedCategory);
-    console.log("Selected Category ID: ", selectedCategoryId);
 
+    // Apply filtering logic
     this.filterProducts();
 
-    const category = this.categories.find((cat) => cat.categoryId === selectedCategoryId);
-    if (category) {
-      console.log("Category found: ", category);
-      this.router.navigate(['/category', selectedCategoryId], {
-        state: { categoryName: category.categoryName },
-      });
-    } else {
-      console.error('Category not found', selectedCategoryId);
+    // Navigate to the selected category if applicable
+    if (selectedCategoryId) {
+      const category = this.categories.find(cat => cat.categoryId === selectedCategoryId);
+      if (category) {
+        console.log('Navigating to category:', category.categoryName);
+        this.router.navigate(['/category', selectedCategoryId], {
+          state: { categoryName: category.categoryName }
+        });
+      } else {
+        console.error('Selected category not found:', selectedCategoryId);
+      }
     }
   }
 }
