@@ -1,6 +1,6 @@
 .container {
     display: flex;
-   justify-content: center;
+    justify-content: center;
     gap: 80px;
     margin: 40px auto;
     max-width: 1000px;
@@ -25,11 +25,11 @@
 }
 
 h2 {
-  font-size: 24px;
-  font-weight: bold;
-  margin-left: 100px;
-  color: #C06308;
-  margin-top: 50px;
+    font-size: 24px;
+    font-weight: bold;
+    margin-left: 100px;
+    color: #C06308;
+    margin-top: 50px;
 }
 
 
@@ -82,6 +82,7 @@ h2 {
     border-radius: 10px;
     background-color: #fff;
     max-width: 400px;
+    height: fit-content;
 
 }
 
@@ -101,8 +102,10 @@ h2 {
     .order-summary {
         max-width: 100%;
         margin-bottom: 20px;
+        height: fit-content;
     }
 }
+
 .order-item {
     display: flex;
     align-items: center;
