@@ -1,45 +1,46 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ApiResponse, Product } from "../types";
 
 @Injectable({
-    providedIn: 'root',
+  providedIn: 'root',
 })
-
 export class ProductService {
-    private apiUrl = "http://172.207.18.25:8080/api/v1/product";
+  private apiUrl = "http://172.207.18.25:8080/api/v1/product";
 
-    constructor(private http: HttpClient) {
-    }
+  constructor(private http: HttpClient) {}
 
-    getProductById(productId: string): Observable<ApiResponse<Product>> {
-        return this.http.get<ApiResponse<Product>>(`${this.apiUrl}/${productId}`);
-    }
+  getProductById(productId: string): Observable<ApiResponse<Product>> {
+    return this.http.get<ApiResponse<Product>>(`${this.apiUrl}/${productId}`);
+  }
 
-    getProducts(): Observable<Product[]> {
-        return this.http.get<Product[]>(`${this.apiUrl}`);
-    }
+  getProducts(): Observable<Product[]> {
+    return this.http.get<Product[]>(`${this.apiUrl}`);
+  }
 
-    addProduct(newProduct: FormData): Observable<any> {
-        return this.http.post<any>(this.apiUrl, newProduct, {
-            headers: {
-                'enctype': 'multipart/form-data',
-            },
-        });
-    }
+  addProduct(newProduct: FormData): Observable<any> {
+    return this.http.post<any>(this.apiUrl, newProduct, {
+      headers: {
+        'enctype': 'multipart/form-data',
+      },
+    });
+  }
 
-    updateProduct(productId: string, updatedProduct: any): Observable<any> {
-        console.log("Payload for update:", JSON.stringify(updatedProduct));
-        return this.http.put<any>(`${this.apiUrl}/${productId}`, updatedProduct, {
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
-    }
-    
+  
+  updateProduct(productId: string, updatedProduct: any): Observable<any> {
+    console.log("Payload for update:", JSON.stringify(updatedProduct));
+    return this.http.put<any>(`${this.apiUrl}/${productId}`, updatedProduct, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+  }
 
-    deleteProduct(productId: string, product: any): Observable<any> {
-        return this.http.put<any>(`${this.apiUrl}/${productId}`, product);
-    }
+  deleteProductByQuery(productId: string): Observable<any> {
+    const params = new HttpParams().set('id', productId); // Set query parameter
+    return this.http.put<any>(this.apiUrl, null, { params }); // Send PUT request with params
+  }
+  
+  
 }
