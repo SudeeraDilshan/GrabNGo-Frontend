@@ -1,6 +1,7 @@
 import { OrderItem } from "./models/order-model";
 
 export interface ApiResponse<T> {
+    availability: any;
     data: T;
     status: boolean;
     message: string;

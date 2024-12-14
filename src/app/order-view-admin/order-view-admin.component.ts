@@ -41,10 +41,8 @@ export class OrderViewAdminComponent implements OnInit {
   }
 
   updateOrderStatus(order: Order): void {
-    // Ensure status is a direct string
     const statusToSend = order.status;
     console.log(statusToSend);
-
     this.orderService.updateOrder(order.orderId.toString(), statusToSend).subscribe({
       next: (updatedOrder: Order) => {
         // Normalize the status if it's a JSON-serialized string
@@ -54,15 +52,12 @@ export class OrderViewAdminComponent implements OnInit {
         } catch (e) {
           console.warn('Failed to parse status, using raw value:', updatedOrder.status);
         }
-
         // Update the local orders list
         const index = this.orders.findIndex((o) => o.orderId === updatedOrder.orderId);
         if (index !== -1) {
           this.orders[index] = updatedOrder;
         }
-
         console.log('Order status updated successfully!', updatedOrder);
-
         this.showSuccessMessage = true;
         setTimeout(() => {
           this.showSuccessMessage = false;

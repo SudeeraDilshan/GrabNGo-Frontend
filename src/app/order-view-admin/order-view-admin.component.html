@@ -2,6 +2,7 @@
   <div *ngIf="isLoading" class="loading">
     <p>Loading orders...</p>
   </div>
+  <h2>Order Details</h2>
   <table *ngIf="orders.length > 0 && !isLoading && !hasError; else noOrders" class="admin-table">
     <thead>
     <tr>
