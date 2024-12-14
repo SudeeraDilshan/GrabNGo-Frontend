@@ -1,49 +1,116 @@
 .order-history {
-    padding: 20px;
+  padding: 30px;
 }
 
-h1 {
-    color: #ff8c00;
-    font-size: 24px;
-    margin-bottom: 20px;
+.order-history-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
 }
 
-.loading,
-.error {
-    text-align: center;
-    font-size: 16px;
-    color: #888;
+.filter-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-.order-card {
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid #e0e0e0;
-    padding: 10px 0;
+.filter-controls input,
+.filter-controls select {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
 }
 
-.order-card img {
-    width: 80px;
-    height: 80px;
-    margin-right: 20px;
+.loading-state,
+.error-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  color: #888;
+  font-size: 16px;
 }
 
-.order-details {
-    flex: 1;
+.spinner {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #ff8c00;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.order-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Two items per row */
+  gap: 20px; /* Spacing between cards */
+}
+
+.order-item {
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: row;
+  padding: 20px;
+  gap: 10px;
+}
+
+.order-item-image {
+  width: 80px;
+  height: 80px;
+  margin-right: 20px;
+}
+
+.order-item-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.order-item-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.order-item-text {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
 .product-name {
-    font-size: 16px;
-    font-weight: bold;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.order-size,
+.order-quantity {
+  font-size: 14px;
+  color: #666;
 }
 
 .price {
-    color: #ff8c00;
-    font-size: 18px;
-    font-weight: bold;
+  font-size: 16px;
+  font-weight: bold;
+  color: #ff8c00;
 }
 
 .order-date {
-    font-size: 14px;
-    color: #888;
+  font-size: 14px;
+  color: #888;
+  text-align: right;
+  white-space: nowrap; /* Prevents wrapping */
 }

@@ -9,7 +9,6 @@ import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
 import { ProductAdminComponent } from './product-admin/product-admin.component';
 import { CategoryViewAdminComponent } from './category-view-admin/category-view-admin.component';
 import { ProductCrudComponent } from './product-crud/product-crud.component';
@@ -33,10 +32,6 @@ import { OrderHistoryComponent } from './order-history/order-history.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { CheckoutAddressComponent } from './checkout-address/checkout-address.component';
-import { OrderSummaryComponent } from './checkout-address/order-summary/order-summary.component';
-import { CheckoutComponent } from './checkout-address/checkout/checkout.component';
-import { CheckoutPaymentComponent } from './checkout-payment/checkout-payment.component';
-import { PaymentPortalComponent } from './checkout-payment/payment-portal/payment-portal.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -47,16 +42,15 @@ import { MatIconModule } from '@angular/material/icon';
 import { FilterResultsComponent } from './filter-results/filter-results.component';
 import { ProductComponent } from './product/product.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
-import { ProductOverviewComponent } from './product-overview/product-overview.component';
 import { FilterCategoryComponent } from './filter-category/filter-category.component';
 import { PasswordModificationComponent } from './password-modification/password-modification.component';
 import { TokenInterceptor } from "./helpers/token.interceptor";
+import { OrderItemComponent } from './order-item/order-item.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         HeaderComponent,
-        FooterComponent,
         ProductAdminComponent,
         CategoryViewAdminComponent,
         ProductCrudComponent,
@@ -68,7 +62,6 @@ import { TokenInterceptor } from "./helpers/token.interceptor";
         CategoryEditComponent,
         CategoryDeleteComponent,
         OrderViewAdminComponent,
-        FooterComponent,
         LoginComponent,
         ResetPasswordComponent,
         EmailVerificationComponent,
@@ -77,18 +70,15 @@ import { TokenInterceptor } from "./helpers/token.interceptor";
         ChangePasswordComponent,
         RegistrationComponent,
         CheckoutAddressComponent,
-        OrderSummaryComponent,
-        CheckoutComponent,
-        CheckoutPaymentComponent,
-        PaymentPortalComponent,
+        CheckoutAddressComponent,
         CartComponent,
         ProductListComponent,
         FilterResultsComponent,
         ProductComponent,
         ShoppingCartComponent,
         FilterCategoryComponent,
-        ProductOverviewComponent,
-        PasswordModificationComponent
+        PasswordModificationComponent,
+        OrderItemComponent
     ],
     imports: [
         BrowserModule,

@@ -1,3 +1,5 @@
+import { OrderItem } from "./models/order-model";
+
 export interface ApiResponse<T> {
     data: T;
     status: boolean;
@@ -24,49 +26,80 @@ export interface UserProfile {
     role: string;
 }
 
-export interface Product {
-
-    CategoryId: number;
-    productId: number;
-    productName: string;
-    productDescription: string;
-    productPrice: number;
-    imageUrl: string[];
-    productQuantity: number;
-    total: number;
-    available: boolean;
-    active: boolean
-}
-
 export interface Category {
     id: number;
     name: string;
     imageUrl: string;
 }
 
+export interface Order {
+    orderId: number;
+    userId: number;
+    totalPrice: number;
+    status: string;
+    createdDateTime: string;
+    discount: number;
+    firstName: string;
+    lastName: string;
+    address: string;
+    apartment: string;
+    city: string;
+    country: string;
+    zipCode: string;
+    orderItems: OrderItem[];
+}
+
 export interface OrderItem {
-    orderItemId: number; // Unique ID for the order item
-    orderId: number;     // ID of the associated order
-    productId: number;   // ID of the product
-    quantity: number;    // Quantity of the product
-    discount: number;    // Discount applied to the item
-    sellPrice: number;   // Selling price of the item
-  }
-  
-  export interface Order {
-    orderId: number;              // Unique ID for the order
-    userId: number;               // ID of the user who placed the order
-    totalPrice: number;           // Total price of the order
-    status: string;               // Status of the order (e.g., "Pending", "Completed")
-    createdDateTime: string;      // Date and time the order was created
-    discount: number;             // Discount applied to the order
-    firstName: string;            // First name of the user
-    lastName: string;             // Last name of the user
-    address: string;              // Shipping address
-    apartment: string;            // Apartment details (if applicable)
-    city: string;                 // City of the address
-    country: string;              // Country of the address
-    zipCode: string;              // ZIP/postal code
-    orderItems: OrderItem[];   // List of items in the order
-  }
-  
+    orderItemId: number;
+    orderId: number;
+    productId: number;
+    quantity: number;
+    discount: number;
+    sellPrice: number;
+}
+
+export interface OrderViewItem {
+    orderId: number;
+    quantity: number;
+    status: string;
+    createdDateTime: string;
+    unitPrice: number;
+    productName: string;
+    productImg: string;
+}
+
+export interface Product {
+    isDeleted: any;
+    productId: string;
+    productName: string;
+    productDescription: string;
+    productPrice: number;
+    productQuantity: number;
+    imageUrl: string;
+    categoryId: string;
+    active: boolean;
+    available: boolean;
+}
+
+export interface Category {
+    categoryId: string;
+    categoryName: string;
+    description: string;
+    isActive: boolean;
+}
+
+export interface Cart {
+    cartId: number;
+    userId: number;
+    totalAmount: number;
+    totalProducts: number;
+    active: boolean;
+}
+
+export interface CartItem {
+    cartItemId:number,
+    productId:number,
+    quantity:number,
+    price:number,
+    cartId:number
+}

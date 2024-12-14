@@ -1,31 +1,35 @@
 <div class="order-history">
+  <div class="order-history-header">
     <h1>Order History</h1>
-
-    <!-- Loading State -->
-    <div *ngIf="isLoading" class="loading">
-        <p>Loading...</p>
     </div>
+  </div>
 
-    <!-- Error State -->
-    <div *ngIf="hasError" class="error">
-        <p>Failed to load order history. Please try again later.</p>
-    </div>
+  <!-- Loading State -->
+  <div *ngIf="isLoading" class="loading-state">
+    <div class="spinner"></div>
+    <p>Loading...</p>
+  </div>
 
-    <!-- Order List -->
-    <div *ngIf="!isLoading && !hasError">
-        <div *ngFor="let order of orders" class="order-card">
-            <div *ngFor="let item of order.orderItems">
-                <img [src]="item.imageUrl" alt="Product Image"/>
-                <div class="order-details">
-                    <p class="product-name">{{ item.productName }}</p>
-                    <p>Size: {{ item.size }}</p>
-                    <p>Quantity: {{ item.quantity }}</p>
-                    <p class="price">${{ item.price }}</p>
-                </div>
-                <div class="order-date">
-                    <p>{{ item.date }}</p>
-                </div>
-            </div>
+  <!-- Error State -->
+  <div *ngIf="hasError" class="error-state">
+    <i class="fas fa-exclamation-triangle"></i>
+    <p>Failed to load order history. Please try again later.</p>
+  </div>
+
+  <!-- Order List -->
+  <div *ngIf="!isLoading && !hasError" class="order-list">
+    <div class="order-item" *ngFor="let item of orderList">
+      <div class="order-item-image">
+        <img [src]="item.productImg" [alt]="item.productName">
+      </div>
+      <div class="order-item-details">
+        <div class="order-item-text">
+          <h3 class="product-name">{{ item.productName }}</h3>
+<!--          <p class="order-size">Size: {{ item.size }}</p>-->
+          <p class="order-quantity">Quantity: {{ item.quantity }}</p>
+          <p class="price">$99</p>
         </div>
+        <p class="order-date">{{ item.createdDateTime | date:'yyyy/MM/dd' }}</p>
+      </div>
     </div>
-</div>
+  </div>
