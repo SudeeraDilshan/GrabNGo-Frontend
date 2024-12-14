@@ -8,7 +8,7 @@ interface OrderItem {
   size: string;
   quantity: number;
   price: number;
-  
+  imageUrl: string;
 }
 
 interface FormData {
@@ -64,11 +64,11 @@ export class CheckoutAddressComponent implements OnInit {
       this.items = cartItems.map((item: any) => ({
         id: Number(item.product.productId),
         name: item.product.productName,
-        size: 'Default Size',
-        quantity: item.quantity,
+        quantity: item.cartItem.quantity,
         price: item.product.productPrice,
         imageUrl: item.product.imageUrl,
       }));
+      console.log(this.items)
     }
   }
 

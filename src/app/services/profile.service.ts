@@ -27,7 +27,7 @@ export class ProfileService {
     }
 
     updateUserProfile(profile: UserProfile): Observable<UserProfile> {
-        return this.http.put<ApiResponse<UserProfile>>(`${this.apiUrl}/profile`, profile)
+        return this.http.put<ApiResponse<UserProfile>>(`${this.apiUrl}/`, profile)
             .pipe(
                 map(response => {
                     if (!response.status) {
