@@ -33,7 +33,7 @@ export class OrderHistoryComponent implements OnInit {
         this.isLoading = true;
         this.hasError = false;
 
-        this.orderService.getOrdersByUserAndStatus(this.userId, this.status).subscribe({
+        this.orderService.getOrdersByUserAndStatus(sessionStorage.getItem("USER_ID")!, this.status).subscribe({
             next: (response) => {
                 console.log(response)
                 this.orders = response;

@@ -71,6 +71,7 @@ export class ProfileComponent implements OnInit {
                 this.isEditing = false;
                 this.isLoading = false;
                 this.errorMessage = null;
+                window.location.reload();
             },
             error: (error) => {
                 this.errorMessage = error.message || 'Failed to update profile';
