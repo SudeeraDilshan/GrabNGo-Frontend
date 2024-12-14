@@ -47,10 +47,10 @@ export class OrderService {
 
     // Update order status
     updateOrder(orderId: string, status: string): Observable<Order> {
-        return this.http.put<Order>(`${this.apiUrl}/${orderId}`, {status});
+        return this.http.patch<Order>(`${this.apiUrl}/${orderId}`, {status});
     }
 
-    // Optional: Get a single order by ID
+    // Get a single order by ID
     getOrderById(orderId: string): Observable<Order> {
         return this.http.get<Order>(`${this.apiUrl}/${orderId}`);
     }

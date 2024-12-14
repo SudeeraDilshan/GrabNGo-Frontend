@@ -54,27 +54,21 @@ export class ProductEditComponent implements OnInit {
   ngOnInit(): void {
     this.productId = this.activatedRoute.snapshot.paramMap.get('id')!;
     this.productService.getProductById(this.productId).subscribe((data) => {
-      console.log(data.data);
-      this.editProductForm.controls['productName'].setValue(
-        data.data.productName
-      );
-      this.editProductForm.controls['productDescription'].setValue(
-        data.data.productDescription
-      );
-      this.editProductForm.controls['productPrice'].setValue(
-        data.data.productPrice
-      );
-      this.editProductForm.controls['productQuantity'].setValue(
-        data.data.productQuantity
-      );
-      this.editProductForm.controls['imageUrl'].setValue(data.data.imageUrl);
-      this.editProductForm.controls['categoryId'].setValue(
-        data.data.categoryId
-      );
-      this.editProductForm.controls['available'].setValue(data.data.available);
+        const productData = data.data;
+        this.editProductForm.controls['productName'].setValue(productData.productName);
+        this.editProductForm.controls['productDescription'].setValue(productData.productDescription);
+        this.editProductForm.controls['productPrice'].setValue(productData.productPrice);
+        this.editProductForm.controls['productQuantity'].setValue(productData.productQuantity);
+        this.editProductForm.controls['imageUrl'].setValue(productData.imageUrl);
+        this.editProductForm.controls['categoryId'].setValue(productData.categoryId);
+        this.editProductForm.controls['available'].setValue(productData.available);
+
+        // Ensure imagePreview is set
+        this.imagePreview = productData.imageUrl;
     });
     this.loadCategories();
-  }
+}
+
 
   resetForm() {
     this.editProductForm.reset();

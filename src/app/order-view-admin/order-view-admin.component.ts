@@ -28,8 +28,17 @@ export class OrderViewAdminComponent implements OnInit {
     this.hasError = false;
     this.orderService.getOrders().subscribe({
       next: (data: Order[]) => {
-        // Explicitly type the parameter
-        this.orders = data;
+        this.orders = data.map(order => {
+          if (!order.status) {
+            // Set default status to ACCEPTED if not already set
+            order.status = this.accepted;
+            this.orderService.updateOrder(order.orderId.toString(), this.accepted).subscribe({
+              next: () => console.log(`Default status set to ${this.accepted} for order ${order.orderId}`),
+              error: (error: any) => console.error('Error setting default status:', error),
+            });
+          }
+          return order;
+        });
         this.isLoading = false;
       },
       error: (error: any) => {
@@ -38,7 +47,9 @@ export class OrderViewAdminComponent implements OnInit {
         this.isLoading = false;
       },
     });
-  }
+}
+
+  
 
   updateOrderStatus(order: Order): void {
     this.orderService
@@ -51,7 +62,7 @@ export class OrderViewAdminComponent implements OnInit {
           if (index !== -1) {
             this.orders[index] = updatedOrder;
           }
-          alert('Order status updated successfully!');
+          console.log('Order status updated successfully!');
 
           this.showSuccessMessage = true;
           setTimeout(() => {
@@ -77,7 +88,6 @@ export class OrderViewAdminComponent implements OnInit {
               },
               error: (error: any) => {
                 console.error('Error updating order status:', error);
-                alert('Failed to update order status.');
               },
             });
         },
