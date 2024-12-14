@@ -1,7 +1,12 @@
 <div class="login-container">
     <div class="login-card">
+      <img
+        alt="Avatar"
+        class="logo"
+        src="../../assets/Logo.png"
+      />
         <h2>Welcome Back</h2>
-        <p>Login with email</p>
+        <p>Login</p>
 
         <form (ngSubmit)="onLogin()" [formGroup]="loginForm">
             <div class="input-group">
@@ -64,10 +69,10 @@
                 Login
             </button>
 
-            <p class="agreement-text">
+            <h4 class="agreement-text">
                 By continuing, you confirm that you're an adult and you've read and accepted our GrabNGo Free Membership
                 Agreement and Privacy Policy.
-            </p>
+            </h4>
         </form>
     </div>
 </div>
