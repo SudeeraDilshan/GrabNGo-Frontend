@@ -153,3 +153,9 @@ body {
     text-align: right; /* Align buttons to the right */
     margin-top: 20px; /* Add some spacing for proper layout */
 }
+
+input[readonly] {
+    background-color: #f0f0f0; /* Light grey background */
+    color: #666; /* Slightly muted text color */
+    cursor: not-allowed; /* Show not-allowed cursor */
+}
