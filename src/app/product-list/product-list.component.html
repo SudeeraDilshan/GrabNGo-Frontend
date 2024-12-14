@@ -1,102 +1,73 @@
 <div class="container">
 
-    <div class="search-sort-container">
-        <div class="search-box">
-            <input [formControl]="searchControl" class="search-input" placeholder="Search for products" type="text">
-            <span class="search-icon">
-          <i class="fas fa-search"></i>
-        </span>
-        </div>
-        <button (click)="onFilterClick()" class="filter-btn">
-            <i class="fas fa-filter"></i> <span class="filter-text">Filter</span>
-        </button>
+  <div class="search-sort-container">
+    <div class="search-box">
+      <input [formControl]="searchControl" type="text" placeholder="Search for products" class="search-input" (input)="onSearch()">
+      <span class="search-icon">
+        <i class="fas fa-search"></i>
+      </span>
     </div>
+    <button class="filter-btn" (click)="onFilterClick()">
+      <i class="fas fa-filter"></i> <span class="filter-text">Filter</span>
+    </button>
+  </div>
 
 
-    <section>
-        <div class="products-header">
-            <h2>New Arrivals</h2>
-            <a class="view-all-btn" href="#">
-                View all <span class="arrow-icon">→</span>
-            </a>
-        </div>
-        <p>Check out the latest products</p>
-        <div class="products-grid">
-            <div *ngFor="let product of newArrivals" class="product-card">
-                <img [alt]="product.productName" [src]="productBackendUrlBase + product.imageUrl" class="product-image">
-                <div class="product-info">
-                    <h3>{{ product.productName }}</h3>
-                    <p class="description">{{ product.productDescription }}</p>
-                    <p class="price">Rs. {{ product.productPrice }}</p>
-                    <button (click)="viewProductDetails(product)" class="view-btn">View</button>
-
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section>
-        <div class="products-header">
-            <h2>Shop by Categories</h2>
-            <a class="view-all-btn" href="#">
-                View all <span class="arrow-icon">→</span>
-            </a>
-        </div>
-        <div class="categories-grid">
-            <div *ngFor="let category of categories" class="category-card">
-                <h3 (click)="goToCategory(category.categoryId, category.categoryName)">
-                    {{ category.categoryName }}
-                </h3>
-
-            </div>
-
-        </div>
-    </section>
-
-
-    <section>
-        <div class="products-header">
-            <h2>Featured Products</h2>
-            <a class="view-all-btn" href="#">
-                View all <span class="arrow-icon">→</span>
-            </a>
-        </div>
-        <p>Check out the latest products</p>
-        <div class="products-grid">
-            <div *ngFor="let product of featuredProducts" class="product-card">
-                <img [alt]="product.productName" [src]="productBackendUrlBase + product.imageUrl" class="product-image">
-                <div class="product-info">
-                    <h3>{{ product.productName }}</h3>
-                    <p class="description">{{ product.productDescription }}</p>
-                    <p class="price">Rs. {{ product.productPrice }}</p>
-                    <button (click)="viewProductDetails(product)" class="view-btn">View</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-    <div (click)="closeFilter()" *ngIf="isFilterOpen" class="filter-modal">
-        <div (click)="$event.stopPropagation()" class="filter-modal-content">
-            <h2>Filter Products</h2>
-            <div class="filter-options">
-                <label for="category">Select Category</label>
-                <select [(ngModel)]="selectedCategory" id="category">
-                    <option value="">All Categories</option>
-                    <option *ngFor="let category of categories"
-                            [value]="category.categoryId">{{ category.categoryName }}
-                    </option>
-                </select>
-            </div>
-            <div class="filter-options">
-                <label for="sortPrice">Sort by Price</label>
-                <select [(ngModel)]="sortByPrice" id="sortPrice">
-                    <option value="asc">Price: Low to High</option>
-                    <option value="desc">Price: High to Low</option>
-                </select>
-            </div>
-            <button (click)="applyFilter()" class="apply-filter-btn">Apply Filter</button>
-        </div>
+  <section>
+    <div class="products-header">
+      <h2>Shop by Categories</h2>
+      <a href="#" class="view-all-btn">
+        View all <span class="arrow-icon">→</span>
+      </a>
     </div>
+    <div class="categories-grid">
+      <div *ngFor="let category of categories" class="category-card">
+        <h3 (click)="goToCategory(category.categoryId, category.categoryName)">
+          {{ category.categoryName }}
+        </h3>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="products-header">
+      <h2>Products</h2>
+      <a href="#" class="view-all-btn">
+        View all <span class="arrow-icon">→</span>
+      </a>
+    </div>
+    <div class="products-grid">
+      <div *ngFor="let product of filteredProducts" class="product-card">
+        <img [src]="product.imageUrl" [alt]="product.productName" class="product-image">
+        <div class="product-info">
+          <h3>{{ product.productName }}</h3>
+          <p class="description">{{ product.productDescription }}</p>
+          <p class="price">Rs. {{ product.productPrice }}</p>
+          <button (click)="viewProductDetails(product)" class="view-btn">View</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div *ngIf="isFilterOpen" class="filter-modal" (click)="closeFilter()">
+    <div class="filter-modal-content" (click)="$event.stopPropagation()">
+      <h2>Filter Products</h2>
+      <div class="filter-options">
+        <label for="category">Select Category</label>
+        <select id="category" [(ngModel)]="selectedCategory">
+          <option value="">All Categories</option>
+          <option *ngFor="let category of categories" [value]="category.categoryId">{{ category.categoryName }}</option>
+        </select>
+      </div>
+      <div class="filter-options">
+        <label for="sortPrice">Sort by Price</label>
+        <select id="sortPrice" [(ngModel)]="sortByPrice">
+          <option value="asc">Price: Low to High</option>
+          <option value="desc">Price: High to Low</option>
+        </select>
+      </div>
+      <button class="apply-filter-btn" (click)="applyFilter()">Apply Filter</button>
+    </div>
+  </div>
 </div>
-  
