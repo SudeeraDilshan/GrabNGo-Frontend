@@ -10,6 +10,13 @@
     margin-bottom: 50px;
 }
 
+h2 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #C06308;
+  margin-top: 50px;
+}
+
 .admin-table th {
     background-color: #FB800D;
     color: white;
@@ -35,4 +42,3 @@
     background-color: #FB800D;
     color: white;
 }
-  

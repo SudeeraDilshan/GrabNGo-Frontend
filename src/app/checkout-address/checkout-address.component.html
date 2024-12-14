@@ -1,3 +1,5 @@
+<div>
+<h2>Order Details</h2>
 <div class="container">
     <div class="checkout">
       <h3>Checkout</h3>
@@ -94,7 +96,7 @@
         </button>
       </form>
     </div>
-  
+
     <div class="order-summary">
       <h3>Order Summary</h3>
       <div *ngIf="items.length === 0" class="empty-cart">
@@ -107,9 +109,6 @@
           <p>Size: {{ item.size }}</p>
           <p>Quantity: {{ item.quantity }}</p>
           <p>Rs. {{ item.price | number: '1.2-2' }}</p>
-          <button class="remove-btn" (click)="openConfirmationModal(item)">
-            Remove
-          </button>
         </div>
       </div>
       <hr />
@@ -120,3 +119,4 @@
       </div>
     </div>
   </div>
+</div>

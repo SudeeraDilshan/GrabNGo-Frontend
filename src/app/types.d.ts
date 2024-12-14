@@ -1,6 +1,7 @@
 import { OrderItem } from "./models/order-model";
 
 export interface ApiResponse<T> {
+    availability: any;
     data: T;
     status: boolean;
     message: string;
@@ -69,6 +70,7 @@ export interface OrderViewItem {
 }
 
 export interface Product {
+    isDeleted: any;
     productId: string;
     productName: string;
     productDescription: string;

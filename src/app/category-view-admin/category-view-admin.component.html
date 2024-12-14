@@ -1,5 +1,7 @@
 <div class="category-view">
-    <table [dataSource]="categories" class="admin-table mat-elevation-z8" mat-table>
+  <h2>Category Details</h2>
+
+  <table [dataSource]="categories" class="admin-table mat-elevation-z8" mat-table>
         <ng-container matColumnDef="name">
             <th *matHeaderCellDef mat-header-cell> Category Name</th>
             <td *matCellDef="let category" mat-cell> {{ category.categoryName }}</td>
@@ -16,10 +18,9 @@
                 <button (click)="deleteCategory(category)" color="warn" mat-icon-button>
                     <mat-icon>delete</mat-icon>
                 </button>
-                <button (click)="editCategory(category)" [routerLink]="['/categoryEdit', category.categoryId]" color="primary"
-                        mat-icon-button>
-                    <mat-icon>settings</mat-icon>
-                </button>
+              <button (click)="editCategory(category)" [routerLink]="['/categoryEdit', category.categoryId]" color="primary" mat-icon-button>
+                <mat-icon>edit</mat-icon>
+              </button>
             </td>
         </ng-container>
 
