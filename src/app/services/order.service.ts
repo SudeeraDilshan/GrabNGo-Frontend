@@ -43,12 +43,12 @@ export class OrderService {
 
     // Create a new order
     addOrder(order: Order): Observable<Order> {
-        return this.http.post<Order>(`${this.apiUrl}/create`, order);
+        return this.http.post<Order>(`${this.apiUrl}/`, order);
     }
 
     // Update order status
     updateOrder(orderId: string, status: string): Observable<Order> {
-        return this.http.put<Order>(`${this.apiUrl}/update/${orderId}`, {status});
+        return this.http.put<Order>(`${this.apiUrl}/${orderId}`, {status});
     }
 
     // Optional: Get a single order by ID
@@ -58,7 +58,7 @@ export class OrderService {
 
     // Optional: Delete an order
     deleteOrder(orderId: string): Observable<any> {
-        return this.http.delete(`${this.apiUrl}/delete/${orderId}`);
+        return this.http.delete(`${this.apiUrl}/${orderId}`);
     }
 
     // Optional: Get orders with pagination

@@ -99,7 +99,7 @@
         <!-- Action Buttons -->
         <div class="button-row">
             <button (click)="cancel()" class="cancel-button" mat-button type="button">Cancel</button>
-            <button [disabled]="!editProductForm.valid" mat-raised-button type="submit">Edit Product</button>
+            <button (click)="editProduct()" [disabled]="!editProductForm.valid" mat-raised-button type="submit">Edit Product</button>
 
         </div>
 
