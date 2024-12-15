@@ -1,0 +1,186 @@
+<div class="container">
+    <div class="register-box">
+      <img
+        alt="Avatar"
+        class="logo"
+        src="../../assets/Logo.png"
+      />
+        <h2>Register to GrabNGo</h2>
+        <form (ngSubmit)="onSubmit()" [formGroup]="registerForm">
+            <!-- Email Address -->
+            <div class="form-group">
+                <input
+                        class="form-control"
+                        formControlName="emailAddress"
+                        placeholder="Email Address"
+                        type="email"
+                />
+                <div *ngIf="registerForm.get('emailAddress')?.invalid && registerForm.get('emailAddress')?.touched"
+                     class="error-message">
+                    <small *ngIf="registerForm.get('emailAddress')?.errors?.['required']">
+                        Email is required.
+                    </small>
+                    <small *ngIf="registerForm.get('emailAddress')?.errors?.['email']">
+                        Please enter a valid email address.
+                    </small>
+                </div>
+            </div>
+
+            <!-- First Name -->
+            <div class="form-group">
+                <input
+                        class="form-control"
+                        formControlName="firstName"
+                        placeholder="First Name"
+                        type="text"
+                />
+                <div *ngIf="registerForm.get('firstName')?.invalid && registerForm.get('firstName')?.touched"
+                     class="error-message">
+                    <small *ngIf="registerForm.get('firstName')?.errors?.['required']">
+                        First name is required.
+                    </small>
+                    <small *ngIf="registerForm.get('firstName')?.errors?.['minlength']">
+                        First name must be at least 2 characters.
+                    </small>
+                    <small *ngIf="registerForm.get('firstName')?.errors?.['maxlength']">
+                        First name cannot exceed 50 characters.
+                    </small>
+                </div>
+            </div>
+
+            <!-- Last Name -->
+            <div class="form-group">
+                <input
+                        class="form-control"
+                        formControlName="lastName"
+                        placeholder="Last Name"
+                        type="text"
+                />
+                <div *ngIf="registerForm.get('lastName')?.invalid && registerForm.get('lastName')?.touched"
+                     class="error-message">
+                    <small *ngIf="registerForm.get('lastName')?.errors?.['required']">
+                        Last name is required.
+                    </small>
+                    <small *ngIf="registerForm.get('lastName')?.errors?.['minlength']">
+                        Last name must be at least 2 characters.
+                    </small>
+                    <small *ngIf="registerForm.get('lastName')?.errors?.['maxlength']">
+                        Last name cannot exceed 50 characters.
+                    </small>
+                </div>
+            </div>
+
+            <!-- Password -->
+            <div class="form-group">
+                <input
+                        class="form-control"
+                        formControlName="password"
+                        placeholder="Password"
+                        type="password"
+                />
+                <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched"
+                     class="error-message">
+                    <small *ngIf="registerForm.get('password')?.errors?.['required']">
+                        Password is required.
+                    </small>
+                    <small *ngIf="registerForm.get('password')?.errors?.['minlength']">
+                        Password must be at least 8 characters.
+                    </small>
+                    <small *ngIf="registerForm.get('password')?.errors?.['pattern']">
+                        Password must contain at least one letter and one number.
+                    </small>
+                </div>
+            </div>
+
+            <!-- Confirm Password -->
+            <div class="form-group">
+                <input
+                        class="form-control"
+                        formControlName="confirmPassword"
+                        placeholder="Confirm Password"
+                        type="password"
+                />
+                <div *ngIf="registerForm.get('confirmPassword')?.invalid && registerForm.get('confirmPassword')?.touched"
+                     class="error-message">
+                    <small *ngIf="registerForm.get('confirmPassword')?.errors?.['required']">
+                        Confirming your password is required.
+                    </small>
+                </div>
+                <div *ngIf="registerForm.errors?.['mismatch'] && registerForm.get('confirmPassword')?.touched"
+                     class="error-message">
+                    <small>Passwords do not match.</small>
+                </div>
+            </div>
+
+            <!-- Contact Number -->
+            <div class="form-group">
+                <input
+                        class="form-control"
+                        formControlName="contactNumber"
+                        placeholder="Contact Number"
+                        type="tel"
+                />
+                <div *ngIf="registerForm.get('contactNumber')?.invalid && registerForm.get('contactNumber')?.touched"
+                     class="error-message">
+                    <small *ngIf="registerForm.get('contactNumber')?.errors?.['required']">
+                        Contact number is required.
+                    </small>
+                    <small *ngIf="registerForm.get('contactNumber')?.errors?.['pattern']">
+                        Please enter a valid contact number (10-14 digits).
+                    </small>
+                </div>
+            </div>
+
+            <!-- Address -->
+            <div class="form-group">
+        <textarea
+                class="form-control"
+                formControlName="address"
+                placeholder="Address"
+        ></textarea>
+                <div *ngIf="registerForm.get('address')?.invalid && registerForm.get('address')?.touched"
+                     class="error-message">
+                    <small *ngIf="registerForm.get('address')?.errors?.['required']">
+                        Address is required.
+                    </small>
+                    <small *ngIf="registerForm.get('address')?.errors?.['minlength']">
+                        Address must be at least 10 characters.
+                    </small>
+                    <small *ngIf="registerForm.get('address')?.errors?.['maxlength']">
+                        Address cannot exceed 200 characters.
+                    </small>
+                </div>
+            </div>
+
+            <!-- NIC -->
+            <div class="form-group">
+                <input
+                        class="form-control"
+                        formControlName="nic"
+                        placeholder="NIC Number"
+                        type="text"
+                />
+                <div *ngIf="registerForm.get('nic')?.invalid && registerForm.get('nic')?.touched" class="error-message">
+                    <small *ngIf="registerForm.get('nic')?.errors?.['required']">
+                        NIC number is required.
+                    </small>
+                    <small *ngIf="registerForm.get('nic')?.errors?.['pattern']">
+                        Please enter a valid NIC number.
+                    </small>
+                </div>
+            </div>
+
+            <button [disabled]="registerForm.invalid" class="submit-button" type="submit">Sign Up</button>
+        </form>
+
+        <p class="login-link">
+            Already have an account? <a routerLink="/auth/login">Log In</a>
+        </p>
+
+        <p class="terms">
+            By continuing, you confirm that you're an adult and you've read and accepted the
+            <a href="#">GrabNGo Free Membership Agreement</a> and
+            <a href="#">Privacy Policy</a>.
+        </p>
+    </div>
+</div>

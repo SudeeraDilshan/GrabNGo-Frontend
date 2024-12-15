@@ -1,0 +1,45 @@
+<div class="product-container">
+  <div class="product-images">
+    <div class="image-grid">
+      <img
+        [src]="product?.imageUrl"
+
+        alt="Product image"
+        class="product-image"
+      />
+    </div>
+  </div>
+
+    <div class="product-details">
+        <div class="product-header">
+            <h1 class="product-title">{{ product?.productName }}</h1>
+            <div class="product-actions"></div>
+        </div>
+
+        <div class="product-price">
+            Rs. {{ product?.productPrice?.toFixed(2) }}
+        </div>
+
+        <p class="product-description">
+            {{ product?.productDescription }}
+        </p>
+
+        <div class="quantity-section">
+            <label>Quantity</label>
+            <div class="quantity-controls">
+                <button (click)="decreaseQuantity()" class="quantity-btn">-</button>
+                <input [value]="quantity" class="quantity-input" readonly type="number">
+                <button (click)="increaseQuantity()" class="quantity-btn">+</button>
+            </div>
+        </div>
+
+        <button (click)="addToCart()" class="add-to-cart-btn">
+            Add to Cart · Rs. {{ ((product?.productPrice ?? 0) * (quantity || 1)).toFixed(2) }}
+        </button>
+
+        <div class="shipping-info">
+            <span>Free standard shipping</span>
+            <p>Free Returns</p>
+        </div>
+    </div>
+</div>

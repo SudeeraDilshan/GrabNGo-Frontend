@@ -1,0 +1,35 @@
+<div class="order-history">
+  <div class="order-history-header">
+    <h2>Order History</h2>
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="isLoading" class="loading-state">
+    <div class="spinner"></div>
+    <p>Loading...</p>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="hasError" class="error-state">
+    <i class="fas fa-exclamation-triangle"></i>
+    <p>Failed to load order history. Please try again later.</p>
+  </div>
+
+  <!-- Order List -->
+  <div *ngIf="!isLoading && !hasError" class="order-list">
+    <div class="order-item" *ngFor="let item of orderList">
+      <div class="order-item-image">
+        <img [src]="item.productImg" [alt]="item.productName">
+      </div>
+      <div class="order-item-details">
+        <div class="order-item-text">
+          <h3 class="product-name">{{ item.productName }}</h3>
+<!--          <p class="order-size">Size: {{ item.size }}</p>-->
+          <p class="order-quantity">Quantity: {{ item.quantity }}</p>
+          <p class="price">$99</p>
+        </div>
+        <p class="order-date">{{ item.createdDateTime | date:'yyyy/MM/dd' }}</p>
+      </div>
+    </div>
+  </div>
